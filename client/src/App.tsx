@@ -4,6 +4,7 @@ import Home from './components/home';
 import About from './components/about';
 import Contact from './components/Contact';
 import Login from './components/log-in/Login';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -23,6 +24,9 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
         </Routes>
+      </div>
+      <div>
+        <Footer/>
       </div>
     </div>
   );
