@@ -24,9 +24,9 @@ exports.accountLogin = async (req, res, next) => {
 };
 
 /* password reset */
-exports.forgotPassword = async (req, res, next) => {
+exports.accountReset = async (req, res, next) => {
   try {
-    await userService.forgotPassword(req, res);
+    await userService.accountReset(req, res);
   } catch (error) {
     next(error);
   } finally {
@@ -35,9 +35,9 @@ exports.forgotPassword = async (req, res, next) => {
 };
 
 /* persist login */
-exports.persistLogin = async (req, res, next) => {
+exports.accountPersist = async (req, res, next) => {
   try {
-    await userService.persistLogin(req, res);
+    await userService.accountPersist(req, res);
   } catch (error) {
     next(error);
   } finally {

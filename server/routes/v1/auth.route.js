@@ -14,9 +14,9 @@ router.post("/register", userController.accountRegistration);
 // account login
 router.post("/login", userController.accountLogin);
 // password reset
-router.patch("/forgot-password", userController.forgotPassword);
+router.patch("/reset", userController.accountReset);
 // login persist
-router.get("/me", verify, userController.persistLogin);
+router.get("/me", verify, userController.accountPersist);
 
 /* export user router */
 module.exports = router;

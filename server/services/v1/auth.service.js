@@ -11,40 +11,32 @@ exports.accountRegistration = async (req, res) => {
       description: "Payload is required",
     });
   } else {
-    if (req.body.email) {
-      const usr = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ email: req.body.email });
 
-      if (usr) {
-        res.status(409).json({
+    if (user) {
+      res.status(409).json({
+        acknowledgement: false,
+        message: "Conflict",
+        description: "Email already exists",
+      });
+    } else {
+      const result = new User(req.body);
+
+      if (!result) {
+        res.status(400).json({
           acknowledgement: false,
-          message: "Conflict",
-          description: "Email already exists",
+          message: "Bad Request",
+          description: "Check given info to recreate user",
         });
       } else {
-        const user = new User(req.body);
+        await result.save();
 
-        if (!user) {
-          res.status(400).json({
-            acknowledgement: false,
-            message: "Bad Request",
-            description: "Failed to create user",
-          });
-        } else {
-          await user.save();
-
-          res.status(201).json({
-            acknowledgement: true,
-            message: "Created",
-            description: "User created successfully",
-          });
-        }
+        res.status(201).json({
+          acknowledgement: true,
+          message: "Created",
+          description: "User created successfully",
+        });
       }
-    } else {
-      res.status(400).json({
-        acknowledgement: false,
-        message: "Bad Request",
-        description: "Email is required",
-      });
     }
   }
 };
@@ -64,7 +56,7 @@ exports.accountLogin = async (req, res) => {
       res.status(404).json({
         acknowledgement: false,
         message: "Not Found",
-        description: "Invalid email",
+        description: "User not found",
       });
     } else {
       const isValid = user.comparePassword(req.body.password, user.password);
@@ -80,7 +72,7 @@ exports.accountLogin = async (req, res) => {
           res.status(401).json({
             acknowledgement: false,
             message: "Unauthorized",
-            description: "Your seller account in a review state",
+            description: "Your account is not active",
           });
         } else {
           const accessToken = token({
@@ -94,7 +86,7 @@ exports.accountLogin = async (req, res) => {
           res.status(200).json({
             acknowledgement: true,
             message: "OK",
-            description: "You logged in successfully",
+            description: "User logged in successfully",
             accessToken,
           });
         }
@@ -104,18 +96,12 @@ exports.accountLogin = async (req, res) => {
 };
 
 /* password reset */
-exports.forgotPassword = async (req, res) => {
-  if (!req.body.email) {
+exports.accountReset = async (req, res) => {
+  if (!req.body.email || !req.body.password) {
     res.status(400).json({
       acknowledgement: false,
       message: "Bad Request",
-      description: "Email is required",
-    });
-  } else if (!req.body.password) {
-    res.status(400).json({
-      acknowledgement: false,
-      message: "Bad Request",
-      description: "Password is required",
+      description: "Email and password are required",
     });
   } else {
     const user = await User.findOne({ email: req.body.email });
@@ -124,11 +110,11 @@ exports.forgotPassword = async (req, res) => {
       res.status(404).json({
         acknowledgement: false,
         message: "Not Found",
-        description: "Invalid email",
+        description: "Try with a valid email address",
       });
     } else {
-      const updatedUser = await User.findOneAndUpdate(
-        { email: req.body.email },
+      const result = await User.findByIdAndUpdate(
+        user?._id,
         { password: user.encryptedPassword(req.body.password) },
         {
           runValidators: true,
@@ -136,7 +122,7 @@ exports.forgotPassword = async (req, res) => {
         }
       );
 
-      if (!updatedUser) {
+      if (!result) {
         res.status(400).json({
           acknowledgement: false,
           message: "Bad Request",
@@ -154,37 +140,20 @@ exports.forgotPassword = async (req, res) => {
 };
 
 /* persist login */
-exports.persistLogin = async (req, res) => {
-  const user = await User.findById(req.user._id)
-    .populate([
-      {
-        path: "posts",
-        select: "-__v",
-        populate: [
-          {
-            path: "comments",
-            select: "-__v",
-          },
-          {
-            path: "author",
-            select: "-password -__v",
-          },
-        ],
-      },
-    ])
-    .select("-password -__v");
+exports.accountPersist = async (req, res) => {
+  const user = await User.findById(req.user._id).select("-password");
 
   if (!user) {
     res.status(404).json({
       acknowledgement: false,
       message: "Not Found",
-      description: "User not found",
+      description: "Please, login to continue",
     });
   } else {
     res.status(200).json({
       acknowledgement: true,
       message: "OK",
-      description: "User logged in successfully",
+      description: "Please, continue exploring",
       data: user,
     });
   }
