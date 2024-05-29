@@ -6,6 +6,7 @@ import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/navbar";
 import Login from "./components/log-in/login";
 import Signup from "./components/sign-up/signup";
+import Forgetpassword from "./components/forget-password/forgetpassword";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/forgetpassword" element={<Forgetpassword />} />
         </Routes>
       </div>
       <div>

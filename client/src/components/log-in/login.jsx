@@ -24,14 +24,16 @@ const Login = () => {
             />
           </div>
           <div className="form-control">
-          <div className="flex justify-between">
-          <label className="label">
-              <span className="label-text">Password</span>
-            </label>
-            <label className="label">
-              <span className="label-text">Forget Password?</span>
-            </label>
-          </div>
+            <div className="flex justify-between">
+              <label className="label">
+                <span className="label-text">Password</span>
+              </label>
+              <label className="label">
+                <Link to="/forgetpassword">
+                  <span className="label-text">Forget Password?</span>
+                </Link>
+              </label>
+            </div>
 
             <input
               type="password"
@@ -40,15 +42,14 @@ const Login = () => {
               required
             />
           </div>
-            <div className=" flex gap-1 mt-3">
-                
-                <input
-                  type="checkbox"
-                  defaultChecked
-                  className="checkbox checkbox-error"
-                />
-             <p className="label-text">Remember me</p>
-            </div>
+          <div className=" flex gap-1 mt-3">
+            <input
+              type="checkbox"
+              defaultChecked
+              className="checkbox checkbox-error"
+            />
+            <p className="label-text">Remember me</p>
+          </div>
           <div className="form-control mt-6">
             <button className="btn btn-primary">Login</button>
           </div>

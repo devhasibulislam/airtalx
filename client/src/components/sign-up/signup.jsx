@@ -17,18 +17,15 @@ const Signup = () => {
 
         <div className="bg-[#eff4f5] p-3 rounded-xl">
           <h1 className="text-3xl font-semibold">Jobseeker Sign Up</h1>
-          <div role="tablist" className="tabs tabs-lifted">
+          <div role="tablist" className="tabs tabs-bordered">
             <input
               type="radio"
-              name="my_tabs_2"
+              name="my_tabs_1"
               role="tab"
-              className="tab btn btn-accent text-black"
-              aria-label="I want to hire"
+              className="tab"
+              aria-label="I Want to hire"
             />
-            <div
-              role="tabpanel"
-              className="tab-content bg-base-100 border-base-300 rounded-box p-0"
-            >
+            <div role="tabpanel" className="tab-content p-10">
               <form className="card-body">
                 <div className="form-control">
                   <label className="label">
@@ -53,10 +50,9 @@ const Signup = () => {
                   />
                 </div>
                 <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Password</span>
-                    </label>
-                   
+                  <label className="label">
+                    <span className="label-text">Password</span>
+                  </label>
 
                   <input
                     type="password"
@@ -66,10 +62,9 @@ const Signup = () => {
                   />
                 </div>
                 <div className="form-control">
-                    <label className="label">
-                      <span className="label-text"> Confirm Password</span>
-                    </label>
-                  
+                  <label className="label">
+                    <span className="label-text"> Confirm Password</span>
+                  </label>
 
                   <input
                     type="password"
@@ -102,18 +97,14 @@ const Signup = () => {
 
             <input
               type="radio"
-              name="my_tabs_2"
+              name="my_tabs_1"
               role="tab"
-              className="tab btn btn-accent text-black"
-              aria-label="I want to a job"
+              className="tab bg-blue-300"
+              aria-label="I Want a Job"
               checked
             />
-
-            <div
-              role="tabpanel"
-              className="tab-content bg-base-100 border-base-300 rounded-box p-6"
-            >
-             <form className="card-body">
+            <div role="tabpanel" className="tab-content p-10">
+              <form className="card-body">
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text">Name</span>
@@ -137,10 +128,9 @@ const Signup = () => {
                   />
                 </div>
                 <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">Password</span>
-                    </label>
-                   
+                  <label className="label">
+                    <span className="label-text">Password</span>
+                  </label>
 
                   <input
                     type="password"
@@ -150,10 +140,9 @@ const Signup = () => {
                   />
                 </div>
                 <div className="form-control">
-                    <label className="label">
-                      <span className="label-text"> Confirm Password</span>
-                    </label>
-                  
+                  <label className="label">
+                    <span className="label-text"> Confirm Password</span>
+                  </label>
 
                   <input
                     type="password"
