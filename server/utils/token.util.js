@@ -11,7 +11,8 @@ function token({ _id, name, email, role, status }) {
       role: role,
       status: status,
     },
-    process.env.TOKEN_SECRET
+    process.env.TOKEN_SECRET,
+    { expiresIn: "24h" }
   );
 
   return accessToken;
