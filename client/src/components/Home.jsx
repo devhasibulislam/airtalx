@@ -22,7 +22,7 @@ const Home = () => {
           <p className="text-sm mt-2">
             Experience where talent meets opportunity, on a global scale.
           </p>
-          <div>
+          <div className="mt-2">
             <button className="btn btn-primary ">Get Started</button>
           </div>
         </div>
@@ -120,8 +120,8 @@ const Home = () => {
 
       <div className="mt-12 w-[80%] mx-auto">
         <h1 className="text-3xl font-semibold">Hiring Process</h1>
-        <p>Hire part-time or full-time workers in the worldwide with our easy to use all in one platform  </p>
-        <div className="grid grid-cols-3 gap-3">
+        <p className="mt-2">Hire part-time or full-time workers in the worldwide with our easy to use all in one platform  </p>
+        <div className="grid grid-cols-3 gap-3 mt-4">
             <div className="mt-3">
                 <img className="mx-auto" src={img6} alt="" />
                 <h2 className="text-2xl font-semibold">Post Job</h2>
