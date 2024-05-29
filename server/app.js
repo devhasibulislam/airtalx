@@ -21,6 +21,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(express.static("uploads"));
 
 /* router level connections */
 app.use("/v1/api/auth", authRouter);
