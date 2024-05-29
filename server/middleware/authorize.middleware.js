@@ -8,7 +8,7 @@ function authorize(...role) {
       return res.status(403).json({
         acknowledgement: false,
         message: "Forbidden",
-        description: "You're not applicable to access this",
+        description: "You're unauthorized to access this",
       });
     }
 
