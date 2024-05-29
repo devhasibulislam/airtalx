@@ -7,6 +7,9 @@ import Navbar from "./components/navbar/navbar";
 import Login from "./components/log-in/login";
 import Signup from "./components/sign-up/signup";
 import Forgetpassword from "./components/forget-password/forgetpassword";
+import VerifyOTP from "./components/forget-password/verifyotp";
+import About from "./components/about-us/about";
+import Contactus from "./components/contact-us/contactus";
 
 function App() {
   return (
@@ -20,6 +23,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgetpassword" element={<Forgetpassword />} />
+          <Route path="/verifyotp" element={<VerifyOTP />} />
+          <Route path="/about-us" element={<About />} />
+          <Route path="/contact-us" element={<Contactus />} />
         </Routes>
       </div>
       <div>

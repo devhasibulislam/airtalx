@@ -1,13 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Link } from "react-router-dom";
-
+import img1 from "../../image/mainicon.svg";
 const Navbar = () => {
   return (
     <div className="navbar bg-slate-300">
       <div className="flex-1">
-        <a className="btn btn-ghost font-bold text-2xl">airTalX</a>
-        <ul className="flex space-x-4">
+        <div className="flex items-center">
+          <img className="w-[42px] h-[42px]" src={img1} alt="" />
+          <h2 className="text-3xl font-semibold"> airTalX</h2>
+        </div>
+        <ul className="flex space-x-4 ml-3">
           <li>
             <Link to="/">Home</Link>
           </li>
