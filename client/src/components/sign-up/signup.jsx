@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import img1 from "../../image/signupin/Feedback.svg";
 const Signup = () => {
+  const [activeTab, setActiveTab] = useState(0);
+
+  const handleTabClick = (index) => {
+    setActiveTab(index);
+  };
   return (
     <div className=" bg-[#a4e8f9]">
       <div className="text-center">
@@ -17,16 +22,27 @@ const Signup = () => {
 
         <div className="bg-[#eff4f5] p-3 rounded-xl">
           <h1 className="text-3xl font-semibold">Jobseeker Sign Up</h1>
-          <div role="tablist" className="tabs tabs-bordered">
-            <input
-              type="radio"
-              name="my_tabs_1"
-              role="tab"
-              className="tab"
-              aria-label="I Want to hire"
-            />
-            <div role="tabpanel" className="tab-content p-10">
-              <form className="card-body">
+          <div className="m-6 rounded-lg">
+      {/* Tabs */}
+      <div className="flex justify-center  ">
+        <button
+          className={`px-4 py-2 ${activeTab === 0 ? 'bg-blue-400 text-white' : 'bg-gray-200 '} rounded-lg ${activeTab !== 0 ? ' ' : ''} focus:outline-none`}
+          onClick={() => handleTabClick(0)}
+        >
+          I Want to Hire
+        </button>
+        <button
+          className={`px-4 py-2 ${activeTab === 1 ? 'bg-blue-400 text-white' : 'bg-gray-200 text-gray-700'} rounded-lg ${activeTab !== 1 ? '' : ''} focus:outline-none`}
+          onClick={() => handleTabClick(1)}
+        >
+         I Want a Job
+        </button>
+      </div>
+
+      {/* Tab Content */}
+      <div className="p-4">
+        {/* Render content based on active tab index */}
+        {activeTab === 0 &&  <form className="card-body">
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text">Name</span>
@@ -92,19 +108,8 @@ const Signup = () => {
                     </Link>
                   </p>
                 </div>
-              </form>
-            </div>
-
-            <input
-              type="radio"
-              name="my_tabs_1"
-              role="tab"
-              className="tab bg-blue-300"
-              aria-label="I Want a Job"
-              checked
-            />
-            <div role="tabpanel" className="tab-content p-10">
-              <form className="card-body">
+              </form>}
+        {activeTab === 1 &&  <form className="card-body">
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text">Name</span>
@@ -170,9 +175,9 @@ const Signup = () => {
                     </Link>
                   </p>
                 </div>
-              </form>
-            </div>
-          </div>
+              </form>}
+      </div>
+    </div>
         </div>
       </div>
     </div>
