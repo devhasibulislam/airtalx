@@ -1,15 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import data from "../../data/findemployee.json";
 const FindEmploye = () => {
-  const [expandedJob, setExpandedJob] = useState(null);
 
-  const toggleDescription = (index) => {
-    if (expandedJob === index) {
-      setExpandedJob(null); // Collapse if already expanded
-    } else {
-      setExpandedJob(index); // Expand the selected job
-    }
-  };
   console.log(data);
   return (
     <div>
