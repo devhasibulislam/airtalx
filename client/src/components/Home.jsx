@@ -98,20 +98,20 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-3 mt-12 gap-4 w-[80%] mx-auto">
-        <div className="bg-[#EDF7F4]">
+      <div className=" grid md:grid-cols-3 mt-12 gap-4 w-[80%] mx-auto">
+        <div className="bg-[#EDF7F4] p-4">
           <img className="mx-auto" src={img3} alt="" />
           <h2 className="text-2xl font-semibold">Strong User Privacy</h2>
           <p className="text-sm">User’s privacy is always our first priority</p>
         </div>
 
-        <div className="bg-[#EDF7F4]">
+        <div className="bg-[#EDF7F4] p-4">
           <img className="mx-auto" src={img4} alt="" />
           <h2 className="text-2xl font-semibold">User Friendly Experience</h2>
           <p className="text-sm">Our platform is very easy to use</p>
         </div>
 
-        <div className="bg-[#EDF7F4]">
+        <div className="bg-[#EDF7F4] p-4">
           <img className="mx-auto" src={img5} alt="" />
           <h2 className="text-2xl font-semibold">World Wide Service</h2>
           <p className="text-sm">Hire your staff from any country</p>
@@ -120,33 +120,51 @@ const Home = () => {
 
       <div className="mt-12 w-[80%] mx-auto">
         <h1 className="text-3xl font-semibold">Hiring Process</h1>
-        <p className="mt-2">Hire part-time or full-time workers in the worldwide with our easy to use all in one platform  </p>
-        <div className="grid grid-cols-3 gap-3 mt-4">
-            <div className="mt-3">
-                <img className="mx-auto" src={img6} alt="" />
-                <h2 className="text-2xl font-semibold">Post Job</h2>
-                <p className="text-[11px]">Create your free job post and start receiving Applicants within ours</p>
-            </div>
-            <div className="mt-3">
-                <img className="mx-auto" src={img7} alt="" />
-                <h2 className="text-2xl font-semibold">Hire Staffs</h2>
-                <p className="text-[11px]">Choose who you want to hire for your project</p>
-            </div>
-            <div className="mt-3">
-                <img className="mx-auto" src={img8} alt="" />
-                <h2 className="text-2xl font-semibold">Staff Work Policy</h2>
-                <p className="text-[11px]">You decide when and how your staff  works</p>
-            </div>
-            <div className="mt-3">
-                <img className="mx-auto" src={img9} alt="" />
-                <h2 className="text-2xl font-semibold">Pay Your Staff</h2>
-                <p className="text-[11px]">Pay your staff with a click of a button</p>
-            </div>
-            <div className="mt-3">
-                <img className="mx-auto" src={img10} alt="" />
-                <h2 className="text-2xl font-semibold">Get your output</h2>
-                <p className="text-[11px]">Get  the promised output from your staffs</p>
-            </div>
+        <p className="mt-2">
+          Hire part-time or full-time workers in the worldwide with our easy to
+          use all in one platform{" "}
+        </p>
+
+        <div className="grid md:grid-cols-3 text-center gap-3 mt-4">
+          <div className="mt-3">
+            <img className="mx-auto" src={img6} alt="" />
+            <h2 className="text-2xl font-semibold">Post Job</h2>
+            <p className="text-[11px]">
+              Create your free job post and start receiving Applicants within
+              ours
+            </p>
+          </div>
+          <div className="mt-3">
+            <img className="mx-auto" src={img7} alt="" />
+            <h2 className="text-2xl font-semibold">Hire Staffs</h2>
+            <p className="text-[11px]">
+              Choose who you want to hire for your project
+            </p>
+          </div>
+          <div className="mt-3">
+            <img className="mx-auto" src={img8} alt="" />
+            <h2 className="text-2xl font-semibold">Staff Work Policy</h2>
+            <p className="text-[11px]">
+              You decide when and how your staff works
+            </p>
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-3 mt-4 text-center">
+          <div className="mt-3">
+            <img className="mx-auto" src={img9} alt="" />
+            <h2 className="text-2xl font-semibold">Pay Your Staff</h2>
+            <p className="text-[11px]">
+              Pay your staff with a click of a button
+            </p>
+          </div>
+          <div className="mt-3">
+            <img className="mx-auto" src={img10} alt="" />
+            <h2 className="text-2xl font-semibold">Get your output</h2>
+            <p className="text-[11px]">
+              Get the promised output from your staffs
+            </p>
+          </div>
         </div>
       </div>
     </div>
