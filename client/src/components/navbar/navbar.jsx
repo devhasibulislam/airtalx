@@ -14,19 +14,29 @@ const Navbar = () => {
   const nav = (
     <>
       <li>
-        <Link className="text-xl" to="/">Home</Link>
+        <Link className="text-xl" to="/">
+          Home
+        </Link>
       </li>
       <li>
-        <Link className="text-xl" to="/find-job">Find Job</Link>
+        <Link className="text-xl" to="/find-job">
+          Find Job
+        </Link>
       </li>
       <li>
-        <Link className="text-xl" to="/contact-us">Contact Us</Link>
+        <Link className="text-xl" to="/find-employee">
+          Find Employee
+        </Link>
       </li>
       <li>
-        <Link className="text-xl" to="/about-us">About Us</Link>
+        <Link className="text-xl" to="/contact-us">
+          Contact Us
+        </Link>
       </li>
       <li>
-        <Link className="text-xl" to="/find-employee">Find Employee</Link>
+        <Link className="text-xl" to="/about-us">
+          About Us
+        </Link>
       </li>
     </>
   );
@@ -118,9 +128,6 @@ const Navbar = () => {
 
             <Link to="/login">
               <button className="btn btn-info btn-sm">Login</button>
-            </Link>
-            <Link to="/signup">
-              <button className="btn btn-accent btn-sm">Sign-up</button>
             </Link>
           </div>
         </div>

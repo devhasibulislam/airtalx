@@ -32,6 +32,7 @@ const FindEmploye = () => {
                 }</h1>
            </div>
           </div>
+           <button className="btn btn-accent flex justify-center">Know More</button>
           </div>
         ))}
       </div>

@@ -11,6 +11,7 @@ import Pricing from "../components/pricing/Pricing";
 import FAQ from "../components/FAQ/faq";
 import FindJob from "../components/find-job/FindJob";
 import FindEmploye from "../components/find-employee/FindEmploye";
+import Sidebar from "../components/sidebar/Sidebar";
 
 const RouteA = () => {
   return (
@@ -27,6 +28,7 @@ const RouteA = () => {
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/find-job" element={<FindJob />} />
         <Route path="/find-employee" element={<FindEmploye />} />
+        <Route path="/sidebar" element={<Sidebar />} />
       </Routes>
     </div>
   );
