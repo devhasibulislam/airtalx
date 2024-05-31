@@ -5,3 +5,26 @@
 body {
   font-family: "Poppins", sans-serif;
 }
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.tabs .tab {
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  background-color: #f1f1f1;
+}
+
+.tabs .tab.active {
+  background-color: #63b3ed;
+  color: white;
+}
+
+.tab-content {
+  border: 1px solid #ccc;
+  padding: 10px;
+}

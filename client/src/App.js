@@ -1,9 +1,8 @@
 // src/App.js
 import React from "react";
-import { Route, Routes } from "react-router-dom";
-import Home from "./components/Home";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/navbar";
+import RouteA from "./routes/route";
 
 function App() {
   return (
@@ -12,12 +11,7 @@ function App() {
         <Navbar />
       </nav>
       <div className="p-4">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          {/* <Route path="/about" element={<About />} /> */}
-          {/* <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Login />} /> */}
-        </Routes>
+        <RouteA />
       </div>
       <div>
         <Footer />
