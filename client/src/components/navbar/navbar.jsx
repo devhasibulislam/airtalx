@@ -25,6 +25,9 @@ const Navbar = () => {
       <li>
         <Link className="text-xl" to="/about-us">About Us</Link>
       </li>
+      <li>
+        <Link className="text-xl" to="/find-employee">Find Employee</Link>
+      </li>
     </>
   );
 
