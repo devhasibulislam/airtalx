@@ -1,7 +1,9 @@
 /* internal imports */
 const User = require("../../models/v1/user.model");
 const token = require("../../utils/token.util");
+const crypto = require("crypto");
 const { sendOTP } = require("./otp.service");
+const mailSender = require("../../utils/email.util");
 
 /* account registration */
 exports.accountRegistration = async (req, res) => {
@@ -46,7 +48,7 @@ exports.accountLogin = async (req, res) => {
       description: "Email and password are required",
     });
   } else {
-    const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ email: req.body.email }).populate("otp");
 
     if (!user) {
       res.status(404).json({
@@ -71,20 +73,28 @@ exports.accountLogin = async (req, res) => {
             description: "Your account is not active",
           });
         } else {
-          const accessToken = token({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            role: user.role,
-            status: user.status,
-          });
+          if (user.otp.status === "unverified") {
+            res.status(401).json({
+              acknowledgement: false,
+              message: "Unauthorized",
+              description: "Your account is not verified",
+            });
+          } else {
+            const accessToken = token({
+              _id: user._id,
+              name: user.name,
+              email: user.email,
+              role: user.role,
+              status: user.status,
+            });
 
-          res.status(200).json({
-            acknowledgement: true,
-            message: "OK",
-            description: "User logged in successfully",
-            accessToken,
-          });
+            res.status(200).json({
+              acknowledgement: true,
+              message: "OK",
+              description: "User logged in successfully",
+              accessToken,
+            });
+          }
         }
       }
     }
@@ -93,11 +103,11 @@ exports.accountLogin = async (req, res) => {
 
 /* password reset */
 exports.accountReset = async (req, res) => {
-  if (!req.body.email || !req.body.password) {
+  if (!req.body.email) {
     res.status(400).json({
       acknowledgement: false,
       message: "Bad Request",
-      description: "Email and password are required",
+      description: "Email is required",
     });
   } else {
     const user = await User.findOne({ email: req.body.email });
@@ -109,28 +119,165 @@ exports.accountReset = async (req, res) => {
         description: "Try with a valid email address",
       });
     } else {
-      const result = await User.findByIdAndUpdate(
-        user?._id,
-        { password: user.encryptedPassword(req.body.password) },
-        {
-          runValidators: true,
-          returnOriginal: false,
-        }
+      const resetToken = crypto.randomBytes(16).toString("hex");
+      user.resetToken = resetToken;
+
+      const mailResponse = await mailSender(
+        user.email,
+        "Reset Your Password",
+        `
+        <!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Reset Your Password</title>
+            <style>
+              body {
+                font-family: Calibri, sans-serif;
+                font-style: normal;
+              }
+              .reset_button {
+                background-color: #008080 !important;
+                width: fit-content;
+                padding: 10px 15px;
+                color: white !important;
+                border-radius: 5px;
+                font-size: 14px;
+                text-decoration: none;
+                margin: 20px 0;
+                display: block;
+              }
+            </style>
+          </head>
+          <body>
+            <section>
+              <p>Hello ${user.name},</p>
+              <div style="margin-bottom: 10px">
+                <span>
+                  We received a request a reset your password. Click the button below to
+                  choose a new password:
+                </span>
+                <br />
+                <span>
+                  Please, enter the following One-Time-Password (OTP) in the
+                  verification field:
+                </span>
+              </div>
+              <a
+                href="${req.protocol}://${req.get("host")}${
+          req.originalUrl
+        }?token=${resetToken}"
+                target="_blank"
+                class="reset_button"
+                >Reset Password</a
+              >
+              <p>If you didn't as to reset your password, you can ignore this email.</p>
+              <p>
+                <span>Thanks,</span>
+                <br />
+                <span style="font-weight: bold">AirTalX Team</span>
+              </p>
+            </section>
+          </body>
+        </html>
+        `
       );
 
-      if (!result) {
+      if (!mailResponse) {
         res.status(400).json({
           acknowledgement: false,
           message: "Bad Request",
-          description: "Failed to reset password",
+          description: "Failed to send password reset link",
         });
       } else {
+        await user.save({
+          runValidators: false,
+        });
+
         res.status(200).json({
           acknowledgement: true,
           message: "OK",
-          description: "Password reset successfully",
+          description: "Reset link sent successfully",
         });
       }
+    }
+  }
+};
+
+exports.verifyAccountReset = async (req, res) => {
+  if (!req.query.token) {
+    res.status(400).json({
+      acknowledgement: false,
+      message: "Bad Request",
+      description: "Token is required",
+    });
+  }
+
+  const user = await User.findOne({ resetToken: req.query.token });
+
+  if (!user) {
+    res.status(404).json({
+      acknowledgement: false,
+      message: "Not Found",
+      description: "Invalid token",
+    });
+  } else {
+    res.redirect(
+      `${process.env.ORIGIN_URL}/forgot-password?token=${req.query.token}`
+    );
+  }
+};
+
+exports.confirmAccountPersist = async (req, res) => {
+  if (!req.body.email || !req.body.password) {
+    res.status(400).json({
+      acknowledgement: false,
+      message: "Bad Request",
+      description: "Email and password are required",
+    });
+  }
+
+  if (!req.query.token) {
+    res.status(400).json({
+      acknowledgement: false,
+      message: "Bad Request",
+      description: "Token is required",
+    });
+  }
+
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) {
+    res.status(404).json({
+      acknowledgement: false,
+      message: "Not Found",
+      description: "Try with a valid email address",
+    });
+  } else {
+    const result = await User.findByIdAndUpdate(
+      user?._id,
+      {
+        $set: { password: user.encryptedPassword(req.body.password) },
+        $unset: { resetToken: 1 },
+      },
+      {
+        runValidators: true,
+        returnOriginal: false,
+      }
+    );
+
+    if (!result) {
+      res.status(400).json({
+        acknowledgement: false,
+        message: "Bad Request",
+        description: "Failed to reset password",
+      });
+    } else {
+      res.status(200).json({
+        acknowledgement: true,
+        message: "OK",
+        description: "Password reset successfully",
+      });
     }
   }
 };

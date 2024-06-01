@@ -14,7 +14,11 @@ router.post("/register", userController.accountRegistration);
 // account login
 router.post("/login", userController.accountLogin);
 // password reset
-router.put("/reset", userController.accountReset);
+router
+  .route("/reset")
+  .put(userController.accountReset)
+  .get(userController.verifyAccountReset)
+  .patch(userController.confirmAccountPersist);
 // login persist
 router.get("/me", verify, userController.accountPersist);
 

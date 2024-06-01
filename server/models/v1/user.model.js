@@ -4,16 +4,16 @@ const bcrypt = require("bcryptjs");
 const userSchema = new mongoose.Schema(
   {
     // user information
-    avatar: {
-      url: {
-        type: String,
-        required: [true, "Please, provide a valid avatar URL"],
-      },
-      public_id: {
-        type: String,
-        required: [true, "Please, provide the avatar public id"],
-      },
-    },
+    // avatar: {
+    //   url: {
+    //     type: String,
+    //     required: [true, "Please, provide a valid avatar URL"],
+    //   },
+    //   public_id: {
+    //     type: String,
+    //     required: [true, "Please, provide the avatar public id"],
+    //   },
+    // },
     name: {
       type: String,
       required: [true, "Please, provide your full name"],
@@ -35,13 +35,19 @@ const userSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: ["active", "inactive"],
-      default: "active",
+      default: "inactive",
     },
 
     // rest info based on user
     otp: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "OTP",
+    },
+
+    resetToken: {
+      type: String,
+      lowercase: true,
+      unique: true,
     },
 
     // user account timing

@@ -34,6 +34,26 @@ exports.accountReset = async (req, res, next) => {
   }
 };
 
+exports.verifyAccountReset = async (req, res, next) => {
+  try {
+    await userService.verifyAccountReset(req, res);
+  } catch (error) {
+    next(error);
+  } finally {
+    console.log(`Route: ${req.url} || Method: ${req.method}`);
+  }
+};
+
+exports.confirmAccountPersist = async (req, res, next) => {
+  try {
+    await userService.confirmAccountPersist(req, res);
+  } catch (error) {
+    next(error);
+  } finally {
+    console.log(`Route: ${req.url} || Method: ${req.method}`);
+  }
+};
+
 /* persist login */
 exports.accountPersist = async (req, res, next) => {
   try {
