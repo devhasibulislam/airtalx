@@ -53,7 +53,7 @@ async function sendVerificationEmail(name, email, otp) {
             .otp {
               background-color: #008080;
               width: fit-content;
-              padding: 8px;
+              padding: 10px 15px;
               color: white;
               border-radius: 5px;
               font-size: 20px;
