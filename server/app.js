@@ -7,6 +7,7 @@ require("dotenv").config();
 const error = require("./middleware/error.middleware");
 const authRouter = require("./routes/v1/auth.route");
 const userRoute = require("./routes/v1/user.route");
+const otpRoute = require("./routes/v1/otp.route");
 
 /* application level connection */
 const app = express();
@@ -27,6 +28,7 @@ app.use(express.static("uploads"));
 /* router level connections */
 app.use("/v1/api/auth", authRouter);
 app.use("/v1/api/user", userRoute);
+app.use("/v1/api/otp", otpRoute);
 
 /* global error handler */
 app.use(error);

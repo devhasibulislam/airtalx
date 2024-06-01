@@ -39,6 +39,10 @@ const userSchema = new mongoose.Schema(
     },
 
     // rest info based on user
+    otp: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "OTP",
+    },
 
     // user account timing
     createdAt: {

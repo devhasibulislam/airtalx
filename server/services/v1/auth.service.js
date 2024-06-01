@@ -1,6 +1,7 @@
 /* internal imports */
 const User = require("../../models/v1/user.model");
 const token = require("../../utils/token.util");
+const { sendOTP } = require("./otp.service");
 
 /* account registration */
 exports.accountRegistration = async (req, res) => {
@@ -30,12 +31,7 @@ exports.accountRegistration = async (req, res) => {
         });
       } else {
         await result.save();
-
-        res.status(201).json({
-          acknowledgement: true,
-          message: "Created",
-          description: "User created successfully",
-        });
+        await sendOTP(req, res);
       }
     }
   }
