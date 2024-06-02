@@ -470,6 +470,8 @@ import { CiUser } from "react-icons/ci";
 import FindJob from "../find-job/FindJob";
 import { BiSolidEditAlt } from "react-icons/bi";
 import Application from "../JobSeeker/Application";
+import FindEmploye from "../find-employee/FindEmploye";
+import Dashboard from "../admin/dashboard/Dashboard";
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("Tab1");
@@ -535,7 +537,7 @@ const AdminDashboard = () => {
           className={`p-4 cursor-pointer ${
             activeTab === "Tab6" ? "bg-gray-300 font-bold" : ""
           }`}
-          onClick={() => handleTabClick("Tab5")}
+          onClick={() => handleTabClick("Tab6")}
         >
           <h2 className="flex gap-2 text-xl">
             <FaHospitalUser className="text-2xl" /> My Employee
@@ -545,7 +547,7 @@ const AdminDashboard = () => {
           className={`p-4 cursor-pointer ${
             activeTab === "Tab7" ? "bg-gray-300 font-bold" : ""
           }`}
-          onClick={() => handleTabClick("Tab5")}
+          onClick={() => handleTabClick("Tab7")}
         >
           <h2 className="flex gap-2 text-xl">
             <IoReloadOutline className="text-2xl" /> History
@@ -555,7 +557,7 @@ const AdminDashboard = () => {
           className={`p-4 cursor-pointer ${
             activeTab === "Tab8" ? "bg-gray-300 font-bold" : ""
           }`}
-          onClick={() => handleTabClick("Tab5")}
+          onClick={() => handleTabClick("Tab8")}
         >
           <h2 className="flex gap-2 text-xl">
             <FaCcAmazonPay className="text-2xl" /> Payment
@@ -565,7 +567,7 @@ const AdminDashboard = () => {
           className={`p-4 cursor-pointer ${
             activeTab === "Tab9" ? "bg-gray-300 font-bold" : ""
           }`}
-          onClick={() => handleTabClick("Tab6")}
+          onClick={() => handleTabClick("Tab9")}
         >
           <h2 className="flex gap-2 text-xl">
             <CiUser className="text-2xl" /> User
@@ -575,7 +577,7 @@ const AdminDashboard = () => {
           className={`p-4 cursor-pointer ${
             activeTab === "Tab10" ? "bg-gray-300 font-bold" : ""
           }`}
-          onClick={() => handleTabClick("Tab6")}
+          onClick={() => handleTabClick("Tab10")}
         >
           <h2 className="flex gap-2 text-xl">
             <FaRegEdit className="text-2xl" /> Post a Blog
@@ -586,7 +588,7 @@ const AdminDashboard = () => {
           className={`p-4 cursor-pointer ${
             activeTab === "Tab11" ? "bg-gray-300 font-bold" : ""
           }`}
-          onClick={() => handleTabClick("Tab6")}
+          onClick={() => handleTabClick("Tab11")}
         >
           <h2 className="flex gap-2 text-xl">
             <FaBookReader className="text-2xl" /> Blog
@@ -597,7 +599,7 @@ const AdminDashboard = () => {
           className={`p-4 cursor-pointer ${
             activeTab === "Tab12" ? "bg-gray-300 font-bold" : ""
           }`}
-          onClick={() => handleTabClick("Tab6")}
+          onClick={() => handleTabClick("Tab12")}
         >
           <h2 className="flex gap-2 text-xl">
             <BsBarChartLine nPay className="text-2xl" /> Goole analytic
@@ -608,7 +610,7 @@ const AdminDashboard = () => {
           className={`p-4 cursor-pointer ${
             activeTab === "Tab13" ? "bg-gray-300 font-bold" : ""
           }`}
-          onClick={() => handleTabClick("Tab6")}
+          onClick={() => handleTabClick("Tab13")}
         >
           <h2 className="flex gap-2 text-xl">
             <BiSolidEditAlt className="text-2xl" /> Edit content
@@ -625,7 +627,9 @@ const AdminDashboard = () => {
           <div>
             <p>Content for Tab 1</p>
             {/* Simulating long content for demonstration */}
-            <div className="h-96 ">Scrollable content for Tab 1</div>
+            <div className="h-96 ">
+           <Dashboard/>
+              </div>
           </div>
         )}
         {activeTab === "Tab2" && (
@@ -649,12 +653,16 @@ const AdminDashboard = () => {
         )}
         {activeTab === "Tab5" && (
           <div>
-            <div className="h-96 ">work history</div>
+            <div className="h-96 ">
+              <FindJob/>
+            </div>
           </div>
         )}
         {activeTab === "Tab6" && (
           <div>
-            <div className="h-96 ">payment</div>
+            <div className="h-96 ">
+              <FindEmploye/>
+            </div>
           </div>
         )}
       </div>
@@ -722,11 +730,12 @@ const EmployeeDashboard = () => {
             <MdShoppingBag className="text-2xl" /> My Jobs
           </h2>
         </div>
+
         <div
           className={`p-4 cursor-pointer ${
             activeTab === "Tab6" ? "bg-gray-300 font-bold" : ""
           }`}
-          onClick={() => handleTabClick("Tab5")}
+          onClick={() => handleTabClick("Tab6")}
         >
           <h2 className="flex gap-2 text-xl">
             <FaHospitalUser className="text-2xl" /> My Employee
@@ -736,7 +745,7 @@ const EmployeeDashboard = () => {
           className={`p-4 cursor-pointer ${
             activeTab === "Tab7" ? "bg-gray-300 font-bold" : ""
           }`}
-          onClick={() => handleTabClick("Tab5")}
+          onClick={() => handleTabClick("Tab7")}
         >
           <h2 className="flex gap-2 text-xl">
             <IoReloadOutline className="text-2xl" /> History
@@ -746,7 +755,7 @@ const EmployeeDashboard = () => {
           className={`p-4 cursor-pointer ${
             activeTab === "Tab8" ? "bg-gray-300 font-bold" : ""
           }`}
-          onClick={() => handleTabClick("Tab5")}
+          onClick={() => handleTabClick("Tab8")}
         >
           <h2 className="flex gap-2 text-xl">
             <FaCcAmazonPay className="text-2xl" /> Billing
@@ -791,12 +800,16 @@ const EmployeeDashboard = () => {
         )}
         {activeTab === "Tab5" && (
           <div>
-            <div className="h-96 ">work history</div>
+            <div className="h-96 ">
+              <FindJob/>
+            </div>
           </div>
         )}
         {activeTab === "Tab6" && (
           <div>
-            <div className="h-96 ">payment</div>
+            <div className="h-96 ">
+              <FindEmploye/>
+            </div>
           </div>
         )}
       </div>
