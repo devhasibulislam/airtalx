@@ -14,7 +14,7 @@ const FindJob = () => {
 
     return (
         <div>
-          <div className='grid md:grid-cols-2 lg:grid-cols-3'>
+          <div className='grid lg:grid-cols-2 '>
           {
             data.map((job, index) => (
                 <div key={index} className='border border-base-300 shadow-xl rounded-sm p-4 m-2'>

@@ -12,12 +12,18 @@ import FAQ from "../components/FAQ/faq";
 import FindJob from "../components/find-job/FindJob";
 import FindEmploye from "../components/find-employee/FindEmploye";
 import Sidebar from "../components/sidebar/Sidebar";
+import  { JobSeekerDashboard, AdminDashboard, EmployeeDashboard } from "../components/main/Main";
 
 const RouteA = () => {
   return (
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
+
+        <Route path="/jobseeker-dashboard" element={<JobSeekerDashboard />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
+
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgetpassword" element={<Forgetpassword />} />
@@ -34,4 +40,5 @@ const RouteA = () => {
   );
 };
 
-export default RouteA;
+
+export  {RouteA};

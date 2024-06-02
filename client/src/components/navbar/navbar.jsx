@@ -29,15 +29,21 @@ const Navbar = () => {
         </Link>
       </li>
       <li>
-        <Link className="text-xl" to="/contact-us">
-          Contact Us
+        <Link className="text-xl" to="/jobseeker-dashboard">
+          JobSeeker
         </Link>
       </li>
       <li>
-        <Link className="text-xl" to="/about-us">
-          About Us
+        <Link className="text-xl" to="/admin-dashboard">
+         Admin 
         </Link>
       </li>
+      <li>
+        <Link className="text-xl" to="/employee-dashboard">
+          Employee 
+        </Link>
+      </li>
+    
     </>
   );
 

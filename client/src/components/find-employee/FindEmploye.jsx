@@ -5,7 +5,7 @@ const FindEmploye = () => {
   console.log(data);
   return (
     <div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid lg:grid-cols-2 ">
         {data.map((em, index) => (
           <div
             key={index}

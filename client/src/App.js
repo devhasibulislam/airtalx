@@ -2,7 +2,7 @@
 import React from "react";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/navbar";
-import RouteA from "./routes/route";
+import { RouteA } from "./routes/route";
 
 function App() {
   return (
