@@ -21,6 +21,8 @@ import FindJob from "../find-job/FindJob";
 import Application from "../JobSeeker/Application";
 import FindEmploye from "../find-employee/FindEmploye";
 import Dashboard from "../admin/dashboard/Dashboard";
+import Payment from "../JobSeeker/Payment";
+import WorkHistory from "../workhistory/WorkHistory";
 
 // Tab data
 const adminTabs = [
@@ -77,8 +79,8 @@ const Sidebar = ({ tabs, activeTab, handleTabClick }) => (
       </div>
     ))}
     <div className="p-4 cursor-pointer">
-      <h2 className="flex items-center gap-2 text-[18px] text-red-500">
-        <IoLogOutOutline className="text-xl" /> <span className="hidden md:inline">LogOut</span>
+      <h2 className="flex items-center max-md:justify-center gap-2 text-[18px] text-red-500">
+        <IoLogOutOutline className="text-2xl md:text-xl" /> <span className="hidden md:inline">LogOut</span>
       </h2>
     </div>
   </div>
@@ -108,6 +110,8 @@ const AdminDashboard = () => {
       {activeTab === "Tab4" && <div>application</div>}
       {activeTab === "Tab5" && <FindJob />}
       {activeTab === "Tab6" && <FindEmploye />}
+      {activeTab === "Tab7" && <WorkHistory />}
+      {activeTab === "Tab8" && <Payment />}
       {/* Add more content for other tabs as needed */}
     </DashboardLayout>
   );
@@ -123,12 +127,13 @@ const EmployeeDashboard = () => {
 
   return (
     <DashboardLayout tabs={employerTabs} activeTab={activeTab} handleTabClick={handleTabClick}>
-      {activeTab === "Tab1" && <p>Content for Tab 1</p>}
+      {activeTab === "Tab1" && <p><Dashboard/></p>}
       {activeTab === "Tab2" && <p>Content for Tab 2</p>}
       {activeTab === "Tab3" && <FindJob />}
       {activeTab === "Tab4" && <div>application</div>}
       {activeTab === "Tab5" && <FindJob />}
       {activeTab === "Tab6" && <FindEmploye />}
+      {activeTab === "Tab7" && <WorkHistory />}
       {/* Add more content for other tabs as needed */}
     </DashboardLayout>
   );
@@ -144,12 +149,12 @@ const JobSeekerDashboard = () => {
 
   return (
     <DashboardLayout tabs={jobSeekerTabs} activeTab={activeTab} handleTabClick={handleTabClick}>
-      {activeTab === "Tab1" && <p>Content for Tab 1</p>}
+      {activeTab === "Tab1" && <p><Dashboard/></p>}
       {activeTab === "Tab2" && <p>Content for Tab 2</p>}
       {activeTab === "Tab3" && <FindJob />}
       {activeTab === "Tab4" && <Application />}
-      {activeTab === "Tab5" && <div>work history</div>}
-      {activeTab === "Tab6" && <div>payment</div>}
+      {activeTab === "Tab5" && <div><WorkHistory/></div>}
+      {activeTab === "Tab6" && <div><Payment/></div>}
       {/* Add more content for other tabs as needed */}
     </DashboardLayout>
   );
