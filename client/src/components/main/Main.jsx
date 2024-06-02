@@ -625,7 +625,6 @@ const AdminDashboard = () => {
       <div className="flex-1 p-8 overflow-y-auto">
         {activeTab === "Tab1" && (
           <div>
-            <p>Content for Tab 1</p>
             {/* Simulating long content for demonstration */}
             <div className="h-96 ">
            <Dashboard/>
