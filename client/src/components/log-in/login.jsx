@@ -51,7 +51,7 @@ const Login = () => {
         <img src={img1} alt="" />
       </div>
 
-     <div className="bg-[#eff4f5] p-4 rounded-2xl">
+     <div className="bg-[#eff4f5] bgw textw p-4 rounded-2xl">
      <div className=" pr-20 rounded-xl">
         <h1 className="text-3xl font-semibold text-center">Welcome back!</h1>
         <h2 className="text-center mt-2">Enter your Credentials to access your account</h2>
@@ -100,7 +100,7 @@ const Login = () => {
             <p className="label-text">Remember me</p>
           </div>
           <div className="form-control mt-6">
-            <button className="btn btn-primary">Login</button>
+            <button className="btn btn-success">Login</button>
           </div>
           <div>
             <p>

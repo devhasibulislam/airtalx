@@ -24,7 +24,7 @@ const Home = () => {
             Experience where talent meets opportunity, on a global scale.
           </p>
           <div className="mt-2">
-            <button className="btn btn-primary ">Get Started</button>
+            <button className="btn btn-success ">Get Started</button>
           </div>
         </div>
         <div className=" m-auto">
