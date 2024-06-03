@@ -51,14 +51,14 @@ const Login = () => {
         <img src={img1} alt="" />
       </div>
 
-     <div className="bg-[#eff4f5]">
+     <div className="bg-[#eff4f5] p-4 rounded-2xl">
      <div className=" pr-20 rounded-xl">
         <h1 className="text-3xl font-semibold text-center">Welcome back!</h1>
         <h2 className="text-center mt-2">Enter your Credentials to access your account</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Email</span>
+              <span className="label-text font-semibold">Email</span>
             </label>
             <input
               type="email"
@@ -73,7 +73,7 @@ const Login = () => {
           <div className="form-control">
             <div className="flex justify-between">
               <label className="label">
-                <span className="label-text">Password</span>
+                <span className="label-text font-semibold">Password</span>
               </label>
               <label className="label">
                 <Link to="/forgetpassword">

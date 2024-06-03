@@ -154,7 +154,7 @@ const Signup = () => {
       <div className="form-control mt-6 ">
         <button className="btn btn-primary">Sign Up</button>
       </div>
-      <div className="form-control  flex justify-between gap-3 mt-[20px]">
+      <div className="  flex justify-between gap-3 mt-[20px]">
         <button className="btn btn-active btn-ghost"><FcGoogle/> Sign In with Google</button>
         <button className="btn btn-active btn-ghost"><BsApple/> Sign In with Facebook</button>
       </div>
@@ -185,7 +185,7 @@ const Signup = () => {
           <img src={img1} alt="" />
         </div>
 
-       <div className="bg-[#eff4f5]">
+       <div className="bg-[#eff4f5] rounded-2xl">
        <div className="pr-20 rounded-xl">
           <h1 className="text-3xl  font-semibold text-center mt-[40px]">
             Jobseeker Sign Up
