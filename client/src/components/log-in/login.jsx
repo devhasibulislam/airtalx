@@ -50,9 +50,11 @@ const Login = () => {
       <div className="mx-auto flex items-center max-md:hidden">
         <img src={img1} alt="" />
       </div>
-      <div className="bg-[#eff4f5] p-3 rounded-xl">
-        <h1 className="text-3xl font-semibold">Welcome back!</h1>
-        <h2>Enter your Credentials to access your account</h2>
+
+     <div className="bg-[#eff4f5]">
+     <div className=" pr-20 rounded-xl">
+        <h1 className="text-3xl font-semibold text-center">Welcome back!</h1>
+        <h2 className="text-center mt-2">Enter your Credentials to access your account</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
           <div className="form-control">
             <label className="label">
@@ -61,7 +63,7 @@ const Login = () => {
             <input
               type="email"
               placeholder="email"
-              className="input input-bordered rounded-2xl"
+              className="input input-sm input-bordered rounded-2xl"
               {...register("email", { required: true })}
             />
             {errors.email && (
@@ -82,7 +84,7 @@ const Login = () => {
             <input
               type="password"
               placeholder="password"
-              className="input input-bordered rounded-2xl"
+              className="input input-sm input-bordered rounded-2xl"
               {...register("password", { required: true })}
             />
             {errors.password && (
@@ -110,6 +112,7 @@ const Login = () => {
           </div>
         </form>
       </div>
+     </div>
     </div>
   );
 };
