@@ -63,12 +63,12 @@ const jobSeekerTabs = [
 
 // Sidebar component
 const Sidebar = ({ tabs, activeTab, handleTabClick }) => (
-  <div className="w-20 md:w-64  border-2 border-base-300 rounded-2xl m-9  overflow-y-auto">
+  <div className="w-20 md:w-64 textw  border-2 border-base-300 rounded-2xl m-9  overflow-y-auto">
     {tabs.map((tab) => (
       <div
         key={tab.id}
         className={`p-4 cursor-pointer ${
-          activeTab === tab.id ? "bg-gray-300 font-bold" : ""
+          activeTab === tab.id ? "bg-gray-300 bgw font-bold" : ""
         }`}
         onClick={() => handleTabClick(tab.id)}
       >
@@ -90,7 +90,7 @@ const Sidebar = ({ tabs, activeTab, handleTabClick }) => (
 const DashboardLayout = ({ tabs, activeTab, handleTabClick, children }) => (
   <div className="flex h-screen">
     <Sidebar tabs={tabs} activeTab={activeTab} handleTabClick={handleTabClick} />
-    <div className="flex-1 p-8 overflow-y-auto">{children}</div>
+    <div className="flex-1  overflow-y-auto">{children}</div>
   </div>
 );
 

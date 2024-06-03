@@ -58,7 +58,7 @@ const Dashboard = () => {
   return (
     <div className=" items-center h-screen ">
 
-      <div className="w-full max-w-4xl p-4 m-5 bg-white rounded-lg shadow-lg">
+      <div className="w-full max-w-4xl p-4 m-5 bg-white bgw rounded-lg shadow-lg">
         <div className="flex justify-between mb-3">
           <div>
             <h2 className="text-2xl"> Total Job Posting </h2>
