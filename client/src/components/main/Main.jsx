@@ -63,7 +63,7 @@ const jobSeekerTabs = [
 
 // Sidebar component
 const Sidebar = ({ tabs, activeTab, handleTabClick }) => (
-  <div className="w-20 md:w-52 rounded-md bg-gray-100 overflow-y-auto">
+  <div className="w-20 md:w-72 rounded-md bg-gray-100 overflow-y-auto">
     {tabs.map((tab) => (
       <div
         key={tab.id}
