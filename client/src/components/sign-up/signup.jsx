@@ -152,7 +152,7 @@ const Signup = () => {
         <p className="label-text">Remember for 30 days</p>
       </div>
       <div className="form-control mt-6 ">
-        <button className="btn btn-primary">Sign Up</button>
+        <button className="btn btn-success">Sign Up</button>
       </div>
       <div className="  flex justify-between gap-3 mt-[20px]">
         <button className="btn btn-active btn-ghost"><FcGoogle/> Sign In with Google</button>
