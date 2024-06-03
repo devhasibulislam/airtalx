@@ -4,7 +4,7 @@ import React from "react";
 const Footer = () => {
   return (
     <div>
-      <footer className="footer p-10 bg-[#2792A8] text-base-content mx-auto">
+      <footer className="footer p-10 bg-[#2792A8] text-base-content mx-auto ">
         <nav>
           <h6 className="footer-title">Services</h6>
           <a className="link link-hover">Find Job</a>
@@ -67,6 +67,9 @@ const Footer = () => {
           </div>
         </nav>
       </footer>
+      <div className="bg-[#1B405D]">
+        <h1 className="text-center text-white p-3">Copyright 2024 - All right reserved by airTalX</h1>
+      </div>
     </div>
   );
 };

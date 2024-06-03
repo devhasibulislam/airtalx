@@ -6,14 +6,14 @@ import { RouteA } from "./routes/route";
 
 function App() {
   return (
-    <div>
+    <div className="h-screen">
       <nav className="">
         <Navbar />
       </nav>
-      <div className="p-4">
+      <div >
         <RouteA />
       </div>
-      <div>
+      <div >
         <Footer />
       </div>
     </div>
