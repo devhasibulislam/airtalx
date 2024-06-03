@@ -151,7 +151,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-3 mt-4 text-center">
+        <div className="grid md:grid-cols-2 gap-3 w-[80%] mx-auto mt-4 text-center">
           <div className="mt-3">
             <img className="mx-auto" src={img9} alt="" />
             <h2 className="text-2xl font-semibold">Pay Your Staff</h2>
