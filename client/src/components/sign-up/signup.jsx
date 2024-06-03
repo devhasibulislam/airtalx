@@ -73,7 +73,7 @@ const Signup = () => {
         <input
           type="text"
           placeholder="name"
-          className="input input-bordered rounded-2xl"
+          className="input input-sm  input-bordered rounded-2xl"
           {...register("name", { required: true })}
         />
         {errors.name && (
@@ -87,7 +87,7 @@ const Signup = () => {
         <input
           type="email"
           placeholder="email"
-          className="input input-bordered rounded-2xl"
+          className="input input-sm  input-bordered rounded-2xl"
           {...register("email", { required: true })}
         />
         {errors.email && (
@@ -101,7 +101,7 @@ const Signup = () => {
         <input
           type="password"
           placeholder="password"
-          className="input input-bordered rounded-2xl"
+          className="input input-sm  input-bordered rounded-2xl"
           {...register("password", { required: true })}
         />
         {errors.password && (
@@ -115,7 +115,7 @@ const Signup = () => {
         <input
           type="password"
           placeholder="password"
-          className="input input-bordered rounded-3xl"
+          className="input input-sm  input-bordered rounded-2xl"
           {...register("password", { required: true })}
         />
         {errors.password && (
@@ -127,12 +127,12 @@ const Signup = () => {
         <label className="label">
           <span className="label-text font-semibold">Upload-Image</span>
         </label>
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col justify-start ">
           <input type="file" id="file-upload" className=" hidden" />
 
           <label
             htmlFor="file-upload"
-            className=" file-input-bordered file-input-accent w-full  flex items-center justify-start rounded-2xl p-3 pl-5 gap-2 cursor-pointer bg-blue-300"
+            className=" file-input-bordered  flex justify-start rounded-2xl p-2 px-5 gap-2 cursor-pointer bg-blue-300"
           >
             <FaUpload className="text-xl" />
             <span> Click to upload image</span>
@@ -151,10 +151,10 @@ const Signup = () => {
         />
         <p className="label-text">Remember for 30 days</p>
       </div>
-      <div className="form-control mt-6">
+      <div className="form-control mt-6 ">
         <button className="btn btn-primary">Sign Up</button>
       </div>
-      <div className="flex justify-between gap-3 mt-[20px]">
+      <div className="form-control  flex justify-between gap-3 mt-[20px]">
         <button className="btn btn-active btn-ghost"><FcGoogle/> Sign In with Google</button>
         <button className="btn btn-active btn-ghost"><BsApple/> Sign In with Facebook</button>
       </div>
@@ -171,25 +171,29 @@ const Signup = () => {
 
   return (
     <div className="bg-blue-300">
-      <div className="text-center mb-4">
+     <div className="">
+     <div className="text-center mb-4">
         <h1 className="text-4xl font-semibold pt-5">Get Started</h1>
         <h2 className="pt-2 mb-2">
           In Our Website you can Sign Up either as an Employer or a Jobseeker
         </h2>
       </div>
+
       <div className="grid md:grid-cols-2">
-        <div className="mx-auto flex items-center max-md:hidden">
+
+        <div className="mx-auto px-24 flex items-center max-md:hidden">
           <img src={img1} alt="" />
         </div>
 
-        <div className="bg-[#eff4f5]  rounded-xl">
-          <h1 className="text-3xl font-semibold text-center mt-[40px]">
+       <div className="bg-[#eff4f5]">
+       <div className="pr-20 rounded-xl">
+          <h1 className="text-3xl  font-semibold text-center mt-[40px]">
             Jobseeker Sign Up
           </h1>
 
           <div className=" rounded-lg">
             {/* Tabs */}
-            <div className="flex justify-center mt-[30px]">
+            <div className="flex justify-center  mt-[30px]">
               <button
                 className={`px-4 py-2 ${
                   activeTab === 0 ? "bg-blue-400 text-white" : "bg-gray-200"
@@ -223,7 +227,9 @@ const Signup = () => {
             </div>
           </div>
         </div>
+       </div>
       </div>
+     </div>
     </div>
   );
 };
