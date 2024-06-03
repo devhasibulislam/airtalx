@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { TfiMenuAlt } from "react-icons/tfi";
 
@@ -10,6 +10,23 @@ const Navbar = () => {
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+
+  const [theme, setTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem("theme") : "autumn");
+
+  const handletoggle = (e) => {
+      if (e.target.checked) {
+          setTheme("synthwave")
+      }
+      else {
+          setTheme("autumn")
+      }
+  }
+
+  useEffect(() => {
+      localStorage.setItem("theme", theme);
+      const localTheme = localStorage.getItem("theme");
+      document.querySelector("html").setAttribute("data-theme", localTheme)
+  }, [theme])
 
   const nav = (
     <>
@@ -48,8 +65,8 @@ const Navbar = () => {
   );
 
   return (
-    <div>
-      <div className="navbar bg-[#EDF7F4]">
+    <div> 
+      <div className="navbar bg-slate-300 textw bgw">
         <div className="navbar-start">
           <div className="dropdown">
             <div
@@ -81,8 +98,12 @@ const Navbar = () => {
 
         <div className="navbar-end">
           <div className="flex justify-center items-center gap-4">
+
             <label className="switch">
-              <input type="checkbox" defaultChecked />
+
+              {/* <input type="checkbox" defaultChecked /> */}
+              <input onChange={handletoggle} type="checkbox" />
+
               <div className="slider">
                 <div className="circle">
                   <svg

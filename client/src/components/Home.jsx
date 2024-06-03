@@ -12,9 +12,10 @@ import img10 from "../image/hiringpart/Frame 21 (4).svg";
 import { FcApproval } from "react-icons/fc";
 const Home = () => {
   return (
-    <div className="mt-4 w-[90%] mx-auto">
-      <div className="grid md:grid-cols-2 items-center ">
-        <div>
+    <div className="mt-4 w-[90%] mx-auto textw">
+
+      <div className="grid md:grid-cols-2 w-[80%] mx-auto items-center ">
+        <div className="">
           <h2 className="text-3xl font-semibold">
             {" "}
             One of the Trusted Talent Marketplaces in the Philippines.
@@ -31,9 +32,9 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="mt-12 p-3 bg-[#EDF7F4]">
-        <h1 className="text-3xl font-semibold">Why Us?</h1>
-        <h3 className="text-xl">
+      <div className="mt-20 p-3 bg-slate-200 bgw">
+        <h1 className="text-3xl font-semibold  text-center">Why Us?</h1>
+        <h3 className="text-xl  text-center">
           From all of the platforms, these are some of the reason for you to
           choose our platform
         </h3>
@@ -98,28 +99,28 @@ const Home = () => {
         </div>
       </div>
 
-      <div className=" grid md:grid-cols-3 mt-12 gap-4 w-[80%] mx-auto">
-        <div className="bg-[#EDF7F4] p-4">
+      <div className=" grid md:grid-cols-3 mt-20 gap-4 w-[80%] mx-auto">
+        <div className="bg-[#EDF7F4] bgw p-4">
           <img className="mx-auto" src={img3} alt="" />
           <h2 className="text-2xl font-semibold">Strong User Privacy</h2>
           <p className="text-sm">User’s privacy is always our first priority</p>
         </div>
 
-        <div className="bg-[#EDF7F4] p-4">
+        <div className="bg-[#EDF7F4] bgw text-center">
           <img className="mx-auto" src={img4} alt="" />
           <h2 className="text-2xl font-semibold">User Friendly Experience</h2>
           <p className="text-sm">Our platform is very easy to use</p>
         </div>
 
-        <div className="bg-[#EDF7F4] p-4">
+        <div className="bg-[#EDF7F4] bgw p-4">
           <img className="mx-auto" src={img5} alt="" />
           <h2 className="text-2xl font-semibold">World Wide Service</h2>
           <p className="text-sm">Hire your staff from any country</p>
         </div>
       </div>
 
-      <div className="mt-12 w-[80%] mx-auto">
-        <h1 className="text-3xl font-semibold">Hiring Process</h1>
+      <div className="mt-20 mb-20 text-center w-[80%] mx-auto">
+        <h1 className="text-3xl font-semibold t">Hiring Process</h1>
         <p className="mt-2">
           Hire part-time or full-time workers in the worldwide with our easy to
           use all in one platform{" "}

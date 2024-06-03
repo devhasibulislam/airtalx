@@ -14,12 +14,12 @@ const FindJob = () => {
 
     return (
         <div>
-          <div className='grid lg:grid-cols-2 '>
+          <div className='grid lg:grid-cols-2 textw'>
           {
             data.map((job, index) => (
                 <div key={index} className='border border-base-300 shadow-xl rounded-sm p-4 m-2'>
                    <div className='flex gap-3 items-center mb-2'>
-                       <h1 className='bg-blue-200 p-2 rounded-2xl'>{job.employment}</h1>
+                       <h1 className='bg-blue-200 bgw p-2 rounded-2xl'>{job.employment}</h1>
                        <h1>{job.job_rate_per_hour}</h1>
                    </div>
 

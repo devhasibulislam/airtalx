@@ -170,3 +170,14 @@ body {
   -webkit-box-shadow: var(--circle-checked-shadow);
   box-shadow: var(--circle-checked-shadow);
 }
+
+
+[data-theme="synthwave"] .fullbodymood {
+  background: #0B2447;
+}
+[data-theme="synthwave"] .textw {
+  color: white;
+}
+[data-theme="synthwave"] .bgw {
+  background: #454f5c;
+}

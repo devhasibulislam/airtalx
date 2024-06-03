@@ -5,14 +5,14 @@ const FindEmploye = () => {
   console.log(data);
   return (
     <div>
-      <div className="grid lg:grid-cols-2 ">
+      <div className="grid lg:grid-cols-2 textw ">
         {data.map((em, index) => (
           <div
             key={index}
             className="border border-base-300 shadow-xl rounded-sm p-4 m-2"
           >
             <div className="flex gap-3 items-center mb-2">
-              <img className="w-20 h-20 rounded-full" src={em.img} alt="" />
+              <img className="w-20 bgw h-20 rounded-full" src={em.img} alt="" />
               <div>
                 <h1 className="text-xl font-bold">{em.name}</h1>
                 <h1>{em.role}</h1>
