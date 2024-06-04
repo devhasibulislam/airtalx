@@ -26,6 +26,7 @@ import WorkHistory from "../workhistory/WorkHistory";
 import Postblog from "../admin/Postblog/Postblog";
 import PostAJob from "../admin/dashboard/postAJobs/PostAJob";
 import User from "../user/User";
+import AdminBlog from "../admin/blog/AdminBlog";
 
 // Tab data
 const adminTabs = [
@@ -117,6 +118,7 @@ const AdminDashboard = () => {
       {activeTab === "Tab8" && <Payment />}
       {activeTab === "Tab9" && <p><User/></p>}
       {activeTab === "Tab10" && <Postblog />}
+      {activeTab === "Tab11" && <AdminBlog />}
       {/* Add more content for other tabs as needed */}
     </DashboardLayout>
   );
