@@ -27,6 +27,7 @@ import Postblog from "../admin/Postblog/Postblog";
 import PostAJob from "../admin/dashboard/postAJobs/PostAJob";
 import User from "../user/User";
 import AdminBlog from "../admin/blog/AdminBlog";
+import JobApplication from "../application/JobApplication";
 
 // Tab data
 const adminTabs = [
@@ -111,7 +112,7 @@ const AdminDashboard = () => {
       {activeTab === "Tab1" && <Dashboard />}
       {activeTab === "Tab2" && <p>Content for Tab 2</p>}
       {activeTab === "Tab3" && <PostAJob />}
-      {activeTab === "Tab4" && <div>application</div>}
+      {activeTab === "Tab4" && <JobApplication/>}
       {activeTab === "Tab5" && <FindJob />}
       {activeTab === "Tab6" && <FindEmploye />}
       {activeTab === "Tab7" && <WorkHistory />}
@@ -137,7 +138,7 @@ const EmployeeDashboard = () => {
       {activeTab === "Tab1" && <p><Dashboard/></p>}
       {activeTab === "Tab2" && <p>Content for Tab 2</p>}
       {activeTab === "Tab3" && <FindJob />}
-      {activeTab === "Tab4" && <div>application</div>}
+      {activeTab === "Tab4" && <JobApplication/>}
       {activeTab === "Tab5" && <FindJob />}
       {activeTab === "Tab6" && <FindEmploye />}
       {activeTab === "Tab7" && <WorkHistory />}
