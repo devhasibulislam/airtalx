@@ -33,7 +33,7 @@ const Postblog = () => {
           <label className="label">
             <span className=" font-semibold">Blog Description</span>
           </label>
-          <textarea className="textarea textarea-warning" placeholder="Blog" {...register("blog_description", { required: true })}/>
+          <textarea className="textarea textarea-bordered" placeholder="Blog" {...register("blog_description", { required: true })}/>
           {errors.job_title && (
             <span className="text-red-500">This field is required</span>
           )}
