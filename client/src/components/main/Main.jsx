@@ -24,6 +24,7 @@ import Dashboard from "../admin/dashboard/Dashboard";
 import Payment from "../JobSeeker/Payment";
 import WorkHistory from "../workhistory/WorkHistory";
 import Postblog from "../admin/Postblog/Postblog";
+import PostAJob from "../admin/dashboard/postAJobs/PostAJob";
 
 // Tab data
 const adminTabs = [
@@ -107,12 +108,14 @@ const AdminDashboard = () => {
     <DashboardLayout tabs={adminTabs} activeTab={activeTab} handleTabClick={handleTabClick}>
       {activeTab === "Tab1" && <Dashboard />}
       {activeTab === "Tab2" && <p>Content for Tab 2</p>}
-      {activeTab === "Tab3" && <Postblog />}
+      {activeTab === "Tab3" && <PostAJob />}
       {activeTab === "Tab4" && <div>application</div>}
       {activeTab === "Tab5" && <FindJob />}
       {activeTab === "Tab6" && <FindEmploye />}
       {activeTab === "Tab7" && <WorkHistory />}
       {activeTab === "Tab8" && <Payment />}
+      {activeTab === "Tab9" && <p>User</p>}
+      {activeTab === "Tab10" && <Postblog />}
       {/* Add more content for other tabs as needed */}
     </DashboardLayout>
   );
