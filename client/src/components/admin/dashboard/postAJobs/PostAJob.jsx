@@ -1,7 +1,5 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-// import Swal from "sweetalert2";
-
 const PostAJob = () => {
   const {
     register,
@@ -12,15 +10,6 @@ const PostAJob = () => {
 
   const onSubmit = async (data) => {
     console.log(data);
-    // Swal.fire({
-    //     title: "You are ll set!",
-    //     text: "Modal with a custom image.",
-    //     imageUrl: "https://unsplash.it/400/200",
-    //     imageWidth: 400,
-    //     imageHeight: 200,
-    //     imageAlt: "Custom image"
-        
-    //   });
   };
   return (
     <div>
@@ -57,12 +46,11 @@ const PostAJob = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-2">
-            
           <div className="form-control mt-3 ">
             <label>Job Type</label>
             <select
               {...register("job_type")}
-              className="input input-sm input-bordered rounded-2xl"
+              className="  rounded-xl p-1 bg-base-100"
             >
               <option value="part time">part time</option>
               <option value="full time">full time</option>
@@ -76,7 +64,7 @@ const PostAJob = () => {
             <label>Hour per week</label>
             <select
               {...register("hour_per_week")}
-              className="input input-sm input-bordered rounded-2xl"
+              className="rounded-xl p-1 bg-base-100"
             >
               <option value="40">40</option>
               <option value="25">25</option>
@@ -87,12 +75,15 @@ const PostAJob = () => {
             )}
           </div>
         </div>
- 
+
         <div className="form-control mt-3">
           <label className="label">
             <span className=" font-semibold">Salary</span>
           </label>
-          <p className="label-text">How much (US Dollar) do you want to pay per Hour? the salary range is between $3.00 and $99.00</p>
+          <p className="label-text">
+            How much (US Dollar) do you want to pay per Hour? the salary range
+            is between $3.00 and $99.00
+          </p>
           <input
             type="text"
             placeholder="Answer"
@@ -104,20 +95,22 @@ const PostAJob = () => {
           )}
         </div>
         <div className="form-control mt-3 ">
-            <label>Experience Level</label>
-            <select
-              {...register("experience")}
-              className="input input-sm input-bordered rounded-2xl"
-            >
-              <option value="6 month">6 month plus</option>
-              <option value="1-2 years">1-2 years</option>
-              <option value="2 years plus">2 years plus</option>
-            </select>
-            {errors.experience && (
-              <span className="text-red-500">This field is required</span>
-            )}
-          </div>
-<button className="btn btn-success mt-3" type="submit">Submit</button>
+          <label>Experience Level</label>
+          <select
+            {...register("experience")}
+            className="rounded-xl p-1 bg-base-100"
+          >
+            <option value="6 month">6 month plus</option>
+            <option value="1-2 years">1-2 years</option>
+            <option value="2 years plus">2 years plus</option>
+          </select>
+          {errors.experience && (
+            <span className="text-red-500">This field is required</span>
+          )}
+        </div>
+        <button className="btn btn-success mt-3" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );
