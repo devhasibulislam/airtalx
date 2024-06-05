@@ -13,6 +13,7 @@ import FindJob from "../components/find-job/FindJob";
 import FindEmploye from "../components/find-employee/FindEmploye";
 import Sidebar from "../components/sidebar/Sidebar";
 import  { JobSeekerDashboard, AdminDashboard, EmployeeDashboard } from "../components/main/Main";
+import AdminBlog from "../components/admin/blog/AdminBlog";
 
 const RouteA = () => {
   return (
@@ -35,6 +36,7 @@ const RouteA = () => {
         <Route path="/find-job" element={<FindJob />} />
         <Route path="/find-employee" element={<FindEmploye />} />
         <Route path="/sidebar" element={<Sidebar />} />
+        <Route path="/blog" element={<AdminBlog />} />
       </Routes>
     </div>
   );

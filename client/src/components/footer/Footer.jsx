@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import {Link} from 'react-router-dom'
 
 const Footer = () => {
   return (
@@ -7,21 +8,28 @@ const Footer = () => {
       <footer className="footer p-10 bg-[#2792A8] text-base-content mx-auto ">
         <nav>
           <h6 className="footer-title">Services</h6>
-          <a className="link link-hover">Find Job</a>
-          <a className="link link-hover">Find Employee</a>
+          <a className="link link-hover">  <Link to="/find-job"> Find Job</Link></a>
+          <a className="link link-hover">  <Link to="/find-employee"> Find Employee</Link></a>
         </nav>
         <nav>
           <h6 className="footer-title">Company</h6>
-          <a className="link link-hover">About us</a>
-          <a className="link link-hover">Contact</a>
-          <a className="link link-hover">Blogs</a>
+          <a className="link link-hover"> <Link to="/about-us"> About us</Link></a>
+          <a className="link link-hover"> <Link to="/contact-us"> Contact us</Link></a>
+          <a className="link link-hover">
+          <Link to="/blog"> Blogs</Link>
+            </a>
           <a className="link link-hover">Client Search</a>
         </nav>
         <nav>
           <h6 className="footer-title">Legal</h6>
-          <a className="link link-hover">Terms of use</a>
-          <a className="link link-hover">Privecy and police</a>
-          <a className="link link-hover">Help & FAQs</a>
+          <a className="link link-hover"> <Link to="/faq">Terms of use</Link> </a>
+          <a className="link link-hover">
+          <Link to="/faq">Privecy and police</Link>
+            
+            </a>
+          <a className="link link-hover">
+            <Link to="/faq">Help & FAQs</Link>
+          </a>
         </nav>
         <nav>
           <h6 className="footer-title">Pricing</h6>
