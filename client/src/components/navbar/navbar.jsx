@@ -35,16 +35,7 @@ const Navbar = () => {
           Home
         </Link>
       </li>
-      <li>
-        <Link className="text-xl" to="/find-job">
-          Find Job
-        </Link>
-      </li>
-      <li>
-        <Link className="text-xl" to="/find-employee">
-          Find Employee
-        </Link>
-      </li>
+     
       <li>
         <Link className="text-xl" to="/jobseeker-dashboard">
           JobSeeker
