@@ -137,7 +137,7 @@ const EmployeeDashboard = () => {
     <DashboardLayout tabs={employerTabs} activeTab={activeTab} handleTabClick={handleTabClick}>
       {activeTab === "Tab1" && <p><Dashboard/></p>}
       {activeTab === "Tab2" && <p>Content for Tab 2</p>}
-      {activeTab === "Tab3" && <FindJob />}
+      {activeTab === "Tab3" && <PostAJob />}
       {activeTab === "Tab4" && <JobApplication/>}
       {activeTab === "Tab5" && <FindJob />}
       {activeTab === "Tab6" && <FindEmploye />}
