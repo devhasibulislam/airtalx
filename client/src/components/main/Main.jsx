@@ -28,6 +28,7 @@ import PostAJob from "../admin/dashboard/postAJobs/PostAJob";
 import User from "../user/User";
 import AdminBlog from "../admin/blog/AdminBlog";
 import JobApplication from "../application/JobApplication";
+import Billing from "../billing/Billing";
 
 // Tab data
 const adminTabs = [
@@ -142,6 +143,7 @@ const EmployeeDashboard = () => {
       {activeTab === "Tab5" && <FindJob />}
       {activeTab === "Tab6" && <FindEmploye />}
       {activeTab === "Tab7" && <WorkHistory />}
+      {activeTab === "Tab8" && <Billing />}
       {/* Add more content for other tabs as needed */}
     </DashboardLayout>
   );
