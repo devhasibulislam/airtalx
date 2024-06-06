@@ -11,29 +11,30 @@ const About = () => {
         <h2 className="text-3xl font-semibold"> airTalX</h2>
       </div>
 
-      <h2 className="text-center font-semibold">
+      <h2 className="text-center text-[32px] text-[#20A3BA] font-semibold">
         Your Trusted Platform for Online Jobs in the Philipines!
       </h2>
 
       <div className="flex justify-center gap-4 mt-9">
-        <div className="p-4 border ">
+        <div className="p-4 border border-base-300">
           <img className="w-[200px] h-[200px]" src={img2} alt="" />
-          <h2 className="text-xl">Airon Mark Ramirez </h2>
-          <p className="text-sm">Oprating Officer</p>
+          <h2 className="text-2xl">Airon Mark Ramirez </h2>
+          <p className="text-[12px]">Oprating Officer</p>
         </div>
-        <div className="p-4 border">
+        <div className="p-4 border border-base-300">
           <img className="w-[200px] h-[200px]" src={img2} alt="" />
-          <h2 className="text-xl">Founder 2 </h2>
-          <p className="text-sm">Oprating Officer</p>
+          <h2 className="text-2xl">Founder 2 </h2>
+          <p className="text-[12px]">Oprating Officer</p>
         </div>
       </div>
 
-      <div className="mt-14 bg-blue-200 p-7">
-        <h1 className="text-3xl font-semibold text-center">About Us</h1>
+      <div className="mt-14 bg-[#cdf1fa] p-7">
+        <h1 className="text-4xl font-semibold text-[#196D7C] text-center">About Us</h1>
         <div className="grid grid-cols-2 gap-5 mt-7">
           <div>
-            <img className="flex items-center" src={img3} alt="" />
+            <img className="w-[372px] h-[302px] ml-[20%]" src={img3} alt="" />
           </div>
+
           <div>
             <h2 className="text-[12px] flex justify-start">
               My professional journey took flight in the vibrant sectors of
@@ -66,9 +67,9 @@ const About = () => {
         </div>
       </div>
 
-      <div className="mt-14 mx-auto w-[80%]">
-        <h1 className="text-3xl font-semibold text-center">Our Motives</h1>
-        <h4 className="text-[12px]">
+      <div className="mt-14 mb-32 mx-auto w-[80%]">
+        <h1 className="text-4xl font-semibold text-[#196D7C] text-center">Our Motives</h1>
+        <h4 className="text-[12px] mt-2">
           At airtalx, we prioritize the safety and satisfaction of our job
           seekers. We're proud to be recognized as the most reliable platform
           for securing long-term online jobs in the Philippines.  <br /><br /> Whether

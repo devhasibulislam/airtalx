@@ -33,8 +33,11 @@ const RouteA = () => {
         <Route path="/contact-us" element={<Contactus />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/pricing" element={<Pricing />} />
-        <Route path="/find-job" element={<FindJob />} />
-        <Route path="/find-employee" element={<FindEmploye />} />
+        <Route path="/find-job" element={ <div className="px-32"><FindJob /></div> } />
+        <Route path="/find-employee" element={ <div className="px-32"><FindEmploye /></div> } />
+
+        
+
         <Route path="/sidebar" element={<Sidebar />} />
         <Route path="/blog" element={<AdminBlog />} />
       </Routes>
