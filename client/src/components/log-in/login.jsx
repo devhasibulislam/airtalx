@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
+import ButtonAll from "../button/Button";
+import { FcGoogle } from "react-icons/fc";
+import { BsApple } from "react-icons/bs";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -46,16 +49,16 @@ const Login = () => {
   };
 
   return (
-    <div className="grid md:grid-cols-2 bg-[#a4e8f9]">
+    <div className="grid md:grid-cols-2 bg-[#cdf1fa]">
       <div className="mx-auto flex items-center max-md:hidden">
         <img src={img1} alt="" />
       </div>
 
-     <div className="bg-[#eff4f5] bgw textw p-4 rounded-2xl">
-     <div className=" pr-20 rounded-xl">
-        <h1 className="text-3xl font-semibold text-center">Welcome back!</h1>
-        <h2 className="text-center mt-2">Enter your Credentials to access your account</h2>
-        <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+     <div className="bg-white bgw textw grid grid-cols-3 p-4 rounded-2xl">
+     <div className="pl-3 col-span-2 rounded-xl">
+        <h1 className="text-3xl font-semibold text-start">Welcome back!</h1>
+        <h2 className="text-start mt-2">Enter your Credentials to access your account</h2>
+        <form onSubmit={handleSubmit(onSubmit)} className="">
           <div className="form-control">
             <label className="label">
               <span className="label-text font-semibold">Email</span>
@@ -100,8 +103,12 @@ const Login = () => {
             <p className="label-text">Remember me</p>
           </div>
           <div className="form-control mt-6">
-            <button className="btn btn-success">Login</button>
+            <ButtonAll>Login</ButtonAll>
           </div>
+          <div className="  flex justify-between gap-3 mt-[20px]">
+        <button className="btn btn-active btn-ghost"><FcGoogle/> Sign In with Google</button>
+        <button className="btn btn-active btn-ghost"><BsApple/> Sign In with Facebook</button>
+      </div>
           <div>
             <p>
               Don't have an account?{" "}
