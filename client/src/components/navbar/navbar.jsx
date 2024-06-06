@@ -31,23 +31,23 @@ const Navbar = () => {
   const nav = (
     <>
       <li>
-        <Link className="text-xl" to="/">
+        <Link className="text-[12px] font-medium" to="/">
           Home
         </Link>
       </li>
      
       <li>
-        <Link className="text-xl" to="/jobseeker-dashboard">
+        <Link className="text-[12px] font-medium" to="/jobseeker-dashboard">
           JobSeeker
         </Link>
       </li>
       <li>
-        <Link className="text-xl" to="/admin-dashboard">
+        <Link className="text-[12px] font-medium" to="/admin-dashboard">
          Admin 
         </Link>
       </li>
       <li>
-        <Link className="text-xl" to="/employee-dashboard">
+        <Link className="text-[12px] font-medium" to="/employee-dashboard">
           Employee 
         </Link>
       </li>
@@ -57,7 +57,7 @@ const Navbar = () => {
 
   return (
     <div> 
-      <div className="navbar bg-slate-300 textw bgw">
+      <div className="navbar bg-[#EDF7F4] textw bgw">
         <div className="navbar-start">
           <div className="dropdown">
             <div
@@ -108,7 +108,7 @@ const Navbar = () => {
             </label>
 
             <Link to="/login">
-              <button className="btn btn-info btn-sm">Login</button>
+              <button className="btn btn-info btn-sm text-[12px] font-medium">Login</button>
             </Link>
           </div>
         </div>

@@ -10,21 +10,22 @@ import img8 from "../image/hiringpart/Frame 21 (2).svg";
 import img9 from "../image/hiringpart/Frame 21 (3).svg";
 import img10 from "../image/hiringpart/Frame 21 (4).svg";
 import { FcApproval } from "react-icons/fc";
+import ButtonAll from "./button/Button";
 const Home = () => {
   return (
-    <div className="mt-4 w-[90%] mx-auto textw">
+    <div className="mt-4 w-full mx-auto textw">
 
-      <div className="grid md:grid-cols-2 w-[80%] mx-auto items-center ">
+      <div className="grid md:grid-cols-2 w-[85%] mx-auto items-center ">
         <div className="">
-          <h2 className="text-3xl font-semibold">
+          <h2 className="text-[40px] font-semibold">
             {" "}
             One of the Trusted Talent Marketplaces in the Philippines.
           </h2>
-          <p className="text-sm mt-2">
+          <p className="text-[20px] mt-4">
             Experience where talent meets opportunity, on a global scale.
           </p>
-          <div className="mt-2">
-            <button className="btn btn-success ">Get Started</button>
+          <div className="mt-4">
+            <ButtonAll>Get Started</ButtonAll>
           </div>
         </div>
         <div className=" m-auto">
@@ -33,26 +34,26 @@ const Home = () => {
       </div>
 
       <div className="mt-20 p-3 bg-slate-200 bgw">
-        <h1 className="text-3xl font-semibold  text-center">Why Us?</h1>
+        <h1 className="text-[36px] font-semibold  text-center">Why Us?</h1>
         <h3 className="text-xl  text-center">
           From all of the platforms, these are some of the reason for you to
           choose our platform
         </h3>
 
-        <div className="grid md:grid-cols-2 items-center mt-4">
-          <div className="w-[75%] mx-auto">
-            <img src={img2} alt="" />
+        <div className="grid md:grid-cols-2 gap-[57px] items-center mt-6">
+          <div className=" mx-auto">
+            <img className="w-[402px] h-[273px]" src={img2} alt="" />
           </div>
 
           <div className="mt-3">
-            <h3 className="text-sm flex gap-1 items-center">
+            <h3 className="text-[12px] flex gap-1 items-center">
               <span>
                 <FcApproval />
               </span>{" "}
               All of your given datas will be safe and secured
             </h3>
 
-            <h3 className="text-sm mt-2 flex  gap-2 ">
+            <h3 className="text-[12px] mt-2 flex  gap-2 ">
               <span>
                 <FcApproval />
               </span>{" "}
@@ -61,34 +62,34 @@ const Home = () => {
               </span>
             </h3>
 
-            <h3 className="text-sm flex gap-2 mt-2">
+            <h3 className="text-[12px] flex gap-2 mt-2">
               <span>
                 <FcApproval />
               </span>{" "}
               Access to a wide range of a job opportunities across various
               industries and locations
             </h3>
-            <h3 className="text-sm flex gap-2 mt-2">
+            <h3 className="text-[12px] flex gap-2 mt-2">
               <span>
                 <FcApproval />
               </span>{" "}
               Professional support and guidance throughout your job search
               journey
             </h3>
-            <h3 className="text-sm flex gap-2 mt-2">
+            <h3 className="text-[12px] flex gap-2 mt-2">
               <span>
                 <FcApproval />
               </span>{" "}
               Regular updates on the latest job openings and trends in the job
               market
             </h3>
-            <h3 className="text-sm flex gap-2 mt-2">
+            <h3 className="text-[12px] flex gap-2 mt-2">
               <span>
                 <FcApproval />
               </span>{" "}
               Opportunities for skill development and career advancement
             </h3>
-            <h3 className="text-sm flex gap-2 mt-2">
+            <h3 className="text-[12px] flex gap-2 mt-2">
               <span>
                 <FcApproval />
               </span>{" "}
@@ -103,25 +104,25 @@ const Home = () => {
         <div className="bg-[#EDF7F4] bgw p-4">
           <img className="mx-auto" src={img3} alt="" />
           <h2 className="text-2xl font-semibold">Strong User Privacy</h2>
-          <p className="text-sm">User’s privacy is always our first priority</p>
+          <p className="text-[12px]">User’s privacy is always our first priority</p>
         </div>
 
-        <div className="bg-[#EDF7F4] bgw text-center">
+        <div className="bg-[#EDF7F4] p-1 bgw text-center">
           <img className="mx-auto" src={img4} alt="" />
-          <h2 className="text-2xl font-semibold">User Friendly Experience</h2>
-          <p className="text-sm">Our platform is very easy to use</p>
+          <h2 className="text-2xl text-start font-semibold">User Friendly Experience</h2>
+          <p className="text-[12px] text-start">Our platform is very easy to use</p>
         </div>
 
         <div className="bg-[#EDF7F4] bgw p-4">
           <img className="mx-auto" src={img5} alt="" />
           <h2 className="text-2xl font-semibold">World Wide Service</h2>
-          <p className="text-sm">Hire your staff from any country</p>
+          <p className="text-[12px]">Hire your staff from any country</p>
         </div>
       </div>
 
       <div className="mt-20 mb-20 text-center w-[80%] mx-auto">
-        <h1 className="text-3xl font-semibold t">Hiring Process</h1>
-        <p className="mt-2">
+        <h1 className="text-4xl font-semibold t">Hiring Process</h1>
+        <p className="mt-2 text-xl">
           Hire part-time or full-time workers in the worldwide with our easy to
           use all in one platform{" "}
         </p>
@@ -129,23 +130,23 @@ const Home = () => {
         <div className="grid md:grid-cols-3 text-center gap-3 mt-4">
           <div className="mt-3">
             <img className="mx-auto" src={img6} alt="" />
-            <h2 className="text-2xl font-semibold">Post Job</h2>
-            <p className="text-[11px]">
+            <h2 className="text-4xl font-semibold">Post Job</h2>
+            <p className="text-[12px]">
               Create your free job post and start receiving Applicants within
               ours
             </p>
           </div>
           <div className="mt-3">
             <img className="mx-auto" src={img7} alt="" />
-            <h2 className="text-2xl font-semibold">Hire Staffs</h2>
-            <p className="text-[11px]">
+            <h2 className="text-4xl font-semibold">Hire Staffs</h2>
+            <p className="text-[12px]">
               Choose who you want to hire for your project
             </p>
           </div>
           <div className="mt-3">
             <img className="mx-auto" src={img8} alt="" />
-            <h2 className="text-2xl font-semibold">Staff Work Policy</h2>
-            <p className="text-[11px]">
+            <h2 className="text-4xl font-semibold">Staff Work Policy</h2>
+            <p className="text-[12px]">
               You decide when and how your staff works
             </p>
           </div>
@@ -154,15 +155,15 @@ const Home = () => {
         <div className="grid md:grid-cols-2 gap-3 w-[80%] mx-auto mt-4 text-center">
           <div className="mt-3">
             <img className="mx-auto" src={img9} alt="" />
-            <h2 className="text-2xl font-semibold">Pay Your Staff</h2>
-            <p className="text-[11px]">
+            <h2 className="text-4xl font-semibold">Pay Your Staff</h2>
+            <p className="text-[12px]">
               Pay your staff with a click of a button
             </p>
           </div>
           <div className="mt-3">
             <img className="mx-auto" src={img10} alt="" />
-            <h2 className="text-2xl font-semibold">Get your output</h2>
-            <p className="text-[11px]">
+            <h2 className="text-4xl font-semibold">Get your output</h2>
+            <p className="text-[12px]">
               Get the promised output from your staffs
             </p>
           </div>
