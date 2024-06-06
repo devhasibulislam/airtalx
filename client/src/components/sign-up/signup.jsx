@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { FaUpload } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { BsApple } from "react-icons/bs";
+import ButtonAll from "../button/Button";
 
 const Signup = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -66,7 +67,7 @@ const Signup = () => {
 
   const fileCompo = (
     <>
-      <div className="form-control">
+      <div className="form-control ">
         <label className="label">
           <span className="label-text font-semibold">Name</span>
         </label>
@@ -132,7 +133,7 @@ const Signup = () => {
 
           <label
             htmlFor="file-upload"
-            className=" file-input-bordered  flex justify-start rounded-2xl p-2 px-5 gap-2 cursor-pointer bg-blue-300"
+            className=" file-input-bordered  flex justify-start rounded-2xl p-2 px-5 gap-2 cursor-pointer bg-[#CFEBFF]"
           >
             <FaUpload className="text-xl" />
             <span> Click to upload image</span>
@@ -152,7 +153,7 @@ const Signup = () => {
         <p className="label-text">Remember for 30 days</p>
       </div>
       <div className="form-control mt-6 ">
-        <button className="btn btn-success">Sign Up</button>
+        <ButtonAll>Sign Up</ButtonAll>
       </div>
       <div className="  flex justify-between gap-3 mt-[20px]">
         <button className="btn btn-active btn-ghost"><FcGoogle/> Sign In with Google</button>
@@ -170,7 +171,7 @@ const Signup = () => {
   );
 
   return (
-    <div className="bg-blue-300">
+    <div className="bg-[#cdf1fa]">
      <div className="">
      <div className="text-center mb-4">
         <h1 className="text-4xl font-semibold pt-5">Get Started</h1>
@@ -181,8 +182,8 @@ const Signup = () => {
 
       <div className="grid md:grid-cols-2">
 
-        <div className="mx-auto px-24 flex items-center max-md:hidden">
-          <img src={img1} alt="" />
+        <div className="mx-auto px-24 py-24 flex max-md:hidden">
+          <img className="w-[400px] h-[312px]" src={img1} alt="" />
         </div>
 
        <div className="bg-[#eff4f5] rounded-2xl">
@@ -193,7 +194,7 @@ const Signup = () => {
 
           <div className=" rounded-lg">
             {/* Tabs */}
-            <div className="flex justify-center  mt-[30px]">
+            <div className="flex justify-center bg-slate-200 w-2/3 mx-auto rounded-xl p-2 mt-[30px]">
               <button
                 className={`px-4 py-2 ${
                   activeTab === 0 ? "bg-blue-400 text-white" : "bg-gray-200"
