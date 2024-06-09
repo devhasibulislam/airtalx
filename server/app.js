@@ -8,6 +8,7 @@ const error = require("./middleware/error.middleware");
 const authRouter = require("./routes/v1/auth.route");
 const userRoute = require("./routes/v1/user.route");
 const jobsRoute = require("./routes/v1/job.route");
+const postjobsRoute = require("./routes/v1/postjob.route");
 
 /* application level connection */
 const app = express();
@@ -29,6 +30,7 @@ app.use(express.static("uploads"));
 app.use("/v1/api/auth", authRouter);
 app.use("/v1/api/user", userRoute);
 app.use("/v1/api/jobs", jobsRoute);
+app.use("/v1/api/postjobs", jobsRoute);
 
 /* global error handler */
 app.use(error);
