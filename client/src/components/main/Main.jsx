@@ -29,6 +29,10 @@ import User from "../user/User";
 import AdminBlog from "../admin/blog/AdminBlog";
 import JobApplication from "../application/JobApplication";
 import Billing from "../billing/Billing";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 // Tab data
 const adminTabs = [
@@ -68,29 +72,88 @@ const jobSeekerTabs = [
 ];
 
 // Sidebar component
-const Sidebar = ({ tabs, activeTab, handleTabClick }) => (
-  <div className="w-20 md:w-64 textw  border-2 border-base-300 rounded-2xl m-9  overflow-y-auto">
-    {tabs.map((tab) => (
-      <div
-        key={tab.id}
-        className={`p-4 cursor-pointer ${
-          activeTab === tab.id ? "bg-gray-300 bgw font-bold" : ""
-        }`}
-        onClick={() => handleTabClick(tab.id)}
-      >
-        <h2 className="flex items-center max-md:justify-center gap-2 text-[18px]">
-          <tab.icon className=" text-2xl md:text-xl" />
-          <span className="hidden md:inline">{tab.label}</span>
+// const Sidebar = ({ tabs, activeTab, handleTabClick }) => (
+//   <div className="w-20 md:w-64 textw  border-2 border-base-300 rounded-2xl m-9  overflow-y-auto">
+//     {tabs.map((tab) => (
+//       <div
+//         key={tab.id}
+//         className={`p-4 cursor-pointer ${
+//           activeTab === tab.id ? "bg-gray-300 bgw font-bold" : ""
+//         }`}
+//         onClick={() => handleTabClick(tab.id)}
+//       >
+//         <h2 className="flex items-center max-md:justify-center gap-2 text-[18px]">
+//           <tab.icon className=" text-2xl md:text-xl" />
+//           <span className="hidden md:inline">{tab.label}</span>
+//         </h2>
+//       </div>
+//     ))}
+//     <div className="p-4 cursor-pointer">
+//       <h2 className="flex items-center max-md:justify-center gap-2 text-[18px] text-red-500">
+//         <IoLogOutOutline className="text-2xl md:text-xl" /> <span className="hidden md:inline">LogOut</span>
+//       </h2>
+//     </div>
+//   </div>
+// );
+
+
+// Sidebar component
+const Sidebar = ({ tabs, activeTab, handleTabClick }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, log out!"
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await signOut(auth);
+          Swal.fire({
+            title: "Logged out!",
+            text: "You have successfully logged out.",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500
+          }).then(() => {
+            navigate("/login"); // Redirect to login page after logout
+          });
+        } catch (error) {
+          console.error("Error logging out:", error);
+        }
+      }
+    });
+  };
+
+  return (
+    <div className="w-20 md:w-64 textw border-2 border-base-300 rounded-2xl m-9 overflow-y-auto">
+      {tabs.map((tab) => (
+        <div
+          key={tab.id}
+          className={`p-4 cursor-pointer ${
+            activeTab === tab.id ? "bg-gray-300 bgw font-bold" : ""
+          }`}
+          onClick={() => handleTabClick(tab.id)}
+        >
+          <h2 className="flex items-center max-md:justify-center gap-2 text-[18px]">
+            <tab.icon className="text-2xl md:text-xl" />
+            <span className="hidden md:inline">{tab.label}</span>
+          </h2>
+        </div>
+      ))}
+      <div className="p-4 cursor-pointer" onClick={handleLogout}>
+        <h2 className="flex items-center max-md:justify-center gap-2 text-[18px] text-red-500">
+          <IoLogOutOutline className="text-2xl md:text-xl" /> <span className="hidden md:inline">LogOut</span>
         </h2>
       </div>
-    ))}
-    <div className="p-4 cursor-pointer">
-      <h2 className="flex items-center max-md:justify-center gap-2 text-[18px] text-red-500">
-        <IoLogOutOutline className="text-2xl md:text-xl" /> <span className="hidden md:inline">LogOut</span>
-      </h2>
     </div>
-  </div>
-);
+  );
+};
 
 // Dashboard Layout
 const DashboardLayout = ({ tabs, activeTab, handleTabClick, children }) => (
@@ -156,6 +219,7 @@ const JobSeekerDashboard = () => {
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
+  
 
   return (
     <DashboardLayout tabs={jobSeekerTabs} activeTab={activeTab} handleTabClick={handleTabClick}>
