@@ -1,12 +1,13 @@
+
+
 import React from "react";
 import img1 from "../../image/signupin/Login.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import Swal from "sweetalert2";
 import ButtonAll from "../button/Button";
-// import { FcGoogle } from "react-icons/fc";
-// import { BsApple } from "react-icons/bs";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -19,46 +20,41 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
-      const result = await axios.post(
-        "http://localhost:8080/v1/api/auth/login",
-        data
-      );
-      // console.log(result);
-      if (result.data.acknowledgement === true) {
-        Swal.fire({
-          position: "top",
-          icon: "success",
-          title: result.data.description || "Your work has been saved",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        // Optionally reset form only if the login is successful
-        reset();
-        navigate("/");
-      }
+      await signInWithEmailAndPassword(auth, data.email, data.password)
+      .then(data=>console.log(data));
+      Swal.fire({
+        position: "top",
+        icon: "success",
+        title: "Login successful",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      reset();
+      navigate("/"); // Redirect to the desired route after successful login
     } catch (error) {
       Swal.fire({
         position: "top",
         icon: "error",
         title: "Login failed",
-        text: error.response?.data?.description || "Please try again later",
+        text: error.message || "Please try again later",
         showConfirmButton: true,
       });
-      console.log(error);
+      console.error("Login error:", error);
     }
   };
 
+  
   return (
     <div className="grid md:grid-cols-2 bg-[#cdf1fa]">
       <div className="mx-auto flex items-center max-md:hidden">
-        <img src={img1} alt="" />
+        <img src={img1} alt="Login illustration" />
       </div>
 
-      <div className="bg-white bgw textw grid grid-cols-3 p-4 rounded-2xl">
+      <div className="bg-white textw grid grid-cols-3 p-4 rounded-2xl">
         <div className="pl-3 col-span-2 rounded-xl">
           <h1 className="text-3xl font-semibold text-start">Welcome back!</h1>
           <h2 className="text-start mt-2">
-            Enter your Credentials to access your account
+            Enter your credentials to access your account
           </h2>
           <form onSubmit={handleSubmit(onSubmit)} className="">
             <div className="form-control">
@@ -67,12 +63,12 @@ const Login = () => {
               </label>
               <input
                 type="email"
-                placeholder="email"
+                placeholder="Email"
                 className="input input-sm input-bordered rounded-2xl"
-                {...register("email", { required: true })}
+                {...register("email", { required: "Email is required" })}
               />
               {errors.email && (
-                <span className="text-red-500">This field is required</span>
+                <span className="text-red-500">{errors.email.message}</span>
               )}
             </div>
             <div className="form-control">
@@ -88,12 +84,12 @@ const Login = () => {
               </div>
               <input
                 type="password"
-                placeholder="password"
+                placeholder="Password"
                 className="input input-sm input-bordered rounded-2xl"
-                {...register("password", { required: true })}
+                {...register("password", { required: "Password is required" })}
               />
               {errors.password && (
-                <span className="text-red-500">This field is required</span>
+                <span className="text-red-500">{errors.password.message}</span>
               )}
             </div>
             <div className="flex gap-1 mt-3">
@@ -106,14 +102,6 @@ const Login = () => {
             </div>
             <div className="form-control mt-6">
               <ButtonAll>Login</ButtonAll>
-            {/* <div className="  flex-col gap-3 justify-center gap- mt-[30px]">
-              <button className="btn btn-active btn-ghost mb-3">
-                <FcGoogle /> Sign In with Google
-              </button>
-              <button className="btn btn-active btn-ghost">
-                <BsApple /> Sign In with Facebook
-              </button>
-            </div> */}
             </div>
             <div className="mt-5">
               <p>
