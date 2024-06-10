@@ -1,16 +1,50 @@
+import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 const PostAJob = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     // reset,
+    // watch,
+    // setValue
   } = useForm();
 
-  const onSubmit = async (data) => {
-    console.log(data);
-  };
+//   const onSubmit = async (data) => {
+//     try {
+//         console.log(data);
+//         const result = await axios.post("http://localhost:8080/v1/api/postjobs", data);
+//         console.log(result.data);
+//     } catch (error) {
+//         console.error("There was an error posting the job!", error);
+//     }
+// };
+
+
+const onSubmit = async (data) => {
+  try {
+    // console.log(data);
+     await axios.post("http://localhost:8080/v1/api/postjobs", data);
+    
+
+    Swal.fire({
+      title: 'Success!',
+      text: 'Job posted successfully',
+      icon: 'success',
+      confirmButtonText: 'OK'
+    });
+  } catch (error) {
+    console.error("There was an error posting the job!", error);
+    Swal.fire({
+      title: 'Error!',
+      text: 'There was an error posting the job',
+      icon: 'error',
+      confirmButtonText: 'OK'
+    });
+  }
+};
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="card-body">
@@ -88,7 +122,7 @@ const PostAJob = () => {
             type="text"
             placeholder="Answer"
             className="input input-sm input-bordered rounded-2xl"
-            {...register("job_headline", { required: true })}
+            {...register("salary", { required: true })}
           />
           {errors.job_headline && (
             <span className="text-red-500">This field is required</span>
@@ -97,7 +131,7 @@ const PostAJob = () => {
         <div className="form-control mt-3 ">
           <label>Experience Level</label>
           <select
-            {...register("experience")}
+            {...register("experience_level")}
             className="rounded-xl p-1 bg-base-100"
           >
             <option value="6 month">6 month plus</option>
@@ -108,7 +142,18 @@ const PostAJob = () => {
             <span className="text-red-500">This field is required</span>
           )}
         </div>
-        <button className="btn btn-success mt-3" type="submit">
+
+         <div className="form-control">
+          <label className="label">
+            <span className=" font-semibold">Job Description</span>
+          </label>
+
+          <textarea className="textarea " placeholder="Job description"   {...register("job_description", { required: true })}/>
+          {errors.job_title && (
+            <span className="text-red-500">This field is required</span>
+          )}
+        </div>
+        <button className="btn btn-success mt-6" type="submit">
           Submit
         </button>
       </form>
