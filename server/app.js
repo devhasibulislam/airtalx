@@ -30,7 +30,7 @@ app.use(express.static("uploads"));
 app.use("/v1/api/auth", authRouter);
 app.use("/v1/api/user", userRoute);
 app.use("/v1/api/jobs", jobsRoute);
-app.use("/v1/api/postjobs", jobsRoute);
+app.use("/v1/api/postjobs", postjobsRoute);
 
 /* global error handler */
 app.use(error);

@@ -26,6 +26,10 @@ const jobsSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please, provide your experience level"],
     },
+    job_description: {
+        type: String,
+        required: [true, "Please, provide your job description"],
+    },
 });
 
-module.exports = mongoose.model("Job", jobsSchema);
+module.exports = mongoose.model("AllJob", jobsSchema);
