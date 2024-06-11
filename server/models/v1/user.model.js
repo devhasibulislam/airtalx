@@ -29,13 +29,14 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      required: [true, "Please, choose one that suite you"],
+      default:"job-seeker",
+      required: [ "Please, choose one that suite you"],
       enum: ["admin", "employer", "job-seeker"],
     },
     status: {
       type: String,
       enum: ["active", "inactive"],
-      default: "inactive",
+      default: "active",
     },
 
     // rest info based on user

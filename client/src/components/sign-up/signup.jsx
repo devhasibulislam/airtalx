@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import img1 from "../../image/signupin/Feedback.svg";
@@ -9,8 +7,12 @@ import { FaUpload } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { BsApple } from "react-icons/bs";
 import ButtonAll from "../button/Button";
-import { GoogleAuthProvider, createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
+import { auth, googleProvider } from "../../firebase";
+// import axios from "axios";
 
 const Signup = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -29,7 +31,7 @@ const Signup = () => {
 
   const onSubmit = async (data) => {
     // const { url, public_id, name, email, password, role, status } = data;
-    const {  email, password } = data;
+    const { email, password } = data;
     // const alldata = {
     //   avatar: {
     //     url,
@@ -43,10 +45,11 @@ const Signup = () => {
     // };
     try {
       await createUserWithEmailAndPassword(auth, email, password);
+      // await axios.post("http://localhost:8080/v1/api/register", data);
       Swal.fire({
         position: "top",
         icon: "success",
-        title: "Your work has been saved",
+        title: "Employer signed up successfully",
         showConfirmButton: false,
         timer: 1500,
       }).then(() => {
@@ -59,10 +62,25 @@ const Signup = () => {
 
   const handleGoogleLogin = async () => {
     try {
-      const result = await auth.signInWithPopup(GoogleAuthProvider);
+      const result = await signInWithPopup(auth, googleProvider);
       console.log(result.user);
+      Swal.fire({
+        position: "top",
+        icon: "success",
+        title: "Employer Google SignUp successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate("/"); // Redirect to the desired route after successful login
     } catch (error) {
       console.error("Error during Google login:", error);
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Google Login failed",
+        text: error.message || "Please try again later",
+        showConfirmButton: true,
+      });
     }
   };
 
@@ -130,7 +148,12 @@ const Signup = () => {
           <span className="label-text font-semibold">Upload-Image</span>
         </label>
         <div className="flex flex-col justify-start ">
-          <input type="file" id="file-upload" className="hidden" {...register("file", { required: true })} />
+          <input
+            type="file"
+            id="file-upload"
+            className="hidden"
+            {...register("file", { required: true })}
+          />
 
           <label
             htmlFor="file-upload"
@@ -155,18 +178,6 @@ const Signup = () => {
       </div>
       <div className="form-control mt-6">
         <ButtonAll>Sign Up</ButtonAll>
-      </div>
-      <div className="flex justify-between gap-3 mt-[20px]">
-        <button onClick={handleGoogleLogin} className="btn btn-active btn-ghost"><FcGoogle /> Sign In with Google</button>
-        <button className="btn btn-active btn-ghost"><BsApple /> Sign In with Apple</button>
-      </div>
-      <div className="mt-[20px]">
-        <p>
-          Already have an account?{" "}
-          <Link to="/login" className="text-red-500">
-            Login
-          </Link>
-        </p>
       </div>
     </>
   );
@@ -216,14 +227,62 @@ const Signup = () => {
                 {/* Tab Content */}
                 <div className="">
                   {activeTab === 0 && (
-                    <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-                      {fileCompo}
-                    </form>
+                   <div>
+                   <form
+                     onSubmit={handleSubmit(onSubmit)}
+                     className="card-body"
+                   >
+                     {fileCompo}
+                   </form>
+                   <div className="flex justify-between gap-3 mt-[20px] p-3">
+                     <button
+                       onClick={handleGoogleLogin}
+                       className="btn btn-active btn-ghost"
+                     >
+                       <FcGoogle /> Sign In with Google
+                     </button>
+                     <button className="btn btn-active btn-ghost">
+                       <BsApple /> Sign In with Apple
+                     </button>
+                   </div>
+                   <div className="mt-[20px] p-3">
+                     <p>
+                       Already have an account?{" "}
+                       <Link to="/login" className="text-red-500">
+                         Login
+                       </Link>
+                     </p>
+                   </div>
+                 </div>
                   )}
                   {activeTab === 1 && (
-                    <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-                      {fileCompo}
-                    </form>
+                    <div>
+                      <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className="card-body"
+                      >
+                        {fileCompo}
+                      </form>
+                      <div className="flex justify-between gap-3 mt-[20px] p-3">
+                        <button
+                          onClick={handleGoogleLogin}
+                          className="btn btn-active btn-ghost"
+                        >
+                          <FcGoogle /> Sign In with Google
+                        </button>
+                        <button className="btn btn-active btn-ghost">
+                          <BsApple /> Sign In with Apple
+                        </button>
+                      </div>
+                      <div className="mt-[20px] p-3">
+                        <p>
+                          Already have an account?{" "}
+                          <Link to="/login" className="text-red-500">
+                            Login
+                          </Link>
+                        </p>
+                      </div>
+                    </div>
                   )}
                 </div>
               </div>
