@@ -1,13 +1,13 @@
-
-
-import React from "react";
+import React, { useState } from "react";
 import img1 from "../../image/signupin/Login.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import ButtonAll from "../button/Button";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "../../firebase";
+import { FcGoogle } from "react-icons/fc";
+import { BsApple } from "react-icons/bs";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,11 +17,13 @@ const Login = () => {
     formState: { errors },
     reset,
   } = useForm();
+  
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const onSubmit = async (data) => {
     try {
-      await signInWithEmailAndPassword(auth, data.email, data.password)
-      .then(data=>console.log(data));
+      const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
+      console.log(userCredential.user);
       Swal.fire({
         position: "top",
         icon: "success",
@@ -43,7 +45,38 @@ const Login = () => {
     }
   };
 
-  
+  const handleGoogleLogin = async () => {
+    if (isPopupOpen) return; // Prevent multiple popups
+
+    setIsPopupOpen(true); // Set popup state to true
+
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      console.log(result.user);
+      Swal.fire({
+        position: "top",
+        icon: "success",
+        title: "Google Login successful",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate("/"); // Redirect to the desired route after successful login
+    } catch (error) {
+      if (error.code !== 'auth/cancelled-popup-request') {
+        console.error("Error during Google login:", error);
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: "Google Login failed",
+          text: error.message || "Please try again later",
+          showConfirmButton: true,
+        });
+      }
+    } finally {
+      setIsPopupOpen(false); // Reset popup state
+    }
+  };
+
   return (
     <div className="grid md:grid-cols-2 bg-[#cdf1fa]">
       <div className="mx-auto flex items-center max-md:hidden">
@@ -101,17 +134,29 @@ const Login = () => {
               <p className="label-text">Remember me</p>
             </div>
             <div className="form-control mt-6">
-              <ButtonAll>Login</ButtonAll>
-            </div>
-            <div className="mt-5">
-              <p>
-                Don't have an account?{" "}
-                <Link to="/signup" className="text-red-500">
-                  Sign-up
-                </Link>
-              </p>
+              <ButtonAll type="submit">Login</ButtonAll>
             </div>
           </form>
+          <div className="flex justify-between gap-3 mt-[20px] p-3">
+            <button
+              onClick={handleGoogleLogin}
+              className="btn btn-active btn-ghost"
+              disabled={isPopupOpen} // Disable button if popup is open
+            >
+              <FcGoogle /> Sign In with Google
+            </button>
+            <button className="btn btn-active btn-ghost">
+              <BsApple /> Sign In with Apple
+            </button>
+          </div>
+          <div className="mt-5">
+            <p>
+              Don't have an account?{" "}
+              <Link to="/signup" className="text-red-500">
+                Sign-up
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>
