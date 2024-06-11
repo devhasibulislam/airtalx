@@ -6,42 +6,44 @@ import img1 from "../../image/mainicon.svg";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase";
 
+import img3 from "../../image/man.svg";
 const Navbar = () => {
   const [user, getUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(()=>{
-    const uns =  onAuthStateChanged(auth, currentUser=>{
-         getUser(currentUser);
-         setLoading(false)
-     })
-     return ()=>{
-         return uns;
-     }
-   },[])
-   console.log(user);
+  useEffect(() => {
+    const uns = onAuthStateChanged(auth, (currentUser) => {
+      getUser(currentUser);
+      // setLoading(false);
+    });
+    return () => {
+      return uns;
+    };
+  }, []);
+  console.log(user);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const [theme, setTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem("theme") : "autumn");
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") ? localStorage.getItem("theme") : "autumn"
+  );
 
   const handletoggle = (e) => {
-      if (e.target.checked) {
-          setTheme("synthwave")
-      }
-      else {
-          setTheme("autumn")
-      }
-  }
+    if (e.target.checked) {
+      setTheme("synthwave");
+    } else {
+      setTheme("autumn");
+    }
+  };
 
   useEffect(() => {
-      localStorage.setItem("theme", theme);
-      const localTheme = localStorage.getItem("theme");
-      document.querySelector("html").setAttribute("data-theme", localTheme)
-  }, [theme])
+    localStorage.setItem("theme", theme);
+    const localTheme = localStorage.getItem("theme");
+    document.querySelector("html").setAttribute("data-theme", localTheme);
+  }, [theme]);
 
   const nav = (
     <>
@@ -50,7 +52,7 @@ const Navbar = () => {
           Home
         </Link>
       </li>
-     
+
       <li>
         <Link className="text-[12px] font-medium" to="/jobseeker-dashboard">
           JobSeeker
@@ -58,20 +60,19 @@ const Navbar = () => {
       </li>
       <li>
         <Link className="text-[12px] font-medium" to="/admin-dashboard">
-         Admin 
+          Admin
         </Link>
       </li>
       <li>
         <Link className="text-[12px] font-medium" to="/employee-dashboard">
-          Employee 
+          Employee
         </Link>
       </li>
-    
     </>
   );
 
   return (
-    <div> 
+    <div>
       <div className="navbar bg-[#EDF7F4] textw bgw">
         <div className="navbar-start">
           <div className="dropdown">
@@ -104,33 +105,32 @@ const Navbar = () => {
 
         <div className="navbar-end">
           <div className="flex justify-center items-center gap-4">
-
             <label className="switch">
-
               {/* <input type="checkbox" defaultChecked /> */}
               <input onChange={handletoggle} type="checkbox" />
 
               <div className="slider">
-
                 <div className="circle">
-                  <LuSun className="text-warning"/>
-               
-
-                 
+                  <LuSun className="text-warning" />
                 </div>
-
               </div>
             </label>
 
-          {!user ?  <Link to="/login">
-              <button className="btn btn-info btn-sm text-[12px] font-medium">Login</button>
-            </Link> :
-            <Link to="/profile" className="bg-white flex gap-1 px-5 py-2 rounded-3xl">
-            <p>Job Seeker User</p>
-            <img src="" className="w-5 h-5" alt="" />
-            </Link>
-
-            }
+            {!user ? (
+              <Link to="/login">
+                <button className="btn btn-info btn-sm text-[12px] font-medium">
+                  Login
+                </button>
+              </Link>
+            ) : (
+              <Link
+                to="/profile"
+                className="bg-white flex gap-1 px-5 py-2 rounded-3xl"
+              >
+                <p>Job Seeker User</p>
+                <img src={img3} className="w-5 h-5" alt="" />
+              </Link>
+            )}
           </div>
         </div>
       </div>
