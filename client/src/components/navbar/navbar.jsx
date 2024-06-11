@@ -3,8 +3,23 @@ import { Link } from "react-router-dom";
 import { TfiMenuAlt } from "react-icons/tfi";
 import { LuSun } from "react-icons/lu";
 import img1 from "../../image/mainicon.svg";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase";
 
 const Navbar = () => {
+  const [user, getUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(()=>{
+    const uns =  onAuthStateChanged(auth, currentUser=>{
+         getUser(currentUser);
+         setLoading(false)
+     })
+     return ()=>{
+         return uns;
+     }
+   },[])
+   console.log(user);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -107,9 +122,15 @@ const Navbar = () => {
               </div>
             </label>
 
-            <Link to="/login">
+          {!user ?  <Link to="/login">
               <button className="btn btn-info btn-sm text-[12px] font-medium">Login</button>
+            </Link> :
+            <Link to="/profile" className="bg-white flex gap-1 px-5 py-2 rounded-3xl">
+            <p>Job Seeker User</p>
+            <img src="" className="w-5 h-5" alt="" />
             </Link>
+
+            }
           </div>
         </div>
       </div>
