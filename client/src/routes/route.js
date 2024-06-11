@@ -14,6 +14,7 @@ import FindEmploye from "../components/find-employee/FindEmploye";
 import Sidebar from "../components/sidebar/Sidebar";
 import  { JobSeekerDashboard, AdminDashboard, EmployeeDashboard } from "../components/main/Main";
 import AdminBlog from "../components/admin/blog/AdminBlog";
+import JobSeekerProfile from "../components/JobSeeker/profile/JobSeekerProfile";
 
 const RouteA = () => {
   return (
@@ -35,6 +36,8 @@ const RouteA = () => {
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/find-job" element={ <div className="px-32"><FindJob /></div> } />
         <Route path="/find-employee" element={ <div className="px-32"><FindEmploye /></div> } />
+
+        <Route path="/profile" element={ <div className="px-32"><JobSeekerProfile /></div> } />
 
         
 

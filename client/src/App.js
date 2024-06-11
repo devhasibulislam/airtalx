@@ -20,14 +20,14 @@ function App() {
   }, []);
 
   return (
-    <div className={`fullbodymood min-h-screen ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>
+    <div className={` fullbodymood min-h-screen ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>
       <nav>
         <Navbar />
       </nav>
       <div>
         <RouteA />
       </div>
-      <div>
+      <div className=" w-full">
         <Footer />
       </div>
     </div>
