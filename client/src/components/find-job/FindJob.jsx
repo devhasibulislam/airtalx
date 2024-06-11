@@ -36,7 +36,11 @@ const FindJob = () => {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <p className="flex justify-center">
+        <span className="loading loading-spinner text-secondary text-center"></span>
+      </p>
+    );
   }
 
   const toggleDescription = (index) => {
@@ -72,18 +76,17 @@ const FindJob = () => {
     setCurrentPage(pageNumber);
   };
 
-  
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:8080/v1/api/postjobs/${id}`);
       Swal.fire({
-        title: 'Deleted!',
-        text: 'Job deleted successfully',
-        icon: 'success',
-        confirmButtonText: 'OK'
+        title: "Deleted!",
+        text: "Job deleted successfully",
+        icon: "success",
+        confirmButtonText: "OK",
       });
       // Remove the deleted job from the state
-      setJobs(jobs.filter(job => job._id !== id));
+      setJobs(jobs.filter((job) => job._id !== id));
     } catch (error) {
       console.error("There was an error deleting the job!", error);
       Swal.fire({
