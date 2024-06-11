@@ -71,30 +71,7 @@ const jobSeekerTabs = [
   { id: "Tab6", label: "Payment", icon: FaAmazonPay },
 ];
 
-// Sidebar component
-// const Sidebar = ({ tabs, activeTab, handleTabClick }) => (
-//   <div className="w-20 md:w-64 textw  border-2 border-base-300 rounded-2xl m-9  overflow-y-auto">
-//     {tabs.map((tab) => (
-//       <div
-//         key={tab.id}
-//         className={`p-4 cursor-pointer ${
-//           activeTab === tab.id ? "bg-gray-300 bgw font-bold" : ""
-//         }`}
-//         onClick={() => handleTabClick(tab.id)}
-//       >
-//         <h2 className="flex items-center max-md:justify-center gap-2 text-[18px]">
-//           <tab.icon className=" text-2xl md:text-xl" />
-//           <span className="hidden md:inline">{tab.label}</span>
-//         </h2>
-//       </div>
-//     ))}
-//     <div className="p-4 cursor-pointer">
-//       <h2 className="flex items-center max-md:justify-center gap-2 text-[18px] text-red-500">
-//         <IoLogOutOutline className="text-2xl md:text-xl" /> <span className="hidden md:inline">LogOut</span>
-//       </h2>
-//     </div>
-//   </div>
-// );
+
 
 
 // Sidebar component
@@ -131,7 +108,7 @@ const Sidebar = ({ tabs, activeTab, handleTabClick }) => {
   };
 
   return (
-    <div className="w-20 md:w-64 textw border-2 border-base-300 rounded-2xl m-9 overflow-y-auto">
+    <div className="w-20 md:w-64 textw border-2 border-base-300 rounded-2xl md:m-9 overflow-y-auto">
       {tabs.map((tab) => (
         <div
           key={tab.id}
