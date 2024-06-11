@@ -2,6 +2,7 @@ import React from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { LuSun } from "react-icons/lu";
 import { PiHandbagSimpleFill } from "react-icons/pi";
+import img1 from "../../../image/man.svg"
 const JobSeekerProfile = () => {
   const handletoggle = (e) => {
     if (e.target.checked) {
@@ -14,7 +15,7 @@ const JobSeekerProfile = () => {
       <div className="flex justify-between items-center">
         <div className="flex gap-2 items-center">
           <div>
-            <img src="" className="w-7 h-7 rounded-full" alt="" />
+            <img src={img1} className="w-10 h-10 rounded-full" alt="" />
           </div>
           <div>
             <h2 className="text-[24px] font-medium">Devid</h2>
@@ -136,60 +137,63 @@ const JobSeekerProfile = () => {
             </div>
           </div>
 
-         <div className="flex justify-between">
-         <div className="mt-3">
-            <p className="text-[14px]">
-              Expertise in In-House talent acquistion and recruitment process
-              Outsorcing
-            </p>
-            <p className="text-[14px]">
-              More than 4 years of dedicated recruitment experience
-            </p>
-            <p className="text-[14px]">
-              Succesfully served international clients across diverse industries
-            </p>
-          </div>
+          <div className="flex justify-between">
+            <div className="mt-3">
+              <p className="text-[14px]">
+                Expertise in In-House talent acquistion and recruitment process
+                Outsorcing
+              </p>
+              <p className="text-[14px]">
+                More than 4 years of dedicated recruitment experience
+              </p>
+              <p className="text-[14px]">
+                Succesfully served international clients across diverse
+                industries
+              </p>
+            </div>
 
-        <div className="flex items-center gap-2"> 
-          <input type="checkbox" className="toggle" checked /> <p>Show</p>
-        </div>
-         </div>
-         <div className="flex justify-between">
-         <div className="mt-3">
-            <p className="text-[14px]">
-              Expertise in In-House talent acquistion and recruitment process
-              Outsorcing
-            </p>
-            <p className="text-[14px]">
-              More than 4 years of dedicated recruitment experience
-            </p>
-            <p className="text-[14px]">
-              Succesfully served international clients across diverse industries
-            </p>
+            <div className="flex items-center gap-2">
+              <input type="checkbox" className="toggle" checked /> <p>Show</p>
+            </div>
           </div>
+          <div className="flex justify-between">
+            <div className="mt-3">
+              <p className="text-[14px]">
+                Expertise in In-House talent acquistion and recruitment process
+                Outsorcing
+              </p>
+              <p className="text-[14px]">
+                More than 4 years of dedicated recruitment experience
+              </p>
+              <p className="text-[14px]">
+                Succesfully served international clients across diverse
+                industries
+              </p>
+            </div>
 
-        <div className="flex items-center gap-2"> 
-          <input type="checkbox" className="toggle" checked /> <p>Show</p>
-        </div>
-         </div>
-         <div className="flex justify-between">
-         <div className="mt-3">
-            <p className="text-[14px]">
-              Expertise in In-House talent acquistion and recruitment process
-              Outsorcing
-            </p>
-            <p className="text-[14px]">
-              More than 4 years of dedicated recruitment experience
-            </p>
-            <p className="text-[14px]">
-              Succesfully served international clients across diverse industries
-            </p>
+            <div className="flex items-center gap-2">
+              <input type="checkbox" className="toggle" checked /> <p>Show</p>
+            </div>
           </div>
+          <div className="flex justify-between">
+            <div className="mt-3">
+              <p className="text-[14px]">
+                Expertise in In-House talent acquistion and recruitment process
+                Outsorcing
+              </p>
+              <p className="text-[14px]">
+                More than 4 years of dedicated recruitment experience
+              </p>
+              <p className="text-[14px]">
+                Succesfully served international clients across diverse
+                industries
+              </p>
+            </div>
 
-        <div className="flex items-center gap-2"> 
-          <input type="checkbox" className="toggle" checked /> <p>Show</p>
-        </div>
-         </div>
+            <div className="flex items-center gap-2">
+              <input type="checkbox" className="toggle" checked /> <p>Show</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
