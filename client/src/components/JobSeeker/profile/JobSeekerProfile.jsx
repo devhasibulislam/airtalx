@@ -93,16 +93,20 @@ const JobSeekerProfile = () => {
         </div>
 
         <div className="mt-[24px] flex flex-col ">
-          <div>
+        
+
             <button className=" bg-[#2792A8] px-6 py-3  rounded-lg">
               Edit Profile
             </button>
+
             <button className=" btn btn-outline mt-5">Upload Resume</button>
+
             <h3 className="text-[12px ] font-medium mt-5">CV-AironNew-2024</h3>
             <button className="text-red-500 mt-24 flex gap-2">
               Delete Account <AiOutlineDelete className="text-xl" />
             </button>
-          </div>
+         
+
         </div>
         
       </div>
