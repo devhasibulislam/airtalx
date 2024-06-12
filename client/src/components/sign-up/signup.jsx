@@ -193,7 +193,7 @@ const Signup = () => {
         </div>
 
         <div className="grid md:grid-cols-2">
-          <div className="mx-auto px-24 py-24 flex max-md:hidden">
+          <div className="mx-auto pt-24 pl-20 flex max-md:hidden">
             <img className="w-[400px] h-[312px]" src={img1} alt="" />
           </div>
 
