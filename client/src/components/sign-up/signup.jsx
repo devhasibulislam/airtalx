@@ -194,7 +194,7 @@ const Signup = () => {
 
         <div className="grid md:grid-cols-2">
 
-          <div className="mx-auto pt-24 pl-20 flex max-md:hidden">
+          <div className="mx-auto pt-32 pl-20 flex max-md:hidden">
             <img className="w-[400px] h-[312px]" src={img1} alt="" />
           </div>
 
@@ -278,8 +278,8 @@ const Signup = () => {
                           <BsApple /> Sign In with Apple
                         </button>
                       </div>
-                      <div className="mt-[20px] p-3">
-                        <p>
+                      <div className="mt-[20px] p-3 ">
+                        <p className="ml-2">
                           Already have an account?{" "}
                           <Link to="/login" className="text-red-500">
                             Login

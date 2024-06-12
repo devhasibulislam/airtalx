@@ -37,7 +37,7 @@ const RouteA = () => {
         <Route path="/find-job" element={ <div className="px-32"><FindJob /></div> } />
         <Route path="/find-employee" element={ <div className="px-32"><FindEmploye /></div> } />
 
-        <Route path="/profile" element={ <div className="px-32"><JobSeekerProfile /></div> } />
+        <Route path="/profile" element={ <div className="md:px-32"><JobSeekerProfile /></div> } />
 
         
 
