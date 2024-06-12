@@ -79,11 +79,11 @@ const Login = () => {
 
   return (
     <div className="grid md:grid-cols-2 bg-[#cdf1fa]">
-      <div className="mx-auto flex items-center max-md:hidden">
+      <div className="mx-auto flex items-center pl-20 max-md:hidden">
         <img src={img1} alt="Login illustration" />
       </div>
 
-      <div className="bg-white textw grid grid-cols-3 p-4 rounded-2xl">
+      <div className="bg-white textw grid sm:grid-cols-3 p-4 rounded-2xl">
         <div className="pl-3 col-span-2 rounded-xl">
           <h1 className="text-3xl font-semibold text-start">Welcome back!</h1>
           <h2 className="text-start mt-2">
@@ -137,15 +137,16 @@ const Login = () => {
               <ButtonAll type="submit">Login</ButtonAll>
             </div>
           </form>
-          <div className="flex justify-between gap-3 mt-[20px] p-3">
+
+          <div className="mx-auto  flex max-lg:flex-col lg:justify-center gap-3 mt-[20px] ">
             <button
               onClick={handleGoogleLogin}
-              className="btn btn-active btn-ghost"
+              className="btn btn-active btn-ghost mt-3"
               disabled={isPopupOpen} // Disable button if popup is open
             >
               <FcGoogle /> Sign In with Google
             </button>
-            <button className="btn btn-active btn-ghost">
+            <button className="btn btn-active btn-ghost mt-3">
               <BsApple /> Sign In with Apple
             </button>
           </div>
