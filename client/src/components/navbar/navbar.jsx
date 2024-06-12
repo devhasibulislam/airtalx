@@ -127,7 +127,7 @@ const Navbar = () => {
                 to="/profile"
                 className="bg-white flex gap-1 px-5 py-2 rounded-3xl"
               >
-                <p>Job Seeker User</p>
+                <p className="max-md:hidden">Job Seeker User</p>
                 <img src={img3} className="w-5 h-5" alt="" />
               </Link>
             )}

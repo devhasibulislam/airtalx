@@ -10,9 +10,10 @@ const JobSeekerProfile = () => {
     }
   };
   return (
-    <div className="m-8">
+    <div className="m-2 ">
       {/* part 1 */}
-      <div className="flex justify-between items-center">
+      <div className="md:flex justify-between items-center">
+
         <div className="flex gap-2 items-center">
           <div>
             <img src={img1} className="w-10 h-10 rounded-full" alt="" />
@@ -25,9 +26,10 @@ const JobSeekerProfile = () => {
             </div>
           </div>
         </div>
-        <div>
-          <button className="text-[16px] flex items-center gap-2">
-            make visible to public{" "}
+
+        <div className="max-md:mt-5">
+          <button className="text-[16px] font-semibold flex items-center gap-2">
+            Make visible to public{" "}
             <label className="switch">
               <input onChange={handletoggle} type="checkbox" />
               <div className="slider">
@@ -41,7 +43,8 @@ const JobSeekerProfile = () => {
       </div>
       {/* part 2 */}
 
-      <div className="grid grid-cols-3">
+      <div className="md:grid grid-cols-3">
+
         <div className="mt-[24px] grid grid-cols-2 col-span-2">
           <div className="">
             <div>
@@ -88,7 +91,8 @@ const JobSeekerProfile = () => {
             </div>
           </div>
         </div>
-        <div className="mt-[24px] flex flex-col  ">
+
+        <div className="mt-[24px] flex flex-col ">
           <div>
             <button className=" bg-[#2792A8] px-6 py-3  rounded-lg">
               Edit Profile
@@ -100,6 +104,7 @@ const JobSeekerProfile = () => {
             </button>
           </div>
         </div>
+        
       </div>
       {/* Part 3 */}
 
