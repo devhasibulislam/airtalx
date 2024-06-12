@@ -11,7 +11,7 @@ const router = express.Router();
 
 /* router methods integration */
 // get all user
-router.get("/all", verify, authorize("job-seeker"), userController.getAllUser);
+router.get("/all", userController.getAllUser);
 
 // get single user
 router.get(

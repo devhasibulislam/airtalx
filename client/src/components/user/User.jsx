@@ -171,8 +171,8 @@ const User = () => {
                 >
                   {item.role}
                 </td>
-                <td className="py-2 px-4 flex gap-2">
-                  <button className="btn btn-sm btn-success">make admin</button>
+                <td className="py-2 px-4 flex gap-2 flex-wrap">
+                  <button className="btn btn-sm btn-success">Make Admin</button>
                   <button className="btn btn-sm btn-outline btn-error">
                     <RiDeleteBin6Fill className="text-xl" />
                   </button>
@@ -186,7 +186,7 @@ const User = () => {
           </tbody>
         </table>
       </div>
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center mt-4 flex-wrap">
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index + 1}
