@@ -193,12 +193,13 @@ const Signup = () => {
         </div>
 
         <div className="grid md:grid-cols-2">
+
           <div className="mx-auto pt-24 pl-20 flex max-md:hidden">
             <img className="w-[400px] h-[312px]" src={img1} alt="" />
           </div>
 
-          <div className="bg-[#eff4f5] rounded-2xl">
-            <div className="pr-20 rounded-xl">
+          <div className="bg-[#eff4f5] rounded-2xl max-md:p-4 ">
+            <div className=" md:pr-20 rounded-xl">
               <h1 className="text-3xl font-semibold text-center mt-[40px]">
                 Jobseeker Sign Up
               </h1>
@@ -234,7 +235,9 @@ const Signup = () => {
                    >
                      {fileCompo}
                    </form>
-                   <div className="flex justify-between gap-3 mt-[20px] p-3">
+                   
+
+                   <div className="mx-auto  flex max-lg:flex-col lg:justify-center gap-3 mt-[20px]">
                      <button
                        onClick={handleGoogleLogin}
                        className="btn btn-active btn-ghost"
@@ -245,6 +248,7 @@ const Signup = () => {
                        <BsApple /> Sign In with Apple
                      </button>
                    </div>
+                   
                    <div className="mt-[20px] p-3">
                      <p>
                        Already have an account?{" "}
