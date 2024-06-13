@@ -7,12 +7,9 @@ import { FaUpload } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { BsApple } from "react-icons/bs";
 import ButtonAll from "../button/Button";
-import {
-  createUserWithEmailAndPassword,
-  signInWithPopup,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../../firebase";
-// import axios from "axios";
+import axios from "axios"; // Import axios for making API requests
 
 const Signup = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -26,26 +23,21 @@ const Signup = () => {
     register,
     handleSubmit,
     formState: { errors },
-    // reset,
   } = useForm();
 
   const onSubmit = async (data) => {
-    // const { url, public_id, name, email, password, role, status } = data;
     const { email, password } = data;
-    // const alldata = {
-    //   avatar: {
-    //     url,
-    //     public_id,
-    //   },
-    //   name,
-    //   email,
-    //   password,
-    //   role,
-    //   status,
-    // };
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      // await axios.post("http://localhost:8080/v1/api/register", data);
+
+     // Fetch additional user data from MongoDB backend
+      const response = await axios.post(
+        "http://localhost:8080/v1/api/userdata",
+        data
+      );
+
+      console.log(response); 
+
       Swal.fire({
         position: "top",
         icon: "success",
@@ -56,14 +48,21 @@ const Signup = () => {
         navigate("/"); // Redirect to home page after successful signup
       });
     } catch (error) {
-      console.log(error.message);
+      console.error("Error during signup:", error);
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Signup failed",
+        text: error.message || "Please try again later",
+        showConfirmButton: true,
+      });
     }
   };
 
   const handleGoogleLogin = async () => {
     try {
-      const result = await signInWithPopup(auth, googleProvider);
-      console.log(result.user);
+      await signInWithPopup(auth, googleProvider);
+
       Swal.fire({
         position: "top",
         icon: "success",
@@ -193,7 +192,6 @@ const Signup = () => {
         </div>
 
         <div className="grid md:grid-cols-2">
-
           <div className="mx-auto pt-32 pl-20 flex max-md:hidden">
             <img className="w-[400px] h-[312px]" src={img1} alt="" />
           </div>
@@ -228,36 +226,35 @@ const Signup = () => {
                 {/* Tab Content */}
                 <div className="">
                   {activeTab === 0 && (
-                   <div>
-                   <form
-                     onSubmit={handleSubmit(onSubmit)}
-                     className="card-body"
-                   >
-                     {fileCompo}
-                   </form>
-                   
+                    <div>
+                      <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className="card-body"
+                      >
+                        {fileCompo}
+                      </form>
 
-                   <div className="mx-auto  flex max-lg:flex-col lg:justify-center gap-3 mt-[20px]">
-                     <button
-                       onClick={handleGoogleLogin}
-                       className="btn btn-active btn-ghost"
-                     >
-                       <FcGoogle /> Sign In with Google
-                     </button>
-                     <button className="btn btn-active btn-ghost">
-                       <BsApple /> Sign In with Apple
-                     </button>
-                   </div>
-                   
-                   <div className="mt-[20px] p-3">
-                     <p>
-                       Already have an account?{" "}
-                       <Link to="/login" className="text-red-500">
-                         Login
-                       </Link>
-                     </p>
-                   </div>
-                 </div>
+                      <div className="mx-auto  flex max-lg:flex-col lg:justify-center gap-3 mt-[20px]">
+                        <button
+                          onClick={handleGoogleLogin}
+                          className="btn btn-active btn-ghost"
+                        >
+                          <FcGoogle /> Sign In with Google
+                        </button>
+                        <button className="btn btn-active btn-ghost">
+                          <BsApple /> Sign In with Apple
+                        </button>
+                      </div>
+
+                      <div className="mt-[20px] p-3">
+                        <p>
+                          Already have an account?{" "}
+                          <Link to="/login" className="text-red-500">
+                            Login
+                          </Link>
+                        </p>
+                      </div>
+                    </div>
                   )}
                   {activeTab === 1 && (
                     <div>
