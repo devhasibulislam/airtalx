@@ -11,19 +11,14 @@ import { BsApple } from "react-icons/bs";
 
 const Login = () => {
   const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
-  
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const onSubmit = async (data) => {
+    console.log("Login Data:", data);
     try {
       const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
-      console.log(userCredential.user);
+      console.log("User Credential:", userCredential.user);
       Swal.fire({
         position: "top",
         icon: "success",
@@ -34,6 +29,7 @@ const Login = () => {
       reset();
       navigate("/"); // Redirect to the desired route after successful login
     } catch (error) {
+      console.error("Login error:", error);
       Swal.fire({
         position: "top",
         icon: "error",
@@ -41,7 +37,6 @@ const Login = () => {
         text: error.message || "Please try again later",
         showConfirmButton: true,
       });
-      console.error("Login error:", error);
     }
   };
 
@@ -52,7 +47,7 @@ const Login = () => {
 
     try {
       const result = await signInWithPopup(auth, googleProvider);
-      console.log(result.user);
+      console.log("Google Login Success:", result.user);
       Swal.fire({
         position: "top",
         icon: "success",
@@ -62,16 +57,14 @@ const Login = () => {
       });
       navigate("/"); // Redirect to the desired route after successful login
     } catch (error) {
-      if (error.code !== 'auth/cancelled-popup-request') {
-        console.error("Error during Google login:", error);
-        Swal.fire({
-          position: "top",
-          icon: "error",
-          title: "Google Login failed",
-          text: error.message || "Please try again later",
-          showConfirmButton: true,
-        });
-      }
+      console.error("Error during Google login:", error);
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Google Login failed",
+        text: error.message || "Please try again later",
+        showConfirmButton: true,
+      });
     } finally {
       setIsPopupOpen(false); // Reset popup state
     }
@@ -82,13 +75,10 @@ const Login = () => {
       <div className="mx-auto flex items-center pl-20 max-md:hidden">
         <img src={img1} alt="Login illustration" />
       </div>
-
       <div className="bg-white textw grid sm:grid-cols-3 p-4 rounded-2xl">
         <div className="pl-3 col-span-2 rounded-xl">
           <h1 className="text-3xl font-semibold text-start">Welcome back!</h1>
-          <h2 className="text-start mt-2">
-            Enter your credentials to access your account
-          </h2>
+          <h2 className="text-start mt-2">Enter your credentials to access your account</h2>
           <form onSubmit={handleSubmit(onSubmit)} className="">
             <div className="form-control">
               <label className="label">
@@ -100,9 +90,7 @@ const Login = () => {
                 className="input input-sm input-bordered rounded-2xl"
                 {...register("email", { required: "Email is required" })}
               />
-              {errors.email && (
-                <span className="text-red-500">{errors.email.message}</span>
-              )}
+              {errors.email && <span className="text-red-500">{errors.email.message}</span>}
             </div>
             <div className="form-control">
               <div className="flex justify-between">
@@ -121,29 +109,18 @@ const Login = () => {
                 className="input input-sm input-bordered rounded-2xl"
                 {...register("password", { required: "Password is required" })}
               />
-              {errors.password && (
-                <span className="text-red-500">{errors.password.message}</span>
-              )}
+              {errors.password && <span className="text-red-500">{errors.password.message}</span>}
             </div>
             <div className="flex gap-1 mt-3">
-              <input
-                type="checkbox"
-                defaultChecked
-                className="checkbox checkbox-error"
-              />
+              <input type="checkbox" defaultChecked className="checkbox checkbox-error" />
               <p className="label-text">Remember me</p>
             </div>
             <div className="form-control mt-6">
               <ButtonAll type="submit">Login</ButtonAll>
             </div>
           </form>
-
-          <div className="mx-auto  flex max-lg:flex-col lg:justify-center gap-3 mt-[20px] ">
-            <button
-              onClick={handleGoogleLogin}
-              className="btn btn-active btn-ghost mt-3"
-              disabled={isPopupOpen} // Disable button if popup is open
-            >
+          <div className="mx-auto flex max-lg:flex-col lg:justify-center gap-3 mt-[20px]">
+            <button onClick={handleGoogleLogin} className="btn btn-active btn-ghost mt-3" disabled={isPopupOpen}>
               <FcGoogle /> Sign In with Google
             </button>
             <button className="btn btn-active btn-ghost mt-3">
@@ -151,17 +128,12 @@ const Login = () => {
             </button>
           </div>
           <div className="mt-5">
-            <p>
-              Don't have an account?{" "}
-              <Link to="/signup" className="text-red-500">
-                Sign-up
-              </Link>
-            </p>
+            <p>Don't have an account? <Link to="/signup" className="text-red-500">Sign-up</Link></p>
           </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default Login;

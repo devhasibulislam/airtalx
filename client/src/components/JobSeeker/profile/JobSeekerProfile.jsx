@@ -1,9 +1,35 @@
-import React from "react";
+
 import { AiOutlineDelete } from "react-icons/ai";
 import { LuSun } from "react-icons/lu";
 import { PiHandbagSimpleFill } from "react-icons/pi";
 import img1 from "../../../image/man.svg"
+import { auth } from "../../../firebase";
+import useAuthUser from "../../../auth/getUser";
 const JobSeekerProfile = () => {
+  const { user } = useAuthUser(auth);
+
+  // const [user,setUser] = useState()
+  
+  // useEffect(() => {
+  //   const uns = onAuthStateChanged(auth, async (currentUser) => {
+  //     if (currentUser) {
+  //       try {
+  //         const response = await axios.get(`http://localhost:8080/v1/api/userdata/email/${currentUser.email}`);
+  //         setUser(response.data);
+  //       } catch (error) {
+  //         console.error("Error fetching user data:", error);
+  //       }
+  //     } else {
+  //       setUser(null);
+  //     }
+  //     // setLoading(false);
+  //   });
+
+  //   return () => uns();
+  // }, []);
+
+  // console.log(user);
+
   const handletoggle = (e) => {
     if (e.target.checked) {
     } else {
@@ -19,7 +45,7 @@ const JobSeekerProfile = () => {
             <img src={img1} className="w-10 h-10 rounded-full" alt="" />
           </div>
           <div>
-            <h2 className="text-[24px] font-medium">Devid</h2>
+            <h2 className="text-[24px] font-medium">{user?.name}</h2>
             <div className="flex gap-1 text-[14px]">
               <p>age : 25</p>
               <p>,Member Since 25 May 2024</p>
@@ -49,7 +75,7 @@ const JobSeekerProfile = () => {
           <div className="">
             <div>
               <h2 className="text-[14px]">Email adress</h2>
-              <h2 className="text-[16px] text-slate-400">myemail@gmail.com</h2>
+              <h2 className="text-[16px] text-slate-400">{user?.email}</h2>
             </div>
             <div className="mt-3">
               <h2 className="text-[14px]">Phone Number</h2>

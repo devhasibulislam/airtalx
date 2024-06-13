@@ -3,17 +3,6 @@ const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema(
   {
-    // user information
-    // avatar: {
-    //   url: {
-    //     type: String,
-    //     required: [true, "Please, provide a valid avatar URL"],
-    //   },
-    //   public_id: {
-    //     type: String,
-    //     required: [true, "Please, provide the avatar public id"],
-    //   },
-    // },
     name: {
       type: String,
       required: [true, "Please, provide your full name"],
@@ -27,10 +16,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please, provide a strong password"],
     },
+    image: { type: String},
     role: {
       type: String,
-      default:"job-seeker",
-      required: [ "Please, choose one that suite you"],
+      default: "job-seeker",
+      required: ["Please, choose one that suite you"],
       enum: ["admin", "employer", "job-seeker"],
     },
     status: {

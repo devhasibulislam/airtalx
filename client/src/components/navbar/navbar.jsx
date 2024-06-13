@@ -3,24 +3,27 @@ import { Link } from "react-router-dom";
 import { TfiMenuAlt } from "react-icons/tfi";
 import { LuSun } from "react-icons/lu";
 import img1 from "../../image/mainicon.svg";
-import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase";
 
 import img3 from "../../image/man.svg";
+import useAuthUser from "../../auth/getUser";
 const Navbar = () => {
-  const [user, getUser] = useState(null);
+  const { user } = useAuthUser(auth);
+
+  // const [users, getUser] = useState(null);
   // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const uns = onAuthStateChanged(auth, (currentUser) => {
-      getUser(currentUser);
-      // setLoading(false);
-    });
-    return () => {
-      return uns;
-    };
-  }, []);
-  console.log(user);
+  // useEffect(() => {
+  //   const uns = onAuthStateChanged(auth, (currentUser) => {
+  //     getUser(currentUser);
+  //     // setLoading(false);
+  //   });
+  //   return () => {
+  //     return uns;
+  //   };
+  // }, []);
+
+  // console.log(user?.role);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -53,21 +56,48 @@ const Navbar = () => {
         </Link>
       </li>
 
+      {user?.role === "job-seeker" && (
+        <li>
+          <Link className="text-[12px] font-medium" to="/jobseeker-dashboard">
+            Dashboard
+          </Link>
+        </li>
+      )}
+
+      {user?.role === "admin" && (
+        <li>
+          <Link className="text-[12px] font-medium" to="/admin-dashboard">
+            Dashboard
+          </Link>
+        </li>
+      )}
+      {user?.role === "employer" && (
+        <li>
+          <Link className="text-[12px] font-medium" to="/employee-dashboard">
+            Dashboard
+          </Link>
+        </li>
+      )}
       <li>
-        <Link className="text-[12px] font-medium" to="/jobseeker-dashboard">
-          JobSeeker
+        <Link className="text-[12px] font-medium" to="/find-job">
+          Find Job
         </Link>
       </li>
-      <li>
-        <Link className="text-[12px] font-medium" to="/admin-dashboard">
-          Admin
-        </Link>
-      </li>
-      <li>
-        <Link className="text-[12px] font-medium" to="/employee-dashboard">
-          Employee
-        </Link>
-      </li>
+
+      {user?.role === "employer"  && (
+        <li>
+          <Link className="text-[12px] font-medium" to="/find-employee">
+            Find Employee
+          </Link>
+        </li>
+      )}
+      {user?.role === "admin"  && (
+        <li>
+          <Link className="text-[12px] font-medium" to="/find-employee">
+            Find Employee
+          </Link>
+        </li>
+      )}
     </>
   );
 
@@ -127,7 +157,15 @@ const Navbar = () => {
                 to="/profile"
                 className="bg-white flex gap-1 px-5 py-2 rounded-3xl"
               >
-                <p className="max-md:hidden">Job Seeker User</p>
+                {user?.role === "admin" && (
+                  <p className="max-md:hidden">Admin </p>
+                )}
+                {user?.role === "employer" && (
+                  <p className="max-md:hidden">Employee </p>
+                )}
+                {user?.role === "job-seeker" && (
+                  <p className="max-md:hidden">Job Seeker </p>
+                )}
                 <img src={img3} className="w-5 h-5" alt="" />
               </Link>
             )}
