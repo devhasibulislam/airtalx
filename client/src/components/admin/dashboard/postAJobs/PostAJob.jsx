@@ -2,31 +2,29 @@ import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import useAuthUser from "../../../../auth/getUser";
+import { auth } from "../../../../firebase";
 const PostAJob = () => {
+  const {user} = useAuthUser(auth);
   const {
     register,
     handleSubmit,
     formState: { errors },
-    // reset,
-    // watch,
-    // setValue
+   
   } = useForm();
 
-//   const onSubmit = async (data) => {
-//     try {
-//         console.log(data);
-//         const result = await axios.post("http://localhost:8080/v1/api/postjobs", data);
-//         console.log(result.data);
-//     } catch (error) {
-//         console.error("There was an error posting the job!", error);
-//     }
-// };
+
 
 
 const onSubmit = async (data) => {
+  const cleanedData = {
+    ...data,
+    postby:user.name
+  };
+
   try {
     // console.log(data);
-     await axios.post("http://localhost:8080/v1/api/postjobs", data);
+     await axios.post("http://localhost:8080/v1/api/postjobs", cleanedData);
     
 
     Swal.fire({

@@ -3,6 +3,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { CiEdit } from "react-icons/ci";
 import axios from "axios";
 import Swal from "sweetalert2";
+import JobUpdateModal from "../../common/JobUpdateModel";
 
 const FindJob = () => {
   const [expandedJob, setExpandedJob] = useState(null);
@@ -12,7 +13,24 @@ const FindJob = () => {
   const itemsPerPage = 4;
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log(jobs);
+
+  const [editId, setEditId] = useState();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleEditClick = (id) => {
+    setIsModalOpen(true);
+    setEditId(id);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const updateJobInState = (updatedJob) => {
+    setJobs((prevJobs) => 
+      prevJobs.map((job) => (job._id === updatedJob._id ? updatedJob : job))
+    );
+  };
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -53,10 +71,12 @@ const FindJob = () => {
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
+    setCurrentPage(1); // Reset to the first page on search change
   };
 
   const handleTypeChange = (e) => {
     setSelectedType(e.target.value);
+    setCurrentPage(1); // Reset to the first page on type change
   };
 
   const filteredJobs = jobs.filter((job) => {
@@ -77,24 +97,36 @@ const FindJob = () => {
   };
 
   const handleDelete = async (id) => {
-    try {
-      await axios.delete(`http://localhost:8080/v1/api/postjobs/${id}`);
-      Swal.fire({
-        title: "Deleted!",
-        text: "Job deleted successfully",
-        icon: "success",
-        confirmButtonText: "OK",
-      });
-      // Remove the deleted job from the state
-      setJobs(jobs.filter((job) => job._id !== id));
-    } catch (error) {
-      console.error("There was an error deleting the job!", error);
-      Swal.fire({
-        title: "Error!",
-        text: "There was an error deleting the job",
-        icon: "error",
-        confirmButtonText: "OK",
-      });
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        await axios.delete(`http://localhost:8080/v1/api/postjobs/${id}`);
+        Swal.fire({
+          title: "Deleted!",
+          text: "Job deleted successfully",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+        // Remove the deleted job from the state
+        setJobs(jobs.filter((job) => job._id !== id));
+      } catch (error) {
+        console.error("There was an error deleting the job!", error);
+        Swal.fire({
+          title: "Error!",
+          text: "There was an error deleting the job",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      }
     }
   };
 
@@ -122,9 +154,9 @@ const FindJob = () => {
       </div>
 
       <div className="grid lg:grid-cols-2 textw">
-        {jobs.map((job, index) => (
+        {currentJobs.map((job, index) => (
           <div
-            key={index}
+            key={job._id}
             className="border border-base-300 shadow-xl rounded-2xl p-4 m-2"
           >
             <div className="flex gap-3 items-center mb-2">
@@ -136,7 +168,7 @@ const FindJob = () => {
 
             <h1 className="text-2xl font-semibold">{job.job_title}</h1>
             <h2 className="mt-2">
-              By <span className="text-blue-600">employer John</span>
+              By <span className="text-blue-600">{job.postby}</span>
             </h2>
             <p className="mt-2">
               {expandedJob === index
@@ -150,7 +182,7 @@ const FindJob = () => {
               {expandedJob === index ? "Show Less" : "See More"}
             </button>
             <div className="flex justify-between mt-6">
-              <button className="btn btn-outline btn-warning">
+              <button onClick={() => handleEditClick(job._id)} className="btn btn-outline btn-warning">
                 <CiEdit className="text-xl" /> Edit Article
               </button>
               <button
@@ -191,6 +223,12 @@ const FindJob = () => {
           Next
         </button>
       </div>
+      <JobUpdateModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        jobId={editId}
+        onUpdate={updateJobInState} // Pass the callback function to update the job in the state
+      />
     </div>
   );
 };
