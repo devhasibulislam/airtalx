@@ -1,137 +1,120 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { IoWarningOutline } from "react-icons/io5";
 import { RiDeleteBin6Fill } from "react-icons/ri";
+import Swal from "sweetalert2";
 
 const User = () => {
-  const data = [
-    {
-      id: 1,
-      name: "Cy Ganderton",
-      email: "gardi@gmail.com",
-      role: "Admin",
-    },
-    {
-      id: 2,
-      name: "Alex Johnson",
-      email: "alex.johnson@example.com",
-      role: "Employee",
-    },
-    {
-      id: 3,
-      name: "Jamie Smith",
-      email: "jamie.smith@example.com",
-      role: "Jobseeker",
-    },
-    {
-      id: 4,
-      name: "Taylor Brown",
-      email: "taylor.brown@example.com",
-      role: "Employee",
-    },
-    {
-      id: 5,
-      name: "Jordan Lee",
-      email: "jordan.lee@example.com",
-      role: "Jobseeker",
-    },
-    {
-      id: 6,
-      name: "Casey Davis",
-      email: "casey.davis@example.com",
-      role: "Admin",
-    },
-    {
-      id: 7,
-      name: "Riley Miller",
-      email: "riley.miller@example.com",
-      role: "Employee",
-    },
-    {
-      id: 8,
-      name: "Morgan Wilson",
-      email: "morgan.wilson@example.com",
-      role: "Jobseeker",
-    },
-    {
-      id: 9,
-      name: "Chris Moore",
-      email: "chris.moore@example.com",
-      role: "Employee",
-    },
-    {
-      id: 10,
-      name: "Alex Taylor",
-      email: "alex.taylor@example.com",
-      role: "Jobseeker",
-    },
-    {
-      id: 11,
-      name: "Sam Anderson",
-      email: "sam.anderson@example.com",
-      role: "Admin",
-    },
-    {
-      id: 12,
-      name: "Dana Thomas",
-      email: "dana.thomas@example.com",
-      role: "Employee",
-    },
-    {
-      id: 13,
-      name: "Avery Jackson",
-      email: "avery.jackson@example.com",
-      role: "Jobseeker",
-    },
-    {
-      id: 14,
-      name: "Cameron White",
-      email: "cameron.white@example.com",
-      role: "Employee",
-    },
-    {
-      id: 15,
-      name: "Dakota Harris",
-      email: "dakota.harris@example.com",
-      role: "Jobseeker",
-    },
-    {
-      id: 16,
-      name: "Jesse Martin",
-      email: "jesse.martin@example.com",
-      role: "Admin",
-    },
-    {
-      id: 17,
-      name: "Taylor Thompson",
-      email: "taylor.thompson@example.com",
-      role: "Employee",
-    },
-    {
-      id: 18,
-      name: "Jordan Martinez",
-      email: "jordan.martinez@example.com",
-      role: "Jobseeker",
-    },
-    {
-      id: 19,
-      name: "Blake Robinson",
-      email: "blake.robinson@example.com",
-      role: "Employee",
-    },
-    {
-      id: 20,
-      name: "Casey Clark",
-      email: "casey.clark@example.com",
-      role: "Admin",
-    },
-  ];
-
+  const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await axios.get("http://localhost:8080/v1/api/userdata");
+        setData(result.data); // Assuming result.data is the array of user data
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const handlePageClick = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+
+  const makeAdmin = async (userId) => {
+    const userToUpdate = data.find(user => user._id === userId);
+    if (userToUpdate.role === "admin") {
+      Swal.fire({
+        position: "top",
+        icon: "info",
+        title: "User is already an admin",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      return;
+    }
+
+    const updateRole = () => {
+      const data = { role: "admin" };
+      axios.put(`http://localhost:8080/v1/api/userdata/${userId}`, data)
+        .then(response => {
+          if (response.data) {
+            Swal.fire({
+              position: "top",
+              icon: "success",
+              title: "Role updated successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+
+            // Update the local state to reflect the role change
+            setData((prevData) =>
+              prevData.map((item) =>
+                item._id === userId ? { ...item, role: "admin" } : item
+              )
+            );
+          }
+        })
+        .catch(error => {
+          console.error("Error updating profile:", error);
+        });
+    };
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, make admin!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        updateRole();
+      }
+    });
+  };
+
+  const deleteUser = async (userId) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(`http://localhost:8080/v1/api/userdata/${userId}`);
+          Swal.fire({
+            position: "top",
+            icon: "success",
+            title: "User deleted successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+
+          // Remove the deleted user from the local state
+          setData((prevData) => prevData.filter((item) => item._id !== userId));
+        } catch (error) {
+          console.error("Error deleting user:", error);
+          Swal.fire({
+            position: "top",
+            icon: "error",
+            title: "Failed to delete user",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      }
+    });
   };
 
   // Logic for displaying current page items
@@ -156,24 +139,32 @@ const User = () => {
           </thead>
           <tbody>
             {currentItems.map((item, index) => (
-              <tr key={item.id}>
+              <tr key={item._id}>
                 <td className="py-2 px-4">{indexOfFirstItem + index + 1}</td>
                 <td className="py-2 px-4">{item.name}</td>
                 <td className="py-2 px-4">{item.email}</td>
                 <td
                   className={`py-2 px-4 ${
-                    item.role === "Admin"
+                    item.role === "admin"
                       ? "text-green-600"
-                      : item.role === "Employee"
+                      : item.role === "employee"
                       ? "text-red-400"
                       : "text-blue-600"
                   }`}
                 >
                   {item.role}
                 </td>
-                <td className="py-2 px-4 flex gap-2 flex-wrap">
-                  <button className="btn btn-sm btn-success">Make Admin</button>
-                  <button className="btn btn-sm btn-outline btn-error">
+                <td className="flex gap-2">
+                  <button
+                    onClick={() => makeAdmin(item._id)}
+                    className="btn btn-sm btn-success"
+                  >
+                    Make Admin
+                  </button>
+                  <button
+                    onClick={() => deleteUser(item._id)}
+                    className="btn btn-sm btn-outline btn-error"
+                  >
                     <RiDeleteBin6Fill className="text-xl" />
                   </button>
                   <button className="btn btn-sm btn-outline btn-warning">
