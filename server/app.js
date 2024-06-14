@@ -10,6 +10,7 @@ const userRoute = require("./routes/v1/user.route");
 const userdataRoute = require("./routes/v1/userData.route");
 const jobsRoute = require("./routes/v1/job.route");
 const postjobsRoute = require("./routes/v1/postjob.route");
+const blogRoute = require("./routes/v1/blog.route");
 
 /* application level connection */
 const app = express();
@@ -33,6 +34,7 @@ app.use("/v1/api/user", userRoute);
 app.use("/v1/api/jobs", jobsRoute);
 app.use("/v1/api/postjobs", postjobsRoute);
 app.use("/v1/api/userdata", userdataRoute);
+app.use("/v1/api/blogs", blogRoute);
 
 /* global error handler */
 app.use(error);
