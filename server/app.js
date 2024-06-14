@@ -18,7 +18,7 @@ const app = express();
 app.use(
   cors({
     origin: process.env.ORIGIN_URL,
-    methods: "GET, PATCH, POST, DELETE",
+    methods: "GET, PATCH, POST,PUT, DELETE",
     allowedHeaders: ["Content-Type", "Authorization"],
     preflightContinue: false,
     optionsSuccessStatus: 204,
