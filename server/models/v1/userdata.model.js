@@ -23,7 +23,30 @@ const userDataSchema = new mongoose.Schema({
   },
   location: {
     type: String,
-    // optional
+  },
+  phone_number: {
+    type: String,
+  },
+  portfolio: {
+    type: String,
+  },
+  skill: {
+    type: String,
+  },
+  current_job: {
+    type: String,
+  },
+  current_company: {
+    type: String,
+  },
+  employment: {
+    type: String,
+  },
+  skill_level: {
+    type: String,
+  },
+  salary: {
+    type: String,
   },
 });
 

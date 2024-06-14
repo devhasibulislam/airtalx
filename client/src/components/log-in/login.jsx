@@ -15,10 +15,8 @@ const Login = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const onSubmit = async (data) => {
-    console.log("Login Data:", data);
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
-      console.log("User Credential:", userCredential.user);
+    await signInWithEmailAndPassword(auth, data.email, data.password);
       Swal.fire({
         position: "top",
         icon: "success",
