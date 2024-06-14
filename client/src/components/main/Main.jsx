@@ -33,6 +33,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import Message from "../message/Message";
 
 // Tab data
 const adminTabs = [
@@ -151,7 +152,7 @@ const AdminDashboard = () => {
   return (
     <DashboardLayout tabs={adminTabs} activeTab={activeTab} handleTabClick={handleTabClick}>
       {activeTab === "Tab1" && <Dashboard />}
-      {activeTab === "Tab2" && <p>Content for Tab 2</p>}
+      {activeTab === "Tab2" && <Message/>}
       {activeTab === "Tab3" && <PostAJob />}
       {activeTab === "Tab4" && <JobApplication/>}
       {activeTab === "Tab5" && <FindJob />}
