@@ -55,21 +55,21 @@ const Footer = () => {
         <nav>
           <h6 className=" text-[12px] font-bold">Social</h6>
           <div className="grid grid-flow-col gap-4">
-            <a >
+            <h2>
               <FaTwitter className="text-2xl" />
-            </a>
-            <a>
+            </h2>
+            <h2>
               <FaFacebook className="text-2xl" />
-            </a>
-            <a>
+            </h2>
+            <h2>
               <IoLogoInstagram className="text-2xl" />
-            </a>
-            <a>
+            </h2>
+            <h2>
               <FaLinkedin className="text-2xl" />
-            </a>
-            <a>
+            </h2>
+            <h2>
               <IoLogoYoutube className="text-2xl" />
-            </a>
+            </h2>
           </div>
         </nav>
       </footer>
