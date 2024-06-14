@@ -4,8 +4,12 @@ import { useForm } from "react-hook-form";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Swal from "sweetalert2";
+import useAuthUser from "../../../auth/getUser";
+import { auth } from "../../../firebase";
 
 const Postblog = () => {
+  const {user} = useAuthUser(auth);
+  // console.log(user);
   const {
     register,
     handleSubmit,
@@ -24,8 +28,10 @@ const Postblog = () => {
   const onSubmit = async (data) => {
     const cleanedData = {
       ...data,
-      blog_description: stripHtmlTags(data.blog_description),
+      description: stripHtmlTags(data.description),
+      createdby:user.name
     };
+    console.log(cleanedData);
     try {
       await axios.post("http://localhost:8080/v1/api/blogs", cleanedData);
       Swal.fire({
