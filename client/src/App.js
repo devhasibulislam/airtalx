@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useEffect, useState } from "react";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/navbar.jsx";
@@ -20,16 +19,16 @@ function App() {
   }, []);
 
   return (
-    <div className={` fullbodymood min-h-screen ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>
+    <div className={`fullbodymood min-h-screen flex flex-col ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>
       <nav>
         <Navbar />
       </nav>
-      <div>
+      <main className="flex-grow">
         <RouteA />
-      </div>
-      <div className=" w-full">
+      </main>
+      <footer className="w-full">
         <Footer />
-      </div>
+      </footer>
     </div>
   );
 }

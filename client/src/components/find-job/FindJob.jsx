@@ -131,7 +131,7 @@ const FindJob = () => {
   };
 
   return (
-    <div className="mt-10">
+    <div className="mt-10 max-w-5xl mx-auto">
       <div className="mb-4 flex justify-center">
         <input
           type="text"

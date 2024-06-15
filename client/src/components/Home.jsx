@@ -11,17 +11,14 @@ import img9 from "../image/hiringpart/Frame 21 (3).svg";
 import img10 from "../image/hiringpart/Frame 21 (4).svg";
 import { FcApproval } from "react-icons/fc";
 import ButtonAll from "./button/Button";
-import moment from "moment"
 const Home = () => {
   return (
     <div className="mt-4 w-full mx-auto textw">
 
-<div>
-  <h2 className="flex justify-end">{moment().format('MMMM Do YYYY, h:mm:ss a')}</h2>
-</div>
 
-      <div className="grid md:grid-cols-2 w-[85%] mx-auto items-center ">
-        <div className="">
+
+      <div className="  w-[959px]  mx-auto h-[328px] md:flex gap-1 justify-center tems-center ">
+        <div className="w-[528px] mx-auto">
           <h2 className="text-[40px] font-semibold">
             {" "}
             One of the Trusted Talent Marketplaces in the Philippines.
@@ -38,14 +35,14 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="mt-20 p-3 bg-slate-200 bgw">
+      <div className=" w-[1280px] h-[425px] mx-auto  bg-slate-200 bgw">
         <h1 className="text-[36px] font-semibold  text-center">Why Us?</h1>
         <h3 className="text-xl  text-center">
           From all of the platforms, these are some of the reason for you to
           choose our platform
         </h3>
 
-        <div className="grid md:grid-cols-2 gap-[57px] items-center mt-6">
+        <div className="grid md:grid-cols-2 gap-[57px] w-[950px] h-[226px] mx-auto items-center mt-6">
           <div className=" mx-auto">
             <img className="w-[402px] h-[273px]" src={img2} alt="" />
           </div>
@@ -105,7 +102,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className=" grid md:grid-cols-3 mt-20 gap-4 w-[80%] mx-auto">
+      <div className=" grid md:grid-cols-3 mt-20 gap-4 max-w-4xl -[956px] h-[256px] mx-auto">
         <div className="bg-[#EDF7F4] bgw p-4">
           <img className="mx-auto" src={img3} alt="" />
           <h2 className="text-2xl font-semibold">Strong User Privacy</h2>
@@ -125,7 +122,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="mt-20 mb-20 text-center w-[80%] mx-auto">
+      <div className="mt-20 mb-20 text-center w-[960px] h-[398px]  mx-auto">
         <h1 className="text-4xl font-semibold t">Hiring Process</h1>
         <p className="mt-2 text-xl">
           Hire part-time or full-time workers in the worldwide with our easy to

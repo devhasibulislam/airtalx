@@ -84,14 +84,14 @@ const Navbar = () => {
         </Link>
       </li>
 
-      {user?.role === "employer"  && (
+      {user?.role === "employer" && (
         <li>
           <Link className="text-[12px] font-medium" to="/find-employee">
             Find Employee
           </Link>
         </li>
       )}
-      {user?.role === "admin"  && (
+      {user?.role === "admin" && (
         <li>
           <Link className="text-[12px] font-medium" to="/find-employee">
             Find Employee
@@ -102,7 +102,7 @@ const Navbar = () => {
   );
 
   return (
-    <div>
+    <div className="max-w-7xl h-[64px] mx-auto">
       <div className="navbar bg-[#EDF7F4] textw bgw">
         <div className="navbar-start">
           <div className="dropdown">
@@ -128,10 +128,12 @@ const Navbar = () => {
             <img className="w-[42px] h-[42px]" src={img1} alt="" />
             <h2 className="text-3xl font-semibold">airTalX</h2>
           </div>
-        </div>
-        <div className="navbar-center hidden lg:flex">
+          <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{nav}</ul>
         </div>
+        </div>
+
+       
 
         <div className="navbar-end">
           <div className="flex justify-center items-center gap-4">
