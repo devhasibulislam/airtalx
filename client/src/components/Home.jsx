@@ -13,7 +13,7 @@ import { FcApproval } from "react-icons/fc";
 import ButtonAll from "./button/Button";
 const Home = () => {
   return (
-    <div className="mt-4 w-full mx-auto textw">
+    <div className="mt-4 max-w-7xl mx-auto textw">
 
 
 

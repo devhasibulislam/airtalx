@@ -69,11 +69,11 @@ const Login = () => {
   };
 
   return (
-    <div className="grid md:grid-cols-2 bg-[#cdf1fa]">
+    <div className="grid max-w-7xl mx-auto md:grid-cols-2 bg-[#cdf1fa]">
       <div className="mx-auto flex items-center pl-20 max-md:hidden">
         <img src={img1} alt="Login illustration" />
       </div>
-      <div className="bg-white textw grid sm:grid-cols-3 p-4 rounded-2xl">
+      <div className="bg-white w-[680px] textw grid sm:grid-cols-3 p-4 rounded-2xl">
         <div className="pl-3 col-span-2 rounded-xl">
           <h1 className="text-3xl font-semibold text-start">Welcome back!</h1>
           <h2 className="text-start mt-2">Enter your credentials to access your account</h2>
