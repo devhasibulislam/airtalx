@@ -11,12 +11,13 @@ import img9 from "../image/hiringpart/Frame 21 (3).svg";
 import img10 from "../image/hiringpart/Frame 21 (4).svg";
 import { FcApproval } from "react-icons/fc";
 import ButtonAll from "./button/Button";
+import moment from "moment"
 const Home = () => {
   return (
     <div className="mt-4 w-full mx-auto textw">
 
 <div>
-  <h2 className="flex justify-end">Lorem ipsum,</h2>
+  <h2 className="flex justify-end">{moment().format('MMMM Do YYYY, h:mm:ss a')}</h2>
 </div>
 
       <div className="grid md:grid-cols-2 w-[85%] mx-auto items-center ">
