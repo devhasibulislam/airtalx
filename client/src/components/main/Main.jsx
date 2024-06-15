@@ -178,7 +178,7 @@ const EmployeeDashboard = () => {
   return (
     <DashboardLayout tabs={employerTabs} activeTab={activeTab} handleTabClick={handleTabClick}>
       {activeTab === "Tab1" && <p><Dashboard/></p>}
-      {activeTab === "Tab2" && <p>Content for Tab 2</p>}
+      {activeTab === "Tab2" && <Message/>}
       {activeTab === "Tab3" && <PostAJob />}
       {activeTab === "Tab4" && <JobApplication/>}
       {activeTab === "Tab5" && <FindJob />}
@@ -202,7 +202,7 @@ const JobSeekerDashboard = () => {
   return (
     <DashboardLayout tabs={jobSeekerTabs} activeTab={activeTab} handleTabClick={handleTabClick}>
       {activeTab === "Tab1" && <p><Dashboard/></p>}
-      {activeTab === "Tab2" && <p>Content for Tab 2</p>}
+      {activeTab === "Tab2" && <Message/>}
       {activeTab === "Tab3" && <FindJob />}
       {activeTab === "Tab4" && <Application />}
       {activeTab === "Tab5" && <div><WorkHistory/></div>}
