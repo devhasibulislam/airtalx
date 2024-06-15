@@ -30,13 +30,13 @@ const Signup = () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
 
-     // Fetch additional user data from MongoDB backend
+      // Fetch additional user data from MongoDB backend
       const response = await axios.post(
         "http://localhost:8080/v1/api/userdata",
         data
       );
 
-      console.log(response); 
+      console.log(response);
 
       Swal.fire({
         position: "top",
@@ -182,7 +182,7 @@ const Signup = () => {
   );
 
   return (
-    <div className="bg-[#cdf1fa]">
+    <div className="bg-[#cdf1fa] max-w-7xl mx-auto">
       <div className="">
         <div className="text-center mb-4">
           <h1 className="text-4xl font-semibold pt-5">Get Started</h1>
@@ -196,8 +196,8 @@ const Signup = () => {
             <img className="w-[400px] h-[312px]" src={img1} alt="" />
           </div>
 
-          <div className="bg-[#eff4f5] rounded-2xl max-md:p-4 ">
-            <div className=" md:pr-20 rounded-xl">
+          <div className="bg-[#eff4f5]   rounded-2xl max-md:p-4 ">
+            <div className="  rounded-xl">
               <h1 className="text-3xl font-semibold text-center mt-[40px]">
                 Jobseeker Sign Up
               </h1>

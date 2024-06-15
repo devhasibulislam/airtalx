@@ -136,7 +136,7 @@ const Sidebar = ({ tabs, activeTab, handleTabClick }) => {
 
 // Dashboard Layout
 const DashboardLayout = ({ tabs, activeTab, handleTabClick, children }) => (
-  <div className="flex h-screen">
+  <div className="flex h-screen max-w-7xl mx-auto">
     <Sidebar tabs={tabs} activeTab={activeTab} handleTabClick={handleTabClick} />
     <div className="flex-1  overflow-y-auto">{children}</div>
   </div>
