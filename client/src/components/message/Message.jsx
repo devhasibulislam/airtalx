@@ -8,6 +8,7 @@ import { CiStar } from "react-icons/ci";
 import moment from "moment";
 import EmojiPicker from "emoji-picker-react";
 import img from "../../image/Rectangle 1.svg";
+
 const UserList = ({
   users,
   selectedUser,
@@ -15,29 +16,43 @@ const UserList = ({
   favorites,
   toggleFavorite,
 }) => (
-  <div className="w-full max-md:sticky md:w-1/4 bg-gray-100 p-4 md:overflow-y-auto">
+  <div className="w-full max-md:sticky md:w-1/4 bg-gray-100 p-4 md:overflow-y-auto overflow-x-auto">
     <h2 className="text-2xl font-bold mb-4">Users</h2>
     <ul className="max-md:flex">
       {users.map((user) => (
         <li
           key={user?._id}
-          className={`p-2 cursor-pointer flex items-center justify-between ${
+          className={`p-2 cursor-pointer flex flex-col items-start justify-between w-full ${
             selectedUser && selectedUser?._id === user?._id
-              ? "bg-blue-500 text-white"
+              ? "bg-[#EDF7F4] text-white"
               : "bg-white text-black"
           }`}
           onClick={() => onSelectUser(user)}
         >
-          <div className="flex gap-1">
-            <img src={img} alt="" className="w-8 h-8 rounded-full mr-2" />
-            <h3 className="max-md:hidden">{user.name}</h3>
+          <div className="flex gap-1 items-center w-full justify-between">
+            <div className="flex items-center">
+              <img src={img} alt="" className="w-8 h-8 rounded-full mr-2" />
+              <h3 className="text-black">{user.name}</h3>
+            </div>
+            <CiStar
+              className={`text-2xl text-black cursor-pointer ${
+                favorites.includes(user?._id) ? "text-yellow-500" : ""
+              }`}
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleFavorite(user?._id);
+              }}
+            />
           </div>
-          <CiStar
-            className={`text-2xl max-md:hidden cursor-pointer ${
-              favorites.includes(user?._id) ? "text-yellow-500" : ""
-            }`}
-            onClick={() => toggleFavorite(user?._id)}
-          />
+          <div className="text-sm max-md:hidden text-gray-500 mt-1">
+            {user?.text || "No messages yet"}
+          </div>
+          <div className="text-xs text-gray-400 mt-1">
+            {/* {user.latestMessage
+              ? moment(user.timestamp).fromNow()
+              : ""} */}
+              <h3 className="max-md:hidden">6.50 pm</h3>
+          </div>
         </li>
       ))}
     </ul>
@@ -242,6 +257,15 @@ function Message() {
           ...prevTimes,
           [selectedUser?._id]: new Date(response.data.timestamp).getTime(),
         }));
+
+        // Update the latest message for the selected user
+        setUsers((prevUsers) =>
+          prevUsers.map((u) =>
+            u._id === selectedUser?._id
+              ? { ...u, latestMessage: response.data }
+              : u
+          )
+        );
       } catch (error) {
         console.error("Error sending message:", error);
       }
@@ -322,7 +346,7 @@ function Message() {
   }, [showEmojiPicker]);
 
   return (
-    <div className="flex h-screen flex-col sm:flex-row">
+    <div className="flex h-[704px] flex-col sm:flex-row">
       <UserList
         users={sortedUsers}
         selectedUser={selectedUser}
