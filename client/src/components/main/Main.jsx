@@ -34,6 +34,7 @@ import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Message from "../message/Message";
+import GoogleAnalytics from "../GoogleAnalytics,jsx/GoogleAnalytics";
 
 // Tab data
 const adminTabs = [
@@ -162,6 +163,7 @@ const AdminDashboard = () => {
       {activeTab === "Tab9" && <p><User/></p>}
       {activeTab === "Tab10" && <Postblog />}
       {activeTab === "Tab11" && <AdminBlog />}
+      {activeTab === "Tab12" && <GoogleAnalytics />}
       {/* Add more content for other tabs as needed */}
     </DashboardLayout>
   );
