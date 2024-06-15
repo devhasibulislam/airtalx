@@ -6,8 +6,8 @@ import { IoIosSearch } from "react-icons/io";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import { CiStar } from "react-icons/ci";
 import moment from "moment";
-import EmojiPicker from 'emoji-picker-react';  // Import the emoji picker
-
+import EmojiPicker from "emoji-picker-react";
+import img from "../../image/Rectangle 1.svg";
 const UserList = ({
   users,
   selectedUser,
@@ -29,11 +29,11 @@ const UserList = ({
           onClick={() => onSelectUser(user)}
         >
           <div className="flex gap-1">
-            <img src="" alt="" className="w-8 h-8 rounded-full mr-2" />
+            <img src={img} alt="" className="w-8 h-8 rounded-full mr-2" />
             <h3 className="max-md:hidden">{user.name}</h3>
           </div>
           <CiStar
-            className={`text-2xl cursor-pointer ${
+            className={`text-2xl max-md:hidden cursor-pointer ${
               favorites.includes(user?._id) ? "text-yellow-500" : ""
             }`}
             onClick={() => toggleFavorite(user?._id)}
@@ -129,13 +129,13 @@ function Message() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [newMessages, setNewMessages] = useState([]);
   const [userMessageTimes, setUserMessageTimes] = useState({});
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false); // Emoji picker visibility state
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const result = await axios.get("http://localhost:8080/v1/api/userdata");
-        const fetchedUsers = result.data;
+        const fetchedUsers = result.data.filter((u) => u._id !== user?._id); // Filter out the current user
 
         if (fetchedUsers.length > 0) {
           setSelectedUser(fetchedUsers[0]);
@@ -153,7 +153,7 @@ function Message() {
       }
     };
     fetchUsers();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -298,6 +298,29 @@ function Message() {
     setMessageText((prevText) => prevText + emojiObject.emoji);
   };
 
+  const emojiPickerRef = useRef();
+
+  const handleClickOutside = (event) => {
+    if (
+      emojiPickerRef.current &&
+      !emojiPickerRef.current.contains(event.target)
+    ) {
+      setShowEmojiPicker(false);
+    }
+  };
+
+  useEffect(() => {
+    if (showEmojiPicker) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showEmojiPicker]);
+
   return (
     <div className="flex h-screen flex-col sm:flex-row">
       <UserList
@@ -310,8 +333,9 @@ function Message() {
       <div className="flex-1 flex flex-col bg-white p-4">
         <div className="flex-1 overflow-y-auto p-4">
           <div className="flex justify-between border-b-[1px]">
-            <div>
-              <h2 className="text-2xl font-bold mb-4">
+            <div className="flex gap-2 items-center mb-4">
+              <img src={img} alt="" />
+              <h2 className="text-2xl font-bold ">
                 {selectedUser ? selectedUser.name : "Select a user to chat"}
               </h2>
             </div>
@@ -354,7 +378,7 @@ function Message() {
             😊
           </button>
           {showEmojiPicker && (
-            <div className="absolute bottom-20">
+            <div ref={emojiPickerRef} className="absolute bottom-20">
               <EmojiPicker onEmojiClick={onEmojiClick} />
             </div>
           )}
