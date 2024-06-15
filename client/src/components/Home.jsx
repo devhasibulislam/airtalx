@@ -15,6 +15,10 @@ const Home = () => {
   return (
     <div className="mt-4 w-full mx-auto textw">
 
+<div>
+  <h2 className="flex justify-end">Lorem ipsum,</h2>
+</div>
+
       <div className="grid md:grid-cols-2 w-[85%] mx-auto items-center ">
         <div className="">
           <h2 className="text-[40px] font-semibold">

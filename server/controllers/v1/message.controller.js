@@ -37,9 +37,34 @@ const deleteMessage = async (req, res) => {
   }
 };
 
+
+// Controller to get new messages for a user
+const getNewMessages = async (req, res) => {
+    try {
+      const userId = req.params.userId;
+      const newMessages = await messageService.getNewMessages(userId);
+      res.json(newMessages);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  };
+  
+  // Controller to mark a message as read
+  const markAsRead = async (req, res) => {
+    try {
+      const { messageId } = req.params;
+      await messageService.markMessageAsRead(messageId);
+      res.status(200).send('Message marked as read');
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  };
+
 module.exports = {
   getMessages,
   createMessage,
   updateMessage,
   deleteMessage,
+  getNewMessages,
+  markAsRead
 };
