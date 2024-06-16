@@ -68,7 +68,8 @@ const Signup = () => {
         await axios.post("http://localhost:8080/v1/api/userdata", {
           name: user.displayName,
           email: user.email,
-          password:"12345678"
+          password:"12345678",
+          image:user.photoURL
            // Add any other user data you need
         });
 

@@ -5,7 +5,6 @@ import { LuSun } from "react-icons/lu";
 import img1 from "../../image/mainicon.svg";
 import { auth } from "../../firebase";
 
-import img3 from "../../image/man.svg";
 import useAuthUser from "../../auth/getUser";
 const Navbar = () => {
   const { user } = useAuthUser(auth);
@@ -168,7 +167,7 @@ const Navbar = () => {
                 {user?.role === "job-seeker" && (
                   <p className="max-md:hidden">Job Seeker </p>
                 )}
-                <img src={img3} className="w-5 h-5" alt="" />
+                <img src={user?.image} className="w-7 h-7 rounded-full" alt="" />
               </Link>
             )}
           </div>

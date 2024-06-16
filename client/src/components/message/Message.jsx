@@ -7,7 +7,6 @@ import { HiOutlineDotsVertical } from "react-icons/hi";
 import { CiStar } from "react-icons/ci";
 import moment from "moment";
 import EmojiPicker from "emoji-picker-react";
-import img from "../../image/Rectangle 1.svg";
 
 const UserList = ({
   users,
@@ -31,7 +30,7 @@ const UserList = ({
         >
           <div className="flex gap-1 items-center w-full justify-between">
             <div className="flex items-center">
-              <img src={img} alt="" className="w-8 h-8 rounded-full mr-2" />
+              <img src={user.image} alt="" className="w-8 h-8 rounded-full mr-2" />
               <h3 className="text-black">{user.name}</h3>
             </div>
             <CiStar
@@ -358,7 +357,7 @@ function Message() {
         <div className="flex-1 overflow-y-auto p-4">
           <div className="flex justify-between border-b-[1px]">
             <div className="flex gap-2 items-center mb-4">
-              <img src={img} alt="" />
+              <img src={selectedUser?.image} className="w-9 h-9 rounded-full" alt="" />
               <h2 className="text-2xl font-bold ">
                 {selectedUser ? selectedUser.name : "Select a user to chat"}
               </h2>
