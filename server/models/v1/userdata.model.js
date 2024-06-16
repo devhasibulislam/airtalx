@@ -14,7 +14,9 @@ const userDataSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please, provide a strong password"],
   },
-  image: { type: String },
+  image: { 
+    type: String 
+  },
   role: {
     type: String,
     default: "job-seeker",

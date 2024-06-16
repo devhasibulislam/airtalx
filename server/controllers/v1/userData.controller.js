@@ -1,18 +1,19 @@
-// controllers/userController.js
-
 const userService = require("../../services/v1/userData.service");
 
+const createUser = (req, res) => {
+  userService.upload(req, res, async (err) => {
+    if (err) {
+      return res.status(400).json({ message: err });
+    }
 
-
-const createUser = async (req, res) => {
-  try {
-    const newUser = await userService.createUser(req.body);
-    res.status(201).json(newUser);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
+    try {
+      const newUser = await userService.createUser(req.body, req.file);
+      res.status(201).json(newUser);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  });
 };
-
 
 const getAllUsers = async (req, res) => {
   try {
@@ -48,16 +49,22 @@ const getUserById = async (req, res) => {
   }
 };
 
-const updateUser = async (req, res) => {
-  try {
-    const updatedUser = await userService.updateUser(req.params.id, req.body);
-    if (!updatedUser) {
-      return res.status(404).json({ message: "User not found" });
+const updateUser = (req, res) => {
+  userService.upload(req, res, async (err) => {
+    if (err) {
+      return res.status(400).json({ message: err });
     }
-    res.status(200).json(updatedUser);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
+
+    try {
+      const updatedUser = await userService.updateUser(req.params.id, req.body, req.file);
+      if (!updatedUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      res.status(200).json(updatedUser);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  });
 };
 
 const deleteUser = async (req, res) => {

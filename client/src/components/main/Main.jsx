@@ -4,7 +4,7 @@ import { LuLayoutDashboard } from "react-icons/lu";
 import { MdOutlineForwardToInbox, MdShoppingBag } from "react-icons/md";
 import { GoInbox } from "react-icons/go";
 import {
-  FaAmazonPay,
+  // FaAmazonPay,
   FaBookReader,
   FaCcAmazonPay,
   FaHospitalUser,
@@ -45,7 +45,7 @@ const adminTabs = [
   { id: "Tab5", label: "My Jobs", icon: MdShoppingBag },
   { id: "Tab6", label: "My Employee", icon: FaHospitalUser },
   { id: "Tab7", label: "History", icon: IoReloadOutline },
-  { id: "Tab8", label: "Payment", icon: FaCcAmazonPay },
+  // { id: "Tab8", label: "Payment", icon: FaCcAmazonPay },
   { id: "Tab9", label: "User", icon: CiUser },
   { id: "Tab10", label: "Post a Blog", icon: FaRegEdit },
   { id: "Tab11", label: "Blog", icon: FaBookReader },
@@ -70,7 +70,7 @@ const jobSeekerTabs = [
   { id: "Tab3", label: "All Jobs", icon: GoInbox },
   { id: "Tab4", label: "Application", icon: FaShoppingBag },
   { id: "Tab5", label: "Work History", icon: IoReloadOutline },
-  { id: "Tab6", label: "Payment", icon: FaAmazonPay },
+  // { id: "Tab6", label: "Payment", icon: FaAmazonPay },
 ];
 
 
@@ -110,7 +110,7 @@ const Sidebar = ({ tabs, activeTab, handleTabClick }) => {
   };
 
   return (
-    <div className="w-20 md:w-[240px]  mx-auto textw border-2 border-base-300 rounded-2xl md:m-9 overflow-y-auto">
+    <div className="w-20 md:w-[240px] max-h-[840px] mx-auto textw border-2 border-base-300 rounded-2xl md:m-9 overflow-y-auto">
       {tabs.map((tab) => (
         <div
           key={tab.id}
