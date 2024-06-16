@@ -11,12 +11,13 @@ import img9 from "../image/hiringpart/Frame 21 (3).svg";
 import img10 from "../image/hiringpart/Frame 21 (4).svg";
 import { FcApproval } from "react-icons/fc";
 import ButtonAll from "./button/Button";
+import { Link } from "react-router-dom";
+import useAuthUser from "../auth/getUser";
+import { auth } from "../firebase";
 const Home = () => {
+  const { user } = useAuthUser(auth);
   return (
     <div className="mt-4 max-w-7xl mx-auto textw">
-
-
-
       <div className="   max-w-5xl  mx-auto p-4  md:flex gap-1 justify-center tems-center ">
         <div className="max-w-[528px] mx-auto">
           <h2 className="text-[40px] font-semibold">
@@ -27,7 +28,29 @@ const Home = () => {
             Experience where talent meets opportunity, on a global scale.
           </p>
           <div className="mt-4">
-            <ButtonAll>Get Started</ButtonAll>
+
+            {!user && (
+              <Link to="/login">
+                <ButtonAll>Get Started</ButtonAll>
+              </Link>
+            )}
+           
+
+            {user?.role === "admin" && (
+              <Link to="/admin-dashboard">
+                <ButtonAll>Get Started</ButtonAll>
+              </Link>
+            )}
+            {user?.role === "employer" && (
+              <Link to="/employee-dashboard">
+                <ButtonAll>Get Started</ButtonAll>
+              </Link>
+            )}
+            {user?.role === "job-seeker" && (
+              <Link to="/jobseeker-dashboard">
+                <ButtonAll>Get Started</ButtonAll>
+              </Link>
+            )}
           </div>
         </div>
         <div className=" m-auto">
@@ -106,13 +129,19 @@ const Home = () => {
         <div className="bg-[#EDF7F4] text-center bgw p-4">
           <img className="mx-auto" src={img3} alt="" />
           <h2 className="text-2xl font-semibold">Strong User Privacy</h2>
-          <p className="text-[12px]">User’s privacy is always our first priority</p>
+          <p className="text-[12px]">
+            User’s privacy is always our first priority
+          </p>
         </div>
 
         <div className="bg-[#EDF7F4] p-1 bgw text-center">
           <img className="mx-auto" src={img4} alt="" />
-          <h2 className="text-2xl text-start font-semibold">User Friendly Experience</h2>
-          <p className="text-[12px] text-start">Our platform is very easy to use</p>
+          <h2 className="text-2xl text-start font-semibold">
+            User Friendly Experience
+          </h2>
+          <p className="text-[12px] text-start">
+            Our platform is very easy to use
+          </p>
         </div>
 
         <div className="bg-[#EDF7F4] text-center bgw p-4">

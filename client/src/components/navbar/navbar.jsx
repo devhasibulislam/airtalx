@@ -6,6 +6,7 @@ import img1 from "../../image/mainicon.svg";
 import { auth } from "../../firebase";
 
 import useAuthUser from "../../auth/getUser";
+import ButtonAll from "../button/Button";
 const Navbar = () => {
   const { user } = useAuthUser(auth);
 
@@ -128,11 +129,9 @@ const Navbar = () => {
             <h2 className="text-3xl font-semibold">airTalX</h2>
           </div>
           <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{nav}</ul>
+            <ul className="menu menu-horizontal px-1">{nav}</ul>
+          </div>
         </div>
-        </div>
-
-       
 
         <div className="navbar-end">
           <div className="flex justify-center items-center gap-4">
@@ -141,17 +140,16 @@ const Navbar = () => {
               <input onChange={handletoggle} type="checkbox" />
 
               <div className="slider">
-                <div className="circle">
-                  <LuSun className="text-warning " />
+                <div className="circle bg-white  w-[31px] h-[31px]">
+                  <LuSun className="text-warning text-xl" />
                 </div>
               </div>
             </label>
 
             {!user ? (
               <Link to="/login">
-                <button className="btn btn-info btn-sm text-[12px] font-medium">
-                  Login
-                </button>
+               
+                <ButtonAll>Login</ButtonAll>
               </Link>
             ) : (
               <Link
@@ -167,7 +165,11 @@ const Navbar = () => {
                 {user?.role === "job-seeker" && (
                   <p className="max-md:hidden">Job Seeker </p>
                 )}
-                <img src={user?.image} className="w-7 h-7 rounded-full" alt="" />
+                <img
+                  src={user?.image}
+                  className="w-7 h-7 rounded-full"
+                  alt=""
+                />
               </Link>
             )}
           </div>

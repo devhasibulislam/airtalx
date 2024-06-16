@@ -276,11 +276,9 @@ const Signup = () => {
                           onClick={handleGoogleLogin}
                           className="btn btn-active btn-ghost"
                         >
-                          <FcGoogle /> Sign In with Google
+                          <FcGoogle /> Sign Up with Google
                         </button>
-                        <button className="btn btn-active btn-ghost">
-                          <BsApple /> Sign In with Apple
-                        </button>
+                       
                       </div>
 
                       <div className="mt-[20px] p-3">
