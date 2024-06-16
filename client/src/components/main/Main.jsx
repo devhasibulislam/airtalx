@@ -21,7 +21,7 @@ import FindJob from "../find-job/FindJob";
 import Application from "../JobSeeker/Application";
 import FindEmploye from "../find-employee/FindEmploye";
 import Dashboard from "../admin/dashboard/Dashboard";
-import Payment from "../JobSeeker/Payment";
+// import Payment from "../JobSeeker/Payment";
 import WorkHistory from "../workhistory/WorkHistory";
 import Postblog from "../admin/Postblog/Postblog";
 import PostAJob from "../admin/dashboard/postAJobs/PostAJob";
@@ -159,7 +159,7 @@ const AdminDashboard = () => {
       {activeTab === "Tab5" && <FindJob />}
       {activeTab === "Tab6" && <FindEmploye />}
       {activeTab === "Tab7" && <WorkHistory />}
-      {activeTab === "Tab8" && <Payment />}
+      {/* {activeTab === "Tab8" && <Payment />} */}
       {activeTab === "Tab9" && <p><User/></p>}
       {activeTab === "Tab10" && <Postblog />}
       {activeTab === "Tab11" && <AdminBlog />}
@@ -208,7 +208,7 @@ const JobSeekerDashboard = () => {
       {activeTab === "Tab3" && <FindJob />}
       {activeTab === "Tab4" && <Application />}
       {activeTab === "Tab5" && <div><WorkHistory/></div>}
-      {activeTab === "Tab6" && <div><Payment/></div>}
+      {/* {activeTab === "Tab6" && <div><Payment/></div>} */}
       {/* Add more content for other tabs as needed */}
     </DashboardLayout>
   );
