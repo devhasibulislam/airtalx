@@ -28,7 +28,7 @@ const JobSeekerProfile = () => {
   };
 
   return (
-    <div className="m-2">
+    <div className="m-2 max-w-7xl mx-auto">
       {/* Part 1 */}
       <div className="md:flex justify-between items-center">
         <div className="flex gap-2 items-center">
