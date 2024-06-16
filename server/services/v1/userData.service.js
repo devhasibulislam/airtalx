@@ -1,6 +1,7 @@
 const multer = require('multer');
 const path = require('path');
-const User = require("../../models/v1/userData.model");
+// const User = require("../../models/v1/userData.model");
+const User = require("../../models/v1/userdata.model");
 
 // Set up storage engine for multer
 const storage = multer.diskStorage({
