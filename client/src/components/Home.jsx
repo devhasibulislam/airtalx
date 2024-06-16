@@ -17,8 +17,8 @@ const Home = () => {
 
 
 
-      <div className="  w-[959px]  mx-auto h-[328px] md:flex gap-1 justify-center tems-center ">
-        <div className="w-[528px] mx-auto">
+      <div className="   max-w-5xl  mx-auto p-4  md:flex gap-1 justify-center tems-center ">
+        <div className="max-w-[528px] mx-auto">
           <h2 className="text-[40px] font-semibold">
             {" "}
             One of the Trusted Talent Marketplaces in the Philippines.
@@ -35,14 +35,14 @@ const Home = () => {
         </div>
       </div>
 
-      <div className=" w-[1280px] h-[425px] mx-auto  bg-slate-200 bgw">
+      <div className="  max-w-7xl p-4  mx-auto  bg-slate-200 bgw">
         <h1 className="text-[36px] font-semibold  text-center">Why Us?</h1>
         <h3 className="text-xl  text-center">
           From all of the platforms, these are some of the reason for you to
           choose our platform
         </h3>
 
-        <div className="grid md:grid-cols-2 gap-[57px] w-[950px] h-[226px] mx-auto items-center mt-6">
+        <div className="grid md:grid-cols-2 gap-[57px] max-w-5xl  mx-auto items-center mt-6">
           <div className=" mx-auto">
             <img className="w-[402px] h-[273px]" src={img2} alt="" />
           </div>
@@ -102,8 +102,8 @@ const Home = () => {
         </div>
       </div>
 
-      <div className=" grid md:grid-cols-3 mt-20 gap-4 max-w-4xl -[956px] h-[256px] mx-auto">
-        <div className="bg-[#EDF7F4] bgw p-4">
+      <div className=" grid md:grid-cols-3 mt-20 gap-4 max-w-4xl  mx-auto">
+        <div className="bg-[#EDF7F4] text-center bgw p-4">
           <img className="mx-auto" src={img3} alt="" />
           <h2 className="text-2xl font-semibold">Strong User Privacy</h2>
           <p className="text-[12px]">User’s privacy is always our first priority</p>
@@ -115,14 +115,14 @@ const Home = () => {
           <p className="text-[12px] text-start">Our platform is very easy to use</p>
         </div>
 
-        <div className="bg-[#EDF7F4] bgw p-4">
+        <div className="bg-[#EDF7F4] text-center bgw p-4">
           <img className="mx-auto" src={img5} alt="" />
           <h2 className="text-2xl font-semibold">World Wide Service</h2>
           <p className="text-[12px]">Hire your staff from any country</p>
         </div>
       </div>
 
-      <div className="mt-20 mb-20 text-center w-[960px] h-[398px]  mx-auto">
+      <div className="mt-20 mb-20 text-center max-w-[960px]   mx-auto">
         <h1 className="text-4xl font-semibold t">Hiring Process</h1>
         <p className="mt-2 text-xl">
           Hire part-time or full-time workers in the worldwide with our easy to
