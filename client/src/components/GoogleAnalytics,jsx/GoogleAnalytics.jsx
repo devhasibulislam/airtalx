@@ -70,7 +70,7 @@ const GoogleAnalytics = () => {
   }, []);
 
   return (
-    <div className="p-4 w-[800px] h-[1390px] mx-auto">
+    <div className="p-4 max-w-[800px] max-h-[1390px] mx-auto">
       <h2 className="text-2xl font-bold mb-4">Google Analytics Reports</h2>
       <div className="mb-8">
         <h3 className="text-xl font-semibold">Sales Report</h3>

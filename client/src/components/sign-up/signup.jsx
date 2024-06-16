@@ -9,7 +9,7 @@ import { BsApple } from "react-icons/bs";
 import ButtonAll from "../button/Button";
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../../firebase";
-import axios from "axios"; // Import axios for making API requests
+import axios from "axios";
 
 const Signup = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -25,46 +25,39 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
 
- 
   const onSubmit = async (data) => {
     const { email, password, image, name } = data;
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("name", name);
+    formData.append("image", image[0]); // Assuming image is a File object
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
 
-      const response = await axios.post(
-        'http://localhost:8080/v1/api/userdata',
-        {
-          name,
-          email,
-          password,
-          image: image[0], // Send the image file directly
+      await axios.post("http://localhost:8080/v1/api/userdata", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
         },
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        }
-      );
-
-      console.log(response);
+      });
 
       Swal.fire({
-        position: 'top',
-        icon: 'success',
-        title: 'Employer signed up successfully',
+        position: "top",
+        icon: "success",
+        title: "Employer signed up successfully",
         showConfirmButton: false,
         timer: 1500,
       }).then(() => {
-        navigate('/');
+        navigate("/");
       });
     } catch (error) {
-      console.error('Error during signup:', error);
+      console.error("Error during signup:", error);
       Swal.fire({
-        position: 'top',
-        icon: 'error',
-        title: 'Signup failed',
-        text: error.message || 'Please try again later',
+        position: "top",
+        icon: "error",
+        title: "Signup failed",
+        text: error.message || "Please try again later",
         showConfirmButton: true,
       });
     }
@@ -81,10 +74,8 @@ const Signup = () => {
           email: user.email,
           password: "12345678",
           image: user.photoURL,
-          // Add any other user data you need
         });
 
-        // Handle successful login/signup
         Swal.fire({
           position: "top",
           icon: "success",
@@ -92,7 +83,7 @@ const Signup = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate("/"); // Redirect to the desired route after successful login
+        navigate("/");
       } catch (error) {
         console.error("Error checking/creating user in MongoDB:", error);
         Swal.fire({
@@ -188,7 +179,6 @@ const Signup = () => {
             className="hidden"
             {...register("image", { required: true })}
           />
-          
 
           <label
             htmlFor="file-upload"
@@ -198,11 +188,10 @@ const Signup = () => {
             <span>Click to upload image</span>
           </label>
         </div>
-        {errors.file && (
+        {errors.image && (
           <span className="text-red-500">This field is required</span>
         )}
       </div>
-
 
       <div className="flex gap-1 mt-3">
         <input
@@ -278,7 +267,6 @@ const Signup = () => {
                         >
                           <FcGoogle /> Sign Up with Google
                         </button>
-                       
                       </div>
 
                       <div className="mt-[20px] p-3">
