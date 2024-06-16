@@ -6,8 +6,9 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="max-w-[1280px] mx-auto ">
-      <footer className="footer text-white p-10 bg-[#2792A8]  mx-auto ">
+   <div className=" text-white bg-[#2792A8]  w-full">
+     <div className="max-w-[1280px] mx-auto ">
+      <footer className="footer p-10  mx-auto ">
         <nav>
           <h6 className=" text-[12px] font-bold">Services</h6>
           <a className="link link-hover  text-[12px]">
@@ -79,6 +80,7 @@ const Footer = () => {
         </h1>
       </div>
     </div>
+   </div>
   );
 };
 

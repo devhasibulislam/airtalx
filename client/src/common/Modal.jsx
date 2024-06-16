@@ -36,6 +36,18 @@ const EditProfileModal = ({ isOpen, onClose, users }) => {
       <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-xl">
         <h2 className="text-xl font-semibold mb-4">Edit Profile</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <div className="flex justify-around">
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Location</label>
+            <input
+              type="text"
+              {...register("location", { required: "LOcation is required" })}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              placeholder="Enter your Location"
+            />
+            {errors.location && <p className="text-red-500 text-xs mt-1">{errors.location.message}</p>}
+          </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">Skill</label>
             <input
@@ -46,7 +58,11 @@ const EditProfileModal = ({ isOpen, onClose, users }) => {
             />
             {errors.skill && <p className="text-red-500 text-xs mt-1">{errors.skill.message}</p>}
           </div>
-          <div>
+
+          </div>
+
+         <div className="flex justify-around">
+         <div>
             <label className="block text-sm font-medium text-gray-700">Skill Level</label>
             <input
               type="text"
@@ -67,14 +83,16 @@ const EditProfileModal = ({ isOpen, onClose, users }) => {
             />
             {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
           </div>
+         </div>
 
+          <div className="flex justify-around">
           <div>
             <label className="block text-sm font-medium text-gray-700">Current Job</label>
             <input
               type="text"
               {...register("current_job", { required: "Current Job is required" })}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              placeholder="Enter your role"
+              placeholder="Enter your Current job"
             />
             {errors.role && <p className="text-red-500 text-xs mt-1">{errors.role.message}</p>}
           </div>
@@ -84,17 +102,20 @@ const EditProfileModal = ({ isOpen, onClose, users }) => {
               type="text"
               {...register("current_company", { required: "Current Company is required" })}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              placeholder="Enter your role"
+              placeholder="Enter your Current company"
             />
             {errors.role && <p className="text-red-500 text-xs mt-1">{errors.role.message}</p>}
           </div>
-          <div>
+          </div>
+
+         <div className="flex justify-around">
+         <div>
             <label className="block text-sm font-medium text-gray-700">Portfolio</label>
             <input
               type="text"
               {...register("portfolio", { required: "Portfolio Job is required" })}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              placeholder="Enter your role"
+              placeholder="Enter your poortfolio"
             />
             {errors.role && <p className="text-red-500 text-xs mt-1">{errors.role.message}</p>}
           </div>
@@ -104,20 +125,24 @@ const EditProfileModal = ({ isOpen, onClose, users }) => {
               type="text"
               {...register("employment", { required: "Employment Job is required" })}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              placeholder="Enter your role"
+              placeholder="Enter your employment"
             />
             {errors.role && <p className="text-red-500 text-xs mt-1">{errors.role.message}</p>}
           </div>
-          <div>
+         </div>
+        
+        <div className="flex justify-center">
+        <div>
             <label className="block text-sm font-medium text-gray-700">Salary</label>
             <input
               type="text"
-              {...register("salarry", { required: "Salary Job is required" })}
+              {...register("salary", { required: "Salary Job is required" })}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              placeholder="Enter your role"
+              placeholder="Enter your salary"
             />
             {errors.role && <p className="text-red-500 text-xs mt-1">{errors.role.message}</p>}
           </div>
+        </div>
           
 
           <div className="flex justify-end space-x-2">

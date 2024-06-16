@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { LuSun } from "react-icons/lu";
 import { PiHandbagSimpleFill } from "react-icons/pi";
-import img1 from "../../../image/man.svg";
 import { auth } from "../../../firebase";
 import useAuthUser from "../../../auth/getUser"; // Adjust the import path
 import EditProfileModal from "../../../common/Modal";
@@ -33,7 +32,7 @@ const JobSeekerProfile = () => {
       <div className="md:flex justify-between items-center">
         <div className="flex gap-2 items-center">
           <div>
-            <img src={img1} className="w-10 h-10 rounded-full" alt="" />
+            <img src={user?.image} className="w-10 h-10 rounded-full" alt="" />
           </div>
           <div>
             <h2 className="text-[24px] font-medium">{user?.name}</h2>

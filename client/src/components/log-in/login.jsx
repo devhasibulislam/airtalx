@@ -16,7 +16,7 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
-    await signInWithEmailAndPassword(auth, data.email, data.password);
+      await signInWithEmailAndPassword(auth, data.email, data.password);
       Swal.fire({
         position: "top",
         icon: "success",

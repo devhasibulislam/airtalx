@@ -25,35 +25,46 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
 
+ 
   const onSubmit = async (data) => {
-    const { email, password } = data;
+    const { email, password, image, name } = data;
+
     try {
       await createUserWithEmailAndPassword(auth, email, password);
 
-      // Fetch additional user data from MongoDB backend
       const response = await axios.post(
-        "http://localhost:8080/v1/api/userdata",
-        data
+        'http://localhost:8080/v1/api/userdata',
+        {
+          name,
+          email,
+          password,
+          image: image[0], // Send the image file directly
+        },
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
       );
 
       console.log(response);
 
       Swal.fire({
-        position: "top",
-        icon: "success",
-        title: "Employer signed up successfully",
+        position: 'top',
+        icon: 'success',
+        title: 'Employer signed up successfully',
         showConfirmButton: false,
         timer: 1500,
       }).then(() => {
-        navigate("/"); // Redirect to home page after successful signup
+        navigate('/');
       });
     } catch (error) {
-      console.error("Error during signup:", error);
+      console.error('Error during signup:', error);
       Swal.fire({
-        position: "top",
-        icon: "error",
-        title: "Signup failed",
-        text: error.message || "Please try again later",
+        position: 'top',
+        icon: 'error',
+        title: 'Signup failed',
+        text: error.message || 'Please try again later',
         showConfirmButton: true,
       });
     }
@@ -61,16 +72,40 @@ const Signup = () => {
 
   const handleGoogleLogin = async () => {
     try {
-      await signInWithPopup(auth, googleProvider);
+      const result = await signInWithPopup(auth, googleProvider);
+      const { user } = result;
 
-      Swal.fire({
-        position: "top",
-        icon: "success",
-        title: "Employer Google SignUp successfully",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      navigate("/"); // Redirect to the desired route after successful login
+      try {
+        await axios.post("http://localhost:8080/v1/api/userdata", {
+          name: user.displayName,
+          email: user.email,
+          password: "12345678",
+          image: user.photoURL,
+          // Add any other user data you need
+        });
+
+        // Handle successful login/signup
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Google SignUp successful",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/"); // Redirect to the desired route after successful login
+      } catch (error) {
+        console.error("Error checking/creating user in MongoDB:", error);
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: "Error during Google Login",
+          text:
+            error.response?.data?.message ||
+            error.message ||
+            "Please try again later",
+          showConfirmButton: true,
+        });
+      }
     } catch (error) {
       console.error("Error during Google login:", error);
       Swal.fire({
@@ -144,28 +179,30 @@ const Signup = () => {
 
       <div className="form-control">
         <label className="label">
-          <span className="label-text font-semibold">Upload-Image</span>
+          <span className="label-text font-semibold">Upload Image</span>
         </label>
         <div className="flex flex-col justify-start ">
           <input
             type="file"
             id="file-upload"
             className="hidden"
-            {...register("file", { required: true })}
+            {...register("image", { required: true })}
           />
+          
 
           <label
             htmlFor="file-upload"
             className="file-input-bordered flex justify-start rounded-2xl p-2 px-5 gap-2 cursor-pointer bg-[#CFEBFF]"
           >
             <FaUpload className="text-xl" />
-            <span> Click to upload image</span>
+            <span>Click to upload image</span>
           </label>
         </div>
         {errors.file && (
           <span className="text-red-500">This field is required</span>
         )}
       </div>
+
 
       <div className="flex gap-1 mt-3">
         <input
