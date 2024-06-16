@@ -31,16 +31,12 @@ const Signup = () => {
     formData.append("email", email);
     formData.append("password", password);
     formData.append("name", name);
-    formData.append("image", image[0]); // Assuming image is a File object
+    formData.append("image", image[0])
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
 
-      await axios.post("http://localhost:8080/v1/api/userdata", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await axios.post("http://localhost:8080/v1/api/userdata", formData);
 
       Swal.fire({
         position: "top",
