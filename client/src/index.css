@@ -31,8 +31,8 @@ body {
 
 .switch {
   /* switch */
-  --switch-width: 46px;
-  --switch-height: 24px;
+  --switch-width: 66px;
+  --switch-height: 34px;
   --switch-bg: rgb(131, 131, 131);
   --switch-checked-bg: rgb(0, 218, 80);
   --switch-offset: calc((var(--switch-height) - var(--circle-diameter)) / 2);
