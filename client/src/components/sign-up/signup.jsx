@@ -61,16 +61,39 @@ const Signup = () => {
 
   const handleGoogleLogin = async () => {
     try {
-      await signInWithPopup(auth, googleProvider);
+      const result = await signInWithPopup(auth, googleProvider);
+      const { user } = result;
 
-      Swal.fire({
-        position: "top",
-        icon: "success",
-        title: "Employer Google SignUp successfully",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      navigate("/"); // Redirect to the desired route after successful login
+      try {
+        await axios.post("http://localhost:8080/v1/api/userdata", {
+          name: user.displayName,
+          email: user.email,
+          password:"12345678"
+           // Add any other user data you need
+        });
+
+        // Handle successful login/signup
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Google SignUp successful",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/"); // Redirect to the desired route after successful login
+      } catch (error) {
+        console.error("Error checking/creating user in MongoDB:", error);
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: "Error during Google Login",
+          text:
+            error.response?.data?.message ||
+            error.message ||
+            "Please try again later",
+          showConfirmButton: true,
+        });
+      }
     } catch (error) {
       console.error("Error during Google login:", error);
       Swal.fire({

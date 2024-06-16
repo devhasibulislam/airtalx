@@ -110,7 +110,7 @@ const Sidebar = ({ tabs, activeTab, handleTabClick }) => {
   };
 
   return (
-    <div className="w-20 md:w-[240px] h-[540px] mx-auto textw border-2 border-base-300 rounded-2xl md:m-9 overflow-y-auto">
+    <div className="w-20 md:w-[240px]  mx-auto textw border-2 border-base-300 rounded-2xl md:m-9 overflow-y-auto">
       {tabs.map((tab) => (
         <div
           key={tab.id}
