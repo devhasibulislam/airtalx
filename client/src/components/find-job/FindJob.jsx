@@ -4,8 +4,11 @@ import { CiEdit } from "react-icons/ci";
 import axios from "axios";
 import Swal from "sweetalert2";
 import JobUpdateModal from "../../common/JobUpdateModel";
+import useAuthUser from "../../auth/getUser";
+import { auth } from "../../firebase";
 
 const FindJob = () => {
+  const { user } = useAuthUser(auth);
   const [expandedJob, setExpandedJob] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedType, setSelectedType] = useState("");
@@ -27,7 +30,7 @@ const FindJob = () => {
   };
 
   const updateJobInState = (updatedJob) => {
-    setJobs((prevJobs) => 
+    setJobs((prevJobs) =>
       prevJobs.map((job) => (job._id === updatedJob._id ? updatedJob : job))
     );
   };
@@ -35,7 +38,7 @@ const FindJob = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/v1/api/postjobs");
+        const res = await axios.get(`${process.env.REACT_APP_HOST}/v1/api/postjobs`);
         setJobs(res.data);
         setLoading(false);
       } catch (error) {
@@ -109,7 +112,7 @@ const FindJob = () => {
 
     if (result.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:8080/v1/api/postjobs/${id}`);
+        await axios.delete(`${process.env.REACT_APP_HOST}/v1/api/postjobs/${id}`);
         Swal.fire({
           title: "Deleted!",
           text: "Job deleted successfully",
@@ -130,6 +133,16 @@ const FindJob = () => {
     }
   };
 
+  const handleApply = ()=>{
+    Swal.fire({
+      position: "top",
+      icon: "success",
+      title: "Your apply job saved",
+      showConfirmButton: false,
+      timer: 1500
+    });
+  }
+
   return (
     <div className="mt-10 max-w-5xl mx-auto">
       <div className="mb-4 flex justify-center">
@@ -143,7 +156,7 @@ const FindJob = () => {
         <select
           value={selectedType}
           onChange={handleTypeChange}
-          className="border border-base-300 p-2 rounded-2xl"
+          className="border border-base-300 textw p-2 rounded-2xl"
         >
           <option value="">Select type</option>
           <option value="full time">Full-time</option>
@@ -182,15 +195,27 @@ const FindJob = () => {
               {expandedJob === index ? "Show Less" : "See More"}
             </button>
             <div className="flex justify-between mt-6">
-              <button onClick={() => handleEditClick(job._id)} className="btn btn-outline btn-warning">
-                <CiEdit className="text-xl" /> Edit Article
-              </button>
-              <button
-                onClick={() => handleDelete(job._id)}
-                className="btn btn-outline btn-error"
-              >
-                <RiDeleteBin6Line className="text-xl" /> Delete
-              </button>
+              {user?.role === "admin" && (
+                <button
+                  onClick={() => handleEditClick(job._id)}
+                  className="btn btn-outline btn-warning"
+                >
+                  <CiEdit className="text-xl" /> Edit Article
+                </button>
+              )}
+              {user?.role === "job-seeker" && (
+                <button onClick={handleApply} className="btn btn-outline btn-warning">
+                  <CiEdit className="text-xl" /> Apply
+                </button>
+              )}
+              {user?.role === "admin" && (
+                <button
+                  onClick={() => handleDelete(job._id)}
+                  className="btn btn-outline btn-error"
+                >
+                  <RiDeleteBin6Line className="text-xl" /> Delete
+                </button>
+              )}{" "}
             </div>
           </div>
         ))}

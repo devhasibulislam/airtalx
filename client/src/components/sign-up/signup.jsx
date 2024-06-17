@@ -34,9 +34,9 @@ const Signup = () => {
     formData.append("image", image[0])
 
     try {
+      
+      await axios.post(`${process.env.REACT_APP_HOST}/v1/api/userdata`, formData);
       await createUserWithEmailAndPassword(auth, email, password);
-
-      await axios.post("http://localhost:8080/v1/api/userdata", formData);
 
       Swal.fire({
         position: "top",
@@ -46,6 +46,9 @@ const Signup = () => {
         timer: 1500,
       }).then(() => {
         navigate("/");
+        setTimeout(() => {
+          window.location.reload();
+        }, 500); 
       });
     } catch (error) {
       console.error("Error during signup:", error);
@@ -65,7 +68,7 @@ const Signup = () => {
       const { user } = result;
 
       try {
-        await axios.post("http://localhost:8080/v1/api/userdata", {
+        await axios.post(`${process.env.REACT_APP_HOST}/v1/api/userdata`, {
           name: user.displayName,
           email: user.email,
           password: "12345678",

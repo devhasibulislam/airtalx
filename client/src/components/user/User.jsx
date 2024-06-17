@@ -12,7 +12,7 @@ const User = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axios.get("http://localhost:8080/v1/api/userdata");
+        const result = await axios.get(`${process.env.REACT_APP_HOST}/v1/api/userdata`);
         setData(result.data); // Assuming result.data is the array of user data
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -41,7 +41,7 @@ const User = () => {
 
     const updateRole = () => {
       const data = { role: "admin" };
-      axios.put(`http://localhost:8080/v1/api/userdata/${userId}`, data)
+      axios.put(`${process.env.REACT_APP_HOST}/v1/api/userdata/${userId}`, data)
         .then(response => {
           if (response.data) {
             Swal.fire({
@@ -92,7 +92,7 @@ const User = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`http://localhost:8080/v1/api/userdata/${userId}`);
+          await axios.delete(`${process.env.REACT_APP_HOST}/v1/api/userdata/${userId}`);
           Swal.fire({
             position: "top",
             icon: "success",

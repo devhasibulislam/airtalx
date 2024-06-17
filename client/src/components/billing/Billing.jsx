@@ -33,7 +33,7 @@ const Billing = () => {
     };
     try {
       const result = await axios.post(
-        "http://localhost:8080/v1/api/auth/register",
+        `${process.env.REACT_APP_HOST}/v1/api/auth/register`,
         alldata
       );
       if (result.data.acknowledgement === true) {

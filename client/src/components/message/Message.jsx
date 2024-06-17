@@ -15,7 +15,7 @@ const UserList = ({
   favorites,
   toggleFavorite,
 }) => (
-  <div className="w-full max-md:sticky md:w-1/4 bg-gray-100 p-4 md:overflow-y-auto overflow-x-auto">
+  <div className="w-full max-md:sticky md:w-1/4 text-w bgw bg-gray-100 p-4 md:overflow-y-auto overflow-x-auto">
     <h2 className="text-2xl font-bold mb-4">Users</h2>
     <ul className="max-md:flex">
       {users.map((user) => (
@@ -23,15 +23,15 @@ const UserList = ({
           key={user?._id}
           className={`p-2 cursor-pointer flex flex-col items-start justify-between w-full ${
             selectedUser && selectedUser?._id === user?._id
-              ? "bg-[#EDF7F4] text-white"
-              : "bg-white text-black"
+              ? "bg-[#EDF7F4] bgww text-white"
+              : "bg-white bgww text-black textw"
           }`}
           onClick={() => onSelectUser(user)}
         >
           <div className="flex gap-1 items-center w-full justify-between">
             <div className="flex items-center">
               <img src={user.image} alt="" className="w-8 h-8 rounded-full mr-2" />
-              <h3 className="text-black">{user.name}</h3>
+              <h3 className="text-black textw">{user.name}</h3>
             </div>
             <CiStar
               className={`text-2xl text-black cursor-pointer ${
@@ -43,10 +43,10 @@ const UserList = ({
               }}
             />
           </div>
-          <div className="text-sm max-md:hidden text-gray-500 mt-1">
+          <div className="text-sm max-md:hidden textw text-gray-500 mt-1">
             {user?.text || "No messages yet"}
           </div>
-          <div className="text-xs text-gray-400 mt-1">
+          <div className="text-xs textw text-gray-400 mt-1">
             {/* {user.latestMessage
               ? moment(user.timestamp).fromNow()
               : ""} */}
@@ -73,7 +73,7 @@ const MessageList = ({ messages, user }) => {
   }, [messages]);
 
   return (
-    <div className="max-md:mt-20 mt-4 flex flex-col justify-end overflow-y-auto">
+    <div className="max-md:mt-20  mt-4 flex flex-col justify-end overflow-y-auto">
       {messages.map((message) => (
         <div
           key={message?._id}
@@ -148,7 +148,7 @@ function Message() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const result = await axios.get("http://localhost:8080/v1/api/userdata");
+        const result = await axios.get(`${process.env.REACT_APP_HOST}/v1/api/userdata`);
         const fetchedUsers = result.data.filter((u) => u._id !== user?._id); // Filter out the current user
 
         if (fetchedUsers.length > 0) {
@@ -174,7 +174,7 @@ function Message() {
       if (selectedUser && user) {
         try {
           const response = await axios.get(
-            `http://localhost:8080/v1/api/message/${user?._id}/${selectedUser?._id}`
+            `${process.env.REACT_APP_HOST}/v1/api/message/${user?._id}/${selectedUser?._id}`
           );
           const sortedMessages = response.data.sort(
             (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
@@ -202,7 +202,7 @@ function Message() {
       if (user) {
         try {
           const response = await axios.get(
-            `http://localhost:8080/v1/api/message/new/${user?._id}`
+            `${process.env.REACT_APP_HOST}/v1/api/message/new/${user?._id}`
           );
           const sortedNewMessages = response.data.sort(
             (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
@@ -242,7 +242,7 @@ function Message() {
 
       try {
         const response = await axios.post(
-          "http://localhost:8080/v1/api/message",
+          `${process.env.REACT_APP_HOST}/v1/api/message`,
           newMessage
         );
         const updatedMessages = [...messages, response.data].sort(
@@ -307,7 +307,7 @@ function Message() {
   const markAsRead = async (messageId) => {
     try {
       await axios.patch(
-        `http://localhost:8080/v1/api/message/read/${messageId}`
+        `${process.env.REACT_APP_HOST}/v1/api/message/read/${messageId}`
       );
       setNewMessages(
         newMessages.filter((message) => message?._id !== messageId)
@@ -345,7 +345,7 @@ function Message() {
   }, [showEmojiPicker]);
 
   return (
-    <div className="flex h-[704px] flex-col sm:flex-row">
+    <div className="flex h-[704px] bgw flex-col sm:flex-row">
       <UserList
         users={sortedUsers}
         selectedUser={selectedUser}
@@ -353,7 +353,7 @@ function Message() {
         favorites={favorites}
         toggleFavorite={toggleFavorite}
       />
-      <div className="flex-1 flex flex-col bg-white p-4">
+      <div className="flex-1 flex flex-col bgww bg-white p-4">
         <div className="flex-1 overflow-y-auto p-4">
           <div className="flex justify-between border-b-[1px]">
             <div className="flex gap-2 items-center mb-4">
@@ -385,7 +385,7 @@ function Message() {
             <input
               type="text"
               placeholder="Search messages"
-              className="w-full p-2 mt-4 border border-gray-300 rounded-md"
+              className="w-full p-2 mt-4  bgww border-gray-300 rounded-md"
               value={searchText}
               onChange={handleSearch}
             />
@@ -408,7 +408,7 @@ function Message() {
           <input
             type="text"
             placeholder="Type a message"
-            className="flex-1 p-2 border border-gray-300 rounded-md"
+            className="flex-1 p-2 border textw border-gray-300 rounded-md"
             value={messageText}
             onChange={(e) => setMessageText(e.target.value)}
           />

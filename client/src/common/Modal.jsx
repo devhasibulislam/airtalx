@@ -1,31 +1,41 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import useAuthUser from "../auth/getUser";
-import { auth } from "../firebase";
+// import useAuthUser from "../auth/getUser";
+// import { auth } from "../firebase";
 import Swal from "sweetalert2";
 
-const EditProfileModal = ({ isOpen, onClose, users }) => {
-  const { user } = useAuthUser(auth);
-  const { register, handleSubmit, formState: { errors } } = useForm();
+const EditProfileModal = ({ isOpen, onClose, user, onProfileUpdate }) => {
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: {
+      location: user?.location || "",
+      skill: user?.skill || "",
+      skill_level: user?.skill_level || "",
+      phone_number: user?.phone_number || "",
+      current_job: user?.current_job || "",
+      current_company: user?.current_company || "",
+      portfolio: user?.portfolio || "",
+      employment: user?.employment || "",
+      salary: user?.salary || "",
+    },
+  });
 
   const onSubmit = async (data) => {
-    console.log(data);
     try {
-      const response = await axios.put(`http://localhost:8080/v1/api/userdata/${user?._id}`, data);
-      console.log('Updated profile data:', response.data);
-      onClose();
-     if(response.data){
-      Swal.fire({
-        position: "top",
-        icon: "success",
-        title: "Profile updated successfully",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-     }
+      const response = await axios.put(`${process.env.REACT_APP_HOST}/v1/api/userdata/${user?._id}`, data);
+      if (response.data) {
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Profile updated successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        onProfileUpdate(response.data); // Update the profile data in the parent component
+        onClose();
+      }
     } catch (error) {
-      console.error('Error updating profile:', error);
+      console.error("Error updating profile:", error);
     }
   };
 
@@ -37,113 +47,107 @@ const EditProfileModal = ({ isOpen, onClose, users }) => {
         <h2 className="text-xl font-semibold mb-4">Edit Profile</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="flex justify-around">
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Location</label>
-            <input
-              type="text"
-              {...register("location", { required: "LOcation is required" })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              placeholder="Enter your Location"
-            />
-            {errors.location && <p className="text-red-500 text-xs mt-1">{errors.location.message}</p>}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Location</label>
+              <input
+                type="text"
+                {...register("location", { required: true })}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                placeholder="Enter your Location"
+              />
+              {errors.location && <p className="text-red-500 text-xs mt-1">Location is required</p>}
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Skill</label>
+              <input
+                type="text"
+                {...register("skill", { required: true })}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                placeholder="Enter your Skill"
+              />
+              {errors.skill && <p className="text-red-500 text-xs mt-1">Skill is required</p>}
+            </div>
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Skill</label>
-            <input
-              type="text"
-              {...register("skill", { required: "skill is required" })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              placeholder="Enter your Skill"
-            />
-            {errors.skill && <p className="text-red-500 text-xs mt-1">{errors.skill.message}</p>}
-          </div>
-
-          </div>
-
-         <div className="flex justify-around">
-         <div>
-            <label className="block text-sm font-medium text-gray-700">Skill Level</label>
-            <input
-              type="text"
-              {...register("skill_level", { required: "skill level is required" })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              placeholder="Enter your Skill"
-            />
-            {errors.skill && <p className="text-red-500 text-xs mt-1">{errors.skill.message}</p>}
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Phone Number</label>
-            <input
-              type="text"
-              {...register("phone_number", { required: "Phone Number is required" })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              placeholder="Enter your Phone Number"
-            />
-            {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
-          </div>
-         </div>
 
           <div className="flex justify-around">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Current Job</label>
-            <input
-              type="text"
-              {...register("current_job", { required: "Current Job is required" })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              placeholder="Enter your Current job"
-            />
-            {errors.role && <p className="text-red-500 text-xs mt-1">{errors.role.message}</p>}
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Current Company</label>
-            <input
-              type="text"
-              {...register("current_company", { required: "Current Company is required" })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              placeholder="Enter your Current company"
-            />
-            {errors.role && <p className="text-red-500 text-xs mt-1">{errors.role.message}</p>}
-          </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Skill Level</label>
+              <input
+                type="text"
+                {...register("skill_level", { required: true })}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                placeholder="Enter your Skill Level"
+              />
+              {errors.skill_level && <p className="text-red-500 text-xs mt-1">Skill Level is required</p>}
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Phone Number</label>
+              <input
+                type="text"
+                {...register("phone_number", { required: true })}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                placeholder="Enter your Phone Number"
+              />
+              {errors.phone_number && <p className="text-red-500 text-xs mt-1">Phone Number is required</p>}
+            </div>
           </div>
 
-         <div className="flex justify-around">
-         <div>
-            <label className="block text-sm font-medium text-gray-700">Portfolio</label>
-            <input
-              type="text"
-              {...register("portfolio", { required: "Portfolio Job is required" })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              placeholder="Enter your poortfolio"
-            />
-            {errors.role && <p className="text-red-500 text-xs mt-1">{errors.role.message}</p>}
+          <div className="flex justify-around">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Current Job</label>
+              <input
+                type="text"
+                {...register("current_job", { required: true })}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                placeholder="Enter your Current Job"
+              />
+              {errors.current_job && <p className="text-red-500 text-xs mt-1">Current Job is required</p>}
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Current Company</label>
+              <input
+                type="text"
+                {...register("current_company", { required: true })}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                placeholder="Enter your Current Company"
+              />
+              {errors.current_company && <p className="text-red-500 text-xs mt-1">Current Company is required</p>}
+            </div>
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">EmployMent</label>
-            <input
-              type="text"
-              {...register("employment", { required: "Employment Job is required" })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              placeholder="Enter your employment"
-            />
-            {errors.role && <p className="text-red-500 text-xs mt-1">{errors.role.message}</p>}
+
+          <div className="flex justify-around">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Portfolio</label>
+              <input
+                type="text"
+                {...register("portfolio")}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                placeholder="Enter your Portfolio"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Employment</label>
+              <input
+                type="text"
+                {...register("employment")}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                placeholder="Enter your Employment"
+              />
+            </div>
           </div>
-         </div>
-        
-        <div className="flex justify-center">
-        <div>
-            <label className="block text-sm font-medium text-gray-700">Salary</label>
-            <input
-              type="text"
-              {...register("salary", { required: "Salary Job is required" })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              placeholder="Enter your salary"
-            />
-            {errors.role && <p className="text-red-500 text-xs mt-1">{errors.role.message}</p>}
+
+          <div className="flex justify-center">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Salary</label>
+              <input
+                type="text"
+                {...register("salary", { required: true })}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                placeholder="Enter your Salary"
+              />
+              {errors.salary && <p className="text-red-500 text-xs mt-1">Salary is required</p>}
+            </div>
           </div>
-        </div>
-          
 
           <div className="flex justify-end space-x-2">
             <button
@@ -151,13 +155,13 @@ const EditProfileModal = ({ isOpen, onClose, users }) => {
               className="btn btn-error"
               onClick={onClose}
             >
-              Back
+              Cancel
             </button>
             <button
               type="submit"
               className="btn btn-warning"
             >
-              Save
+              Update Profile
             </button>
           </div>
         </form>

@@ -10,7 +10,7 @@ import ButtonAll from "../button/Button";
 import { IoIosNotificationsOutline } from "react-icons/io";
 const Navbar = () => {
   const { user } = useAuthUser(auth);
-
+// console.log(process.env.REACT_APP_HOST);
   // const [users, getUser] = useState(null);
   // const [loading, setLoading] = useState(true);
 

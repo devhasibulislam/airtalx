@@ -7,7 +7,6 @@ import ButtonAll from "../button/Button";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../../firebase";
 import { FcGoogle } from "react-icons/fc";
-import { BsApple } from "react-icons/bs";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -26,6 +25,10 @@ const Login = () => {
       });
       reset();
       navigate("/"); // Redirect to the desired route after successful login
+      setTimeout(() => {
+        window.location.reload();
+      }, 500); 
+
     } catch (error) {
       console.error("Login error:", error);
       Swal.fire({

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { LuSun } from "react-icons/lu";
 import { PiHandbagSimpleFill } from "react-icons/pi";
@@ -9,7 +9,7 @@ import ExperienceModal from "../../../common/ExperienceModal";
 
 const JobSeekerProfile = () => {
   const { user } = useAuthUser(auth);
-  console.log(user);
+  const [profileData, setProfileData] = useState(user);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalExOpen, setIsModalExOpen] = useState(false);
 
@@ -24,6 +24,7 @@ const JobSeekerProfile = () => {
   const handleEditProfileClick = () => {
     setIsModalOpen(true);
   };
+
   const handleAddExperienceClick = () => {
     setIsModalExOpen(true);
   };
@@ -31,10 +32,18 @@ const JobSeekerProfile = () => {
   const handleCloseExModal = () => {
     setIsModalExOpen(false);
   };
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
- 
+
+  const handleProfileUpdate = (updatedData) => {
+    setProfileData(updatedData);
+  };
+
+  useEffect(() => {
+    setProfileData(user);
+  }, [user]);
 
   return (
     <div className="m-2 max-w-7xl mx-auto">
@@ -42,10 +51,14 @@ const JobSeekerProfile = () => {
       <div className="md:flex justify-between items-center">
         <div className="flex gap-2 items-center">
           <div>
-            <img src={user?.image} className="w-10 h-10 rounded-full" alt="" />
+            <img
+              src={profileData?.image}
+              className="w-10 h-10 rounded-full"
+              alt=""
+            />
           </div>
           <div>
-            <h2 className="text-[24px] font-medium">{user?.name}</h2>
+            <h2 className="text-[24px] font-medium">{profileData?.name}</h2>
             <div className="flex gap-1 text-[14px]">
               <p>Age: 25</p>
               <p>, Member Since 25 May 2024</p>
@@ -74,55 +87,63 @@ const JobSeekerProfile = () => {
           <div>
             <div>
               <h2 className="text-[14px]">Email Address</h2>
-              <h2 className="text-[16px] text-slate-400">{user?.email}</h2>
+              <h2 className="text-[16px] text-slate-400">
+                {profileData?.email}
+              </h2>
             </div>
             <div className="mt-3">
               <h2 className="text-[14px]">Phone Number</h2>
               <h2 className="text-[16px] font-medium">
-                {user?.phone_number || "null"}
+                {profileData?.phone_number || "null"}
               </h2>
             </div>
             <div className="mt-3">
               <h2 className="text-[14px]">Portfolio</h2>
               <h2 className="text-[16px] font-medium">
-                {user?.portfolio || "null"}
+                {profileData?.portfolio || "null"}
               </h2>
             </div>
             <div className="mt-3">
               <h2 className="text-[14px]">Preferred Salary</h2>
               <h2 className="text-[16px] font-medium">
-                {user?.salary || "null"}/hr
+                {profileData?.salary || "null"}/hr
               </h2>
             </div>
             <div className="mt-3">
               <h2 className="text-[14px]">Skill</h2>
-              <h2 className="text-[16px] font-medium">{user?.skill}</h2>
+              <h2 className="text-[16px] font-medium">{profileData?.skill}</h2>
             </div>
           </div>
           <div>
             <div>
               <h2 className="text-[14px]">Location</h2>
-              <h2 className="text-[16px] font-medium">{user?.location}</h2>
+              <h2 className="text-[16px] font-medium">
+                {profileData?.location}
+              </h2>
             </div>
             <div className="mt-3">
               <h2 className="text-[14px]">Current Job</h2>
-              <h2 className="text-[16px] font-medium">{user?.current_job}</h2>
+              <h2 className="text-[16px] font-medium">
+                {profileData?.current_job}
+              </h2>
             </div>
             <div className="mt-3">
               <h2 className="text-[14px]">Current Company</h2>
               <h2 className="text-[16px] font-medium">
-                {user?.current_company || "null"}
+                {profileData?.current_company || "null"}
               </h2>
             </div>
             <div className="mt-3">
               <h2 className="text-[14px]">Preferred Employment</h2>
               <h2 className="text-[16px] font-medium">
-                {user?.employment || "null"}
+                {profileData?.employment || "null"}
               </h2>
             </div>
             <div className="mt-3">
               <h2 className="text-[14px]">Skill Level</h2>
-              <h2 className="text-[16px] font-medium">{user?.skill_level}</h2>
+              <h2 className="text-[16px] font-medium">
+                {profileData?.skill_level}
+              </h2>
             </div>
           </div>
         </div>
@@ -162,45 +183,47 @@ const JobSeekerProfile = () => {
             </div>
           </div>
           <div>
-            <button  onClick={handleAddExperienceClick} className="text-[#2792A8] hover:text-[#1f7280]">
+            <button
+              onClick={handleAddExperienceClick}
+              className="text-[#2792A8] hover:text-[#1f7280]"
+            >
               Add Experience
             </button>
           </div>
         </div>
         {/* Experience List */}
-
         <div className="mt-6">
-          {user?.experience.map((m) => (
+          {profileData?.experience.map((m) => (
             <div
               key={m._id}
               className=" m-3 p-3 border-b-2 border-base-200  grid-cols-2 items-center gap-3"
             >
               <div className="grid grid-cols-2 items-center">
-              <div>
-              <img src="" className="w-6 h-6" alt="" />
                 <div>
-                  <h2 className="text-[20px]">{m.title}</h2>
-                  <h2 className="text-[14px]">{m.company}</h2>
-                  <h2 className="text-[14px]">
-                    Dhaka Bangladesh,{m.start_date}
-                  </h2>
+                  <img src="" className="w-6 h-6" alt="" />
+                  <div>
+                    <h2 className="text-[20px]">{m.title}</h2>
+                    <h2 className="text-[14px]">{m.company}</h2>
+                    <h2 className="text-[14px]">
+                      Dhaka Bangladesh, {m.start_date}
+                    </h2>
+                  </div>
                 </div>
-              </div>
-
-                <div className="flex justify-end ">
-                  <input type="checkbox" className="toggle" checked />{" "}
+                <div className="flex justify-end gap-2 items-center">
+                  <label className="switch">
+                    <input onChange={handleToggle} type="checkbox" />
+                    <div className="slider">
+                      <div className="circle">
+                        <LuSun className="text-warning" />
+                      </div>
+                    </div>
+                  </label>
                   <p>Show</p>
                 </div>
               </div>
-
-              <div>
-                {m.description}
-              </div>
-            
+              <div>{m.description}</div>
             </div>
           ))}
-
-      
         </div>
       </div>
 
@@ -208,12 +231,13 @@ const JobSeekerProfile = () => {
       <EditProfileModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        user={user}
+        user={profileData}
+        onProfileUpdate={handleProfileUpdate}
       />
       <ExperienceModal
         isOpen={isModalExOpen}
         onClose={handleCloseExModal}
-        user={user}
+        user={profileData}
       />
     </div>
   );
