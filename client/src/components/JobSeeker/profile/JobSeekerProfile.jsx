@@ -5,10 +5,13 @@ import { PiHandbagSimpleFill } from "react-icons/pi";
 import { auth } from "../../../firebase";
 import useAuthUser from "../../../auth/getUser"; // Adjust the import path
 import EditProfileModal from "../../../common/Modal";
+import ExperienceModal from "../../../common/ExperienceModal";
 
 const JobSeekerProfile = () => {
   const { user } = useAuthUser(auth);
+  console.log(user);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalExOpen, setIsModalExOpen] = useState(false);
 
   const handleToggle = (e) => {
     if (e.target.checked) {
@@ -21,10 +24,17 @@ const JobSeekerProfile = () => {
   const handleEditProfileClick = () => {
     setIsModalOpen(true);
   };
+  const handleAddExperienceClick = () => {
+    setIsModalExOpen(true);
+  };
 
+  const handleCloseExModal = () => {
+    setIsModalExOpen(false);
+  };
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+ 
 
   return (
     <div className="m-2 max-w-7xl mx-auto">
@@ -68,15 +78,21 @@ const JobSeekerProfile = () => {
             </div>
             <div className="mt-3">
               <h2 className="text-[14px]">Phone Number</h2>
-              <h2 className="text-[16px] font-medium">{user?.phone_number || "null"}</h2>
+              <h2 className="text-[16px] font-medium">
+                {user?.phone_number || "null"}
+              </h2>
             </div>
             <div className="mt-3">
               <h2 className="text-[14px]">Portfolio</h2>
-              <h2 className="text-[16px] font-medium">{user?.portfolio || "null"}</h2>
+              <h2 className="text-[16px] font-medium">
+                {user?.portfolio || "null"}
+              </h2>
             </div>
             <div className="mt-3">
               <h2 className="text-[14px]">Preferred Salary</h2>
-              <h2 className="text-[16px] font-medium">{user?.salary || "null"}/hr</h2>
+              <h2 className="text-[16px] font-medium">
+                {user?.salary || "null"}/hr
+              </h2>
             </div>
             <div className="mt-3">
               <h2 className="text-[14px]">Skill</h2>
@@ -94,11 +110,15 @@ const JobSeekerProfile = () => {
             </div>
             <div className="mt-3">
               <h2 className="text-[14px]">Current Company</h2>
-              <h2 className="text-[16px] font-medium">{user?.current_company || "null"}</h2>
+              <h2 className="text-[16px] font-medium">
+                {user?.current_company || "null"}
+              </h2>
             </div>
             <div className="mt-3">
               <h2 className="text-[14px]">Preferred Employment</h2>
-              <h2 className="text-[16px] font-medium">{user?.employment || "null"}</h2>
+              <h2 className="text-[16px] font-medium">
+                {user?.employment || "null"}
+              </h2>
             </div>
             <div className="mt-3">
               <h2 className="text-[14px]">Skill Level</h2>
@@ -136,38 +156,65 @@ const JobSeekerProfile = () => {
             <PiHandbagSimpleFill className="text-4xl text-[#2792A8]" />
             <div>
               <h2 className="text-[24px]">Experience</h2>
-              <h2 className="text-[14px]">Add experience to increase the chance of hiring</h2>
+              <h2 className="text-[14px]">
+                Add experience to increase the chance of hiring
+              </h2>
             </div>
           </div>
           <div>
-            <button className="text-[#2792A8] hover:text-[#1f7280]">Add Experience</button>
+            <button  onClick={handleAddExperienceClick} className="text-[#2792A8] hover:text-[#1f7280]">
+              Add Experience
+            </button>
           </div>
         </div>
         {/* Experience List */}
+
         <div className="mt-6">
-          <div className="flex items-center gap-3">
-            <img src="" className="w-6 h-6" alt="" />
-            <div>
-              <h2 className="text-[20px]">Recruitment Specialist</h2>
-              <h2 className="text-[14px]">Airtalx</h2>
-              <h2 className="text-[14px]">Dhaka Bangladesh, May 25 2024 at present</h2>
+          {user?.experience.map((m) => (
+            <div
+              key={m._id}
+              className=" m-3 p-3 border-b-2 border-base-200  grid-cols-2 items-center gap-3"
+            >
+              <div className="grid grid-cols-2 items-center">
+              <div>
+              <img src="" className="w-6 h-6" alt="" />
+                <div>
+                  <h2 className="text-[20px]">{m.title}</h2>
+                  <h2 className="text-[14px]">{m.company}</h2>
+                  <h2 className="text-[14px]">
+                    Dhaka Bangladesh,{m.start_date}
+                  </h2>
+                </div>
+              </div>
+
+                <div className="flex justify-end ">
+                  <input type="checkbox" className="toggle" checked />{" "}
+                  <p>Show</p>
+                </div>
+              </div>
+
+              <div>
+                {m.description}
+              </div>
+            
             </div>
-          </div>
-          <div className="flex justify-between">
-            <div className="mt-3">
-              <p className="text-[14px]">Expertise in In-House talent acquisition and recruitment process Outsourcing</p>
-              <p className="text-[14px]">More than 4 years of dedicated recruitment experience</p>
-              <p className="text-[14px]">Successfully served international clients across diverse industries</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <input type="checkbox" className="toggle" checked /> <p>Show</p>
-            </div>
-          </div>
+          ))}
+
+      
         </div>
       </div>
 
       {/* Edit Profile Modal */}
-      <EditProfileModal isOpen={isModalOpen} onClose={handleCloseModal} user={user} />
+      <EditProfileModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        user={user}
+      />
+      <ExperienceModal
+        isOpen={isModalExOpen}
+        onClose={handleCloseExModal}
+        user={user}
+      />
     </div>
   );
 };
