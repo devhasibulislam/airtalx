@@ -50,6 +50,28 @@ const userDataSchema = new mongoose.Schema({
   salary: {
     type: String,
   },
+  experience: [
+    {
+      title: {
+        type: String,
+      },
+      company: {
+        type: String,
+      },
+      start_date: {
+        type: String,
+      },
+      end_date: {
+        type: String,
+      },
+      description: {
+        type: String,
+      },
+      location: {
+        type: String,
+      },
+    }
+  ]
 });
 
 const User = mongoose.model("UserData", userDataSchema);

@@ -1,17 +1,10 @@
 const multer = require('multer');
 const path = require('path');
-// const User = require("../../models/v1/userData.model");
 const User = require("../../models/v1/userdata.model");
 
 // Set up storage engine for multer
-const storage = multer.diskStorage({
-  destination: './uploads/',
-  filename: (req, file, cb) => {
-    cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
-  }
-});
+const storage = multer.memoryStorage();
 
-// Initialize multer upload
 const upload = multer({
   storage: storage,
   limits: { fileSize: 1000000 }, // limit to 1MB
@@ -36,7 +29,7 @@ function checkFileType(file, cb) {
 const createUser = async (userData, file) => {
   const newUser = new User({
     ...userData,
-    image: file ? file.filename : null
+    image: file ? `/uploads/${file.filename}` : null
   });
   return await newUser.save();
 };
@@ -55,13 +48,23 @@ const getUserById = async (id) => {
 
 const updateUser = async (id, userData, file) => {
   if (file) {
-    userData.image = file.filename;
+    userData.image = file.buffer.toString('base64');
   }
   return await User.findByIdAndUpdate(id, userData, { new: true, runValidators: true });
 };
 
 const deleteUser = async (id) => {
   return await User.findByIdAndDelete(id);
+};
+
+// Add experience to a user
+const addExperience = async (userId, experienceData) => {
+  const user = await User.findById(userId);
+  if (!user) {
+    throw new Error('User not found');
+  }
+  user.experience.push(experienceData);
+  return await user.save();
 };
 
 module.exports = {
@@ -71,5 +74,6 @@ module.exports = {
   getUserById,
   updateUser,
   deleteUser,
-  getUserByEmails
+  getUserByEmails,
+  addExperience
 };

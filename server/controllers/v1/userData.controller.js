@@ -79,11 +79,24 @@ const deleteUser = async (req, res) => {
   }
 };
 
+// Controller to add experience to a user
+const addExperience = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const experienceData = req.body;
+    const updatedUser = await userService.addExperience(id, experienceData);
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createUser,
   getAllUsers,
   getUserById,
   updateUser,
   deleteUser,
-  getUserByEmailC
+  getUserByEmailC,
+  addExperience
 };
