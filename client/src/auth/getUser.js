@@ -10,7 +10,7 @@ const useAuthUser = (auth) => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         try {
-          const response = await axios.get(`${process.env.REACT_APP_HOST}/v1/api/userdata/email/${currentUser.email}`);
+          const response = await axios.get(`https://airtalx-liard.vercel.app/v1/api/userdata/email/${currentUser.email}`);
           setUser(response.data);
         } catch (error) {
           console.error("Error fetching user data:", error);

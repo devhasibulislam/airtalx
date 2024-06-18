@@ -14,7 +14,7 @@ import axios from "axios";
 const Signup = () => {
   const [activeTab, setActiveTab] = useState(0);
   const navigate = useNavigate();
-
+console.log(`https://airtalx-liard.vercel.app`);
   const handleTabClick = (index) => {
     setActiveTab(index);
   };
@@ -35,7 +35,8 @@ const Signup = () => {
 
     try {
       
-      await axios.post(`${process.env.REACT_APP_HOST}/v1/api/userdata`, formData);
+      await axios.post(`https://airtalx-liard.vercel.app/v1/api/userdata`, formData);
+
       await createUserWithEmailAndPassword(auth, email, password);
 
       Swal.fire({
@@ -68,7 +69,7 @@ const Signup = () => {
       const { user } = result;
 
       try {
-        await axios.post(`${process.env.REACT_APP_HOST}/v1/api/userdata`, {
+        await axios.post(`https://airtalx-liard.vercel.app/v1/api/userdata`, {
           name: user.displayName,
           email: user.email,
           password: "12345678",

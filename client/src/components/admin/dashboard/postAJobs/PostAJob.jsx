@@ -24,7 +24,7 @@ const onSubmit = async (data) => {
 
   try {
     // console.log(data);
-     await axios.post(`${process.env.REACT_APP_HOST}/v1/api/postjobs`, cleanedData);
+     await axios.post(`https://airtalx-liard.vercel.app/v1/api/postjobs`, cleanedData);
     
 
     Swal.fire({
