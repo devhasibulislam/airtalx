@@ -14,9 +14,11 @@ const userDataSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please, provide a strong password"],
   },
-  image: { 
-    type: String 
-  },
+  // avator: {
+  //   url: { type: String },
+  //   id: { type: String },
+  // },
+  image:{type:String},
   role: {
     type: String,
     default: "job-seeker",
@@ -70,10 +72,13 @@ const userDataSchema = new mongoose.Schema({
       location: {
         type: String,
       },
-    }
-  ]
+    },
+  ],
 });
 
 const User = mongoose.model("UserData", userDataSchema);
 
 module.exports = User;
+
+
+

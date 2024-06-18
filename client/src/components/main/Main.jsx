@@ -4,6 +4,7 @@ import { LuLayoutDashboard } from "react-icons/lu";
 import { MdOutlineForwardToInbox, MdShoppingBag } from "react-icons/md";
 import { GoInbox } from "react-icons/go";
 import {
+  FaAmazonPay,
   // FaAmazonPay,
   FaBookReader,
   FaCcAmazonPay,
@@ -21,7 +22,7 @@ import FindJob from "../find-job/FindJob";
 import Application from "../JobSeeker/Application";
 import FindEmploye from "../find-employee/FindEmploye";
 import Dashboard from "../admin/dashboard/Dashboard";
-// import Payment from "../JobSeeker/Payment";
+import Payment from "../JobSeeker/Payment";
 import WorkHistory from "../workhistory/WorkHistory";
 import Postblog from "../admin/Postblog/Postblog";
 import PostAJob from "../admin/dashboard/postAJobs/PostAJob";
@@ -45,7 +46,7 @@ const adminTabs = [
   { id: "Tab5", label: "My Jobs", icon: MdShoppingBag },
   { id: "Tab6", label: "My Employee", icon: FaHospitalUser },
   { id: "Tab7", label: "History", icon: IoReloadOutline },
-  // { id: "Tab8", label: "Payment", icon: FaCcAmazonPay },
+  { id: "Tab8", label: "Payment", icon: FaCcAmazonPay },
   { id: "Tab9", label: "User", icon: CiUser },
   { id: "Tab10", label: "Post a Blog", icon: FaRegEdit },
   { id: "Tab11", label: "Blog", icon: FaBookReader },
@@ -70,7 +71,7 @@ const jobSeekerTabs = [
   { id: "Tab3", label: "All Jobs", icon: GoInbox },
   { id: "Tab4", label: "Application", icon: FaShoppingBag },
   { id: "Tab5", label: "Work History", icon: IoReloadOutline },
-  // { id: "Tab6", label: "Payment", icon: FaAmazonPay },
+  { id: "Tab6", label: "Payment", icon: FaAmazonPay },
 ];
 
 
@@ -159,7 +160,7 @@ const AdminDashboard = () => {
       {activeTab === "Tab5" && <FindJob />}
       {activeTab === "Tab6" && <FindEmploye />}
       {activeTab === "Tab7" && <WorkHistory />}
-      {/* {activeTab === "Tab8" && <Payment />} */}
+      {activeTab === "Tab8" && <Payment />}
       {activeTab === "Tab9" && <p><User/></p>}
       {activeTab === "Tab10" && <Postblog />}
       {activeTab === "Tab11" && <AdminBlog />}

@@ -14,7 +14,7 @@ import axios from "axios";
 const Signup = () => {
   const [activeTab, setActiveTab] = useState(0);
   const navigate = useNavigate();
-console.log(`https://airtalx-liard.vercel.app`);
+  console.log(`http://localhost:8080`);
   const handleTabClick = (index) => {
     setActiveTab(index);
   };
@@ -31,12 +31,14 @@ console.log(`https://airtalx-liard.vercel.app`);
     formData.append("email", email);
     formData.append("password", password);
     formData.append("name", name);
-    formData.append("image", image[0])
+    formData.append("image", image[0]);
 
     try {
-      
-      await axios.post(`https://airtalx-liard.vercel.app/v1/api/userdata`, formData);
-
+      const res = await axios.post(
+        `http://localhost:8080/v1/api/userdata`,
+        formData
+      );
+      console.log(res);
       await createUserWithEmailAndPassword(auth, email, password);
 
       Swal.fire({
@@ -49,7 +51,7 @@ console.log(`https://airtalx-liard.vercel.app`);
         navigate("/");
         setTimeout(() => {
           window.location.reload();
-        }, 500); 
+        }, 500);
       });
     } catch (error) {
       console.error("Error during signup:", error);
@@ -57,52 +59,6 @@ console.log(`https://airtalx-liard.vercel.app`);
         position: "top",
         icon: "error",
         title: "Signup failed",
-        text: error.message || "Please try again later",
-        showConfirmButton: true,
-      });
-    }
-  };
-
-  const handleGoogleLogin = async () => {
-    try {
-      const result = await signInWithPopup(auth, googleProvider);
-      const { user } = result;
-
-      try {
-        await axios.post(`https://airtalx-liard.vercel.app/v1/api/userdata`, {
-          name: user.displayName,
-          email: user.email,
-          password: "12345678",
-          image: user.photoURL,
-        });
-
-        Swal.fire({
-          position: "top",
-          icon: "success",
-          title: "Google SignUp successful",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        navigate("/");
-      } catch (error) {
-        console.error("Error checking/creating user in MongoDB:", error);
-        Swal.fire({
-          position: "top",
-          icon: "error",
-          title: "Error during Google Login",
-          text:
-            error.response?.data?.message ||
-            error.message ||
-            "Please try again later",
-          showConfirmButton: true,
-        });
-      }
-    } catch (error) {
-      console.error("Error during Google login:", error);
-      Swal.fire({
-        position: "top",
-        icon: "error",
-        title: "Google Login failed",
         text: error.message || "Please try again later",
         showConfirmButton: true,
       });
@@ -168,7 +124,7 @@ console.log(`https://airtalx-liard.vercel.app`);
         )}
       </div>
 
-      <div className="form-control">
+      {/* <div className="form-control">
         <label className="label">
           <span className="label-text font-semibold">Upload Image</span>
         </label>
@@ -180,6 +136,29 @@ console.log(`https://airtalx-liard.vercel.app`);
             {...register("image", { required: true })}
           />
 
+          <label
+            htmlFor="file-upload"
+            className="file-input-bordered flex justify-start rounded-2xl p-2 px-5 gap-2 cursor-pointer bg-[#CFEBFF]"
+          >
+            <FaUpload className="text-xl" />
+            <span>Click to upload image</span>
+          </label>
+        </div>
+        {errors.image && (
+          <span className="text-red-500">This field is required</span>
+        )}
+      </div> */}
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text font-semibold">Upload Image</span>
+        </label>
+        <div className="flex flex-col justify-start">
+          <input
+            type="file"
+            id="file-upload"
+            className="hidden"
+            {...register("image", { required: true })}
+          />
           <label
             htmlFor="file-upload"
             className="file-input-bordered flex justify-start rounded-2xl p-2 px-5 gap-2 cursor-pointer bg-[#CFEBFF]"
@@ -206,6 +185,61 @@ console.log(`https://airtalx-liard.vercel.app`);
       </div>
     </>
   );
+
+  const handleGoogleLogin = async () => {
+    try {
+      try {
+        const result = await signInWithPopup(auth, googleProvider);
+        const { user } = result;
+        console.log(user.photoURL);
+       const rrr=  await axios.post(`http://localhost:8080/v1/api/userdata`, {
+          name: user.displayName,
+          email: user.email,
+          password: "12345678",
+          image: user.photoURL,
+        });
+// console.log(rrr.data);
+
+        await axios.put(`http://localhost:8080/v1/api/userdata/${rrr.data._id}`, {
+          
+          image: user.photoURL,
+        });
+
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Google SignUp successful",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/");
+        setTimeout(() => {
+          window.location.reload();
+        }, 500); 
+      } catch (error) {
+        console.error("Error checking/creating user in MongoDB:", error);
+        Swal.fire({
+          position: "top",
+          icon: "error",
+          title: "Error during Google Login",
+          text:
+            error.response?.data?.message ||
+            error.message ||
+            "Please try again later",
+          showConfirmButton: true,
+        });
+      }
+    } catch (error) {
+      console.error("Error during Google login:", error);
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Google Login failed",
+        text: error.message || "Please try again later",
+        showConfirmButton: true,
+      });
+    }
+  };
 
   return (
     <div className="bg-[#cdf1fa] max-w-7xl mx-auto">

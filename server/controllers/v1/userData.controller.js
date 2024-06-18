@@ -1,3 +1,4 @@
+// const userService = require("../../services/v1/userData.service");
 const userService = require("../../services/v1/userData.service");
 
 const createUser = (req, res) => {
@@ -27,7 +28,7 @@ const getAllUsers = async (req, res) => {
 const getUserByEmailC = async (req, res) => {
   try {
     const { email } = req.params;
-    const user = await userService.getUserByEmails(email);
+    const user = await userService.getUserByEmail(email);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }

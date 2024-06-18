@@ -1,37 +1,62 @@
-const multer = require('multer');
-const path = require('path');
+/* external imports */
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const multer = require("multer");
+const path = require("path");
 const User = require("../../models/v1/userdata.model");
-const bcrypt = require('bcrypt');
-// Set up storage engine for multer
-const storage = multer.memoryStorage();
+const bcrypt = require("bcrypt");
+
+/* cloudinary config */
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+  secure: true,
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: async (_, file) => {
+    return {
+      folder: 'airtalx',
+      public_id: `${Date.now()}_${file.originalname
+        .replace(/[^\w\s.-]/g, "")
+        .replace(/\s+/g, "-")
+        .toLowerCase()}`,
+    };
+  },
+});
 
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 1000000 }, // limit to 1MB
-  fileFilter: (req, file, cb) => {
-    checkFileType(file, cb);
-  }
+  fileFilter: (_, file, cb) => {
+    const supportedImage = /jpg|png|jpeg/i;
+    const extension = path.extname(file.originalname);
+
+    if (supportedImage.test(extension)) {
+      cb(null, true);
+    } else {
+      cb(new Error("Must be a png/jpg/jpeg format"));
+    }
+  },
 }).single('image');
 
-// Check file type
-function checkFileType(file, cb) {
-  const filetypes = /jpeg|jpg|svg|png|gif/;
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-  const mimetype = filetypes.test(file.mimetype);
-
-  if (mimetype && extname) {
-    return cb(null, true);
-  } else {
-    cb('Error: Images Only!');
-  }
-}
+/* user service functions */
 
 const createUser = async (userData, file) => {
   const hashedPassword = await bcrypt.hash(userData.password, 10); // Hash the password
+  
+  // Check if an image file is uploaded
+  let imagePath = null;
+  if (file) {
+    const uploadResult = await cloudinary.uploader.upload(file.path);
+    imagePath = uploadResult.secure_url;
+  }
+
   const newUser = new User({
     ...userData,
     password: hashedPassword,
-    image: file ? `/uploads/${file.filename}` : null
+    image: imagePath
   });
   return await newUser.save();
 };
@@ -40,7 +65,7 @@ const getAllUsers = async () => {
   return await User.find();
 };
 
-const getUserByEmails = async (email) => {
+const getUserByEmail = async (email) => {
   return await User.findOne({ email });
 };
 
@@ -50,7 +75,8 @@ const getUserById = async (id) => {
 
 const updateUser = async (id, userData, file) => {
   if (file) {
-    userData.image = file.buffer.toString('base64');
+    const uploadResult = await cloudinary.uploader.upload(file.path);
+    userData.image = uploadResult.secure_url;
   }
   return await User.findByIdAndUpdate(id, userData, { new: true, runValidators: true });
 };
@@ -63,7 +89,7 @@ const deleteUser = async (id) => {
 const addExperience = async (userId, experienceData) => {
   const user = await User.findById(userId);
   if (!user) {
-    throw new Error('User not found');
+    throw new Error("User not found");
   }
   user.experience.push(experienceData);
   return await user.save();
@@ -76,6 +102,7 @@ module.exports = {
   getUserById,
   updateUser,
   deleteUser,
-  getUserByEmails,
+  getUserByEmail,
   addExperience
 };
+

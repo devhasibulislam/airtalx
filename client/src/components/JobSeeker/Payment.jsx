@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { AiFillPlusCircle } from "react-icons/ai";
+import usePayPalScript from "./usePayPalScript"; // Import the custom hook
+
 const Payment = () => {
   const {
     register,
@@ -12,10 +14,38 @@ const Payment = () => {
   const onSubmit = async (data) => {
     console.log(data);
   };
+
+  // Use the custom hook to load the PayPal SDK
+  usePayPalScript("YOUR_CLIENT_ID"); // Replace with your actual PayPal client ID
+
+  useEffect(() => {
+    if (window.paypal) {
+      window.paypal.Buttons({
+        createOrder: (data, actions) => {
+          return actions.order.create({
+            purchase_units: [
+              {
+                amount: {
+                  value: "100.00", // Replace with the actual amount
+                },
+              },
+            ],
+          });
+        },
+        onApprove: (data, actions) => {
+          return actions.order.capture().then((details) => {
+            alert("Transaction completed by " + details.payer.name.given_name);
+            console.log(details);
+          });
+        },
+      }).render('#paypal-button-container');
+    }
+  }, []);
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-        <div className="grid md:grid-cols-2 gap-2">
+      <div className="grid md:grid-cols-2 gap-2">
           <div className="form-control">
             <label className="label">
               <span className=" font-semibold">Full Name</span>
@@ -227,56 +257,59 @@ const Payment = () => {
             )}
           </div>
         </div>
-
         <div className="mt-3">
-            <h1 className="flex gap-2"><AiFillPlusCircle className="text-2xl text-green-600" /> Add another live item</h1>
+          <h1 className="flex gap-2">
+            <AiFillPlusCircle className="text-2xl text-green-600" />
+            Add another line item
+          </h1>
         </div>
 
         <div className="grid md:grid-cols-2 gap-2">
           <div className="form-control">
             <label className="label">
-              <span className=" font-semibold">Notes to perticipent</span>
+              <span className="font-semibold">Notes to participant</span>
             </label>
             <input
               type="text"
-              
               className="input input-sm input-bordered rounded-2xl"
-              {...register("name", { required: true })}
+              {...register("notes", { required: true })}
             />
-            {errors.job_title && (
+            {errors.notes && (
               <span className="text-red-500">This field is required</span>
             )}
           </div>
 
           <div className="form-control ">
             <label className="label">
-              <span className=" font-semibold">Total anount</span>
+              <span className="font-semibold">Total amount</span>
             </label>
             <input
-              type="email"
+              type="number"
               className="input input-sm input-bordered rounded-2xl"
-              {...register("email", { required: true })}
+              {...register("total_amount", { required: true })}
             />
-            {errors.job_headline && (
+            {errors.total_amount && (
               <span className="text-red-500">This field is required</span>
             )}
           </div>
         </div>
-<div className="flex justify-between gap-2">
 
-        <button className="btn btn-success mt-3" type="submit">
-          Download PDF
-        </button>
-        <button className="btn btn-success mt-3" type="submit">
-          Save as Template
-        </button>
-        <button className="btn btn-outline btn-error mt-3" type="submit">
-          Delete Template
-        </button>
-        <button className="btn btn-warning mt-3" type="submit">
-          Send Invoice
-        </button>
-</div>
+        <div id="paypal-button-container"></div>
+
+        <div className="flex justify-between gap-2">
+          <button className="btn btn-success mt-3" type="submit">
+            Download PDF
+          </button>
+          <button className="btn btn-success mt-3" type="submit">
+            Save as Template
+          </button>
+          <button className="btn btn-outline btn-error mt-3" type="submit">
+            Delete Template
+          </button>
+          <button className="btn btn-warning mt-3" type="submit">
+            Send Invoice
+          </button>
+        </div>
       </form>
     </div>
   );
