@@ -12,7 +12,7 @@ const FAQ = () => {
   };
 
   return (
-    <div className="m-6 rounded-lg">
+    <div className="m-6 rounded-lg max-w-6xl mx-auto">
       {/* Tabs */}
       <div className="flex justify-center  ">
         <button

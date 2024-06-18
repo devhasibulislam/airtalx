@@ -1,7 +1,7 @@
 const multer = require('multer');
 const path = require('path');
 const User = require("../../models/v1/userdata.model");
-
+const bcrypt = require('bcrypt');
 // Set up storage engine for multer
 const storage = multer.memoryStorage();
 
@@ -27,8 +27,10 @@ function checkFileType(file, cb) {
 }
 
 const createUser = async (userData, file) => {
+  const hashedPassword = await bcrypt.hash(userData.password, 10); // Hash the password
   const newUser = new User({
     ...userData,
+    password: hashedPassword,
     image: file ? `/uploads/${file.filename}` : null
   });
   return await newUser.save();
