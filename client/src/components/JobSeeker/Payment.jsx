@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { AiFillPlusCircle } from "react-icons/ai";
-import usePayPalScript from "./usePayPalScript"; // Import the custom hook
+import usePayPalScript from "./UsePaypalSript";
+// import usePayPalScript from "./usePayPalScript"; // Import the custom hook
 
 const Payment = () => {
   const {

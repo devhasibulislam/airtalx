@@ -12,6 +12,7 @@ const jobsRoute = require('./routes/v1/job.route');
 const postjobsRoute = require('./routes/v1/postjob.route');
 const blogRoute = require('./routes/v1/blog.route');
 const messageRoute = require('./routes/v1/message.route');
+const paymentRoute = require('./routes/v1/payment.route');
 
 /* application level connection */
 const app = express();
@@ -39,6 +40,7 @@ app.use('/v1/api/postjobs', postjobsRoute);
 app.use('/v1/api/userdata', userdataRoute);
 app.use('/v1/api/blogs', blogRoute);
 app.use('/v1/api/message', messageRoute);
+app.use('/v1/api/payment', paymentRoute);
 
 /* global error handler */
 app.use(error);
