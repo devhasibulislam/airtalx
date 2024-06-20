@@ -9,7 +9,8 @@
   },
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "build": "index.js build"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
