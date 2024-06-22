@@ -44,7 +44,7 @@ app.use('/v1/api/blogs', blogRoute);
 app.use('/v1/api/message', messageRoute);
 app.use('/v1/api/payment', paymentRoute);
 app.use('/v1/api/application', applicationRoute);
-app.use('/v1/api/ootp', otpRoute);
+app.use('/v1/api/otp', otpRoute);
 
 /* global error handler */
 app.use(error);

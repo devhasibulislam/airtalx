@@ -25,7 +25,7 @@ const Forgetpassword = () => {
             />
           </div>
 
-          <Link to="/verifyotp">
+          <Link>
             <button type="submit" className="btn btn-accent">
               Send
             </button>
