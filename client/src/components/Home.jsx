@@ -17,14 +17,14 @@ import { auth } from "../firebase";
 const Home = () => {
   const { user } = useAuthUser(auth);
   return (
-    <div className="mt-4 max-w-7xl mx-auto textw">
-      <div className="   max-w-5xl  mx-auto p-4  md:flex gap-1 justify-center tems-center ">
+    <div className="mt-4 w-screen mx-auto textw">
+      <div className="   max-w-5xl  mx-auto p-4  md:flex gap-1 justify-center tems-center py-20">
         <div className="max-w-[528px] mx-auto">
-          <h2 className="text-[40px] font-semibold">
+          <h2 className="text-[40px] font-semibold text-[#287180] textw">
             {" "}
             One of the Trusted Talent Marketplaces in the Philippines.
           </h2>
-          <p className="text-[20px] mt-4">
+          <p className="text-[20px] my-4 text-[#333333] textw">
             Experience where talent meets opportunity, on a global scale.
           </p>
           <div className="mt-4">
@@ -58,8 +58,8 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="  max-w-7xl p-4  mx-auto  bg-slate-200 bgw">
-        <h1 className="text-[36px] font-semibold  text-center">Why Us?</h1>
+      <div className=" w-screen p-4  mx-auto bg-[#edf7f4] bgw">
+        <h1 className="text-[36px] font-semibold  text-center text-[#287180] textw">Why Us?</h1>
         <h3 className="text-xl  text-center">
           From all of the platforms, these are some of the reason for you to
           choose our platform
@@ -70,7 +70,7 @@ const Home = () => {
             <img className="w-[402px] h-[273px]" src={img2} alt="" />
           </div>
 
-          <div className="mt-3">
+          <div className="mt-3 flex flex-col gap-y-6">
             <h3 className="text-[12px] flex gap-1 items-center">
               <span>
                 <FcApproval />
@@ -125,34 +125,34 @@ const Home = () => {
         </div>
       </div>
 
-      <div className=" grid md:grid-cols-3 mt-20 gap-4 max-w-4xl  mx-auto">
-        <div className="bg-[#EDF7F4] text-center bgw p-4">
-          <img className="mx-auto" src={img3} alt="" />
+      <div className=" grid md:grid-cols-3 mt-20 gap-x-8 max-w-4xl  mx-auto">
+        <div className="bg-[#EDF7F4] flex flex-col py-5 text-center bgw px-4 rounded-lg shadow-md">
+          <img className="mx-auto flex-grow " src={img3} alt=""  />
           <h2 className="text-2xl font-semibold">Strong User Privacy</h2>
           <p className="text-[12px]">
             User’s privacy is always our first priority
           </p>
         </div>
 
-        <div className="bg-[#EDF7F4] p-1 bgw text-center">
-          <img className="mx-auto" src={img4} alt="" />
-          <h2 className="text-2xl text-start font-semibold">
+        <div className="bg-[#EDF7F4] flex flex-col py-5 px-4 bgw text-center  rounded-lg shadow-md">
+          <img className="mx-auto flex-grow " src={img4} alt=""  />
+          <h2 className="text-2xl font-semibold text-center">
             User Friendly Experience
           </h2>
-          <p className="text-[12px] text-start">
+          <p className="text-[12px] text-center">
             Our platform is very easy to use
           </p>
         </div>
 
-        <div className="bg-[#EDF7F4] text-center bgw p-4">
-          <img className="mx-auto" src={img5} alt="" />
+        <div className="bg-[#EDF7F4] flex flex-col py-5 text-center bgw px-4  rounded-lg shadow-md">
+          <img className="mx-auto flex-grow " src={img5} alt=""  />
           <h2 className="text-2xl font-semibold">World Wide Service</h2>
           <p className="text-[12px]">Hire your staff from any country</p>
         </div>
       </div>
 
       <div className="mt-20 mb-20 text-center max-w-[960px]   mx-auto">
-        <h1 className="text-4xl font-semibold t">Hiring Process</h1>
+        <h1 className="text-4xl font-semibold text-[#196D7C] textw">Hiring Process</h1>
         <p className="mt-2 text-xl">
           Hire part-time or full-time workers in the worldwide with our easy to
           use all in one platform{" "}
