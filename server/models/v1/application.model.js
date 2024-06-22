@@ -3,23 +3,19 @@ const mongoose = require("mongoose");
 const applicationSchema = new mongoose.Schema(
   {
     employer_name: {
-      type: String,
-      required: true,
+      type: String
     },
     job_title: {
-      type: String,
-      required: true,
+      type: String
     },
     job_type: {
-      type: String,
-      required: true,
+      type: String
     },
     status: {
-      type: String,
-      required: true,
+      type: String
     },
     job_post: {
-      type: String,
+      type: String
     },
   },
   {

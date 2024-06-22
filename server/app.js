@@ -14,6 +14,7 @@ const blogRoute = require('./routes/v1/blog.route');
 const messageRoute = require('./routes/v1/message.route');
 const paymentRoute = require('./routes/v1/payment.route');
 const applicationRoute = require('./routes/v1/application.route');
+const otpRoute = require('./routes/v1/upotp.route');
 
 /* application level connection */
 const app = express();
@@ -21,7 +22,7 @@ const app = express();
 /* middleware connections */
 app.use(
   cors({
-    origin: process.env.ORIGIN_URL,
+    origin: true,
     methods: 'GET, PATCH, POST, PUT, DELETE',
     allowedHeaders: ['Content-Type', 'Authorization'],
     preflightContinue: false,
@@ -42,7 +43,8 @@ app.use('/v1/api/userdata', userdataRoute);
 app.use('/v1/api/blogs', blogRoute);
 app.use('/v1/api/message', messageRoute);
 app.use('/v1/api/payment', paymentRoute);
-app.use('/v1/api/applications', applicationRoute);
+app.use('/v1/api/application', applicationRoute);
+app.use('/v1/api/ootp', otpRoute);
 
 /* global error handler */
 app.use(error);

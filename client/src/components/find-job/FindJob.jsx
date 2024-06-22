@@ -133,15 +133,32 @@ const FindJob = () => {
     }
   };
 
-  const handleApply = ()=>{
-    Swal.fire({
-      position: "top",
-      icon: "success",
-      title: "Your apply job saved",
-      showConfirmButton: false,
-      timer: 1500
-    });
-  }
+  console.log(jobs);
+
+  const handleApply = async (id) => {
+    const res = await axios.get(`http://localhost:8080/v1/api/postjobs/${id}`);
+    const { job_title, job_type, job_description } = res?.data;
+    const alldata = {
+      employer_name:user?.name,
+      job_title,
+      job_type,
+      job_post: job_description,
+      status: "active",
+    };
+    const po = await axios.post(`http://localhost:8080/v1/api/application`, 
+      alldata,
+    );
+    if(po?.data){
+      Swal.fire({
+        position: "top",
+        icon: "success",
+        title: "Your apply job saved",
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+
+  };
 
   return (
     <div className="mt-10 max-w-5xl mx-auto">
@@ -204,7 +221,10 @@ const FindJob = () => {
                 </button>
               )}
               {user?.role === "job-seeker" && (
-                <button onClick={handleApply} className="btn btn-outline btn-warning">
+                <button
+                  onClick={() => handleApply(job._id)}
+                  className="btn btn-outline btn-warning"
+                >
                   <CiEdit className="text-xl" /> Apply
                 </button>
               )}
