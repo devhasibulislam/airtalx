@@ -17,6 +17,15 @@ const applicationSchema = new mongoose.Schema(
     job_post: {
       type: String
     },
+    subject: {
+      type: String
+    },
+    message: {
+      type: String
+    },
+    contact_info: {
+      type: String
+    },
   },
   {
     timestamps: true, 

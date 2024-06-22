@@ -1,9 +1,10 @@
 /* internal imports */
-const User = require("../../models/v1/user.model");
+// const User = require("../../models/v1/user.model");
 const token = require("../../utils/token.util");
 const crypto = require("crypto");
 const { sendOTP } = require("./otp.service");
 const mailSender = require("../../utils/email.util");
+const User = require("../../models/v1/userdata.model");
 
 /* account registration */
 exports.accountRegistration = async (req, res) => {

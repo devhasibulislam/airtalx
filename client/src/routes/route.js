@@ -22,6 +22,8 @@ import JobSeekerProfile from "../components/JobSeeker/profile/JobSeekerProfile";
 import JobDetails from "../components/find-job/JobDetails";
 import SingleBlog from "../components/admin/blog/SingleBlog";
 import AdminView from "../components/find-employee/AdminView";
+import JobApply from "../components/find-job/JobApply";
+import ApplySuccess from "../components/find-job/ApplySuccess";
 
 const RouteA = () => {
   return (
@@ -36,6 +38,8 @@ const RouteA = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/find-job/:id" element={<JobDetails />} />
+        <Route path="/apply-job/:id" element={<JobApply />} />
+        <Route path="/apply-success/:id" element={<ApplySuccess />} />
         <Route path="/forgetpassword" element={<Forgetpassword />} />
         <Route path="/verifyotp" element={<VerifyOTP />} />
         <Route path="/adminview" element={<AdminView />} />

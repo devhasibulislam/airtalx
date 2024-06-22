@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please, provide a strong password"],
     },
-    image: { type: String},
+    image: { type: String },
     role: {
       type: String,
       default: "job-seeker",
@@ -38,7 +38,6 @@ const userSchema = new mongoose.Schema(
     resetToken: {
       type: String,
       lowercase: true,
-      unique: true,
     },
 
     // user account timing

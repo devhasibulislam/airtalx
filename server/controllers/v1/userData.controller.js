@@ -8,7 +8,7 @@ const createUser = (req, res) => {
     }
 
     try {
-      const newUser = await userService.createUser(req.body, req.file);
+      const newUser = await userService.createUser(req.body, req.file, res);
       res.status(201).json(newUser);
     } catch (error) {
       res.status(400).json({ message: error.message });
