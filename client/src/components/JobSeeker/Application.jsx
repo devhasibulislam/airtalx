@@ -1,129 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 const Application = () => {
-  const data = [
-    {
-      id: 1,
-      employer: "Cy Ganderton",
-      jobTitle: "Quality Control Specialist",
-      jobType: "Full-time",
-      status: "Active",
-      jobPost: "Lorem ipsum dolor sit amet.",
-    },
-    {
-      id: 2,
-      employer: "Cy Programming",
-      jobTitle: "Software Developer",
-      jobType: "Part-time",
-      status: "Active",
-      jobPost: "Lorem ipsum dolor sit amet.",
-    },
-    {
-      id: 3,
-      employer: "Brice Swyre",
-      jobTitle: "Tax Accountant",
-      jobType: "Contract",
-      status: "Inactive",
-      jobPost: "Lorem ipsum dolor sit amet.",
-    },
-    {
-      id: 4,
-      employer: "Brice Swyre",
-      jobTitle: "Tax Accountant",
-      jobType: "Contract",
-      status: "Inactive",
-      jobPost: "Lorem ipsum dolor sit amet.",
-    },
-    {
-      id: 5,
-      employer: "John Doe",
-      jobTitle: "Frontend Developer",
-      jobType: "Full-time",
-      status: "Active",
-      jobPost: "Lorem ipsum dolor sit amet.",
-    },
-    {
-      id: 6,
-      employer: "Jane Smith",
-      jobTitle: "Graphic Designer",
-      jobType: "Part-time",
-      status: "Active",
-      jobPost: "Lorem ipsum dolor sit amet.",
-    },
-    {
-      id: 7,
-      employer: "Alice Johnson",
-      jobTitle: "Marketing Manager",
-      jobType: "Full-time",
-      status: "Inactive",
-      jobPost: "Lorem ipsum dolor sit amet.",
-    },
-    {
-      id: 8,
-      employer: "Bob Brown",
-      jobTitle: "Project Manager",
-      jobType: "Full-time",
-      status: "Active",
-      jobPost: "Lorem ipsum dolor sit amet.",
-    },
-    {
-      id: 9,
-      employer: "Eva Green",
-      jobTitle: "Accountant",
-      jobType: "Part-time",
-      status: "Inactive",
-      jobPost: "Lorem ipsum dolor sit amet.",
-    },
-    {
-      id: 10,
-      employer: "Michael Johnson",
-      jobTitle: "Data Analyst",
-      jobType: "Contract",
-      status: "Active",
-      jobPost: "Lorem ipsum dolor sit amet.",
-    },
-    {
-      id: 11,
-      employer: "David Lee",
-      jobTitle: "UI/UX Designer",
-      jobType: "Full-time",
-      status: "Active",
-      jobPost: "Lorem ipsum dolor sit amet.",
-    },
-    {
-      id: 12,
-      employer: "Sarah Parker",
-      jobTitle: "HR Manager",
-      jobType: "Full-time",
-      status: "Inactive",
-      jobPost: "Lorem ipsum dolor sit amet.",
-    },
-    {
-      id: 13,
-      employer: "Emily White",
-      jobTitle: "Content Writer",
-      jobType: "Part-time",
-      status: "Active",
-      jobPost: "Lorem ipsum dolor sit amet.",
-    },
-    {
-      id: 14,
-      employer: "Peter Smith",
-      jobTitle: "Software Engineer",
-      jobType: "Full-time",
-      status: "Inactive",
-      jobPost: "Lorem ipsum dolor sit amet.",
-    },
-    {
-      id: 15,
-      employer: "Olivia Johnson",
-      jobTitle: "Product Manager",
-      jobType: "Contract",
-      status: "Active",
-      jobPost: "Lorem ipsum dolor sit amet.",
-    },
-  ];
+  const [appli, setAppli] = useState([]);
+ console.log(appli);
+
 
   const [currentPage, setCurrentPage] = useState(1);
   const [runningJobs, setRunningJobs] = useState(0);
@@ -132,11 +14,25 @@ const Application = () => {
 
   useEffect(() => {
     // Calculate running and complete jobs whenever data changes
-    const running = data.filter((item) => item.status === "Active").length;
-    const complete = data.filter((item) => item.status === "Inactive").length;
+    const running = appli.filter((item) => item.status === "Active").length;
+    const complete = appli.filter((item) => item.status === "Inactive").length;
     setRunningJobs(running);
     setCompleteJobs(complete);
-  }, [data]);
+  }, [appli]);
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8080/v1/api/application`);
+        setAppli(res.data);
+      } catch (error) {
+        console.error("There was an error fetching the user!", error);
+      }
+    };
+
+
+    fetchJobs();
+  }, []);
 
   const handlePageClick = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -145,9 +41,9 @@ const Application = () => {
   // Logic for displaying current page items
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = appli.slice(indexOfFirstItem, indexOfLastItem);
 
-  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const totalPages = Math.ceil(appli.length / itemsPerPage);
 
   return (
     <div className="p-4">
@@ -171,12 +67,12 @@ const Application = () => {
             </tr>
           </thead>
           <tbody>
-            {currentItems.map((item, index) => (
+            {appli.map((item, index) => (
               <tr key={item.id}>
                 <td className="py-2 px-4 ">{indexOfFirstItem + index + 1}</td>
-                <td className="py-2 px-4 ">{item.employer}</td>
-                <td className="py-2 px-4 ">{item.jobTitle}</td>
-                <td className="py-2 px-4 ">{item.jobType}</td>
+                <td className="py-2 px-4 ">{item.employer_name}</td>
+                <td className="py-2 px-4 ">{item.job_title}</td>
+                <td className="py-2 px-4 ">{item.job_type}</td>
                 <td className="py-2 px-4 ">{item.status}</td>
                 <td className="py-2 px-4 ">{item.jobPost}</td>
               </tr>

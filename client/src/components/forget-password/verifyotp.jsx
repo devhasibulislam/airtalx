@@ -1,8 +1,9 @@
 import React from 'react';
 import img1 from "../../image/signupin/Login.svg"
+import ButtonAll from '../button/Button';
 const VerifyOTP = () => {
     return (
-        <div className="grid md:grid-cols-2 bg-[#a4e8f9]">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 bg-[#a4e8f9]">
         <div className="mx-auto flex items-center max-md:hidden">
           <img src={img1} alt="" />
         </div>
@@ -23,7 +24,10 @@ const VerifyOTP = () => {
             </div>
            
             
-        <button type='submit' className='btn btn-accent'>Submit</button>
+        
+         <ButtonAll>
+          Submit
+         </ButtonAll>
           </form>
         </div>
       </div>

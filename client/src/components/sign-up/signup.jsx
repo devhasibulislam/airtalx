@@ -48,7 +48,7 @@ const Signup = () => {
         showConfirmButton: false,
         timer: 1500,
       }).then(() => {
-        navigate("/");
+        navigate("/verifyotp");
         setTimeout(() => {
           window.location.reload();
         }, 500);
@@ -212,7 +212,7 @@ const Signup = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate("/");
+        navigate("/verifyotp");
         setTimeout(() => {
           window.location.reload();
         }, 500); 
