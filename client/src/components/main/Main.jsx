@@ -16,7 +16,7 @@ import {
 import { IoLogOutOutline, IoReloadOutline } from "react-icons/io5";
 import { BsBarChartLine } from "react-icons/bs";
 import { CiUser } from "react-icons/ci";
-// import { BiSolidEditAlt } from "react-icons/bi";
+import { BiSolidEditAlt } from "react-icons/bi";
 
 import FindJob from "../find-job/FindJob";
 import Application from "../JobSeeker/Application";
@@ -36,6 +36,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Message from "../message/Message";
 import GoogleAnalytics from "../GoogleAnalytics,jsx/GoogleAnalytics";
+import EditContent from "../edit-content/EditContent";
 
 // Tab data
 const adminTabs = [
@@ -51,7 +52,7 @@ const adminTabs = [
   { id: "Tab10", label: "Post a Blog", icon: FaRegEdit },
   { id: "Tab11", label: "Blog", icon: FaBookReader },
   { id: "Tab12", label: "Google Analytics", icon: BsBarChartLine },
-  // { id: "Tab13", label: "Edit Content", icon: BiSolidEditAlt },
+  { id: "Tab13", label: "Edit Content", icon: BiSolidEditAlt },
 ];
 
 const employerTabs = [
@@ -111,23 +112,23 @@ const Sidebar = ({ tabs, activeTab, handleTabClick }) => {
   };
 
   return (
-    <div className="w-20 md:w-[240px] max-h-[840px] mx-auto textw border-2 border-base-300 rounded-2xl md:m-9 overflow-y-auto">
+    <div className="w-20 md:w-[240px] max-h-[850px] shadow-lg mx-auto textw rounded-2xl my-10 md:m-9 overflow-y-auto " style={{border: '0.5px'}}>
       {tabs.map((tab) => (
         <div
           key={tab.id}
-          className={`p-4 cursor-pointer ${
-            activeTab === tab.id ? "bg-gray-300 bgw font-bold" : ""
+          className={`p-4 cursor-pointer hover:bg-[#f4f5ff] ${
+            activeTab === tab.id ? "bg-[#f4f5ff] bgw font-bold text-[#0049fc]" : " text-[#60656e]"
           }`}
           onClick={() => handleTabClick(tab.id)}
         >
-          <h2 className="flex items-center max-md:justify-center gap-2 text-[18px]">
-            <tab.icon className="text-2xl md:text-xl" />
+          <h2 className="flex items-center max-md:justify-center gap-x-2 text-[14px]">
+            <tab.icon className="text-2xl md:text-xl text-[#60656e]" />
             <span className="hidden md:inline">{tab.label}</span>
           </h2>
         </div>
       ))}
       <div className="p-4 cursor-pointer" onClick={handleLogout}>
-        <h2 className="flex items-center max-md:justify-center gap-2 text-[18px] text-red-500">
+        <h2 className="flex items-center max-md:justify-center gap-2 text-[14px] text-red-500">
           <IoLogOutOutline className="text-2xl md:text-xl" /> <span className="hidden md:inline">LogOut</span>
         </h2>
       </div>
@@ -137,7 +138,7 @@ const Sidebar = ({ tabs, activeTab, handleTabClick }) => {
 
 // Dashboard Layout
 const DashboardLayout = ({ tabs, activeTab, handleTabClick, children }) => (
-  <div className="flex h-screen max-w-7xl mx-auto">
+  <div className="flex max-w-7xl mx-auto">
     <Sidebar tabs={tabs} activeTab={activeTab} handleTabClick={handleTabClick} />
     <div className="flex-1  overflow-y-auto">{children}</div>
   </div>
@@ -165,6 +166,7 @@ const AdminDashboard = () => {
       {activeTab === "Tab10" && <Postblog />}
       {activeTab === "Tab11" && <AdminBlog />}
       {activeTab === "Tab12" && <GoogleAnalytics />}
+      {activeTab === "Tab13" && <EditContent/>}
       {/* Add more content for other tabs as needed */}
     </DashboardLayout>
   );
