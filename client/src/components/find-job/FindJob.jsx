@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import JobUpdateModal from "../../common/JobUpdateModel";
 import useAuthUser from "../../auth/getUser";
 import { auth } from "../../firebase";
-import ButtonAll from "../button/Button";
+import  { ButtonAll2 } from "../button/Button";
 import { Link } from "react-router-dom";
 
 const FindJob = () => {
@@ -130,31 +130,7 @@ const FindJob = () => {
 
   // console.log(jobs);
 
-  const handleApply = async (id) => {
-    const res = await axios.get(`http://localhost:8080/v1/api/postjobs/${id}`);
-    const { job_title, job_type, job_description } = res?.data;
-    const alldata = {
-      employer_name: user?.name,
-      job_title,
-      job_type,
-      job_post: job_description,
-      status: "active",
-    };
-    const po = await axios.post(
-      `http://localhost:8080/v1/api/application`,
-      alldata
-    );
-    if (po?.data) {
-      Swal.fire({
-        position: "top",
-        icon: "success",
-        title: "Your apply job saved",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    }
-  };
-
+ 
   return (
     <div className="mt-10 max-w-5xl mx-auto">
       <div className="mb-4 flex justify-center">
@@ -199,15 +175,15 @@ const FindJob = () => {
             </h2>
             <p className="mt-2">{job.job_description.substring(0, 100)}...`</p>
 
-            <div className="flex justify-center max-w-full mt-5">
+            <div className="  mt-5">
 
              <Link to={`/find-job/${job._id}`}>
-             <ButtonAll>See More</ButtonAll>
+             <ButtonAll2>See More</ButtonAll2>
               
              </Link>
             </div>
 
-            <div className="flex justify-center mt-6">
+            <div className="flex justify-between mt-6">
               {user?.role === "admin" && (
                 <button
                   onClick={() => handleEditClick(job._id)}
@@ -216,14 +192,7 @@ const FindJob = () => {
                   <CiEdit className="text-xl" /> Edit Article
                 </button>
               )}
-              {user?.role === "job-seeker" && (
-                <button
-                  onClick={() => handleApply(job._id)}
-                  className="btn btn-outline btn-warning"
-                >
-                  <CiEdit className="text-xl" /> Apply
-                </button>
-              )}
+            
               {user?.role === "admin" && (
                 <button
                   onClick={() => handleDelete(job._id)}

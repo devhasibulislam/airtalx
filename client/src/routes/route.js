@@ -16,6 +16,7 @@ import  { JobSeekerDashboard, AdminDashboard, EmployeeDashboard } from "../compo
 import AdminBlog from "../components/admin/blog/AdminBlog";
 import JobSeekerProfile from "../components/JobSeeker/profile/JobSeekerProfile";
 import JobDetails from "../components/find-job/JobDetails";
+import SingleBlog from "../components/admin/blog/SingleBlog";
 
 const RouteA = () => {
   return (
@@ -44,7 +45,16 @@ const RouteA = () => {
         
 
         <Route path="/sidebar" element={<Sidebar />} />
-        <Route path="/blog" element={<AdminBlog />} />
+        <Route path="/blog" element={
+          <div className="max-w-4xl mt-5 mx-auto">
+            <AdminBlog />
+          </div>
+        } />
+        <Route path="/blog/:id" element={
+          <div className="max-w-4xl mt-5 mx-auto">
+            <SingleBlog />
+          </div>
+        } />
       </Routes>
     </div>
   );
