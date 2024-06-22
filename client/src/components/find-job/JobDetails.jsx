@@ -15,6 +15,7 @@ const JobDetails = () => {
   const [jobDetails, setJobDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   console.log(jobDetails);
+  
   useEffect(() => {
     const fetchJobs = async () => {
       try {
