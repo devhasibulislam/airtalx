@@ -12,7 +12,11 @@ import FAQ from "../components/FAQ/faq";
 import FindJob from "../components/find-job/FindJob";
 import FindEmploye from "../components/find-employee/FindEmploye";
 import Sidebar from "../components/sidebar/Sidebar";
-import  { JobSeekerDashboard, AdminDashboard, EmployeeDashboard } from "../components/main/Main";
+import {
+  JobSeekerDashboard,
+  AdminDashboard,
+  EmployeeDashboard,
+} from "../components/main/Main";
 import AdminBlog from "../components/admin/blog/AdminBlog";
 import JobSeekerProfile from "../components/JobSeeker/profile/JobSeekerProfile";
 import JobDetails from "../components/find-job/JobDetails";
@@ -39,28 +43,52 @@ const RouteA = () => {
         <Route path="/contact-us" element={<Contactus />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/pricing" element={<Pricing />} />
-        <Route path="/find-job" element={ <div className="px-32"><FindJob /></div> } />
-        <Route path="/find-employee" element={ <div className="px-32"><FindEmploye /></div> } />
+        <Route
+          path="/find-job"
+          element={
+            <div className="px-32">
+              <FindJob />
+            </div>
+          }
+        />
+        <Route
+          path="/find-employee"
+          element={
+            <div className="px-32">
+              <FindEmploye />
+            </div>
+          }
+        />
 
-        <Route path="/profile" element={ <div className="px-3 md:px-32"><JobSeekerProfile /></div> } />
-
-        
+        <Route
+          path="/profile"
+          element={
+            <div className="px-3 md:px-32">
+              <JobSeekerProfile />
+            </div>
+          }
+        />
 
         <Route path="/sidebar" element={<Sidebar />} />
-        <Route path="/blog" element={
-          <div className="max-w-4xl mt-5 mx-auto">
-            <AdminBlog />
-          </div>
-        } />
-        <Route path="/blog/:id" element={
-          <div className="max-w-4xl mt-5 mx-auto">
-            <SingleBlog />
-          </div>
-        } />
+        <Route
+          path="/blog"
+          element={
+            <div className="max-w-4xl mt-5 mx-auto">
+              <AdminBlog />
+            </div>
+          }
+        />
+        <Route
+          path="/blog/:id"
+          element={
+            <div className="max-w-4xl mt-5 mx-auto">
+              <SingleBlog />
+            </div>
+          }
+        />
       </Routes>
     </div>
   );
 };
 
-
-export  {RouteA};
+export { RouteA };
