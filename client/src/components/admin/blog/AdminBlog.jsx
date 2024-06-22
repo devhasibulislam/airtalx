@@ -4,8 +4,14 @@ import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import BlogUpdateModal from "../../../common/BlogUpdateModal";
 import Swal from "sweetalert2";
+import useAuthUser from "../../../auth/getUser";
+import { auth } from "../../../firebase";
+import  { ButtonAll2 } from "../../button/Button";
+import { Link } from "react-router-dom";
 
 const AdminBlog = () => {
+  const {user} = useAuthUser(auth);
+  console.log(user);
   const [editId, setEditId] = useState();
   const [datad, setData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,7 +28,7 @@ const AdminBlog = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axios.get(`https://airtalx-liard.vercel.app/v1/api/blogs`);
+        const result = await axios.get(`http://localhost:8080/v1/api/blogs`);
         setData(result.data); // Assuming result.data is the array of user data
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -44,7 +50,7 @@ const AdminBlog = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`https://airtalx-liard.vercel.app/v1/api/blogs/${userId}`);
+          await axios.delete(`http://localhost:8080/v1/api/blogs/${userId}`);
           Swal.fire({
             position: "top",
             icon: "success",
@@ -84,7 +90,7 @@ const AdminBlog = () => {
             <h2 className="text-blue-500">By {m.createdby}</h2>
             <h2 className="text-purple-500">Date: {new Date(m.createdAt).toLocaleDateString()}</h2>
           </div>
-          <div className="flex justify-between mt-6">
+        {user?.role==='admin' &&  <div className="flex justify-between mt-6">
             <button
               onClick={() => handleEditClick(m._id)}
               className="btn btn-outline btn-warning"
@@ -94,7 +100,13 @@ const AdminBlog = () => {
             <button onClick={() => deleteBlog(m._id)} className="btn btn-outline btn-error">
               <RiDeleteBin6Line className="text-xl" /> Delete
             </button>
+          </div>}
+
+         <Link to={`/blog/${m._id}`}>
+         <div className="flex justify-center mt-5  w-full">
+            <ButtonAll2>See more</ButtonAll2>
           </div>
+         </Link>
         </div>
       ))}
 

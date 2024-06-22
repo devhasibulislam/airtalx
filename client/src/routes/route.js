@@ -12,9 +12,18 @@ import FAQ from "../components/FAQ/faq";
 import FindJob from "../components/find-job/FindJob";
 import FindEmploye from "../components/find-employee/FindEmploye";
 import Sidebar from "../components/sidebar/Sidebar";
-import  { JobSeekerDashboard, AdminDashboard, EmployeeDashboard } from "../components/main/Main";
+import {
+  JobSeekerDashboard,
+  AdminDashboard,
+  EmployeeDashboard,
+} from "../components/main/Main";
 import AdminBlog from "../components/admin/blog/AdminBlog";
 import JobSeekerProfile from "../components/JobSeeker/profile/JobSeekerProfile";
+import JobDetails from "../components/find-job/JobDetails";
+import SingleBlog from "../components/admin/blog/SingleBlog";
+import AdminView from "../components/find-employee/AdminView";
+import JobApply from "../components/find-job/JobApply";
+import ApplySuccess from "../components/find-job/ApplySuccess";
 
 const RouteA = () => {
   return (
@@ -28,25 +37,62 @@ const RouteA = () => {
 
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/find-job/:id" element={<JobDetails />} />
+        <Route path="/apply-job/:id" element={<JobApply />} />
+        <Route path="/apply-success/:id" element={<ApplySuccess />} />
         <Route path="/forgetpassword" element={<Forgetpassword />} />
         <Route path="/verifyotp" element={<VerifyOTP />} />
+        <Route path="/adminview" element={<AdminView />} />
         <Route path="/about-us" element={<About />} />
         <Route path="/contact-us" element={<Contactus />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/pricing" element={<Pricing />} />
-        <Route path="/find-job" element={ <div className="px-32"><FindJob /></div> } />
-        <Route path="/find-employee" element={ <div className="px-32"><FindEmploye /></div> } />
+        <Route
+          path="/find-job"
+          element={
+            <div className="px-32">
+              <FindJob />
+            </div>
+          }
+        />
+        <Route
+          path="/find-employee"
+          element={
+            <div className="px-32">
+              <FindEmploye />
+            </div>
+          }
+        />
 
-        <Route path="/profile" element={ <div className="px-3 md:px-32"><JobSeekerProfile /></div> } />
-
-        
+        <Route
+          path="/profile"
+          element={
+            <div className="px-3 md:px-32">
+              <JobSeekerProfile />
+            </div>
+          }
+        />
 
         <Route path="/sidebar" element={<Sidebar />} />
-        <Route path="/blog" element={<AdminBlog />} />
+        <Route
+          path="/blog"
+          element={
+            <div className="max-w-4xl mt-5 mx-auto">
+              <AdminBlog />
+            </div>
+          }
+        />
+        <Route
+          path="/blog/:id"
+          element={
+            <div className="max-w-4xl mt-5 mx-auto">
+              <SingleBlog />
+            </div>
+          }
+        />
       </Routes>
     </div>
   );
 };
 
-
-export  {RouteA};
+export { RouteA };

@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import ButtonAll from "../button/Button";
+import { LuMessagesSquare } from "react-icons/lu";
 
 const FindEmploye = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -7,11 +9,11 @@ const FindEmploye = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
   const [users, setUsers] = useState([]);
-
+  
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const result = await axios.get(`https://airtalx-liard.vercel.app/v1/api/userdata`);
+        const result = await axios.get(`http://localhost:8080/v1/api/userdata`);
         setUsers(result.data); // Assuming result.data is the array of user data
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -23,13 +25,13 @@ const FindEmploye = () => {
 
   // Filter users with role 'employer'
   const employers = users.filter(user => user.role === "employer");
-  console.log(employers);
 
   // Filter based on search query and selected type
   const filteredEmployees = employers.filter((em) => {
-    const matchesSearch = em.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          em.role?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          em.location?.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = 
+      (em.name?.toLowerCase().includes(searchQuery.toLowerCase()) || '') ||
+      (em.role?.toLowerCase().includes(searchQuery.toLowerCase()) || '') ||
+      (em.location?.toLowerCase().includes(searchQuery.toLowerCase()) || '');
     const matchesType = selectedType ? em.employment === selectedType : true;
     return matchesSearch && matchesType;
   });
@@ -45,7 +47,7 @@ const FindEmploye = () => {
   };
 
   return (
-    <div className='mt-10 max-w-6xl mx-auto'>
+    <div className='mt-10 max-w-4xl mx-auto'>
       <div className="mb-4 flex justify-center">
         <input 
           type="text" 
@@ -60,43 +62,52 @@ const FindEmploye = () => {
           className="border border-base-300 p-2 rounded-2xl"
         >
           <option value="">Select type</option>
-          <option value="Full-time">Full-time</option>
-          <option value="Part-time">Part-time</option>
-          <option value="Contract">Contract</option>
-          <option value="Internship">Internship</option>
+          <option value="full-time">Full-time</option>
+          <option value="part-time">Part-time</option>
+          <option value="contract">Contract</option>
+          <option value="internship">Internship</option>
         </select>
       </div>
 
       <div className="grid lg:grid-cols-2 textw">
-        {currentEmployees.map((em) => (
-          <div
-            key={em._id}
-            className="border border-base-300 shadow-xl rounded-sm p-4 m-2"
-          >
-            <div className="flex gap-3 items-center mb-2">
-              <img className="w-20 bgw h-20 rounded-full" src={em.img || 'default-image.jpg'} alt={em.name} />
-              <div>
-                <h1 className="text-xl font-bold">{em.name}</h1>
-                <h1>{em.role}</h1>
-                <h1>{em.location}</h1>
+        {currentEmployees.length > 0 ? (
+          currentEmployees.map((em) => (
+            <div
+              key={em._id}
+              className="border border-base-300 shadow-xl rounded-sm p-4 m-2"
+            >
+              <div className="flex gap-3 items-center mb-2">
+                <img className="w-20 bgw h-20 rounded-full" src={em.image || 'default-image.jpg'} alt={em.name} />
+                <div>
+                  <h1 className="text-xl font-bold">{em.name}</h1>
+                  <h1>{em.role}</h1>
+                  <h1>{em.location}</h1>
+                </div>
               </div>
-            </div>
 
-            <div className="mt-5 pb-6 flex justify-between">
-              <div>
-                <h1>Preferred Job Type</h1>
-                <h2 className="text-xl font-bold">{em.employment}</h2>
+              <div className="mt-5 pb-6 flex justify-between">
+                <div>
+                  <h1>Preferred Job Type</h1>
+                  <h2 className="text-xl font-bold">{em.employment}</h2>
+                </div>
+                <div>
+                  <h2>Skills</h2>
+                  <h1 className="text-bold flex flex-col">
+                    {em.skill }
+                  </h1>
+                </div>
               </div>
-              <div>
-                <h2>Skills</h2>
-                <h1 className="text-bold flex flex-col">
-                  {em.skill }
-                </h1>
+              <div className="flex gap-2 items-center">
+                <ButtonAll>Know More</ButtonAll>
+                <LuMessagesSquare className="text-2xl"/>
               </div>
             </div>
-            <button className="btn btn-success flex justify-center">Know More</button>
+          ))
+        ) : (
+          <div className="col-span-2 text-center">
+            <p>No employees found matching your criteria.</p>
           </div>
-        ))}
+        )}
       </div>
 
       <div className="flex justify-center mt-4">

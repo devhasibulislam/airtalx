@@ -10,21 +10,7 @@ import ButtonAll from "../button/Button";
 import { IoIosNotificationsOutline } from "react-icons/io";
 const Navbar = () => {
   const { user } = useAuthUser(auth);
-// console.log(process.env.REACT_APP_HOST);
-  // const [users, getUser] = useState(null);
-  // const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   const uns = onAuthStateChanged(auth, (currentUser) => {
-  //     getUser(currentUser);
-  //     // setLoading(false);
-  //   });
-  //   return () => {
-  //     return uns;
-  //   };
-  // }, []);
-
-  // console.log(user?.role);
+  
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -84,6 +70,11 @@ const Navbar = () => {
           Find Job
         </Link>
       </li>
+      <li>
+        <Link className="text-[12px] font-medium" to="/blog">
+         Article
+        </Link>
+      </li>
 
       {user?.role === "employer" && (
         <li>
@@ -103,7 +94,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className=" bg-[#EDF7F4] w-full">
+    <div className=" bg-[#EDF7F4] w-full bgw">
       <div className="navbar max-w-7xl h-[64px] mx-auto  textw bgw">
         <div className="navbar-start">
           <div className="dropdown">

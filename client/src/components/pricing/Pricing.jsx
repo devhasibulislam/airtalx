@@ -1,10 +1,11 @@
 import React from "react";
 import { FcCancel, FcCheckmark } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import ButtonAll from "../button/Button";
 
 const Pricing = () => {
   return (
-    <div className="bg-gradient-to-r from-cyan-500 to-blue-500">
+    <div className="max-w-6xl mx-auto bg-gradient-to-r from-cyan-500 to-blue-500">
       <h2 className="text-3xl font-semibold text-center pt-5 text-white">
         {" "}
         Our Pricing
@@ -58,8 +59,9 @@ const Pricing = () => {
             </div>
           </div>
 
-          <div className="flex justify-center">
-            <button className="btn btn-accent">Upgrade Now</button>
+          <div className="flex justify-center mb-3">
+            <ButtonAll>Upgrade Now</ButtonAll>
+         
           </div>
         </div>
         <div className="flex items-center card p-4 w-96 h-[70%]  bg-base-100 shadow-xl">
@@ -102,7 +104,10 @@ const Pricing = () => {
                 </h2>
               </div>
               <div className="flex justify-center">
-             <Link to="/signup">   <button className="btn btn-accent">Register Now</button></Link>
+             <Link to="/signup"> 
+             <ButtonAll>Register Now</ButtonAll>
+
+             </Link>
               </div>
             </div>
           </div>
