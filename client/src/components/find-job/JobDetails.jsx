@@ -46,30 +46,7 @@ const JobDetails = () => {
   if (!jobDetails) {
     return <div>No job details found</div>;
   }
-  const handleApply = async (id) => {
-    const res = await axios.get(`http://localhost:8080/v1/api/postjobs/${id}`);
-    const { job_title, job_type, job_description } = res?.data;
-    const alldata = {
-      employer_name: user?.name,
-      job_title,
-      job_type,
-      job_post: job_description,
-      status: "active",
-    };
-    const po = await axios.post(
-      `http://localhost:8080/v1/api/application`,
-      alldata
-    );
-    if (po?.data) {
-      Swal.fire({
-        position: "top",
-        icon: "success",
-        title: "Your apply job saved",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    }
-  };
+
 
   return (
     <div className="mt-7 max-w-6xl mx-auto">
@@ -80,11 +57,15 @@ const JobDetails = () => {
         </h4>
 
         <div className="flex gap-3 items-center mt-3 mb-3">
-          {user?.role === "job-seeker" && (
+          {/* {user?.role === "job-seeker" && (
             <ButtonAll onClick={() => handleApply(jobDetails._id)}>
               Apply this Job
             </ButtonAll>
-          )}
+          )} */}
+
+          <Link to={`/apply-job/${jobDetails._id}`}>
+          <ButtonAll>Apply This Job</ButtonAll>
+          </Link>
 
           {
             !user && (

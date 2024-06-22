@@ -16,7 +16,7 @@ import {
 import { IoLogOutOutline, IoReloadOutline } from "react-icons/io5";
 import { BsBarChartLine } from "react-icons/bs";
 import { CiUser } from "react-icons/ci";
-// import { BiSolidEditAlt } from "react-icons/bi";
+import { BiSolidEditAlt } from "react-icons/bi";
 
 import FindJob from "../find-job/FindJob";
 import Application from "../JobSeeker/Application";
@@ -51,7 +51,7 @@ const adminTabs = [
   { id: "Tab10", label: "Post a Blog", icon: FaRegEdit },
   { id: "Tab11", label: "Blog", icon: FaBookReader },
   { id: "Tab12", label: "Google Analytics", icon: BsBarChartLine },
-  // { id: "Tab13", label: "Edit Content", icon: BiSolidEditAlt },
+  { id: "Tab13", label: "Edit Content", icon: BiSolidEditAlt },
 ];
 
 const employerTabs = [
@@ -165,6 +165,7 @@ const AdminDashboard = () => {
       {activeTab === "Tab10" && <Postblog />}
       {activeTab === "Tab11" && <AdminBlog />}
       {activeTab === "Tab12" && <GoogleAnalytics />}
+      {activeTab === "Tab13" && <p>edit content</p>}
       {/* Add more content for other tabs as needed */}
     </DashboardLayout>
   );
