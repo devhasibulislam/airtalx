@@ -15,6 +15,7 @@ import Sidebar from "../components/sidebar/Sidebar";
 import  { JobSeekerDashboard, AdminDashboard, EmployeeDashboard } from "../components/main/Main";
 import AdminBlog from "../components/admin/blog/AdminBlog";
 import JobSeekerProfile from "../components/JobSeeker/profile/JobSeekerProfile";
+import JobDetails from "../components/find-job/JobDetails";
 
 const RouteA = () => {
   return (
@@ -28,6 +29,7 @@ const RouteA = () => {
 
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/find-job/:id" element={<JobDetails />} />
         <Route path="/forgetpassword" element={<Forgetpassword />} />
         <Route path="/verifyotp" element={<VerifyOTP />} />
         <Route path="/about-us" element={<About />} />

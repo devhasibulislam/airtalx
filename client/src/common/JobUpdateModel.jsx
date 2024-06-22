@@ -4,8 +4,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const JobUpdateModal = ({ isOpen, onClose, jobId, onUpdate }) => {
-  const [initialValues, setInitialValues] = useState(null);
-  console.log(initialValues);
+  const [, setInitialValues] = useState(null);
+  // console.log(initialValues);
   const {
     register,
     handleSubmit,

@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { CiEdit } from "react-icons/ci";
+import { CiCreditCard1, CiEdit } from "react-icons/ci";
 import axios from "axios";
 import Swal from "sweetalert2";
 import JobUpdateModal from "../../common/JobUpdateModel";
 import useAuthUser from "../../auth/getUser";
 import { auth } from "../../firebase";
+import ButtonAll from "../button/Button";
+import { Link } from "react-router-dom";
 
 const FindJob = () => {
   const { user } = useAuthUser(auth);
-  const [expandedJob, setExpandedJob] = useState(null);
+
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedType, setSelectedType] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
   const [jobs, setJobs] = useState([]);
+  // console.log(jobs);
   const [loading, setLoading] = useState(true);
 
   const [editId, setEditId] = useState();
@@ -63,14 +66,6 @@ const FindJob = () => {
       </p>
     );
   }
-
-  const toggleDescription = (index) => {
-    if (expandedJob === index) {
-      setExpandedJob(null); // Collapse if already expanded
-    } else {
-      setExpandedJob(index); // Expand the selected job
-    }
-  };
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -133,31 +128,31 @@ const FindJob = () => {
     }
   };
 
-  console.log(jobs);
+  // console.log(jobs);
 
   const handleApply = async (id) => {
     const res = await axios.get(`http://localhost:8080/v1/api/postjobs/${id}`);
     const { job_title, job_type, job_description } = res?.data;
     const alldata = {
-      employer_name:user?.name,
+      employer_name: user?.name,
       job_title,
       job_type,
       job_post: job_description,
       status: "active",
     };
-    const po = await axios.post(`http://localhost:8080/v1/api/application`, 
-      alldata,
+    const po = await axios.post(
+      `http://localhost:8080/v1/api/application`,
+      alldata
     );
-    if(po?.data){
+    if (po?.data) {
       Swal.fire({
         position: "top",
         icon: "success",
         title: "Your apply job saved",
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
       });
     }
-
   };
 
   return (
@@ -193,25 +188,26 @@ const FindJob = () => {
               <h1 className="bg-blue-200 bgw p-2 rounded-2xl">
                 {job.job_type}
               </h1>
-              <h1>{job.hour_per_week}$</h1>
+              <h1 className="flex gap-1 items-center">
+                <CiCreditCard1 /> {job.hour_per_week}$
+              </h1>
             </div>
 
             <h1 className="text-2xl font-semibold">{job.job_title}</h1>
             <h2 className="mt-2">
               By <span className="text-blue-600">{job.postby}</span>
             </h2>
-            <p className="mt-2">
-              {expandedJob === index
-                ? job.job_description
-                : `${job.job_description.substring(0, 100)}...`}
-            </p>
-            <button
-              className="btn btn-success mt-2"
-              onClick={() => toggleDescription(index)}
-            >
-              {expandedJob === index ? "Show Less" : "See More"}
-            </button>
-            <div className="flex justify-between mt-6">
+            <p className="mt-2">{job.job_description.substring(0, 100)}...`</p>
+
+            <div className="flex justify-center max-w-full mt-5">
+
+             <Link to={`/find-job/${job._id}`}>
+             <ButtonAll>See More</ButtonAll>
+              
+             </Link>
+            </div>
+
+            <div className="flex justify-center mt-6">
               {user?.role === "admin" && (
                 <button
                   onClick={() => handleEditClick(job._id)}
@@ -268,6 +264,7 @@ const FindJob = () => {
           Next
         </button>
       </div>
+
       <JobUpdateModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
