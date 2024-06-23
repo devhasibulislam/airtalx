@@ -14,7 +14,7 @@ const blogRoute = require('./routes/v1/blog.route');
 const messageRoute = require('./routes/v1/message.route');
 const paymentRoute = require('./routes/v1/payment.route');
 const applicationRoute = require('./routes/v1/application.route');
-const otpRoute = require('./routes/v1/upotp.route');
+const otpRoute = require('./routes/v1/otp.route');
 
 /* application level connection */
 const app = express();

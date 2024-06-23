@@ -1,6 +1,6 @@
 const otpGenerator = require("otp-generator");
 const OTP = require("../../models/v1/otp.model");
-const User = require("../../models/v1/user.model");
+const User = require("../../models/v1/userdata.model");
 
 exports.sendOTP = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
