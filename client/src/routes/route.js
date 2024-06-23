@@ -24,6 +24,7 @@ import SingleBlog from "../components/admin/blog/SingleBlog";
 import AdminView from "../components/find-employee/AdminView";
 import JobApply from "../components/find-job/JobApply";
 import ApplySuccess from "../components/find-job/ApplySuccess";
+import ResetPin from "../components/forget-password/ResetPin";
 
 const RouteA = () => {
   return (
@@ -33,6 +34,7 @@ const RouteA = () => {
 
         <Route path="/jobseeker-dashboard" element={<JobSeekerDashboard />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/reset-pin" element={<ResetPin />} />
         <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
 
         <Route path="/login" element={<Login />} />
