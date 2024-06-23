@@ -7,16 +7,6 @@ const createJob = async (jobData) => {
     return await job.save();
 };
 
-// const createJob = async (jobData) => {
-//     const job = new JobPosting(jobData);
-//     await job.save();
-    
-//     // Save job history
-//     const history = new History(jobData);
-//     await history.save();
-  
-//      return await job.save();
-//   };
 
 const getAllJobs = async () => {
     return await Job.find({});
