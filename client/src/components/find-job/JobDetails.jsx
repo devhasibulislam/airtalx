@@ -15,7 +15,7 @@ const JobDetails = () => {
   const [jobDetails, setJobDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   console.log(jobDetails);
-  
+
   useEffect(() => {
     const fetchJobs = async () => {
       try {
@@ -47,7 +47,6 @@ const JobDetails = () => {
     return <div>No job details found</div>;
   }
 
-
   return (
     <div className="mt-7 max-w-6xl mx-auto">
       <div>
@@ -64,16 +63,14 @@ const JobDetails = () => {
           )} */}
 
           <Link to={`/apply-job/${jobDetails._id}`}>
-          <ButtonAll>Apply This Job</ButtonAll>
+            <ButtonAll>Apply This Job</ButtonAll>
           </Link>
 
-          {
-            !user && (
-               <Link to='/login'>
-                <ButtonAll>Login to apply this job</ButtonAll>
-               </Link>
-            )
-          }
+          {!user && (
+            <Link to="/login">
+              <ButtonAll>Login to apply this job</ButtonAll>
+            </Link>
+          )}
 
           <h3>Copy Link</h3>
         </div>
@@ -115,49 +112,10 @@ const JobDetails = () => {
           </div>
         </div>
       </div>
-      <div className="mt-6">
+      <div className="my-6">
         <h2 className="text-3xl font-semibold text-center">Job Description</h2>
-        <div>
-          <h3>
-            Lorem ipsum dolor sit amet consectetur. Quam etiam ac viverra in
-            vulputate suspendisse tellus leo viverra. Commodo donec convallis
-            enim nulla donec tempus felis. Id et aliquam maecenas quam sagittis
-            nulla urna. Libero quis sit massa ut congue rhoncus nisl urna. Eget
-            massa elit non morbi ut sed congue amet. Cursus sed nisi urna mauris
-            tincidunt facilisi id etiam. Pellentesque tellus auctor sapien nulla
-            ullamcorper auctor id sit. Aliquam morbi urna rhoncus gravida felis
-            lorem volutpat lectus. Laoreet mauris laoreet dolor egestas neque
-            faucibus augue sagittis. Et dapibus dui blandit ac adipiscing nisl.
-            Metus feugiat pellentesque eu tincidunt ornare mus placerat accumsan
-            aliquam. Arcu egestas tellus volutpat ipsum ultrices sed.
-            Pellentesque non est interdum ornare in. Aliquam auctor morbi nisi
-            elementum. Eu libero erat fermentum neque nibh vel. Pharetra semper
-            molestie erat velit egestas. Nunc ipsum in ac tempor ornare. Et erat
-            laoreet ultricies iaculis at arcu leo dui ac. Fringilla ipsum sit
-            feugiat a netus fermentum leo. Turpis nibh pellentesque augue
-            pharetra nulla id hendrerit. Vitae magna sit tincidunt arcu. Nulla
-            quis auctor congue scelerisque nibh donec eget. Non habitant sit et
-            ut habitasse. Lectus pellentesque metus in velit ultrices enim amet
-            quam leo. Et massa aliquam ipsum consectetur risus. Quis posuere
-            fermentum aliquam dui integer sed molestie. Mattis diam viverra ut
-            sit mi pretium fames proin. Nisl viverra cras montes feugiat in.
-            Arcu proin gravida massa adipiscing malesuada orci mi at tempus.
-            Enim amet maecenas tincidunt urna adipiscing aliquet faucibus est
-            quis. Malesuada diam vitae tellus dolor tristique in dictum eu. Diam
-            interdum et faucibus pellentesque sed duis. Rutrum placerat vel orci
-            gravida viverra scelerisque. Mattis id volutpat etiam nam quis
-            cursus. Viverra ullamcorper habitasse dui quam euismod et ut quam
-            et. Quis ornare dictum sit vehicula. Justo id rhoncus sed vestibulum
-            cursus aliquet nunc. Sagittis tortor suspendisse blandit magna.
-            Nullam tristique habitant scelerisque mattis posuere enim aliquam.
-            Aenean urna justo pellentesque in tincidunt scelerisque vestibulum
-            et risus. Placerat neque molestie porttitor placerat at diam dui
-            aliquam. At suspendisse consequat sed in nam suspendisse luctus at
-            ut. Dui enim lectus blandit aliquam. Facilisi euismod vel maecenas
-            interdum habitasse. Imperdiet mi vitae et turpis nibh platea at.
-            Eget amet ut in nibh bibendum mi senectus sed elementum. Morbi
-            ultricies aenean ut egestas nullam accumsan scelerisque lacus.
-          </h3>
+        <div className="!p-4 bg-[#ecf7f4]">
+          {jobDetails.job_description}
         </div>
       </div>
     </div>
