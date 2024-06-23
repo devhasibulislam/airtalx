@@ -37,7 +37,7 @@ const ApplySuccess = () => {
   }, []);
   return (
     <div className="mt-5 max-w-6xl mx-auto">
-      <div className="flex gap-3 mt-5">
+      <div className="mx-auto flex gap-3 mt-5">
         <div className="flex gap-2 items-center border border-base-300 rounded-xl px-4 py-2">
           <div>
             <IoBagHandle className="text-2xl" />
