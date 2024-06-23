@@ -37,6 +37,7 @@ import Swal from "sweetalert2";
 import Message from "../message/Message";
 import GoogleAnalytics from "../GoogleAnalytics,jsx/GoogleAnalytics";
 import EditContent from "../edit-content/EditContent";
+import AdminViewEmploye from "../find-employee/AdminView";
 
 // Tab data
 const adminTabs = [
@@ -159,7 +160,7 @@ const AdminDashboard = () => {
       {activeTab === "Tab3" && <PostAJob />}
       {activeTab === "Tab4" && <JobApplication/>}
       {activeTab === "Tab5" && <FindJob />}
-      {activeTab === "Tab6" && <FindEmploye />}
+      {activeTab === "Tab6" && <AdminViewEmploye />}
       {activeTab === "Tab7" && <WorkHistory />}
       {activeTab === "Tab8" && <Payment />}
       {activeTab === "Tab9" && <p><User/></p>}

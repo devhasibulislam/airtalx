@@ -22,7 +22,7 @@ const EditProfileModal = ({ isOpen, onClose, user, onProfileUpdate }) => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.put(`https://api-airtalx.vercel.app/v1/api/userdata/${user?._id}`, data);
+      const response = await axios.put(`http://localhost:8080/v1/api/userdata/${user?._id}`, data);
       if (response.data) {
         Swal.fire({
           position: "top",
