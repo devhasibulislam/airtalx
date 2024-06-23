@@ -26,7 +26,7 @@ const Forgetpassword = () => {
   }
 
   return (
-    <div className="grid md:grid-cols-2 bg-[#a4e8f9]">
+    <div className="max-w-4xl mx-auto grid md:grid-cols-2 bg-[#a4e8f9]">
       <div className="mx-auto flex items-center max-md:hidden">
         <img src={img1} alt="Login" />
       </div>

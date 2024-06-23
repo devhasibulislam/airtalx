@@ -33,7 +33,7 @@ const VerifyOTP = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto grid md:grid-cols-2 bg-[#a4e8f9]">
+    <div className="max-w-5xl mx-auto grid md:grid-cols-2 bg-[#a4e8f9]">
       <div className="mx-auto flex items-center max-md:hidden">
         <img src={img1} alt="" />
       </div>
