@@ -7,7 +7,7 @@ import { auth } from "../../firebase";
 
 import useAuthUser from "../../auth/getUser";
 import ButtonAll from "../button/Button";
-import { IoIosNotificationsOutline } from "react-icons/io";
+
 const Navbar = () => {
   const { user } = useAuthUser(auth);
   
@@ -138,8 +138,7 @@ const Navbar = () => {
               </div>
             </label>
 
-          {user &&  <h2><IoIosNotificationsOutline  className="text-2xl" /></h2>}
-
+         
             {!user ? (
               <Link to="/login">
                

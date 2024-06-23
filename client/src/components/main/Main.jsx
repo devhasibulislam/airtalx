@@ -211,7 +211,7 @@ const JobSeekerDashboard = () => {
       {activeTab === "Tab3" && <FindJob />}
       {activeTab === "Tab4" && <Application />}
       {activeTab === "Tab5" && <div><WorkHistory/></div>}
-      {/* {activeTab === "Tab6" && <div><Payment/></div>} */}
+      {activeTab === "Tab6" && <div><Payment/></div>}
       {/* Add more content for other tabs as needed */}
     </DashboardLayout>
   );
