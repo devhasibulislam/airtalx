@@ -25,6 +25,7 @@ import AdminView from "../components/find-employee/AdminView";
 import JobApply from "../components/find-job/JobApply";
 import ApplySuccess from "../components/find-job/ApplySuccess";
 import ResetPin from "../components/forget-password/ResetPin";
+import SingleProfile from "../components/JobSeeker/profile/SingleProfile";
 
 const RouteA = () => {
   return (
@@ -71,6 +72,15 @@ const RouteA = () => {
           element={
             <div className="px-3 md:px-32">
               <JobSeekerProfile />
+            </div>
+          }
+        />
+
+        <Route
+          path="/profile/:id"
+          element={
+            <div className="px-3 md:px-32">
+              <SingleProfile />
             </div>
           }
         />
