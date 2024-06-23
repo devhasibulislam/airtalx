@@ -6,10 +6,14 @@ import { auth } from "../../../firebase";
 import useAuthUser from "../../../auth/getUser"; // Adjust the import path
 import EditProfileModal from "../../../common/Modal";
 import ExperienceModal from "../../../common/ExperienceModal";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const JobSeekerProfile = () => {
   const { user } = useAuthUser(auth);
+  // console.log(`http://localhost:8080/v1/api/userdata/${user?._id}`);;
   const [profileData, setProfileData] = useState(user);
+  // console.log(user);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalExOpen, setIsModalExOpen] = useState(false);
 
@@ -37,13 +41,61 @@ const JobSeekerProfile = () => {
     setIsModalOpen(false);
   };
 
-  const handleProfileUpdate = (updatedData) => {
+  const handleProfileUpdate = 
+  (updatedData) => {
     setProfileData(updatedData);
   };
 
   useEffect(() => {
     setProfileData(user);
   }, [user]);
+
+  const handleDeleteAccount =
+   async () => {
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+       
+        try {
+          // Make API call to delete user from your database
+          await axios.delete(`http://localhost:8080/v1/api/userdata/${user?._id}`);
+    
+          // Delete user from Firebase Authentication
+          const currentUser = auth.currentUser;
+          if (currentUser) {
+            await currentUser.delete();
+          }
+    
+          Swal.fire({
+            title: 'Success',
+            text: 'Your account has been deleted successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            // Optionally, you can redirect the user to a different page
+            window.location.href = '/login';
+          });
+        } catch (error) {
+          console.error('Error deleting account:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Failed to delete your account. Please try again later.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
+        }
+      }
+    });
+
+  };
 
   return (
     <div className="m-2 max-w-7xl mx-auto">
@@ -142,7 +194,8 @@ const JobSeekerProfile = () => {
             <div className="mt-3">
               <h2 className="text-[14px]">Skill Level</h2>
               <h2 className="text-[16px] font-medium">
-                {profileData?.skill_level}
+                {
+                profileData?.skill_level}
               </h2>
             </div>
           </div>
@@ -159,7 +212,8 @@ const JobSeekerProfile = () => {
             Upload Resume
           </button>
           <h3 className="text-[12px] font-medium mt-5">CV-AironNew-2024</h3>
-          <button className="text-red-500 mt-24 flex gap-2 hover:text-red-600">
+
+          <button onClick={handleDeleteAccount} className="text-red-500 mt-24 flex gap-2 hover:text-red-600">
             Delete Account <AiOutlineDelete className="text-xl" />
           </button>
         </div>
