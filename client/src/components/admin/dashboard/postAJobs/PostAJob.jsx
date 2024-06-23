@@ -9,6 +9,7 @@ const PostAJob = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -20,11 +21,11 @@ const PostAJob = () => {
 
     const historyData = {
       designation: data.job_title,
-      posted_date:new Date() ,
+      posted_date: new Date(),
       active: 10,
       awaiting: 5,
       conducting: 2,
-      location: data.location
+      location: data.location,
     };
 
     // console.log(data);
@@ -32,23 +33,27 @@ const PostAJob = () => {
 
     try {
       // console.log(data);
-       await axios.post(`http://localhost:8080/v1/api/postjobs`, cleanedData);
+      await axios.post(`http://localhost:8080/v1/api/postjobs`, cleanedData);
 
-       await axios.post(`http://localhost:8080/v1/api/history`, historyData);
+      await axios.post(`http://localhost:8080/v1/api/history`, historyData);
 
-      Swal.fire({
-        title: 'Success!',
-        text: 'Job posted successfully',
-        icon: 'success',
-        confirmButtonText: 'OK'
-      });
+      Swal.fire(
+        {
+          title: "Success!",
+          text: "Job posted successfully",
+          icon: "success",
+          confirmButtonText: "OK",
+        },
+
+        reset()
+      );
     } catch (error) {
       console.error("There was an error posting the job!", error);
       Swal.fire({
-        title: 'Error!',
-        text: 'There was an error posting the job',
-        icon: 'error',
-        confirmButtonText: 'OK'
+        title: "Error!",
+        text: "There was an error posting the job",
+        icon: "error",
+        confirmButtonText: "OK",
       });
     }
   };
