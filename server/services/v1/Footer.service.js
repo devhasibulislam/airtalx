@@ -20,6 +20,14 @@ exports.createFooter = async (req, res) => {
 };
 
 exports.updateFooter = async (req, res) => {
+    const id = req.params.id;
+    if(!id){
+        res.status(404)
+            .json({
+              success: false,
+              details: "Id is required!"   
+            })
+    }
   try {
     const updatedFooter = await Footer.findByIdAndUpdate(req.params.id, req.body, { new: true });
     res.json(updatedFooter);

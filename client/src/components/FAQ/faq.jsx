@@ -12,9 +12,9 @@ const FAQ = () => {
   };
 
   return (
-    <div className="m-6 rounded-lg max-w-6xl mx-auto">
+    <div className="m-6 rounded-lg max-w-6xl mx-auto space-x-4">
       {/* Tabs */}
-      <div className="flex justify-center  ">
+      <div className="flex justify-center gap-x-6 ">
         <button
           className={`px-4 py-2 ${activeTab === 0 ? 'bg-blue-400 text-white' : 'bg-gray-200 '} rounded-lg ${activeTab !== 0 ? ' ' : ''} focus:outline-none`}
           onClick={() => handleTabClick(0)}
