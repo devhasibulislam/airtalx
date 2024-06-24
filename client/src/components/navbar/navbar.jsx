@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { TfiMenuAlt } from "react-icons/tfi";
-import { LuSun } from "react-icons/lu";
+import { IoIosSunny } from "react-icons/io";
 import img1 from "../../image/mainicon.svg";
 import { auth } from "../../firebase";
 
 import useAuthUser from "../../auth/getUser";
 import ButtonAll from "../button/Button";
 import { IoIosNotificationsOutline } from "react-icons/io";
+import { BsFillMoonStarsFill } from "react-icons/bs";
+
 const Navbar = () => {
   const { user } = useAuthUser(auth);
-  
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -22,11 +24,12 @@ const Navbar = () => {
   );
 
   const handletoggle = (e) => {
-    if (e.target.checked) {
-      setTheme("synthwave");
-    } else {
-      setTheme("autumn");
-    }
+    // if (e.target.checked) {
+    //   setTheme("synthwave");
+    // } else {
+    //   setTheme("autumn");
+    // }
+    setTheme(theme === "autumn" ? "synthwave" : "autumn");
   };
 
   useEffect(() => {
@@ -72,7 +75,7 @@ const Navbar = () => {
       </li>
       <li>
         <Link className="text-[12px] font-medium" to="/blog">
-         Article
+          Article
         </Link>
       </li>
 
@@ -120,35 +123,56 @@ const Navbar = () => {
             <img className="w-[42px] h-[42px]" src={img1} alt="" />
             <h2 className="text-3xl font-semibold">airTalX</h2>
           </div>
-          <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">{nav}</ul>
+          <div className="hidden navbar-center lg:flex">
+            <ul className="px-1 menu menu-horizontal">{nav}</ul>
           </div>
         </div>
 
-        <div className="navbar-end">
-          <div className="flex justify-center items-center gap-4">
-            <label className="switch">
-              {/* <input type="checkbox" defaultChecked /> */}
+        <div className="navbar-end pr-[4%]">
+          <div className="flex items-center justify-center gap-8 lg:gap-16">
+            {/* <label className="switch">
               <input onChange={handletoggle} type="checkbox" />
 
               <div className="slider">
                 <div className="circle bg-white  w-[31px] h-[31px]">
-                  <LuSun className="text-warning text-xl" />
+                  <IoIosSunny className="text-2xl text-warning" />
                 </div>
               </div>
-            </label>
+            </label> */}
 
-          {user &&  <h2><IoIosNotificationsOutline  className="text-2xl" /></h2>}
+            <div
+              onClick={handletoggle}
+              className={`w-16 rounded-full h-9 px-[2px] cursor-pointer  items-center  relative duration-300 transition-all flex ${
+                theme === "autumn" ? "  bg-[#78C6FF]" : " bg-[#0b2447]"
+              }`}
+            >
+              <div
+                className={`flex items-center justify-center duration-300 bg-white rounded-full size-8 absolute  top-[4.3%] ${
+                  theme === "autumn" ? "left-[5%]" : "left-[48%]"
+                }`}
+              >
+                {theme === "autumn" ? (
+                  <IoIosSunny className="text-2xl text-warning" />
+                ) : (
+                  <BsFillMoonStarsFill className="text-xl text-gray-800" />
+                )}
+              </div>
+            </div>
+
+            {user && (
+              <h2>
+                <IoIosNotificationsOutline className="text-2xl" />
+              </h2>
+            )}
 
             {!user ? (
               <Link to="/login">
-               
                 <ButtonAll>Login</ButtonAll>
               </Link>
             ) : (
               <Link
                 to="/profile"
-                className="bg-white flex gap-1 px-5 py-2 rounded-3xl"
+                className="flex gap-1 px-5 py-2 bg-white rounded-3xl"
               >
                 {user?.role === "admin" && (
                   <p className="max-md:hidden">Admin </p>
@@ -161,7 +185,7 @@ const Navbar = () => {
                 )}
                 <img
                   src={user?.image}
-                  className="w-7 h-7 rounded-full"
+                  className="rounded-full w-7 h-7"
                   alt=""
                 />
               </Link>
