@@ -41,7 +41,7 @@ const Application = () => {
   // Logic for displaying current page items
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = appli.slice(indexOfFirstItem, indexOfLastItem);
+  // const currentItems = appli.slice(indexOfFirstItem, indexOfLastItem);
 
   const totalPages = Math.ceil(appli.length / itemsPerPage);
 
