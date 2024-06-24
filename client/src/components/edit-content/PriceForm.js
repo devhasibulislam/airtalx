@@ -2,14 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 const PriceForm = () => {
-  const [prices, setPrices] = useState({
-    priceLevel1: "",
-    priceAmount1: "",
-    pricingFill1: "",
-    priceLevel2: "",
-    priceAmount2: "",
-    pricingFill2: "",
-  });
+  const [prices, setPrices] = useState();
   const {
     register,
     handleSubmit,
@@ -26,9 +19,28 @@ const PriceForm = () => {
     })
   },[]);
 
+  if(!prices){
+    return <span className="loading loading-spinner loading-xs"></span>
+  }
 
   const onSubmit = (data) => {
     console.log(data);
+    if(prices){
+        const body = [
+      {
+        heading: data?.pricing_level,
+        price: data?.price,
+        options: [...prices[0]?.options,data?.pricingfill]
+      },
+      {
+        heading: data?.pricing_level2 ,
+        price: data?.price2 ,
+        options: [...prices[0]?.options,data?.pricingfill2]
+      }
+    ]
+    console.log("this is from anubis", {body})  
+    }
+
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -86,7 +98,8 @@ const PriceForm = () => {
           </label>
           <textarea
             id="pricingfill"
-            placeholder="Pricing Fill"
+            placeholder={prices[0]?.options?.map(data=> data)}
+            // defaultValue={prices[0]?.options?.map(data=> data)}
             rows={3}
             className="border min-h-[136px] rounded-md text-xs p-3 font-medium focus:outline-none w-full"
             {...register("pricingfill")}
@@ -148,7 +161,8 @@ const PriceForm = () => {
           </label>
           <textarea
             id="pricingfill2"
-            placeholder="Pricing Fill"
+            placeholder={prices[1]?.options?.map(data=> data)}
+            // defaultValue={prices[1]?.options?.map(data=> data)}
             rows={3}
             className="border min-h-[136px] rounded-md text-xs p-3 font-medium focus:outline-none w-full"
             {...register("pricingfill2")}
