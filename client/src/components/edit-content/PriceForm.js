@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 const PriceForm = () => {
+  const [prices, setPrices] = useState({
+    priceLevel1: "",
+    priceAmount1: "",
+    pricingFill1: "",
+    priceLevel2: "",
+    priceAmount2: "",
+    pricingFill2: "",
+  });
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+
+  useEffect(()=>{
+    fetch(`${process.env.REACT_APP_ORIGIN_URL}/footer`)
+    .then(res=> res.json())
+    .then(data=>{
+      setPrices(data?.pricing)
+      console.log(data?.pricing)
+    })
+  },[]);
+
 
   const onSubmit = (data) => {
     console.log(data);
@@ -28,9 +47,10 @@ const PriceForm = () => {
           <input
             id="pricing_level"
             type="text"
+            defaultValue={prices[0]?.heading}
             placeholder="Pricing Level"
             className=" border rounded-md text-[10px] max-w-[263px] h-[32px] px-3 font-medium focus:outline-none"
-            {...register("pricing_level", { required: true })}
+            {...register("pricing_level")}
           />
           {errors.pricing_level && (
             <p className=" text-xs text-red-500">This field is required.</p>
@@ -46,10 +66,11 @@ const PriceForm = () => {
           </label>
           <input
             id="price"
+            defaultValue={prices[0]?.price}
             type="number"
             placeholder="Price"
             className=" border rounded-md max-w-[263px] text-[10px] h-[32px] px-3 font-medium focus:outline-none"
-            {...register("price", { required: true })}
+            {...register("price")}
           />
           {errors.price && (
             <p className=" text-xs text-red-500">This field is required.</p>
@@ -68,7 +89,7 @@ const PriceForm = () => {
             placeholder="Pricing Fill"
             rows={3}
             className="border min-h-[136px] rounded-md text-xs p-3 font-medium focus:outline-none w-full"
-            {...register("pricingfill", { required: true })}
+            {...register("pricingfill")}
           />
           {errors.pricingfill && (
             <p className=" text-xs text-red-500">This field is required.</p>
@@ -88,9 +109,10 @@ const PriceForm = () => {
           </label>
           <input
             id="pricing_level2"
+            defaultValue={prices[1]?.heading}
             placeholder="Pricing Level"
             className=" border rounded-md text-[10px] max-w-[263px] h-[32px] px-3 font-medium focus:outline-none"
-            {...register("pricing_level2", { required: true })}
+            {...register("pricing_level2")}
           />
           {errors.pricing_level2 && (
             <p className=" text-xs text-red-500">This field is required.</p>
@@ -107,9 +129,10 @@ const PriceForm = () => {
           <input
             type="number"
             id="price2"
+            defaultValue={prices[1]?.price}
             placeholder="Price"
             className=" border rounded-md max-w-[263px] text-[10px] h-[32px] px-3 font-medium focus:outline-none"
-            {...register("price2", { required: true })}
+            {...register("price2")}
           />
           {errors.price2 && (
             <p className=" text-xs text-red-500">This field is required.</p>
@@ -128,7 +151,7 @@ const PriceForm = () => {
             placeholder="Pricing Fill"
             rows={3}
             className="border min-h-[136px] rounded-md text-xs p-3 font-medium focus:outline-none w-full"
-            {...register("pricingfill2", { required: true })}
+            {...register("pricingfill2")}
           />
           {errors.pricingfill2 && (
             <p className=" text-xs text-red-500">This field is required.</p>
