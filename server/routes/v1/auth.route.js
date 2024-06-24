@@ -16,9 +16,9 @@ router.post("/login", userController.accountLogin);
 // password reset
 router
   .route("/reset")
-  .put(userController.accountReset)
+  .post(userController.accountReset)
   .get(userController.verifyAccountReset)
-  .patch(userController.confirmAccountPersist);
+  .put(userController.confirmAccountPersist);
 // login persist
 router.get("/me", verify, userController.accountPersist);
 

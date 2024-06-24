@@ -28,9 +28,17 @@ const jobsSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please, provide your experience level"],
     },
-    job_description: {
-      type: String,
-      required: [true, "Please, provide your job description"],
+    company: {
+      type: String
+    },
+    location: {
+      type: String
+    },
+    industry: {
+      type: String
+    },
+    size_of_company: {
+      type: String
     },
   },
   {

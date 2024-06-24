@@ -14,7 +14,8 @@ const blogRoute = require('./routes/v1/blog.route');
 const messageRoute = require('./routes/v1/message.route');
 const paymentRoute = require('./routes/v1/payment.route');
 const applicationRoute = require('./routes/v1/application.route');
-const otpRoute = require('./routes/v1/upotp.route');
+const otpRoute = require('./routes/v1/otp.route');
+const historyRoute = require('./routes/v1/history.route');
 
 /* application level connection */
 const app = express();
@@ -45,6 +46,7 @@ app.use('/v1/api/message', messageRoute);
 app.use('/v1/api/payment', paymentRoute);
 app.use('/v1/api/application', applicationRoute);
 app.use('/v1/api/otp', otpRoute);
+app.use('/v1/api/history',historyRoute);
 
 /* global error handler */
 app.use(error);

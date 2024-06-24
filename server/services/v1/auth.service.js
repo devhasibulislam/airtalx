@@ -1,9 +1,10 @@
 /* internal imports */
-const User = require("../../models/v1/user.model");
+// const User = require("../../models/v1/user.model");
 const token = require("../../utils/token.util");
 const crypto = require("crypto");
 const { sendOTP } = require("./otp.service");
 const mailSender = require("../../utils/email.util");
+const User = require("../../models/v1/userdata.model");
 
 /* account registration */
 exports.accountRegistration = async (req, res) => {
@@ -164,14 +165,9 @@ exports.accountReset = async (req, res) => {
                   verification field:
                 </span>
               </div>
-              <a
-                href="${req.protocol}://${req.get("host")}${
-          req.originalUrl
-        }?token=${resetToken}"
-                target="_blank"
-                class="reset_button"
-                >Reset Password</a
-              >
+              <a href="%LINK%">
+        Click here to reset your password
+      </a>
               <p>If you didn't as to reset your password, you can ignore this email.</p>
               <p>
                 <span>Thanks,</span>

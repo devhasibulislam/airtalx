@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { FaUpload } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { BsApple } from "react-icons/bs";
 import ButtonAll from "../button/Button";
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../../firebase";
@@ -14,7 +13,7 @@ import axios from "axios";
 const Signup = () => {
   const [activeTab, setActiveTab] = useState(0);
   const navigate = useNavigate();
-  console.log(`http://localhost:8080`);
+  // console.log(`http://localhost:8080`);
   const handleTabClick = (index) => {
     setActiveTab(index);
   };
@@ -35,7 +34,47 @@ const Signup = () => {
 
     try {
       const res = await axios.post(
-        `http://localhost:8080/v1/api/userdata`,
+        `https://api-airtalx.vercel.app/v1/api/userdata`,
+        formData
+      );
+      console.log(res);
+      await createUserWithEmailAndPassword(auth, email, password);
+
+      Swal.fire({
+        position: "top",
+        icon: "success",
+        title: "Employer signed up successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      }).then(() => {
+        navigate("/verifyotp");
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+      });
+    } catch (error) {
+      console.error("Error during signup:", error);
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Signup failed",
+        text: error.message || "Please try again later",
+        showConfirmButton: true,
+      });
+    }
+  };
+  const onSubmit2 = async (data) => {
+    const { email, password, image, name } = data;
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("name", name);
+    formData.append("role", "employer");
+    formData.append("image", image[0]);
+
+    try {
+      const res = await axios.post(
+        `https://api-airtalx.vercel.app/v1/api/userdata`,
         formData
       );
       console.log(res);
@@ -192,18 +231,20 @@ const Signup = () => {
         const result = await signInWithPopup(auth, googleProvider);
         const { user } = result;
         console.log(user.photoURL);
-       const rrr=  await axios.post(`http://localhost:8080/v1/api/userdata`, {
+        const rrr = await axios.post(`https://api-airtalx.vercel.app/v1/api/userdata`, {
           name: user.displayName,
           email: user.email,
           password: "12345678",
           image: user.photoURL,
         });
-// console.log(rrr.data);
+        // console.log(rrr.data);
 
-        await axios.put(`http://localhost:8080/v1/api/userdata/${rrr.data._id}`, {
-          
-          image: user.photoURL,
-        });
+        await axios.put(
+          `https://api-airtalx.vercel.app/v1/api/userdata/${rrr.data._id}`,
+          {
+            image: user.photoURL,
+          }
+        );
 
         Swal.fire({
           position: "top",
@@ -215,7 +256,7 @@ const Signup = () => {
         navigate("/verifyotp");
         setTimeout(() => {
           window.location.reload();
-        }, 500); 
+        }, 500);
       } catch (error) {
         console.error("Error checking/creating user in MongoDB:", error);
         Swal.fire({
@@ -271,7 +312,7 @@ const Signup = () => {
                     } rounded-lg focus:outline-none`}
                     onClick={() => handleTabClick(0)}
                   >
-                    I Want to Hire
+                    I Want a Job
                   </button>
                   <button
                     className={`px-4 py-2 ${
@@ -279,7 +320,7 @@ const Signup = () => {
                     } rounded-lg focus:outline-none`}
                     onClick={() => handleTabClick(1)}
                   >
-                    I Want a Job
+                    I Want to Hire
                   </button>
                 </div>
 
@@ -316,20 +357,18 @@ const Signup = () => {
                   {activeTab === 1 && (
                     <div>
                       <form
-                        onSubmit={handleSubmit(onSubmit)}
+                        onSubmit={handleSubmit(onSubmit2)}
                         className="card-body"
                       >
                         {fileCompo}
                       </form>
-                      <div className="flex justify-between gap-3 mt-[20px] p-3">
+
+                      <div className="mx-auto  flex max-lg:flex-col lg:justify-center gap-3 mt-[20px]">
                         <button
                           onClick={handleGoogleLogin}
                           className="btn btn-active btn-ghost"
                         >
-                          <FcGoogle /> Sign In with Google
-                        </button>
-                        <button className="btn btn-active btn-ghost">
-                          <BsApple /> Sign In with Apple
+                          <FcGoogle /> Sign Up with Google
                         </button>
                       </div>
                       <div className="mt-[20px] p-3 ">

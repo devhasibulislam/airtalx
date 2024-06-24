@@ -24,15 +24,18 @@ import SingleBlog from "../components/admin/blog/SingleBlog";
 import AdminView from "../components/find-employee/AdminView";
 import JobApply from "../components/find-job/JobApply";
 import ApplySuccess from "../components/find-job/ApplySuccess";
+import ResetPin from "../components/forget-password/ResetPin";
+import SingleProfile from "../components/JobSeeker/profile/SingleProfile";
 
 const RouteA = () => {
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <Routes>
         <Route path="/" element={<Home />} />
 
         <Route path="/jobseeker-dashboard" element={<JobSeekerDashboard />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/reset-pin" element={<ResetPin />} />
         <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
 
         <Route path="/login" element={<Login />} />
@@ -69,6 +72,15 @@ const RouteA = () => {
           element={
             <div className="px-3 md:px-32">
               <JobSeekerProfile />
+            </div>
+          }
+        />
+
+        <Route
+          path="/profile/:id"
+          element={
+            <div className="px-3 md:px-32">
+              <SingleProfile />
             </div>
           }
         />

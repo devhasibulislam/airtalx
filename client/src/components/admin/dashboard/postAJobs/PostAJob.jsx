@@ -5,44 +5,58 @@ import Swal from "sweetalert2";
 import useAuthUser from "../../../../auth/getUser";
 import { auth } from "../../../../firebase";
 const PostAJob = () => {
-  const {user} = useAuthUser(auth);
+  const { user } = useAuthUser(auth);
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
-   
   } = useForm();
 
+  const onSubmit = async (data) => {
+    const cleanedData = {
+      ...data,
+      postby: user.name,
+    };
 
+    const historyData = {
+      designation: data.job_title,
+      posted_date: new Date(),
+      active: 10,
+      awaiting: 5,
+      conducting: 2,
+      location: data.location,
+    };
 
-
-const onSubmit = async (data) => {
-  const cleanedData = {
-    ...data,
-    postby:user.name
-  };
-
-  try {
     // console.log(data);
-     await axios.post(`http://localhost:8080/v1/api/postjobs`, cleanedData);
-    
+    // console.log(historyData);
 
-    Swal.fire({
-      title: 'Success!',
-      text: 'Job posted successfully',
-      icon: 'success',
-      confirmButtonText: 'OK'
-    });
-  } catch (error) {
-    console.error("There was an error posting the job!", error);
-    Swal.fire({
-      title: 'Error!',
-      text: 'There was an error posting the job',
-      icon: 'error',
-      confirmButtonText: 'OK'
-    });
-  }
-};
+    try {
+      // console.log(data);
+      await axios.post(`http://localhost:8080/v1/api/postjobs`, cleanedData);
+
+      await axios.post(`http://localhost:8080/v1/api/history`, historyData);
+
+      Swal.fire(
+        {
+          title: "Success!",
+          text: "Job posted successfully",
+          icon: "success",
+          confirmButtonText: "OK",
+        },
+
+        reset()
+      );
+    } catch (error) {
+      console.error("There was an error posting the job!", error);
+      Swal.fire({
+        title: "Error!",
+        text: "There was an error posting the job",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
+  };
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="card-body">
@@ -108,6 +122,74 @@ const onSubmit = async (data) => {
           </div>
         </div>
 
+        <div className="grid md:grid-cols-2 gap-2 ">
+          <div className="form-control mt-3">
+            <label className="label">
+              <span className=" font-semibold">Company</span>
+            </label>
+
+            <input
+              type="text"
+              placeholder="Answer"
+              className="input input-sm input-bordered rounded-2xl"
+              {...register("company", { required: true })}
+            />
+            {errors.job_headline && (
+              <span className="text-red-500">This field is required</span>
+            )}
+          </div>
+
+          <div className="form-control mt-3">
+            <label className="label">
+              <span className=" font-semibold">Location</span>
+            </label>
+
+            <input
+              type="text"
+              placeholder="Answer"
+              className="input input-sm input-bordered rounded-2xl"
+              {...register("location", { required: true })}
+            />
+            {errors.job_headline && (
+              <span className="text-red-500">This field is required</span>
+            )}
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-2 ">
+          <div className="form-control mt-3">
+            <label className="label">
+              <span className=" font-semibold">Industry</span>
+            </label>
+
+            <input
+              type="text"
+              placeholder="Answer"
+              className="input input-sm input-bordered rounded-2xl"
+              {...register("industry", { required: true })}
+            />
+            {errors.job_headline && (
+              <span className="text-red-500">This field is required</span>
+            )}
+          </div>
+
+          <div className="form-control mt-3">
+            <label className="label">
+              <span className=" font-semibold">Size of Company</span>
+            </label>
+
+            <input
+              type="text"
+              placeholder="Answer"
+              className="input input-sm input-bordered rounded-2xl"
+              {...register("size_of_company", { required: true })}
+            />
+            {errors.job_headline && (
+              <span className="text-red-500">This field is required</span>
+            )}
+          </div>
+        </div>
+
         <div className="form-control mt-3">
           <label className="label">
             <span className=" font-semibold">Salary</span>
@@ -141,12 +223,16 @@ const onSubmit = async (data) => {
           )}
         </div>
 
-         <div className="form-control">
+        <div className="form-control">
           <label className="label">
             <span className=" font-semibold">Job Description</span>
           </label>
 
-          <textarea className="textarea " placeholder="Job description"   {...register("job_description", { required: true })}/>
+          <textarea
+            className="textarea "
+            placeholder="Job description"
+            {...register("job_description", { required: true })}
+          />
           {errors.job_title && (
             <span className="text-red-500">This field is required</span>
           )}

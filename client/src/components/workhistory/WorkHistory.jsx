@@ -1,6 +1,36 @@
-import React, { useState } from "react";
+// import axios from "axios";
+import React, {  useState } from "react";
+// import Swal from "sweetalert2";
 
 const WorkHistory = () => {
+  // const [data,setData] = useState([])
+
+  // look,,when you dynmaic it just off demo data, and use dynamic fetch data
+  // useEffect(() => {
+  //   const fetchJobs = async () => {
+  //     try {
+  //       const res = await axios.get(
+  //         `http://localhost:8080/v1/api/history`
+  //       );
+  //       setData(res.data);
+  //     //   setLoading(false);
+  //     } catch (error) {
+  //       console.error("There was an error fetching the jobs!", error);
+  //       Swal.fire({
+  //         title: "Error!",
+  //         text: "There was an error fetching the jobs",
+  //         icon: "error",
+  //         confirmButtonText: "OK",
+  //       });
+  //     //   setLoading(false);
+  //     }
+  //   };
+
+  //   fetchJobs();
+  // }, []);
+
+
+
   const data = [
     {
       id: 1,
@@ -203,6 +233,7 @@ const WorkHistory = () => {
       location: "Washington, DC",
     },
   ];
+ 
 
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedStatus, setSelectedStatus] = useState("");
@@ -219,7 +250,7 @@ const WorkHistory = () => {
         if (selectedStatus === "Contructual") return item.contucting > 0;
         if (selectedStatus === "Hired") return item.hired > 0;
         return true;
-      })
+      }) 
     : data;
 
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
@@ -251,7 +282,7 @@ const WorkHistory = () => {
         </select>
       </div>
       <div className="p-5">
-        {displayedData.map((m) => (
+        {data.map((m) => (
           <div
             key={m.id}
             className="flex flex-col md:flex-row items-center justify-between border-b border-gray-200 gap-5 p-3 mb-5"

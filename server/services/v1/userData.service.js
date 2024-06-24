@@ -5,6 +5,7 @@ const multer = require("multer");
 const path = require("path");
 const User = require("../../models/v1/userdata.model");
 const bcrypt = require("bcrypt");
+const { sendOTP } = require("./otp.service");
 
 /* cloudinary config */
 cloudinary.config({
@@ -18,7 +19,7 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: async (_, file) => {
     return {
-      folder: 'airtalx',
+      folder: "airtalx",
       public_id: `${Date.now()}_${file.originalname
         .replace(/[^\w\s.-]/g, "")
         .replace(/\s+/g, "-")
@@ -39,13 +40,13 @@ const upload = multer({
       cb(new Error("Must be a png/jpg/jpeg format"));
     }
   },
-}).single('image');
+}).single("image");
 
 /* user service functions */
 
-const createUser = async (userData, file) => {
+const createUser = async (userData, file, res) => {
   const hashedPassword = await bcrypt.hash(userData.password, 10); // Hash the password
-  
+
   // Check if an image file is uploaded
   let imagePath = null;
   if (file) {
@@ -56,9 +57,13 @@ const createUser = async (userData, file) => {
   const newUser = new User({
     ...userData,
     password: hashedPassword,
-    image: imagePath
+    image: imagePath,
   });
-  return await newUser.save();
+
+  if (newUser) {
+    await newUser.save();
+    await sendOTP({ body: newUser }, res);
+  }
 };
 
 const getAllUsers = async () => {
@@ -78,7 +83,10 @@ const updateUser = async (id, userData, file) => {
     const uploadResult = await cloudinary.uploader.upload(file.path);
     userData.image = uploadResult.secure_url;
   }
-  return await User.findByIdAndUpdate(id, userData, { new: true, runValidators: true });
+  return await User.findByIdAndUpdate(id, userData, {
+    new: true,
+    runValidators: true,
+  });
 };
 
 const deleteUser = async (id) => {
@@ -103,6 +111,5 @@ module.exports = {
   updateUser,
   deleteUser,
   getUserByEmail,
-  addExperience
+  addExperience,
 };
-

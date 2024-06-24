@@ -1,10 +1,12 @@
 // services/jobService.js
 const Job = require("../../models/v1/post.job");
+const History = require('../../models/v1/history.model');
 
 const createJob = async (jobData) => {
     const job = new Job(jobData);
     return await job.save();
 };
+
 
 const getAllJobs = async () => {
     return await Job.find({});

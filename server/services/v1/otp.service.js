@@ -1,6 +1,6 @@
 const otpGenerator = require("otp-generator");
 const OTP = require("../../models/v1/otp.model");
-const User = require("../../models/v1/user.model");
+const User = require("../../models/v1/userdata.model");
 
 exports.sendOTP = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
@@ -69,7 +69,6 @@ exports.verifyOTP = async (req, res) => {
   }
 
   const result = await OTP.findOne({ otp });
-  const user = await User.findOne({ email: result.email });
 
   if (!result) {
     res.status(404).json({
@@ -78,6 +77,8 @@ exports.verifyOTP = async (req, res) => {
       description: "Please, provide a valid OTP",
     });
   }
+
+  const user = await User.findOne({ email: result.email });
 
   if (result.status === "unverified") {
     result.status = "verified";

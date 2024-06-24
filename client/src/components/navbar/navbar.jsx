@@ -7,8 +7,6 @@ import { auth } from "../../firebase";
 
 import useAuthUser from "../../auth/getUser";
 import ButtonAll from "../button/Button";
-import { IoIosNotificationsOutline } from "react-icons/io";
-import { BsFillMoonStarsFill } from "react-icons/bs";
 
 const Navbar = () => {
   const { user } = useAuthUser(auth);
@@ -139,31 +137,6 @@ const Navbar = () => {
                 </div>
               </div>
             </label> */}
-
-            <div
-              onClick={handletoggle}
-              className={`w-16 rounded-full h-9 px-[2px] cursor-pointer  items-center  relative duration-300 transition-all flex ${
-                theme === "autumn" ? "  bg-[#78C6FF]" : " bg-[#0b2447]"
-              }`}
-            >
-              <div
-                className={`flex items-center justify-center duration-300 bg-white rounded-full size-8 absolute  top-[4.3%] ${
-                  theme === "autumn" ? "left-[5%]" : "left-[48%]"
-                }`}
-              >
-                {theme === "autumn" ? (
-                  <IoIosSunny className="text-2xl text-warning" />
-                ) : (
-                  <BsFillMoonStarsFill className="text-xl text-gray-800" />
-                )}
-              </div>
-            </div>
-
-            {user && (
-              <h2>
-                <IoIosNotificationsOutline className="text-2xl" />
-              </h2>
-            )}
 
             {!user ? (
               <Link to="/login">
