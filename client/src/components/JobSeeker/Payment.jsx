@@ -53,7 +53,7 @@
 //             </label>
 //             <input
 //               type="text"
-              
+
 //               className="input input-sm input-bordered rounded-2xl"
 //               {...register("name", { required: true })}
 //             />
@@ -116,7 +116,7 @@
 //             </label>
 //             <input
 //               type="text"
-              
+
 //               className="input input-sm input-bordered rounded-2xl"
 //               {...register("invoid_choice", { required: true })}
 //             />
@@ -130,7 +130,7 @@
 //             </label>
 //             <input
 //               type="text"
-              
+
 //               className="input input-sm input-bordered rounded-2xl"
 //               {...register("invoid_choice", { required: true })}
 //             />
@@ -144,7 +144,7 @@
 //             </label>
 //             <input
 //               type="text"
-              
+
 //               className="input input-sm input-bordered rounded-2xl"
 //               {...register("invoid_choice", { required: true })}
 //             />
@@ -154,7 +154,6 @@
 //           </div>
 //         </div>
 
-
 //         <div className="grid md:grid-cols-3 gap-2">
 //         <div className="form-control">
 //             <label className="label">
@@ -162,7 +161,7 @@
 //             </label>
 //             <input
 //               type="text"
-              
+
 //               className="input input-sm input-bordered rounded-2xl"
 //               {...register("invoid_choice", { required: true })}
 //             />
@@ -176,7 +175,7 @@
 //             </label>
 //             <input
 //               type="text"
-              
+
 //               className="input input-sm input-bordered rounded-2xl"
 //               {...register("invoid_choice", { required: true })}
 //             />
@@ -190,7 +189,7 @@
 //             </label>
 //             <input
 //               type="text"
-              
+
 //               className="input input-sm input-bordered rounded-2xl"
 //               {...register("invoid_choice", { required: true })}
 //             />
@@ -207,7 +206,7 @@
 //             </label>
 //             <input
 //               type="text"
-              
+
 //               className="input input-sm input-bordered rounded-2xl"
 //               {...register("invoid_choice", { required: true })}
 //             />
@@ -221,7 +220,7 @@
 //             </label>
 //             <input
 //               type="text"
-              
+
 //               className="input input-sm input-bordered rounded-2xl"
 //               {...register("invoid_choice", { required: true })}
 //             />
@@ -235,7 +234,7 @@
 //             </label>
 //             <input
 //               type="text"
-              
+
 //               className="input input-sm input-bordered rounded-2xl"
 //               {...register("invoid_choice", { required: true })}
 //             />
@@ -249,7 +248,7 @@
 //             </label>
 //             <input
 //               type="text"
-              
+
 //               className="input input-sm input-bordered rounded-2xl"
 //               {...register("invoid_choice", { required: true })}
 //             />
@@ -318,15 +317,19 @@
 
 // export default Payment;
 
-
 import React from "react";
 import { useForm } from "react-hook-form";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { loadStripe } from "@stripe/stripe-js";
-import { Elements, useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
+import {
+  Elements,
+  useStripe,
+  useElements,
+  CardElement,
+} from "@stripe/react-stripe-js";
 
 // Replace with your actual Stripe publishable key
-const stripePromise = loadStripe("YOUR_PUBLISHABLE_KEY");
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 const CheckoutForm = () => {
   const stripe = useStripe();
