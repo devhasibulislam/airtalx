@@ -1,372 +1,9 @@
-// import React, { useEffect } from "react";
-// import { useForm } from "react-hook-form";
-// import { AiFillPlusCircle } from "react-icons/ai";
-// import usePayPalScript from "./UsePaypalSript";
-// // import usePayPalScript from "./usePayPalScript"; // Import the custom hook
-
-// const Payment = () => {
-//   const {
-//     register,
-//     handleSubmit,
-//     formState: { errors },
-//     // reset,
-//   } = useForm();
-
-//   const onSubmit = async (data) => {
-//     console.log(data);
-//   };
-
-//   // Use the custom hook to load the PayPal SDK
-//   usePayPalScript("YOUR_CLIENT_ID"); // Replace with your actual PayPal client ID
-
-//   useEffect(() => {
-//     if (window.paypal) {
-//       window.paypal.Buttons({
-//         createOrder: (data, actions) => {
-//           return actions.order.create({
-//             purchase_units: [
-//               {
-//                 amount: {
-//                   value: "100.00", // Replace with the actual amount
-//                 },
-//               },
-//             ],
-//           });
-//         },
-//         onApprove: (data, actions) => {
-//           return actions.order.capture().then((details) => {
-//             alert("Transaction completed by " + details.payer.name.given_name);
-//             console.log(details);
-//           });
-//         },
-//       }).render('#paypal-button-container');
-//     }
-//   }, []);
-
-//   return (
-//     <div>
-//       <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-//       <div className="grid md:grid-cols-2 gap-2">
-//           <div className="form-control">
-//             <label className="label">
-//               <span className=" font-semibold">Full Name</span>
-//             </label>
-//             <input
-//               type="text"
-
-//               className="input input-sm input-bordered rounded-2xl"
-//               {...register("name", { required: true })}
-//             />
-//             {errors.job_title && (
-//               <span className="text-red-500">This field is required</span>
-//             )}
-//           </div>
-
-//           <div className="form-control ">
-//             <label className="label">
-//               <span className=" font-semibold">Email</span>
-//             </label>
-//             <input
-//               type="email"
-//               placeholder="Enter your email"
-//               className="input input-sm input-bordered rounded-2xl"
-//               {...register("email", { required: true })}
-//             />
-//             {errors.job_headline && (
-//               <span className="text-red-500">This field is required</span>
-//             )}
-//           </div>
-//         </div>
-
-//         <div className="grid md:grid-cols-2 gap-2">
-//           <div className="form-control mt-3 ">
-//             <label>Payment Option</label>
-//             <select
-//               {...register("payment_option")}
-//               className="  rounded-xl p-1 bg-base-100"
-//             >
-//               <option value="part time">1</option>
-//               <option value="full time">2</option>
-//               <option value="hybridge">3</option>
-//             </select>
-//             {errors.payment_option && (
-//               <span className="text-red-500">This field is required</span>
-//             )}
-//           </div>
-//           <div className="form-control mt-3">
-//             <label>Currency</label>
-//             <select
-//               {...register("currency")}
-//               className="rounded-xl p-1 bg-base-100"
-//             >
-//               <option value="40">40</option>
-//               <option value="25">25</option>
-//               <option value="30">30</option>
-//             </select>
-//             {errors.currency && (
-//               <span className="text-red-500">This field is required</span>
-//             )}
-//           </div>
-//         </div>
-
-//         <div className="grid md:grid-cols-3 gap-2">
-//         <div className="form-control">
-//             <label className="label">
-//               <span className=" font-semibold">Invoid No</span>
-//             </label>
-//             <input
-//               type="text"
-
-//               className="input input-sm input-bordered rounded-2xl"
-//               {...register("invoid_choice", { required: true })}
-//             />
-//             {errors.invoid_choice && (
-//               <span className="text-red-500">This field is required</span>
-//             )}
-//           </div>
-//         <div className="form-control">
-//             <label className="label">
-//               <span className=" font-semibold">Invoid Date</span>
-//             </label>
-//             <input
-//               type="text"
-
-//               className="input input-sm input-bordered rounded-2xl"
-//               {...register("invoid_choice", { required: true })}
-//             />
-//             {errors.invoid_choice && (
-//               <span className="text-red-500">This field is required</span>
-//             )}
-//           </div>
-//         <div className="form-control">
-//             <label className="label">
-//               <span className=" font-semibold">Due Date</span>
-//             </label>
-//             <input
-//               type="text"
-
-//               className="input input-sm input-bordered rounded-2xl"
-//               {...register("invoid_choice", { required: true })}
-//             />
-//             {errors.invoid_choice && (
-//               <span className="text-red-500">This field is required</span>
-//             )}
-//           </div>
-//         </div>
-
-//         <div className="grid md:grid-cols-3 gap-2">
-//         <div className="form-control">
-//             <label className="label">
-//               <span className=" font-semibold">Bill To</span>
-//             </label>
-//             <input
-//               type="text"
-
-//               className="input input-sm input-bordered rounded-2xl"
-//               {...register("invoid_choice", { required: true })}
-//             />
-//             {errors.invoid_choice && (
-//               <span className="text-red-500">This field is required</span>
-//             )}
-//           </div>
-//         <div className="form-control">
-//             <label className="label">
-//               <span className=" font-semibold">Employer Name</span>
-//             </label>
-//             <input
-//               type="text"
-
-//               className="input input-sm input-bordered rounded-2xl"
-//               {...register("invoid_choice", { required: true })}
-//             />
-//             {errors.invoid_choice && (
-//               <span className="text-red-500">This field is required</span>
-//             )}
-//           </div>
-//         <div className="form-control">
-//             <label className="label">
-//               <span className=" font-semibold">Company name</span>
-//             </label>
-//             <input
-//               type="text"
-
-//               className="input input-sm input-bordered rounded-2xl"
-//               {...register("invoid_choice", { required: true })}
-//             />
-//             {errors.invoid_choice && (
-//               <span className="text-red-500">This field is required</span>
-//             )}
-//           </div>
-//         </div>
-
-//         <div className="grid bg-slate-300 md:grid-cols-4 rounded-xl px-2 pt-5 pb-5 gap-2">
-//         <div className="form-control">
-//             <label className="label">
-//               <span className=" font-semibold">Description</span>
-//             </label>
-//             <input
-//               type="text"
-
-//               className="input input-sm input-bordered rounded-2xl"
-//               {...register("invoid_choice", { required: true })}
-//             />
-//             {errors.invoid_choice && (
-//               <span className="text-red-500">This field is required</span>
-//             )}
-//           </div>
-//         <div className="form-control">
-//             <label className="label">
-//               <span className=" font-semibold">Rate</span>
-//             </label>
-//             <input
-//               type="text"
-
-//               className="input input-sm input-bordered rounded-2xl"
-//               {...register("invoid_choice", { required: true })}
-//             />
-//             {errors.invoid_choice && (
-//               <span className="text-red-500">This field is required</span>
-//             )}
-//           </div>
-//         <div className="form-control">
-//             <label className="label">
-//               <span className=" font-semibold">Hour</span>
-//             </label>
-//             <input
-//               type="text"
-
-//               className="input input-sm input-bordered rounded-2xl"
-//               {...register("invoid_choice", { required: true })}
-//             />
-//             {errors.invoid_choice && (
-//               <span className="text-red-500">This field is required</span>
-//             )}
-//           </div>
-//         <div className="form-control">
-//             <label className="label">
-//               <span className=" font-semibold">Amount</span>
-//             </label>
-//             <input
-//               type="text"
-
-//               className="input input-sm input-bordered rounded-2xl"
-//               {...register("invoid_choice", { required: true })}
-//             />
-//             {errors.invoid_choice && (
-//               <span className="text-red-500">This field is required</span>
-//             )}
-//           </div>
-//         </div>
-//         <div className="mt-3">
-//           <h1 className="flex gap-2">
-//             <AiFillPlusCircle className="text-2xl text-green-600" />
-//             Add another line item
-//           </h1>
-//         </div>
-
-//         <div className="grid md:grid-cols-2 gap-2">
-//           <div className="form-control">
-//             <label className="label">
-//               <span className="font-semibold">Notes to participant</span>
-//             </label>
-//             <input
-//               type="text"
-//               className="input input-sm input-bordered rounded-2xl"
-//               {...register("notes", { required: true })}
-//             />
-//             {errors.notes && (
-//               <span className="text-red-500">This field is required</span>
-//             )}
-//           </div>
-
-//           <div className="form-control ">
-//             <label className="label">
-//               <span className="font-semibold">Total amount</span>
-//             </label>
-//             <input
-//               type="number"
-//               className="input input-sm input-bordered rounded-2xl"
-//               {...register("total_amount", { required: true })}
-//             />
-//             {errors.total_amount && (
-//               <span className="text-red-500">This field is required</span>
-//             )}
-//           </div>
-//         </div>
-
-//         <div id="paypal-button-container"></div>
-
-//         <div className="flex justify-between gap-2">
-//           <button className="btn btn-success mt-3" type="submit">
-//             Download PDF
-//           </button>
-//           <button className="btn btn-success mt-3" type="submit">
-//             Save as Template
-//           </button>
-//           <button className="btn btn-outline btn-error mt-3" type="submit">
-//             Delete Template
-//           </button>
-//           <button className="btn btn-warning mt-3" type="submit">
-//             Send Invoice
-//           </button>
-//         </div>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default Payment;
-
 import React from "react";
 import { useForm } from "react-hook-form";
 import { AiFillPlusCircle } from "react-icons/ai";
-import { loadStripe } from "@stripe/stripe-js";
-import {
-  Elements,
-  useStripe,
-  useElements,
-  CardElement,
-} from "@stripe/react-stripe-js";
 
-// Replace with your actual Stripe publishable key
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
-
-const CheckoutForm = () => {
-  const stripe = useStripe();
-  const elements = useElements();
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (!stripe || !elements) {
-      // Stripe.js has not yet loaded.
-      return;
-    }
-
-    const cardElement = elements.getElement(CardElement);
-
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
-      card: cardElement,
-    });
-
-    if (error) {
-      console.error(error);
-    } else {
-      console.log(paymentMethod);
-      // You can send the paymentMethod.id to your server for further processing
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <CardElement />
-      <button type="submit" disabled={!stripe}>
-        Pay
-      </button>
-    </form>
-  );
-};
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const Payment = () => {
   const {
@@ -377,12 +14,32 @@ const Payment = () => {
 
   const onSubmit = async (data) => {
     console.log(data);
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/v1/api/payment",
+        data
+      );
+      console.log(response);
+      if (response.data) {
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Payment saved successful",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    } catch (error) {
+      console.error("Error creatingpayment:", error);
+    }
   };
 
   return (
-    <div>
+    <div className="max-w-6xl mx-auto">
       <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+        {/* Your form fields */}
         <div className="grid md:grid-cols-2 gap-2">
+          {/* Name and Email */}
           <div className="form-control">
             <label className="label">
               <span className="font-semibold">Full Name</span>
@@ -390,13 +47,12 @@ const Payment = () => {
             <input
               type="text"
               className="input input-sm input-bordered rounded-2xl"
-              {...register("name", { required: true })}
+              {...register("name")}
             />
             {errors.name && (
               <span className="text-red-500">This field is required</span>
             )}
           </div>
-
           <div className="form-control">
             <label className="label">
               <span className="font-semibold">Email</span>
@@ -405,7 +61,7 @@ const Payment = () => {
               type="email"
               placeholder="Enter your email"
               className="input input-sm input-bordered rounded-2xl"
-              {...register("email", { required: true })}
+              {...register("email")}
             />
             {errors.email && (
               <span className="text-red-500">This field is required</span>
@@ -413,7 +69,9 @@ const Payment = () => {
           </div>
         </div>
 
+        {/* Other form fields */}
         <div className="grid md:grid-cols-2 gap-2">
+          {/* Payment Option and Currency */}
           <div className="form-control mt-3">
             <label>Payment Option</label>
             <select
@@ -444,6 +102,7 @@ const Payment = () => {
           </div>
         </div>
 
+        {/* Invoice and Billing Information */}
         <div className="grid md:grid-cols-3 gap-2">
           <div className="form-control">
             <label className="label">
@@ -452,7 +111,7 @@ const Payment = () => {
             <input
               type="text"
               className="input input-sm input-bordered rounded-2xl"
-              {...register("invoice_no", { required: true })}
+              {...register("invoice_no")}
             />
             {errors.invoice_no && (
               <span className="text-red-500">This field is required</span>
@@ -465,7 +124,7 @@ const Payment = () => {
             <input
               type="date"
               className="input input-sm input-bordered rounded-2xl"
-              {...register("invoice_date", { required: true })}
+              {...register("invoice_date")}
             />
             {errors.invoice_date && (
               <span className="text-red-500">This field is required</span>
@@ -478,7 +137,7 @@ const Payment = () => {
             <input
               type="date"
               className="input input-sm input-bordered rounded-2xl"
-              {...register("due_date", { required: true })}
+              {...register("due_date")}
             />
             {errors.due_date && (
               <span className="text-red-500">This field is required</span>
@@ -486,6 +145,7 @@ const Payment = () => {
           </div>
         </div>
 
+        {/* More Billing Information */}
         <div className="grid md:grid-cols-3 gap-2">
           <div className="form-control">
             <label className="label">
@@ -494,7 +154,7 @@ const Payment = () => {
             <input
               type="text"
               className="input input-sm input-bordered rounded-2xl"
-              {...register("bill_to", { required: true })}
+              {...register("bill_to")}
             />
             {errors.bill_to && (
               <span className="text-red-500">This field is required</span>
@@ -507,7 +167,7 @@ const Payment = () => {
             <input
               type="text"
               className="input input-sm input-bordered rounded-2xl"
-              {...register("employer_name", { required: true })}
+              {...register("employer_name")}
             />
             {errors.employer_name && (
               <span className="text-red-500">This field is required</span>
@@ -520,14 +180,13 @@ const Payment = () => {
             <input
               type="text"
               className="input input-sm input-bordered rounded-2xl"
-              {...register("company_name", { required: true })}
+              {...register("company_name")}
             />
-            {errors.company_name && (
-              <span className="text-red-500">This field is required</span>
-            )}
+            <span className="text-red-500">This field is required</span>
           </div>
         </div>
 
+        {/* Itemized Billing Information */}
         <div className="grid bg-slate-300 md:grid-cols-4 rounded-xl px-2 pt-5 pb-5 gap-2">
           <div className="form-control">
             <label className="label">
@@ -536,7 +195,7 @@ const Payment = () => {
             <input
               type="text"
               className="input input-sm input-bordered rounded-2xl"
-              {...register("description", { required: true })}
+              {...register("description")}
             />
             {errors.description && (
               <span className="text-red-500">This field is required</span>
@@ -549,7 +208,7 @@ const Payment = () => {
             <input
               type="number"
               className="input input-sm input-bordered rounded-2xl"
-              {...register("rate", { required: true })}
+              {...register("rate")}
             />
             {errors.rate && (
               <span className="text-red-500">This field is required</span>
@@ -562,7 +221,7 @@ const Payment = () => {
             <input
               type="number"
               className="input input-sm input-bordered rounded-2xl"
-              {...register("hour", { required: true })}
+              {...register("hour")}
             />
             {errors.hour && (
               <span className="text-red-500">This field is required</span>
@@ -575,13 +234,15 @@ const Payment = () => {
             <input
               type="number"
               className="input input-sm input-bordered rounded-2xl"
-              {...register("amount", { required: true })}
+              {...register("amount")}
             />
             {errors.amount && (
               <span className="text-red-500">This field is required</span>
             )}
           </div>
         </div>
+
+        {/* Add Another Line Item */}
         <div className="mt-3">
           <h1 className="flex gap-2">
             <AiFillPlusCircle className="text-2xl text-green-600" />
@@ -589,6 +250,7 @@ const Payment = () => {
           </h1>
         </div>
 
+        {/* Notes and Total Amount */}
         <div className="grid md:grid-cols-2 gap-2">
           <div className="form-control">
             <label className="label">
@@ -597,13 +259,12 @@ const Payment = () => {
             <input
               type="text"
               className="input input-sm input-bordered rounded-2xl"
-              {...register("notes", { required: true })}
+              {...register("notes")}
             />
             {errors.notes && (
               <span className="text-red-500">This field is required</span>
             )}
           </div>
-
           <div className="form-control">
             <label className="label">
               <span className="font-semibold">Total amount</span>
@@ -611,31 +272,32 @@ const Payment = () => {
             <input
               type="number"
               className="input input-sm input-bordered rounded-2xl"
-              {...register("total_amount", { required: true })}
+              {...register("totalAmount")}
             />
-            {errors.total_amount && (
+            {errors.totalAmount && (
               <span className="text-red-500">This field is required</span>
             )}
           </div>
         </div>
 
-        <div className="mt-5">
-          <Elements stripe={stripePromise}>
-            <CheckoutForm />
-          </Elements>
-        </div>
+        {/* Stripe Elements and CheckoutForm */}
 
-        <div className="flex justify-between gap-2 mt-5">
-          <button className="btn btn-success" type="submit">
+        {/* <div type="submit" className="mt-3 p-5">
+          <Payment2 />
+        </div> */}
+
+        {/* Buttons */}
+        <div className="flex justify-between gap-2">
+          <button className="btn btn-success mt-3" type="submit">
             Download PDF
           </button>
           <button className="btn btn-success" type="submit">
             Save as Template
           </button>
-          <button className="btn btn-outline btn-error" type="submit">
+          <button className="btn btn-outline btn-error mt-3" type="button">
             Delete Template
           </button>
-          <button className="btn btn-warning" type="submit">
+          <button className="btn btn-warning mt-3" type="button">
             Send Invoice
           </button>
         </div>
