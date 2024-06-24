@@ -11,6 +11,25 @@ const createPayment = async (req, res) => {
   }
 };
 
+const createPaymentintent  = async (req, res) => {
+  const { amount, currency } = req.body;
+
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: amount * 100, // Stripe expects the amount in cents
+      currency: currency,
+    });
+
+    res.status(200).json({
+      clientSecret: paymentIntent.client_secret,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+};
+
 const getPayments = async (req, res) => {
   try {
     const payments = await paymentService.getPayments();
@@ -65,4 +84,5 @@ module.exports = {
   getPaymentById,
   updatePayment,
   deletePayment,
+  createPaymentintent
 };
