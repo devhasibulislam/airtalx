@@ -1,9 +1,11 @@
+import Swal from "sweetalert2";
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 const buttons = ["Terms Of Use", "Privacy & Policy", "Help & FAQs"];
 
 const HeadingForm = () => {
+  const [isLoading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("Terms Of Use");
   const [inputName, setInputName] = useState("statement");
   const [inputHeading, setInputHeading] = useState("Statement");
@@ -23,12 +25,112 @@ const HeadingForm = () => {
     formState: { errors },
   } = useForm();
 
-  const handleTab = (tab) => {
-    setActiveTab(tab);
+  const onSubmit = () => {
+    setLoading(true);
+    console.log({ termsStatement });
+    let url;
+    let data;
+    if (
+      termsStatement?.termsStatement &&
+      termsStatement?.teamsFill &&
+      !(termsStatement?.policyStatement && termsStatement?.policyFill) &&
+      !(termsStatement?.faqStatement && termsStatement?.faqFill)
+    ) {
+      console.log("this is only statement");
+      url = `${process.env.REACT_APP_ORIGIN_URL}/footer?terms=true`;
+      data = {
+        heading: termsStatement.termsStatement,
+        detail: termsStatement.teamsFill,
+      };
+    } else if (
+      !(termsStatement?.termsStatement && termsStatement?.teamsFill) &&
+      termsStatement?.policyStatement &&
+      termsStatement?.policyFill &&
+      !(termsStatement?.faqStatement && termsStatement?.faqFill)
+    ) {
+      console.log("this is only policy");
+      url = `${process.env.REACT_APP_ORIGIN_URL}/footer?policy=true`;
+      data = {
+        heading: termsStatement.policyStatement,
+        detail: termsStatement.policyFill,
+      };
+    } else if (
+      !(termsStatement?.termsStatement && termsStatement?.teamsFill) &&
+      !(termsStatement?.policyStatement && termsStatement?.policyFill) &&
+      termsStatement?.faqStatement &&
+      termsStatement?.faqFill
+    ) {
+      console.log("this is only faq");
+      url = `${process.env.REACT_APP_ORIGIN_URL}/footer?faq=true`;
+      data = {
+        heading: termsStatement.faqStatement,
+        detail: termsStatement.faqFill,
+      };
+    }
+
+    const result = fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setLoading(false);
+        console.log("changed data", data);
+        Swal.fire({
+          icon: "success",
+          title: "Add successfully!",
+        });
+        setTermsStatements({
+          termsStatement: "",
+          teamsFill: "",
+          policyStatement: "",
+          policyFill: "",
+          faqStatement: "",
+          faqFill: "",
+        });
+      });
   };
 
-  const onSubmit = (data) => {
-    console.log(data, { termsStatement });
+  const handleTab = (tab) => {
+    if (
+      termsStatement?.termsStatement ||
+      termsStatement?.teamsFill ||
+      termsStatement?.policyStatement ||
+      termsStatement?.policyFill ||
+      termsStatement?.faqStatement ||
+      termsStatement?.faqFill
+    ) {
+      Swal.fire({
+        title: "Do you want to save the changes?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Save",
+        denyButtonText: `Don't save`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          onSubmit();
+          setActiveTab(tab);
+          Swal.fire("Saved!", "", "success");
+        } else if (result.isDenied) {
+          setActiveTab(tab);
+          setTermsStatements({
+            termsStatement: "",
+            teamsFill: "",
+            policyStatement: "",
+            policyFill: "",
+            faqStatement: "",
+            faqFill: "",
+          });
+          Swal.fire("Changes are not saved", "", "info");
+        }
+      });
+    } else {
+      setActiveTab(tab);
+    }
   };
 
   useEffect(() => {
@@ -149,7 +251,11 @@ const HeadingForm = () => {
       </div>
       <div className=" w-full flex justify-end">
         <button className=" bg-[#2792A8] text-xs rounded py-3 px-10 text-white font-semibold tracking-wider">
-          Submit
+          {isLoading ? (
+            <span className="loading loading-spinner loading-xs"></span>
+          ) : (
+            "Submit"
+          )}
         </button>
       </div>
     </form>

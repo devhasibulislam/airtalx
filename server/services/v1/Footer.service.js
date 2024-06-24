@@ -31,7 +31,7 @@ exports.updateFooter = async (req, res) => {
       body.push(req.body);
       try {
         const updatedFooter = await Footer.findByIdAndUpdate(
-          req.params.id,
+          footer._id,
           { $set: { services: body } },
           { new: true }
         );
@@ -48,7 +48,7 @@ exports.updateFooter = async (req, res) => {
       body.push(req.body);
       try {
         const updatedFooter = await Footer.findByIdAndUpdate(
-          req.params.id,
+          footer._id,
           { $set: { "legal.terms": body } },
           { new: true }
         );
@@ -65,7 +65,7 @@ exports.updateFooter = async (req, res) => {
       body.push(req.body);
       try {
         const updatedFooter = await Footer.findByIdAndUpdate(
-          req.params.id,
+          footer._id,
           { $set: { "legal.faq": body } },
           { new: true }
         );
@@ -82,7 +82,7 @@ exports.updateFooter = async (req, res) => {
       body.push(req.body);
       try {
         const updatedFooter = await Footer.findByIdAndUpdate(
-          req.params.id,
+          footer._id,
           { $set: { "legal.policy": body } },
           { new: true }
         );

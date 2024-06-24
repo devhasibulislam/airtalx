@@ -4,7 +4,7 @@ const footerController = require('../../controllers/v1/footer.controller');
 
 router.get('/', footerController.getFooter);
 router.post('/', footerController.createFooter);
-router.put('/:id', footerController.updateFooter);
+router.put('/', footerController.updateFooter);
 router.delete('/:id', footerController.deleteFooter);
 
 module.exports = router;
