@@ -19,7 +19,6 @@ const HeadingForm = () => {
   });
 
   const {
-    register,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -29,7 +28,7 @@ const HeadingForm = () => {
   };
 
   const onSubmit = (data) => {
-    console.log(data,{termsStatement});
+    console.log(data, { termsStatement });
   };
 
   useEffect(() => {
@@ -67,91 +66,7 @@ const HeadingForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className=" flex flex-col my-2">
-        <label
-          htmlFor="footerHeading"
-          className=" text-sm font-medium leading-5 text-[#23262A]"
-        >
-          Footer Headlines
-        </label>
-        <input
-          id="footerHeading"
-          placeholder="Services"
-          className=" border rounded-md text-[10px] h-[32px] lg:w-[49%] px-3 font-medium focus:outline-none"
-          {...register("footerHeading", { required: true })}
-        />
-        {errors.footerHeading && (
-          <p className=" text-xs text-red-500">This field is required.</p>
-        )}
-      </div>
-
-      <div className=" flex md:flex-row flex-col items-end gap-x-5 w-full ">
-        <div className=" flex flex-col w-full">
-          <label
-            htmlFor="footerFill"
-            className=" text-sm font-medium leading-5 text-[#23262A]"
-          >
-            Footer Fill
-          </label>
-          <input
-            id="footerFill"
-            placeholder="Footer fill"
-            className=" border rounded-md text-[10px] h-[32px] w-full px-3 font-medium focus:outline-none"
-            {...register("footerFill", { required: true })}
-          />
-          {errors.footerFill && (
-            <p className=" text-xs text-red-500">This field is required.</p>
-          )}
-        </div>
-
-        {/* <div className="lg:w-1/3 w-full my-3 md:my-0">
-          <Controller
-            name="footerImage"
-            control={control}
-            defaultValue=""
-            rules={{ required: true }}
-            render={({ field: { onChange, onBlur, name, ref, value } }) => (
-              <label className="w-auto cursor-pointer text-center bg-white text-[10px] font-medium text-[#2792A8] border border-gray-600 rounded-lg hover:text-black focus:outline-none focus:shadow-outline flex justify-center items-center py-2 gap-x-3">
-                <LuUpload />
-                <span>{valueImg ? valueImg : "Upload Image"}</span>
-                <input
-                  type="file"
-                  onBlur={onBlur}
-                  onChange={(e) => {
-                    onChange(e.target.files[0]);
-                    setValueImg(e.target.files[0].name);
-                  }}
-                  ref={ref}
-                  name={name}
-                  className="hidden"
-                />
-              </label>
-            )}
-          />
-          {errors.footerImage && (
-            <p className=" text-xs text-red-500">This field is required.</p>
-          )}
-        </div> */}
-
-        <div className=" flex flex-col w-full">
-          <label
-            htmlFor="footerLinks"
-            className=" text-sm font-medium leading-5 text-[#23262A]"
-          >
-            Footer Links:
-          </label>
-          <input
-            id="footerLinks"
-            placeholder="Footer links"
-            className=" border rounded-md text-[10px] h-[32px] w-full px-3 font-medium focus:outline-none"
-            {...register("footerLinks", { required: true })}
-          />
-          {errors.footerLinks && (
-            <p className=" text-xs text-red-500">This field is required.</p>
-          )}
-        </div>
-      </div>
-      <div className=" bg-[#dde1eb] w-full h-3 my-10"></div>
+      <div className=" bg-[#dde1eb] w-full h-3 my-5 "></div>
       <div>
         {/* buttons */}
         <div className="flex md:flex-row flex-col gap-x-5 md:border-b pb-3">
@@ -227,132 +142,6 @@ const HeadingForm = () => {
             />
 
             {errors[inputDetailName] && (
-              <p className=" text-xs text-red-500">This field is required.</p>
-            )}
-          </div>
-        </div>
-
-        {/* divider */}
-        <div className=" bg-[#dde1eb] w-full h-3 my-10"></div>
-        <h4 className=" text-3xl font-bold leading-10 text-[#23262A]">
-          Pricing
-        </h4>
-        {/* Pricing 1 */}
-        <div>
-          {/* pricing level */}
-          <div className=" flex flex-col my-2">
-            <label
-              htmlFor="pricing_level"
-              className=" text-sm font-medium leading-5 text-[#23262A]"
-            >
-              Pricing Level
-            </label>
-            <input
-              id="pricing_level"
-              type="text"
-              placeholder="Pricing Level"
-              className=" border rounded-md text-[10px] max-w-[263px] h-[32px] px-3 font-medium focus:outline-none"
-              {...register("pricing_level", { required: true })}
-            />
-            {errors.pricing_level && (
-              <p className=" text-xs text-red-500">This field is required.</p>
-            )}
-          </div>
-          {/* price */}
-          <div className=" flex flex-col my-2">
-            <label
-              htmlFor="price"
-              className=" text-sm font-medium leading-5 text-[#23262A]"
-            >
-              Price (USD)
-            </label>
-            <input
-              id="price"
-              type="number"
-              placeholder="Price"
-              className=" border rounded-md max-w-[263px] text-[10px] h-[32px] px-3 font-medium focus:outline-none"
-              {...register("price", { required: true })}
-            />
-            {errors.price && (
-              <p className=" text-xs text-red-500">This field is required.</p>
-            )}
-          </div>
-          {/* pricing fill */}
-          <div className=" flex flex-col my-2">
-            <label
-              htmlFor="pricingfill"
-              className=" text-sm font-medium leading-5 text-[#23262A]"
-            >
-              Pricing Fill
-            </label>
-            <textarea
-              id="pricingfill"
-              placeholder="Pricing Fill"
-              rows={3}
-              className="border min-h-[136px] rounded-md text-xs p-3 font-medium focus:outline-none w-full"
-              {...register("pricingfill", { required: true })}
-            />
-            {errors.pricingfill && (
-              <p className=" text-xs text-red-500">This field is required.</p>
-            )}
-          </div>
-        </div>
-
-        {/* pricing 2 */}
-        <div className=" my-5">
-          {/* pricing level */}
-          <div className=" flex flex-col my-2">
-            <label
-              htmlFor="pricing_level2"
-              className=" text-sm font-medium leading-5 text-[#23262A]"
-            >
-              Pricing Level
-            </label>
-            <input
-              id="pricing_level2"
-              placeholder="Pricing Level"
-              className=" border rounded-md text-[10px] max-w-[263px] h-[32px] px-3 font-medium focus:outline-none"
-              {...register("pricing_level2", { required: true })}
-            />
-            {errors.pricing_level2 && (
-              <p className=" text-xs text-red-500">This field is required.</p>
-            )}
-          </div>
-          {/* price */}
-          <div className=" flex flex-col my-2">
-            <label
-              htmlFor="price2"
-              className=" text-sm font-medium leading-5 text-[#23262A]"
-            >
-              Price (USD)
-            </label>
-            <input
-            type="number"
-              id="price2"
-              placeholder="Price"
-              className=" border rounded-md max-w-[263px] text-[10px] h-[32px] px-3 font-medium focus:outline-none"
-              {...register("price2", { required: true })}
-            />
-            {errors.price2 && (
-              <p className=" text-xs text-red-500">This field is required.</p>
-            )}
-          </div>
-          {/* pricing fill */}
-          <div className=" flex flex-col my-2">
-            <label
-              htmlFor="pricingfill2"
-              className=" text-sm font-medium leading-5 text-[#23262A]"
-            >
-              Pricing Fill
-            </label>
-            <textarea
-              id="pricingfill2"
-              placeholder="Pricing Fill"
-              rows={3}
-              className="border min-h-[136px] rounded-md text-xs p-3 font-medium focus:outline-none w-full"
-              {...register("pricingfill2", { required: true })}
-            />
-            {errors.pricingfill2 && (
               <p className=" text-xs text-red-500">This field is required.</p>
             )}
           </div>

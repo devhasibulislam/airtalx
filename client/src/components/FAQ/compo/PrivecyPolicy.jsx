@@ -20,10 +20,10 @@ const PrivecyPolicy = () => {
       </h2>
       {footerData?.legal?.policy?.map((data) => (
         <div key={data._id} className="mt-2">
-          <h1 className="text-[22px] ml-3 text-blue-500 font-medium mb-2">
+          <h1 className="text-[22px] ml-3 text-blue-500 font-medium mb-2 capitalize">
             {data?.heading}
           </h1>
-          <p className="text-[18px] ml-6">
+          <p className="text-[18px] ml-6 capitalize">
             {data?.detail}
           </p>
         </div>

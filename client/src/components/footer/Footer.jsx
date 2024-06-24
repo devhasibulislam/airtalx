@@ -33,7 +33,7 @@ const Footer = () => {
             </a> */}
             {footerData?.services?.map(data=> 
               <a key={data._id} className="link link-hover  text-[12px]">
-              <Link to={data?.url}> {data?.heading} </Link>
+              <Link to={data?.url} className=" capitalize"> {data?.heading} </Link>
             </a>
             )}
           </nav>

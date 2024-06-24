@@ -16,11 +16,11 @@ const CollapsibleSections = () => {
     <div className="container mx-auto my-8">
     {footerData?.legal?.terms?.map((data, index) => (
         <div key={index} tabIndex={0} className="collapse collapse-plus border border-base-300 my-2">
-        <div className="collapse-title text-[22px] text-[#196D7C] font-medium">
+        <div className="collapse-title text-[22px] text-[#196D7C] font-medium capitalize">
         {index + 1}. {data?.heading}
         </div>
         <div className="collapse-content text-[18px] ml-5">
-          <p>{data?.detail}</p>
+          <p className=' capitalize'>{data?.detail}</p>
         </div>
       </div>
       ))}

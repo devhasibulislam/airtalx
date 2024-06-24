@@ -18,11 +18,11 @@ const HelpFaq = () => {
           tabIndex={0}
           className="collapse border border-base-300 my-4 py-2"
         >
-          <div className="collapse-title text-[22px] text-[#196D7C] font-medium">
+          <div className="collapse-title text-[22px] text-[#196D7C] font-medium capitalize">
             {index + 1}. {data?.heading}
           </div>
           <div className="text-[18px] ml-6">
-            <p className=" px-3">{data?.detail}</p>
+            <p className=" px-3 capitalize">{data?.detail}</p>
           </div>
         </div>
       ))}
