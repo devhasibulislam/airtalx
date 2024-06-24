@@ -31,7 +31,7 @@ import Payment2 from "../components/JobSeeker/TryPayment";
 
 const RouteA = () => {
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/payment" element={<Payment />} />
