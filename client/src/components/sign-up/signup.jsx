@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import img1 from "../../image/signupin/Feedback.svg";
 import { useForm } from "react-hook-form";
@@ -108,12 +108,12 @@ const Signup = () => {
     <>
       <div className="form-control ">
         <label className="label">
-          <span className="label-text font-semibold">Name</span>
+          <span className="font-semibold label-text">Name</span>
         </label>
         <input
           type="text"
           placeholder="name"
-          className="input input-sm  input-bordered rounded-2xl"
+          className="input input-sm input-bordered rounded-2xl"
           {...register("name", { required: true })}
         />
         {errors.name && (
@@ -122,12 +122,12 @@ const Signup = () => {
       </div>
       <div className="form-control">
         <label className="label">
-          <span className="label-text font-semibold">Email</span>
+          <span className="font-semibold label-text">Email</span>
         </label>
         <input
           type="email"
           placeholder="email"
-          className="input input-sm  input-bordered rounded-2xl"
+          className="input input-sm input-bordered rounded-2xl"
           {...register("email", { required: true })}
         />
         {errors.email && (
@@ -136,12 +136,12 @@ const Signup = () => {
       </div>
       <div className="form-control">
         <label className="label">
-          <span className="label-text font-semibold">Password</span>
+          <span className="font-semibold label-text">Password</span>
         </label>
         <input
           type="password"
           placeholder="password"
-          className="input input-sm  input-bordered rounded-2xl"
+          className="input input-sm input-bordered rounded-2xl"
           {...register("password", { required: true })}
         />
         {errors.password && (
@@ -150,12 +150,12 @@ const Signup = () => {
       </div>
       <div className="form-control">
         <label className="label">
-          <span className="label-text font-semibold">Confirm Password</span>
+          <span className="font-semibold label-text">Confirm Password</span>
         </label>
         <input
           type="password"
           placeholder="password"
-          className="input input-sm  input-bordered rounded-2xl"
+          className="input input-sm input-bordered rounded-2xl"
           {...register("confirmPassword", { required: true })}
         />
         {errors.confirmPassword && (
@@ -165,7 +165,7 @@ const Signup = () => {
 
       {/* <div className="form-control">
         <label className="label">
-          <span className="label-text font-semibold">Upload Image</span>
+          <span className="font-semibold label-text">Upload Image</span>
         </label>
         <div className="flex flex-col justify-start ">
           <input
@@ -189,7 +189,7 @@ const Signup = () => {
       </div> */}
       <div className="form-control">
         <label className="label">
-          <span className="label-text font-semibold">Upload Image</span>
+          <span className="font-semibold label-text">Upload Image</span>
         </label>
         <div className="flex flex-col justify-start">
           <input
@@ -200,10 +200,10 @@ const Signup = () => {
           />
           <label
             htmlFor="file-upload"
-            className="file-input-bordered flex justify-start rounded-2xl p-2 px-5 gap-2 cursor-pointer bg-[#CFEBFF]"
+            className="file-input-bordered flex justify-start rounded-2xl p-2 px-5 gap-2 items-center cursor-pointer bg-[#CFEBFF]"
           >
-            <FaUpload className="text-xl" />
-            <span>Click to upload image</span>
+            <FaUpload className="text-xs" />
+            <span className="!text-xs">Click to upload image</span>
           </label>
         </div>
         {errors.image && (
@@ -215,11 +215,16 @@ const Signup = () => {
         <input
           type="checkbox"
           defaultChecked
-          className="checkbox checkbox-error"
+          className="checkbox checkbox-success checkbox-xs"
         />
-        <p className="label-text">Remember for 30 days</p>
+        <label
+          htmlFor="remember-me"
+          className="label-text  !text-xs cursor-pointer"
+        >
+          Remember for 30 days
+        </label>
       </div>
-      <div className="form-control mt-6">
+      <div className="mt-6 form-control">
         <ButtonAll>Sign Up</ButtonAll>
       </div>
     </>
@@ -231,12 +236,15 @@ const Signup = () => {
         const result = await signInWithPopup(auth, googleProvider);
         const { user } = result;
         console.log(user.photoURL);
-        const rrr = await axios.post(`https://api-airtalx.vercel.app/v1/api/userdata`, {
-          name: user.displayName,
-          email: user.email,
-          password: "12345678",
-          image: user.photoURL,
-        });
+        const rrr = await axios.post(
+          `https://api-airtalx.vercel.app/v1/api/userdata`,
+          {
+            name: user.displayName,
+            email: user.email,
+            password: "12345678",
+            image: user.photoURL,
+          }
+        );
         // console.log(rrr.data);
 
         await axios.put(
@@ -283,41 +291,51 @@ const Signup = () => {
   };
 
   return (
-    <div className="bg-[#cdf1fa] max-w-7xl mx-auto">
+    <div className="bg-[#2792A8]/20 max-w-7xl mx-auto">
       <div className="">
-        <div className="text-center mb-4">
-          <h1 className="text-4xl font-semibold pt-5">Get Started</h1>
+        <div className="mb-4 text-center">
+          <h1 className="pt-5 text-4xl font-semibold text-[#196D7C]">
+            Get Started
+          </h1>
           <h2 className="pt-2 mb-2">
             In Our Website you can Sign Up either as an Employer or a Jobseeker
           </h2>
         </div>
 
         <div className="grid md:grid-cols-2">
-          <div className="mx-auto pt-32 pl-20 flex max-md:hidden">
+          <div className="flex pt-32 pl-20 mx-auto max-md:hidden">
             <img className="w-[400px] h-[312px]" src={img1} alt="" />
           </div>
 
           <div className="bg-[#eff4f5]   rounded-2xl max-md:p-4 ">
-            <div className="  rounded-xl">
+            <div className=" rounded-xl">
               <h1 className="text-3xl font-semibold text-center mt-[40px]">
                 Jobseeker Sign Up
               </h1>
 
               <div className="rounded-lg">
                 {/* Tabs */}
-                <div className="flex justify-center bg-slate-200 w-2/3 mx-auto rounded-xl p-2 mt-[30px]">
+                <div className="flex justify-center bg-slate-200  mx-auto rounded-xl p-2 mt-[30px] w-max    relative">
+                  <button
+                    className={`px-4 py-2  rounded-lg  absolute    focus:!outline-none focus:!border-none bg-blue-400 text-white top-[15%]  w-1/2 duration-300  ${
+                      activeTab === 0 ? "left-[2%]" : " left-[48%]"
+                    }`}
+                    onClick={() => handleTabClick(0)}
+                  >
+                    {activeTab === 0 ? "I Want a Job" : "I Want to Hire"}
+                  </button>
                   <button
                     className={`px-4 py-2 ${
-                      activeTab === 0 ? "bg-blue-400 text-white" : "bg-gray-200"
-                    } rounded-lg focus:outline-none`}
+                      activeTab === 0 ? " text-white" : "bg-gray-200"
+                    } rounded-lg  focus:!outline-none focus:!border-none`}
                     onClick={() => handleTabClick(0)}
                   >
                     I Want a Job
                   </button>
                   <button
                     className={`px-4 py-2 ${
-                      activeTab === 1 ? "bg-blue-400 text-white" : "bg-gray-200"
-                    } rounded-lg focus:outline-none`}
+                      activeTab === 1 ? " text-white" : "bg-gray-200"
+                    } rounded-lg  focus:!outline-none`}
                     onClick={() => handleTabClick(1)}
                   >
                     I Want to Hire
@@ -335,19 +353,20 @@ const Signup = () => {
                         {fileCompo}
                       </form>
 
-                      <div className="mx-auto  flex max-lg:flex-col lg:justify-center gap-3 mt-[20px]">
+                      <div className="mx-auto  flex max-lg:flex-col lg:justify-center gap-3 mt-10 !bg-[#D9D9D9]/10">
                         <button
                           onClick={handleGoogleLogin}
-                          className="btn btn-active btn-ghost"
+                          className="mt-3  !border border-gray-300 px-5 py-1 rounded-lg gap-x-2  flex items-center  "
+                          // disabled={isPopupOpen}
                         >
-                          <FcGoogle /> Sign Up with Google
+                          <FcGoogle className="text-xl" /> Sign Up with Google
                         </button>
                       </div>
 
-                      <div className="mt-[20px] p-3">
-                        <p>
+                      <div className="mt-[20px] p-3  w-full flex justify-center text-center ">
+                        <p className="w-full ml-2 text-center">
                           Already have an account?{" "}
-                          <Link to="/login" className="text-red-500">
+                          <Link to="/login" className=" text-[#20A3BA] ">
                             Login
                           </Link>
                         </p>
@@ -363,18 +382,19 @@ const Signup = () => {
                         {fileCompo}
                       </form>
 
-                      <div className="mx-auto  flex max-lg:flex-col lg:justify-center gap-3 mt-[20px]">
+                      <div className="mx-auto  flex max-lg:flex-col lg:justify-center gap-3 mt-10 !bg-[#D9D9D9]/10">
                         <button
                           onClick={handleGoogleLogin}
-                          className="btn btn-active btn-ghost"
+                          className="mt-3  !border border-gray-300 px-5 py-1 rounded-lg gap-x-2  flex items-center  "
+                          // disabled={isPopupOpen}
                         >
-                          <FcGoogle /> Sign Up with Google
+                          <FcGoogle className="text-xl" /> Sign In with Google
                         </button>
                       </div>
-                      <div className="mt-[20px] p-3 ">
-                        <p className="ml-2">
+                      <div className="mt-[20px] p-3  w-full flex justify-center text-center ">
+                        <p className="w-full ml-2 text-center">
                           Already have an account?{" "}
-                          <Link to="/login" className="text-red-500">
+                          <Link to="/login" className=" text-[#20A3BA] ">
                             Login
                           </Link>
                         </p>
