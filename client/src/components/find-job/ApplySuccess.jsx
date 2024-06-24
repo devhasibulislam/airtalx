@@ -17,7 +17,7 @@ const ApplySuccess = () => {
     const fetchJobs = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8080/v1/api/postjobs/${id}`
+          `https://api-airtalx.vercel.app/v1/api/postjobs/${id}`
         );
         setData(res.data);
         // setLoading(false);
