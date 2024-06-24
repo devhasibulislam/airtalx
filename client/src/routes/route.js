@@ -29,7 +29,7 @@ import SingleProfile from "../components/JobSeeker/profile/SingleProfile";
 
 const RouteA = () => {
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <Routes>
         <Route path="/" element={<Home />} />
 
