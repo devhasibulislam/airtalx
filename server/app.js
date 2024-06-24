@@ -2,6 +2,8 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
+const stripe = require('stripe')('sk_test_51NElpiAhkmdcIHMiXy3ii8CGSPoxh75aEtM67itfpP2PEYWGhCqkERaXnTQWWTGYtUJVeSLkKhUe4TYaWdbdNyzo00xQZFlwEl');
+const bodyParser = require('body-parser');
 
 /* internal import */
 const error = require('./middleware/error.middleware');
@@ -50,8 +52,27 @@ app.use('/v1/api/history',historyRoute);
 
 /* global error handler */
 app.use(error);
-
 /* connection establishment */
+
+app.post('/')
+
+app.post('/v1/api/cit', async (req, res) => {
+  const { amount, currency } = req.body;
+  
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount,
+      currency,
+    });
+
+    res.send({
+      clientSecret: paymentIntent.client_secret,
+    });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+});
+
 app.get('/', (req, res, next) => {
   try {
     res.status(200).json({

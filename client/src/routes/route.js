@@ -26,12 +26,16 @@ import JobApply from "../components/find-job/JobApply";
 import ApplySuccess from "../components/find-job/ApplySuccess";
 import ResetPin from "../components/forget-password/ResetPin";
 import SingleProfile from "../components/JobSeeker/profile/SingleProfile";
+import Payment from "../components/JobSeeker/Payment";
+import Payment2 from "../components/JobSeeker/TryPayment";
 
 const RouteA = () => {
   return (
     <div className="overflow-x-hidden">
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/payment2" element={<Payment2 />} />
 
         <Route path="/jobseeker-dashboard" element={<JobSeekerDashboard />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />

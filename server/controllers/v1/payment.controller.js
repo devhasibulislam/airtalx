@@ -1,5 +1,5 @@
 // controllers/payment.controller.js
-const paymentService = require('../../services/v1/payment.service');
+const paymentService = require("../../services/v1/payment.service");
 
 const createPayment = async (req, res) => {
   try {
@@ -24,7 +24,7 @@ const getPaymentById = async (req, res) => {
   try {
     const payment = await paymentService.getPaymentById(req.params.id);
     if (!payment) {
-      res.status(404).json({ message: 'Payment not found' });
+      res.status(404).json({ message: "Payment not found" });
     } else {
       res.status(200).json(payment);
     }
@@ -37,7 +37,7 @@ const updatePayment = async (req, res) => {
   try {
     const payment = await paymentService.updatePayment(req.params.id, req.body);
     if (!payment) {
-      res.status(404).json({ message: 'Payment not found' });
+      res.status(404).json({ message: "Payment not found" });
     } else {
       res.status(200).json(payment);
     }
@@ -50,7 +50,7 @@ const deletePayment = async (req, res) => {
   try {
     const payment = await paymentService.deletePayment(req.params.id);
     if (!payment) {
-      res.status(404).json({ message: 'Payment not found' });
+      res.status(404).json({ message: "Payment not found" });
     } else {
       res.status(204).json();
     }

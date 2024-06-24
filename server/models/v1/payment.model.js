@@ -2,26 +2,26 @@
 const mongoose = require('mongoose');
 
 const paymentSchema = new mongoose.Schema({
-  fullName: { type: String, required: true },
-  email: { type: String, required: true },
-  paymentOption: { type: String, required: true },
-  currency: { type: String, required: true },
-  invoiceNumber: { type: String, required: true },
-  invoiceDate: { type: Date, required: true },
-  dueDate: { type: Date, required: true },
-  billTo: { type: String, required: true },
-  employerName: { type: String, required: true },
-  companyName: { type: String, required: true },
+  fullName: { type: String, },
+  email: { type: String, },
+  payment_option: { type: String, },
+  currency: { type: String, },
+  invoiceNumber: { type: String, },
+  invoiceDate: { type: Date, },
+  dueDate: { type: Date, },
+  billTo: { type: String, },
+  employer_name: { type: String, },
+  company_name: { type: String, },
   items: [
     {
-      description: { type: String, required: true },
-      rate: { type: Number, required: true },
-      hours: { type: Number, required: true },
-      amount: { type: Number, required: true },
+      description: { type: String, },
+      rate: { type: Number, },
+      hours: { type: Number, },
+      amount: { type: Number, },
     }
   ],
   notes: { type: String },
-  totalAmount: { type: Number, required: true },
+  totalAmount: { type: Number, },
   paymentStatus: { type: String, default: 'Pending' },
 }, { timestamps: true });
 
