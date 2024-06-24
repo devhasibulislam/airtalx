@@ -5,6 +5,8 @@ const linkSchema = new Schema({
   heading: { type: String },
   detail: { type: String },
   url: { type: String },
+  price: { type: String},
+  options: { type: [String], default: [] }
 });
 
 const footerSchema = new Schema({
