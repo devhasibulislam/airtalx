@@ -60,7 +60,10 @@ const Pricing = () => {
           </div>
 
           <div className="flex justify-center mb-3">
-            <ButtonAll>Upgrade Now</ButtonAll>
+
+          <Link to="/payment2">
+          <ButtonAll>Upgrade Now</ButtonAll>
+          </Link>
          
           </div>
         </div>

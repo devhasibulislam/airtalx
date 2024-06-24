@@ -1,76 +1,86 @@
-// import React, { useState } from 'react';
-// import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import React, { useState, useEffect } from "react";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import Swal from "sweetalert2";
 
-// const CheckoutForm = ({ amount, currency }) => {
-//   const stripe = useStripe();
-//   const elements = useElements();
-//   const [error, setError] = useState(null);
-//   const [success, setSuccess] = useState(false);
+const CheckoutForm = ({ amount, currency }) => {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [clientSecret, setClientSecret] = useState(null);
+  const [error, setError] = useState(null);
 
-//   const handleSubmit = async (event) => {
-//     event.preventDefault();
+  useEffect(() => {
+    // Create PaymentIntent as soon as the page loads
+    fetch("http://localhost:8080/v1/api/cit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount, currency }),
+    })
+      .then((res) => res.json())
+      .then((data) => setClientSecret(data.clientSecret))
+      .catch((error) => setError(`Error: ${error.message}`));
+  }, [amount, currency]);
 
-//     if (!stripe || !elements) {
-//       return;
-//     }
-
-//     const cardElement = elements.getElement(CardElement);
-
-//     const response = await fetch('http://localhost:8080/v1/api/payment/str', {
-//       method: 'POST',
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify({ amount: amount * 100, currency: currency }), // amount in cents
-//     });
-
-//     const { clientSecret } = await response.json();
-
-//     const paymentResult = await stripe.confirmCardPayment(clientSecret, {
-//       payment_method: {
-//         card: cardElement,
-//       },
-//     });
-
-//     if (paymentResult.error) {
-//       setError(`Payment failed: ${paymentResult.error.message}`);
-//     } else {
-//       setError(null);
-//       setSuccess(true);
-//     }
-//   };
-
-//   return (
-//     <form className=' mt-5 p-5' onSubmit={handleSubmit}>
-//       <CardElement />
-
-//       <button className='bg-red-500 p-5' type="submit" color='red' disabled={!stripe}>
-//         Pay
-//       </button>
-
-//       {error && <div>{error}</div>}
-//       {success && <div>Payment succeeded!</div>}
-//     </form>
-//   );
-// };
-
-// export default CheckoutForm;
-
-import React from 'react';
-import { CardElement } from '@stripe/react-stripe-js';
-
-const CheckoutForm = ({ handleSubmit, loading }) => {
-  const onSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    await handleSubmit({
-      elements: event.target.elements,
-    });
+
+    if (!stripe || !elements) {
+      return;
+    }
+
+    const cardElement = elements.getElement(CardElement);
+
+    const { error, paymentIntent } = await stripe.confirmCardPayment(
+      clientSecret,
+      {
+        payment_method: {
+          card: cardElement,
+          billing_details: {
+            // Include details such as name, address, email, etc.
+            // These are optional but can be useful for Stripe's fraud prevention
+          },
+        },
+      }
+    );
+
+    if (error) {
+      console.error(error);
+      setError(`Payment failed: ${error.message}`);
+      Swal.fire({
+        icon: "error",
+        title: "Payment Failed",
+        text: error.message,
+      });
+    } else if (paymentIntent.status === "succeeded") {
+      setError(null);
+      Swal.fire({
+        icon: "success",
+        title: "Payment Successful",
+        text: "Your payment was successful!",
+      });
+      // You can handle success actions here, like updating UI or redirecting
+    }
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <CardElement options={{ style: { base: { fontSize: '16px' } } }} />
-      <button type="submit" disabled={loading}>
-        {loading ? 'Processing...' : 'Pay Now'}
+    <form onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label htmlFor="amountInput">Amount ({currency})</label>
+        <input
+          id="amountInput"
+          type="number"
+          className="form-control"
+          value={amount}
+          readOnly
+        />
+      </div>
+      <div className="form-group">
+        <label>Card details</label>
+        <CardElement className="form-control" />
+      </div>
+      <button type="submit" className="btn btn-primary mt-5" disabled={!stripe || !clientSecret}>
+        Pay
       </button>
+      {error && <div className="mt-3 text-danger">{error}</div>}
     </form>
   );
 };

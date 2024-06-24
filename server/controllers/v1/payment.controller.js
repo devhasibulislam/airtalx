@@ -1,5 +1,5 @@
 // controllers/payment.controller.js
-const paymentService = require('../../services/v1/payment.service');
+const paymentService = require("../../services/v1/payment.service");
 
 const createPayment = async (req, res) => {
   try {
@@ -8,25 +8,6 @@ const createPayment = async (req, res) => {
     res.status(201).json(payment);
   } catch (error) {
     res.status(500).json({ message: error.message });
-  }
-};
-
-const createPaymentintent  = async (req, res) => {
-  const { amount, currency } = req.body;
-
-  try {
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: amount * 100, // Stripe expects the amount in cents
-      currency: currency,
-    });
-
-    res.status(200).json({
-      clientSecret: paymentIntent.client_secret,
-    });
-  } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
   }
 };
 
@@ -43,7 +24,7 @@ const getPaymentById = async (req, res) => {
   try {
     const payment = await paymentService.getPaymentById(req.params.id);
     if (!payment) {
-      res.status(404).json({ message: 'Payment not found' });
+      res.status(404).json({ message: "Payment not found" });
     } else {
       res.status(200).json(payment);
     }
@@ -56,7 +37,7 @@ const updatePayment = async (req, res) => {
   try {
     const payment = await paymentService.updatePayment(req.params.id, req.body);
     if (!payment) {
-      res.status(404).json({ message: 'Payment not found' });
+      res.status(404).json({ message: "Payment not found" });
     } else {
       res.status(200).json(payment);
     }
@@ -69,7 +50,7 @@ const deletePayment = async (req, res) => {
   try {
     const payment = await paymentService.deletePayment(req.params.id);
     if (!payment) {
-      res.status(404).json({ message: 'Payment not found' });
+      res.status(404).json({ message: "Payment not found" });
     } else {
       res.status(204).json();
     }
@@ -84,5 +65,4 @@ module.exports = {
   getPaymentById,
   updatePayment,
   deletePayment,
-  createPaymentintent
 };
