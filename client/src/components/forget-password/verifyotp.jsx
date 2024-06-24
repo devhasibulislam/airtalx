@@ -9,7 +9,7 @@ const VerifyOTP = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
+    // reset,
   } = useForm();
 
   function handleOtp(data) {

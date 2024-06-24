@@ -254,10 +254,10 @@ const WorkHistory = () => {
     : data;
 
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-  const displayedData = filteredData.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+  // const displayedData = filteredData.slice(
+  //   (currentPage - 1) * itemsPerPage,
+  //   currentPage * itemsPerPage
+  // );
 
   const handlePreviousPage = () => {
     setCurrentPage((prev) => Math.max(prev - 1, 1));
