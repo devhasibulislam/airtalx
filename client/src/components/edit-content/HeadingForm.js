@@ -1,11 +1,9 @@
-import { LuUpload } from "react-icons/lu";
 import React, { useState, useEffect } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 const buttons = ["Terms Of Use", "Privacy & Policy", "Help & FAQs"];
 
 const HeadingForm = () => {
-  const [valueImg, setValueImg] = useState();
   const [activeTab, setActiveTab] = useState("Terms Of Use");
   const [inputName, setInputName] = useState("statement");
   const [inputHeading, setInputHeading] = useState("Statement");
@@ -23,7 +21,6 @@ const HeadingForm = () => {
   const {
     register,
     handleSubmit,
-    control,
     formState: { errors },
   } = useForm();
 
