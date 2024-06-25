@@ -136,6 +136,7 @@ const EditProfileModal = ({ isOpen, onClose, user, onProfileUpdate }) => {
             </div>
           </div>
 
+          <div classNme="flex justify-around">
           <div className="flex justify-center">
             <div>
               <label className="block text-sm font-medium text-gray-700">Salary</label>
@@ -147,6 +148,20 @@ const EditProfileModal = ({ isOpen, onClose, user, onProfileUpdate }) => {
               />
               {errors.salary && <p className="text-red-500 text-xs mt-1">Salary is required</p>}
             </div>
+          </div>
+          
+          <div className="flex justify-center">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Summary</label>
+              <input
+                type="text"
+                {...register("summary", { required: true })}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                placeholder="Enter your Summary"
+              />
+              {errors.summary && <p className="text-red-500 text-xs mt-1">Summary is required</p>}
+            </div>
+          </div>
           </div>
 
           <div className="flex justify-end space-x-2">

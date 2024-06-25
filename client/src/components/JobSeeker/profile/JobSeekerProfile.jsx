@@ -275,6 +275,7 @@ const JobSeekerProfile = () => {
       {/* Part 3 */}
       <div className="border border-base-200 rounded-xl p-4 mt-[24px]">
         <h2>Summary</h2>
+        <p>{user?.summary}</p>
       </div>
 
       {/* Part 4 */}
