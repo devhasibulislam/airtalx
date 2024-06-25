@@ -38,7 +38,7 @@ const stripePromise = loadStripe("pk_test_51NElpiAhkmdcIHMiGJQEC60TQ7b4WD0ciHvkY
 
 const Payment2 = () => {
   return (
-    <div className="m-2 border border-base-300 p-3 rounded-2xl my-10 mx-20">
+    <div className="m-2 border border-base-300 p-3 rounded-2xl my-10 max-w-5xl mx-auto">
       <Elements stripe={stripePromise}>
       <CheckoutForm amount={4900} currency="usd" />
     </Elements>
