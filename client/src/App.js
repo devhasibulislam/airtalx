@@ -19,7 +19,11 @@ function App() {
   }, []);
 
   return (
-    <div className={`fullbodymood min-h-screen flex flex-col ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>
+    <div
+      className={`fullbodymood min-h-screen flex flex-col ${
+        isDarkMode ? "bg-gray-900 text-white" : "bg-white text-black"
+      }`}
+    >
       <nav>
         <Navbar />
       </nav>
@@ -28,6 +32,11 @@ function App() {
       </main>
       <footer className="w-full">
         <Footer />
+        <div className="bg-[#1B405D]">
+          <h1 className="text-center text-[12px] text-white p-3">
+            Copyright 2024 - All right reserved by airTalX
+          </h1>
+        </div>
       </footer>
     </div>
   );

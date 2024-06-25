@@ -11,17 +11,16 @@ const Payment = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
- 
 
   const onSubmit = async (data) => {
     console.log(data);
     try {
       const response = await axios.post(
-        "http://localhost:8080/v1/api/payment",
-       data
+        "https://api-airtalx.vercel.app/v1/api/payment",
+        data
       );
-console.log(response);
-      if(response.data){
+      console.log(response);
+      if (response.data) {
         Swal.fire({
           position: "top",
           icon: "success",
@@ -30,7 +29,6 @@ console.log(response);
           timer: 1500,
         });
       }
-
     } catch (error) {
       console.error("Error creatingpayment:", error);
     }
@@ -124,7 +122,7 @@ console.log(response);
               <span className="font-semibold">Invoice Date</span>
             </label>
             <input
-              type="text"
+              type="date"
               className="input input-sm input-bordered rounded-2xl"
               {...register("invoice_date")}
             />
@@ -137,7 +135,7 @@ console.log(response);
               <span className="font-semibold">Due Date</span>
             </label>
             <input
-              type="text"
+              type="date"
               className="input input-sm input-bordered rounded-2xl"
               {...register("due_date")}
             />
@@ -184,9 +182,7 @@ console.log(response);
               className="input input-sm input-bordered rounded-2xl"
               {...register("company_name")}
             />
-            {errors.company_name && (
-              <span className="text-red-500">This field is required</span>
-            )}
+            <span className="text-red-500">This field is required</span>
           </div>
         </div>
 
@@ -210,7 +206,7 @@ console.log(response);
               <span className="font-semibold">Rate</span>
             </label>
             <input
-              type="text"
+              type="number"
               className="input input-sm input-bordered rounded-2xl"
               {...register("rate")}
             />
@@ -223,7 +219,7 @@ console.log(response);
               <span className="font-semibold">Hour</span>
             </label>
             <input
-              type="text"
+              type="number"
               className="input input-sm input-bordered rounded-2xl"
               {...register("hour")}
             />
@@ -236,7 +232,7 @@ console.log(response);
               <span className="font-semibold">Amount</span>
             </label>
             <input
-              type="text"
+              type="number"
               className="input input-sm input-bordered rounded-2xl"
               {...register("amount")}
             />
@@ -271,7 +267,7 @@ console.log(response);
           </div>
           <div className="form-control">
             <label className="label">
-              <span className="font-semibold">Total Amount</span>
+              <span className="font-semibold">Total amount</span>
             </label>
             <input
               type="number"
@@ -295,7 +291,7 @@ console.log(response);
           <button className="btn btn-success mt-3" type="submit">
             Download PDF
           </button>
-          <button className="btn btn-success mt-3" type="submit">
+          <button className="btn btn-success" type="submit">
             Save as Template
           </button>
           <button className="btn btn-outline btn-error mt-3" type="button">

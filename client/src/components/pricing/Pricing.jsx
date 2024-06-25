@@ -2,10 +2,13 @@ import React from "react";
 import { FcCancel, FcCheckmark } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import ButtonAll from "../button/Button";
-
 const Pricing = () => {
   return (
-    <div className="max-w-6xl mx-auto bg-gradient-to-r from-cyan-500 to-blue-500">
+    <div
+     className="max-w-6xl mx-auto bg-gradient-to-r from-cyan-500 to-blue-500"
+    // className="bg-cover bg-center h-screen"
+    // style={{ backgroundImage: "url('../')" }}
+    >
       <h2 className="text-3xl font-semibold text-center pt-5 text-white">
         {" "}
         Our Pricing
