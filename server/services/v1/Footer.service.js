@@ -92,6 +92,21 @@ exports.updateFooter = async (req, res) => {
       }
     }
 
+       // price
+       if (req.query.price === "true") {
+        
+        try {
+          const updatedFooter = await Footer.findByIdAndUpdate(
+            footer._id,
+            { $set: { pricing: req.body } },
+            { new: true }
+          );
+          res.json(updatedFooter);
+        } catch (error) {
+          res.json({ error: error.message });
+        }
+      }
+
     // console.log("this is body", { body });
   } catch (err) {
     res.status(500).json({ error: err.message });

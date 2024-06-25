@@ -1,13 +1,22 @@
-import React from "react";
-import { FcCancel, FcCheckmark } from "react-icons/fc";
+import React, { useEffect, useState } from "react";
+import { FcCheckmark } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import ButtonAll from "../button/Button";
 const Pricing = () => {
+  const [footerData, setFooterData] = useState();
+  useEffect(() => {
+   const loader = () => {
+    fetch(`${process.env.REACT_APP_ORIGIN_URL}/footer`)
+      .then((res) => res.json())
+      .then((data) => setFooterData(data));
+   } 
+   loader();
+  }, []);
+
   return (
     <div
-     className="max-w-6xl mx-auto bg-gradient-to-r from-cyan-500 to-blue-500"
-    // className="bg-cover bg-center h-screen"
-    // style={{ backgroundImage: "url('../')" }}
+     className=" mx-auto min-h-[90vh] flex flex-col justify-center bg-no-repeat bg-cover"
+     style={{ backgroundImage: 'url("/bg.svg")' }} 
     >
       <h2 className="text-3xl font-semibold text-center pt-5 text-white">
         {" "}
@@ -16,49 +25,26 @@ const Pricing = () => {
       <div className="flex justify-center p-5 gap-5">
         <div className="card w-96 bg-base-100 shadow-xl">
           <figure className="p-2 bg-[#2792A8]">
-            <h2 className="text-xl font-semibold">Most popular</h2>
+            <h2 className="text-xl font-semibold text-white">Most popular</h2>
           </figure>
 
           <div className="text-center">
-            <h2 className=" text-center text-2xl font-semibold">
-              Professional Tier!
+            <h2 className=" text-center text-2xl font-bold capitalize">
+              {footerData?.pricing[1]?.heading}
             </h2>
             <p className="text-3xl">
-              <span className=" font-bold"> $49</span>/month{" "}
+              <span className=" font-bold"> ${footerData?.pricing[1]?.price}</span>/month{" "}
             </p>
           </div>
           <div className="card-body">
             <div>
-              <h2 className="flex gap-2 items-center">
-                <FcCheckmark className="text-xl" /> Communicate with Workers
-              </h2>
-              <h2 className="flex gap-2 items-center">
-                <FcCheckmark className="text-xl" /> Hire Workers
-              </h2>
-              <h2 className="flex gap-2 items-center">
-                <FcCheckmark className="text-xl" />
-                Create up to **10 job posts** per month
-              </h2>
-              <h2 className="flex gap-2 items-center">
-                <FcCheckmark className="text-xl" />
-                Instant Job Post approva
-              </h2>
-              <h2 className="flex gap-2 items-center">
-                <FcCheckmark className="text-xl" />
-                View Job Applications
-              </h2>
-              <h2 className="flex gap-2 items-center">
-                <FcCheckmark className="text-xl" />
-                Bookmark Workers
-              </h2>
-              <h2 className="flex gap-2 items-center">
-                <FcCheckmark className="text-xl" />
-                 Invite **25 workers** per job post
-              </h2>
-              <h2 className="flex gap-2 items-center">
-                <FcCheckmark className="text-xl" />
-                Customer Support
-              </h2>
+              {
+                footerData?.pricing[1]?.options?.map(option=>
+                 {if(option !== ""){return <><h2 className="flex gap-2 items-center capitalize">
+                <FcCheckmark className="text-xl" /> {option}
+              </h2></>} }
+                )
+              }
             </div>
           </div>
 
@@ -70,49 +56,27 @@ const Pricing = () => {
          
           </div>
         </div>
-        <div className="flex items-center card p-4 w-96 h-[70%]  bg-base-100 shadow-xl">
-          <div className="">
-            <figure className="pt-2 bg-[#f9fdfd]">
-              <h2 className="text-xl font-semibold ">Free Tier</h2>
+        <div className="flex items-center card max-w-96 h-[95%]  bg-base-100 shadow-xl">
+          <div className=" rounded-t-xl">
+            <figure className=" bg-[#f9fdfd] rounded-t-xl py-2">
+              <h2 className="text-xl font-semibold capitalize">
+              {footerData?.pricing[0]?.heading}
+                </h2>
             </figure>
 
-            <div className="card-body">
+            <div className="card-body px-4 flex flex-col gap-y-4">
               <div>
-                <h2 className="flex gap-2 items-center">
-                  <FcCancel className="text-xl" /> Communicate with Workers
-                </h2>
-                <h2 className="flex gap-2 items-center">
-                  <FcCancel className="text-xl" /> Hire Workers
-                </h2>
-                <h2 className="flex gap-2 items-center">
-                  <FcCheckmark className="text-xl" />
-                  Create up to **10 job posts** per month
-                </h2>
-                <h2 className="flex gap-2 items-center">
-                  <FcCheckmark className="text-xl" />
-                  Instant Job Post approva
-                </h2>
-                <h2 className="flex gap-2 items-center">
-                  <FcCheckmark className="text-xl" />
-                  View Job Applications
-                </h2>
-                <h2 className="flex gap-2 items-center">
-                  <FcCheckmark className="text-xl" />
-                  Bookmark Workers
-                </h2>
-                <h2 className="flex gap-2 items-center">
-                  <FcCheckmark className="text-xl" />
-                   Invite **25 workers** per job post
-                </h2>
-                <h2 className="flex gap-2 items-center">
-                  <FcCheckmark className="text-xl" />
-                  Customer Support
-                </h2>
+              {
+                footerData?.pricing[0]?.options?.map(option=>
+                 {if(option !== ""){return <><h2 className="flex gap-2 items-center capitalize">
+                <FcCheckmark className="text-xl" /> {option}
+              </h2></>} }
+                )
+              }
               </div>
               <div className="flex justify-center">
              <Link to="/signup"> 
              <ButtonAll>Register Now</ButtonAll>
-
              </Link>
               </div>
             </div>

@@ -67,8 +67,8 @@ const Footer = () => {
           </nav>
           <nav>
             <h6 className=" text-[12px] font-bold">Pricing</h6>
-            <a className="link link-hover  text-[12px]">Free tiar</a>
-            <a className="link link-hover  text-[12px]">Proffesional tiar</a>
+            <a className="link link-hover  text-[12px] capitalize">{footerData?.pricing[0]?.heading}</a>
+            <a className="link link-hover  text-[12px] capitalize">{footerData?.pricing[1]?.heading}</a>
           </nav>
           <nav>
             <h6 className=" text-[12px] font-bold">Social</h6>

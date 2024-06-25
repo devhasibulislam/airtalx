@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const PriceForm = () => {
   const [prices, setPrices] = useState();
@@ -24,7 +25,7 @@ const PriceForm = () => {
   }
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     if(prices){
         const body = [
       {
@@ -38,7 +39,24 @@ const PriceForm = () => {
         options: [...prices[0]?.options,data?.pricingfill2]
       }
     ]
-    console.log("this is from anubis", {body})  
+    
+    fetch(`${process.env.REACT_APP_ORIGIN_URL}/footer?price=true`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    ).then((res) => res.json())
+     .then(data=>{
+      Swal.fire({
+        icon: "success",
+        title: "Pice updated!",
+      });
+      console.log("this is from anubis", {data})  
+     })
+
     }
 
   };
