@@ -69,7 +69,7 @@ const CheckoutForm = ({ amount, currency }) => {
           id="amountInput"
           type="number"
           className="form-control"
-          value={amount}
+          value={amount/100}
           readOnly
         />
       </div>

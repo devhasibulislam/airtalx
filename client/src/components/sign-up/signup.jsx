@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import img1 from "../../image/signupin/Feedback.svg";
 import { useForm } from "react-hook-form";
