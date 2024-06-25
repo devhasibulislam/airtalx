@@ -147,15 +147,7 @@ const Navbar = () => {
                 to="/profile"
                 className="flex gap-1 px-5 py-2 bg-white rounded-3xl"
               >
-                {user?.role === "admin" && (
-                  <p className="max-md:hidden">Admin </p>
-                )}
-                {user?.role === "employer" && (
-                  <p className="max-md:hidden">Employee </p>
-                )}
-                {user?.role === "job-seeker" && (
-                  <p className="max-md:hidden">Job Seeker </p>
-                )}
+                <p className="max-md:hidden">{user?.name} </p>
                 <img
                   src={user?.image}
                   className="rounded-full w-7 h-7"

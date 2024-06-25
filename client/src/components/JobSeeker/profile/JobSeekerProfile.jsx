@@ -17,7 +17,7 @@ const JobSeekerProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalExOpen, setIsModalExOpen] = useState(false);
   const [resumeName, setResumeName] = useState("");
-  const [ , setResumeUrl] = useState("");
+  const [, setResumeUrl] = useState("");
 
   const handleToggle = (e) => {
     if (e.target.checked) {
@@ -306,14 +306,16 @@ const JobSeekerProfile = () => {
               className=" m-3 p-3 border-b-2 border-base-200  grid-cols-2 items-center gap-3"
             >
               <div className="grid grid-cols-2 items-center">
-                <div>
-                  <img src="" className="w-6 h-6" alt="" />
+                <div className="flex gap-3 items-center">
+                  <img
+                    src="/assets/skill.png"
+                    className="w-[72px] h-[72px]"
+                    alt=""
+                  />
                   <div>
                     <h2 className="text-[20px]">{m.title}</h2>
                     <h2 className="text-[14px]">{m.company}</h2>
-                    <h2 className="text-[14px]">
-                      Dhaka Bangladesh, {m.start_date}
-                    </h2>
+                    <h2 className="text-[14px]">{m.start_date}</h2>
                   </div>
                 </div>
                 <div className="flex justify-end gap-2 items-center">
