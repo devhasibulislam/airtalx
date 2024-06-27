@@ -10,6 +10,6 @@ router.put("/:id", userController.updateUser);
 router.delete("/:id", userController.deleteUser);
 router.get("/email/:email", userController.getUserByEmailC);
 router.post("/:id/experience", userController.addExperience); // New route to add experience
-router.post("/:id/verify", userController.addUserVerify); // New route to add experience
+router.put("/:id/verify", userController.addUserVerify); // New route to add experience
 
 module.exports = router;
