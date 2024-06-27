@@ -235,9 +235,11 @@ const Signup = () => {
       try {
         const result = await signInWithPopup(auth, googleProvider);
         const { user } = result;
+        
         console.log(user.photoURL);
+
         const rrr = await axios.post(
-          `https://api-airtalx.vercel.app/v1/api/userdata`,
+          `http://localhost:8080/v1/api/userdata`,
           {
             name: user.displayName,
             email: user.email,
@@ -245,10 +247,10 @@ const Signup = () => {
             image: user.photoURL,
           }
         );
-        // console.log(rrr.data);
+        console.log(rrr.data);
 
         await axios.put(
-          `https://api-airtalx.vercel.app/v1/api/userdata/${rrr.data._id}`,
+          `http://localhost:8080/v1/api/userdata/${rrr.data._id}`,
           {
             image: user.photoURL,
           }

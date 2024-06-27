@@ -55,15 +55,15 @@ const createUser = async (userData, file, res) => {
     imagePath = uploadResult.secure_url;
   }
 
-  const newUser = new User({
+  const user = new User({
     ...userData,
     password: hashedPassword,
     image: imagePath,
   });
 
-  if (newUser) {
-    await newUser.save();
-    await sendOTP({ body: newUser }, res);
+  if (user) {
+    await user.save();
+    await sendOTP({ body: user }, res);
   }
 };
 
