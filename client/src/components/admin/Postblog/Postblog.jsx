@@ -18,17 +18,17 @@ const Postblog = () => {
     watch,
   } = useForm();
 
-  const stripHtmlTags = (str) => {
-    if (!str) return str;
-    return str.replace(/<\/?[^>]+(>|$)/g, "");
-  };
+  // const stripHtmlTags = (str) => {
+  //   if (!str) return str;
+  //   return str.replace(/<\/?[^>]+(>|$)/g, "");
+  // };
 
  
 
   const onSubmit = async (data) => {
     const cleanedData = {
       ...data,
-      description: stripHtmlTags(data.description),
+      // description: stripHtmlTags(data.description),
       createdby:user.name
     };
     console.log(cleanedData);
@@ -80,7 +80,6 @@ const Postblog = () => {
                 [{ size: [] }],
                 ["bold", "italic", "underline", "strike", "blockquote"],
                 [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
-                ["link", "image", "video"],
                 ["clean"],
               ],
             }}
@@ -91,7 +90,7 @@ const Postblog = () => {
             <span className="text-red-500">This field is required</span>
           )}
         </div>
-        <button type="submit" className="btn btn-success mt-9">
+        <button type="submit" className="btn btn-success mt-12">
           Create a Blog
         </button>
       </form>

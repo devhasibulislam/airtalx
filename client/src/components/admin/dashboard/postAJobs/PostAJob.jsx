@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
+import ReactQuill from "react-quill";
 import Swal from "sweetalert2";
 import useAuthUser from "../../../../auth/getUser";
 import { auth } from "../../../../firebase";
@@ -11,11 +12,21 @@ const PostAJob = () => {
     handleSubmit,
     reset,
     formState: { errors },
+    setValue,
+    watch,
   } = useForm();
 
+  // const stripHtmlTags = (str) => {
+  //   if (!str) return str;
+  //   return str.replace(/<\/?[^>]+(>|$)/g, "");
+  // };
+
   const onSubmit = async (data) => {
+    console.log(data);
+
     const cleanedData = {
       ...data,
+      job_description: data.description || data.job_description,
       postby: user.name,
     };
 
@@ -33,9 +44,15 @@ const PostAJob = () => {
 
     try {
       // console.log(data);
-      await axios.post(`https://api-airtalx.vercel.app/v1/api/postjobs`, cleanedData);
+      await axios.post(
+        `https://api-airtalx.vercel.app/v1/api/postjobs`,
+        cleanedData
+      );
 
-      await axios.post(`https://api-airtalx.vercel.app/v1/api/history`, historyData);
+      await axios.post(
+        `https://api-airtalx.vercel.app/v1/api/history`,
+        historyData
+      );
 
       Swal.fire(
         {
@@ -57,6 +74,8 @@ const PostAJob = () => {
       });
     }
   };
+
+  const jobDescription = watch("job_description");
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="card-body">
@@ -225,19 +244,33 @@ const PostAJob = () => {
 
         <div className="form-control">
           <label className="label">
-            <span className=" font-semibold">Job Description</span>
+            <span className="font-semibold">Job Description</span>
           </label>
-
-          <textarea
-            className="textarea "
-            placeholder="Job description"
-            {...register("job_description", { required: true })}
+          <ReactQuill
+            value={jobDescription}
+            onChange={(value) => setValue("job_description", value)}
+            modules={{
+              toolbar: [
+                [{ header: "1" }, { header: "2" }, { font: [] }],
+                [{ size: [] }],
+                ["bold", "italic", "underline", "strike", "blockquote"],
+                [
+                  { list: "ordered" },
+                  { list: "bullet" },
+                  { indent: "-1" },
+                  { indent: "+1" },
+                ],
+                ["clean"],
+              ],
+            }}
+            className="rounded-2xl "
+            style={{ height: "100px" }}
           />
-          {errors.job_title && (
+          {errors.job_description && (
             <span className="text-red-500">This field is required</span>
           )}
         </div>
-        <button className="btn btn-success mt-6" type="submit">
+        <button className="btn btn-success mt-12" type="submit">
           Submit
         </button>
       </form>

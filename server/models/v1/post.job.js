@@ -20,6 +20,10 @@ const jobsSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please, provide your job headline"],
     },
+    job_description: {
+      type: String,
+      required: [true, "Please, provide your job description"],
+    },
     salary: {
       type: String,
       required: [true, "Please, provide your job salary"],

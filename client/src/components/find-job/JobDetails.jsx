@@ -114,9 +114,10 @@ const JobDetails = () => {
       </div>
       <div className="my-6">
         <h2 className="text-3xl font-semibold text-center">Job Description</h2>
-        <div className="!p-4 bg-[#ecf7f4]">
-          {jobDetails.job_description}
-        </div>
+        <div
+          className="!p-4 bg-[#ecf7f4] prose"
+          dangerouslySetInnerHTML={{ __html: jobDetails.job_description }}
+        ></div>
       </div>
     </div>
   );
