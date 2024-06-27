@@ -7,6 +7,8 @@ const User = require("../../models/v1/userdata.model");
 const bcrypt = require("bcrypt");
 const { sendOTP } = require("./otp.service");
 const mailSender = require("../../utils/email.util");
+const OTP = require("../../models/v1/otp.model");
+const otpGenerator = require("otp-generator");
 
 /* cloudinary config */
 cloudinary.config({
@@ -63,7 +65,40 @@ const createUser = async (userData, file, res) => {
 
   if (user) {
     await user.save();
-    await sendOTP({ body: user }, res);
+    // await sendOTP({ body: user }, res);
+
+    const otp = otpGenerator.generate(5, {
+      digits: true,
+      lowerCaseAlphabets: false,
+      upperCaseAlphabets: false,
+      specialChars: false,
+    });
+
+    const result = await OTP.create({
+      name: user.name,
+      email: user.email,
+      otp,
+      status: "unverified",
+    });
+
+    if (!result) {
+      res.status(400).json({
+        acknowledgement: false,
+        message: "Bad Request",
+        description: "Failed to send OTP",
+      });
+    } else {
+      user.otp = result._id;
+      await user.save({
+        runValidators: false,
+      });
+
+      res.status(200).json({
+        acknowledgement: true,
+        message: "OK",
+        description: "OTP sent successfully",
+        data: user,
+      });
   }
 };
 
