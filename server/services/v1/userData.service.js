@@ -105,7 +105,7 @@ const addExperience = async (userId, experienceData) => {
 
 const addUserVerify = async (req, res) => {
   try {
-    const updatedUser = await userService.updateUser(
+    const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
       req.body,
       req.file
