@@ -172,7 +172,7 @@ const User = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, verify it!",
+      confirmButtonText: "Yes, verify it!!!",
     }).then((result) => {
       if (result.isConfirmed) {
         updateVerified();
