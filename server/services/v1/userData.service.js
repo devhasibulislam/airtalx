@@ -99,6 +99,7 @@ const createUser = async (userData, file, res) => {
         description: "OTP sent successfully",
         data: user,
       });
+    }
   }
 };
 
