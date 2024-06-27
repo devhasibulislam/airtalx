@@ -14,7 +14,9 @@ const FindEmploye = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const result = await axios.get(`https://api-airtalx.vercel.app/v1/api/userdata`);
+        const result = await axios.get(
+          `https://api-airtalx.vercel.app/v1/api/userdata`
+        );
         setUsers(result.data); // Assuming result.data is the array of user data
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -25,29 +27,28 @@ const FindEmploye = () => {
   }, []);
 
   // Filter users with role 'employer'
-  const employers = users.filter((user) => user.role === "employer");
+  const employers = users?.filter((user) => user.role === "employer");
 
   // Filter based on search query and selected type
-  const filteredEmployees = employers.filter((em) => {
-    const matchesSearch =
-      em.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      "" ||
-      em.role?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      "" ||
-      em.location?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      "";
-    const matchesType = selectedType ? em.employment === selectedType : true;
-    return matchesSearch && matchesType;
-  });
+  const filteredEmployees =
+    employers?.filter((em) => {
+      const matchesSearch =
+        em.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        "" ||
+        em.role?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        "" ||
+        em.location?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        "";
+      const matchesType = selectedType ? em.employment === selectedType : true;
+      return matchesSearch && matchesType;
+    }) || [];
 
   // Pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentEmployees = filteredEmployees.slice(
-    indexOfFirstItem,
-    indexOfLastItem
-  );
-  const totalPages = Math.ceil(filteredEmployees.length / itemsPerPage);
+  const currentEmployees =
+    filteredEmployees?.slice(indexOfFirstItem, indexOfLastItem) || [];
+  const totalPages = Math.ceil(filteredEmployees?.length / itemsPerPage);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -77,8 +78,8 @@ const FindEmploye = () => {
       </div>
 
       <div className="grid lg:grid-cols-2 textw">
-        {currentEmployees.length > 0 ? (
-          currentEmployees.map((em) => (
+        {currentEmployees?.length > 0 ? (
+          currentEmployees?.map((em) => (
             <div
               key={em._id}
               className="border border-base-300 shadow-xl rounded-sm p-4 m-2"
@@ -115,13 +116,13 @@ const FindEmploye = () => {
             </div>
           ))
         ) : (
-          <div className="col-span-2 text-center">
-            <p>No employees found matching your criteria.</p>
+          <div className="col-span-2  w-full flex justify-center items-center py-6 text-center">
+            <img src="/no-employy-img.svg" alt="" className=" w-2/4" />
           </div>
         )}
       </div>
 
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center my-4">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}

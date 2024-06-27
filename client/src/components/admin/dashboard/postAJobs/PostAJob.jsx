@@ -86,7 +86,7 @@ const PostAJob = () => {
           <input
             type="text"
             placeholder="job title"
-            className="input input-sm input-bordered rounded-2xl"
+            className="input input-sm !bg-white input-bordered rounded-2xl"
             {...register("job_title", { required: true })}
           />
           {errors.job_title && (
@@ -102,7 +102,7 @@ const PostAJob = () => {
           <input
             type="text"
             placeholder="Answer"
-            className="input input-sm input-bordered rounded-2xl"
+            className="input input-sm !bg-white input-bordered rounded-2xl"
             {...register("job_headline", { required: true })}
           />
           {errors.job_headline && (
@@ -150,7 +150,7 @@ const PostAJob = () => {
             <input
               type="text"
               placeholder="Answer"
-              className="input input-sm input-bordered rounded-2xl"
+              className="input input-sm !bg-white input-bordered rounded-2xl"
               {...register("company", { required: true })}
             />
             {errors.job_headline && (
@@ -166,7 +166,7 @@ const PostAJob = () => {
             <input
               type="text"
               placeholder="Answer"
-              className="input input-sm input-bordered rounded-2xl"
+              className="input input-sm !bg-white input-bordered rounded-2xl"
               {...register("location", { required: true })}
             />
             {errors.job_headline && (
@@ -184,7 +184,7 @@ const PostAJob = () => {
             <input
               type="text"
               placeholder="Answer"
-              className="input input-sm input-bordered rounded-2xl"
+              className="input input-sm !bg-white input-bordered rounded-2xl"
               {...register("industry", { required: true })}
             />
             {errors.job_headline && (
@@ -200,7 +200,7 @@ const PostAJob = () => {
             <input
               type="text"
               placeholder="Answer"
-              className="input input-sm input-bordered rounded-2xl"
+              className="input input-sm !bg-white input-bordered rounded-2xl"
               {...register("size_of_company", { required: true })}
             />
             {errors.job_headline && (
@@ -220,7 +220,7 @@ const PostAJob = () => {
           <input
             type="text"
             placeholder="Answer"
-            className="input input-sm input-bordered rounded-2xl"
+            className="input input-sm !bg-white input-bordered rounded-2xl"
             {...register("salary", { required: true })}
           />
           {errors.job_headline && (
