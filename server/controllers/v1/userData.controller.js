@@ -57,7 +57,11 @@ const updateUser = (req, res) => {
     }
 
     try {
-      const updatedUser = await userService.updateUser(req.params.id, req.body, req.file);
+      const updatedUser = await userService.updateUser(
+        req.params.id,
+        req.body,
+        req.file
+      );
       if (!updatedUser) {
         return res.status(404).json({ message: "User not found" });
       }
@@ -92,6 +96,14 @@ const addExperience = async (req, res) => {
   }
 };
 
+const addUserVerify = async (req, res) => {
+  try {
+    await userService.addUserVerify(req, res);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createUser,
   getAllUsers,
@@ -99,5 +111,6 @@ module.exports = {
   updateUser,
   deleteUser,
   getUserByEmailC,
-  addExperience
+  addExperience,
+  addUserVerify,
 };

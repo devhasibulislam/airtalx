@@ -103,6 +103,99 @@ const addExperience = async (userId, experienceData) => {
   return await user.save();
 };
 
+const addUserVerify = async (req, res) => {
+  try {
+    const updatedUser = await userService.updateUser(
+      req.params.id,
+      req.body,
+      req.file
+    );
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (req.body.status === "verified") {
+      const user = await User.findById(req.params.id);
+
+      const mailResponse = await mailSender(
+        user.email,
+        "Account Confirmation",
+        `
+        <!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Account Confirmation</title>
+            <style>
+              body {
+                font-family: Calibri, sans-serif;
+                font-style: normal;
+              }
+              .reset_button {
+                background-color: #008080 !important;
+                width: fit-content;
+                padding: 10px 15px;
+                color: white !important;
+                border-radius: 5px;
+                font-size: 14px;
+                text-decoration: none;
+                margin: 20px 0;
+                display: block;
+              }
+            </style>
+          </head>
+          <body>
+            <section>
+              <p>Hi ${user.name},</p>
+              <div style="margin-bottom: 10px">
+                <span>
+                  We're pleased to inform you that the government-issued ID you
+                  submitted to your airTalX account has been successfully verified. Here
+                  are the details:
+                </span>
+                <br />
+                <span>
+                  <li>Your Name: ${user.name}</li>
+                  <li>Verification Time: ${new Date()}</li>
+                </span>
+                <br />
+                <span>
+                  This verification increases the trust between you and potential
+                  employers on our platform. You can now apply for jobs with a verified
+                  badge on your profile, which signifies that your identity has been
+                  confirmed.
+                </span>
+              </div>
+              <br />
+              <p>
+                If you have any questions or concerns, please feel free to contact our
+                support team. Thank you for using airTalX and happy job hunting!
+              </p>
+              <p>
+                <span>Thanks,</span>
+                <br />
+                <span style="font-weight: bold">AirTalX Team</span>
+              </p>
+            </section>
+          </body>
+        </html>
+        `
+      );
+
+      if (!mailResponse) {
+        return res
+          .status(500)
+          .json({ message: "Failed to send verification email" });
+      }
+    }
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports = {
   upload,
   createUser,
@@ -112,4 +205,5 @@ module.exports = {
   deleteUser,
   getUserByEmail,
   addExperience,
+  addUserVerify,
 };

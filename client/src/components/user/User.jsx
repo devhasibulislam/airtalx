@@ -12,7 +12,9 @@ const User = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axios.get(`https://api-airtalx.vercel.app/v1/api/userdata`);
+        const result = await axios.get(
+          `https://api-airtalx.vercel.app/v1/api/userdata`
+        );
         setData(result.data); // Assuming result.data is the array of user data
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -27,7 +29,7 @@ const User = () => {
   };
 
   const makeAdmin = async (userId) => {
-    const userToUpdate = data.find(user => user._id === userId);
+    const userToUpdate = data.find((user) => user._id === userId);
     if (userToUpdate.role === "admin") {
       Swal.fire({
         position: "top",
@@ -41,8 +43,9 @@ const User = () => {
 
     const updateRole = () => {
       const data = { role: "admin" };
-      axios.put(`https://api-airtalx.vercel.app/v1/api/userdata/${userId}`, data)
-        .then(response => {
+      axios
+        .put(`https://api-airtalx.vercel.app/v1/api/userdata/${userId}`, data)
+        .then((response) => {
           if (response.data) {
             Swal.fire({
               position: "top",
@@ -60,7 +63,7 @@ const User = () => {
             );
           }
         })
-        .catch(error => {
+        .catch((error) => {
           console.error("Error updating profile:", error);
         });
     };
@@ -72,7 +75,7 @@ const User = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, make admin!"
+      confirmButtonText: "Yes, make admin!",
     }).then((result) => {
       if (result.isConfirmed) {
         updateRole();
@@ -88,11 +91,13 @@ const User = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`https://api-airtalx.vercel.app/v1/api/userdata/${userId}`);
+          await axios.delete(
+            `https://api-airtalx.vercel.app/v1/api/userdata/${userId}`
+          );
           Swal.fire({
             position: "top",
             icon: "success",
@@ -117,6 +122,64 @@ const User = () => {
     });
   };
 
+  const verifyUser = async (userId) => {
+    const userToUpdate = data.find((user) => user._id === userId);
+    if (userToUpdate.verified) {
+      Swal.fire({
+        position: "top",
+        icon: "info",
+        title: "User is already verified",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      return;
+    }
+
+    const updateVerified = () => {
+      const data = { status: "verified" };
+      axios
+        .put(
+          `https://api-airtalx.vercel.app/v1/api/userdata/${userId}/verify`,
+          data
+        )
+        .then((response) => {
+          if (response.data) {
+            Swal.fire({
+              position: "top",
+              icon: "success",
+              title: "User verified successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+
+            // Update the local state to reflect the verification change
+            setData((prevData) =>
+              prevData.map((item) =>
+                item._id === userId ? { ...item, status: "verified" } : item
+              )
+            );
+          }
+        })
+        .catch((error) => {
+          console.error("Error updating profile:", error);
+        });
+    };
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, verify it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        updateVerified();
+      }
+    });
+  };
+
   // Logic for displaying current page items
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -134,6 +197,7 @@ const User = () => {
               <th className="py-2 px-4">Name</th>
               <th className="py-2 px-4">Email</th>
               <th className="py-2 px-4">Role</th>
+              <th className="py-2 px-4">Status</th>
               <th className="py-2 px-4">Action</th>
             </tr>
           </thead>
@@ -154,6 +218,17 @@ const User = () => {
                 >
                   {item.role}
                 </td>
+                <td
+                  className={`py-2 px-4 ${
+                    item.role === "admin"
+                      ? "text-green-600"
+                      : item.role === "employee"
+                      ? "text-red-400"
+                      : "text-blue-600"
+                  }`}
+                >
+                  {item.status || "N/A"}
+                </td>
                 <td className="flex gap-2">
                   <button
                     onClick={() => makeAdmin(item._id)}
@@ -170,7 +245,12 @@ const User = () => {
                   <button className="btn btn-sm btn-outline btn-warning">
                     <IoWarningOutline className="text-xl" /> Suspend User
                   </button>
-                  <h2 className="text-blue-600">Verify</h2>
+                  <button
+                    className="text-blue-600"
+                    onClick={() => verifyUser(item._id)}
+                  >
+                    Verify
+                  </button>
                 </td>
               </tr>
             ))}

@@ -52,6 +52,11 @@ const userDataSchema = new mongoose.Schema({
   summary: {
     type: String
   },
+  status: {
+    type: String,
+    enum: ["active", "inactive", "suspended", "verified"],
+    default: "active",
+  },
   verify: { type: Boolean, default: false },
   experience: [
     {
