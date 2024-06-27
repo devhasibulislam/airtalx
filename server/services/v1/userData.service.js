@@ -6,6 +6,7 @@ const path = require("path");
 const User = require("../../models/v1/userdata.model");
 const bcrypt = require("bcrypt");
 const { sendOTP } = require("./otp.service");
+const mailSender = require("../../utils/email.util");
 
 /* cloudinary config */
 cloudinary.config({
@@ -116,6 +117,8 @@ const addUserVerify = async (req, res) => {
 
     if (req.body.status === "verified") {
       const user = await User.findById(req.params.id);
+
+      console.log(user);
 
       const mailResponse = await mailSender(
         user.email,
