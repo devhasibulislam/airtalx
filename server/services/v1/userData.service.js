@@ -95,79 +95,81 @@ const deleteUser = async (id) => {
 
   console.log(user);
 
-  const mailResponse = await mailSender(
-    user.email,
-    "Account Deletion",
-    `
-      <!DOCTYPE html>
-      <html lang="en">
-        <head>
-          <meta charset="UTF-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>Account Deletion</title>
-          <style>
-            body {
-              font-family: Calibri, sans-serif;
-              font-style: normal;
-            }
-            .reset_button {
-              background-color: #008080 !important;
-              width: fit-content;
-              padding: 10px 15px;
-              color: white !important;
-              border-radius: 5px;
-              font-size: 14px;
-              text-decoration: none;
-              margin: 20px 0;
-              display: block;
-            }
-          </style>
-        </head>
-        <body>
-          <section>
-            <p>Hi ${user.name},</p>
-            <div style="margin-bottom: 10px">
-              <span>
-                We're pleased to inform you that the government-issued ID you
-                submitted to your airTalX account has been successfully verified. Here
-                are the details:
-              </span>
-              <br />
-              <span>
-                <li>Your Name: ${user.name}</li>
-                <li>Deletion Time: ${new Date()}</li>
-              </span>
-              <br />
-              <span>
-                This Deletion increases the trust between you and potential
-                employers on our platform. You can now apply for jobs with a verified
-                badge on your profile, which signifies that your identity has been
-                confirmed.
-              </span>
-            </div>
-            <br />
-            <p>
-              If you have any questions or concerns, please feel free to contact our
-              support team. Thank you for using airTalX and happy job hunting!
-            </p>
-            <p>
-              <span>Thanks,</span>
-              <br />
-              <span style="font-weight: bold">AirTalX Team</span>
-            </p>
-          </section>
-        </body>
-      </html>
+  if (user) {
+    const mailResponse = await mailSender(
+      user.email,
+      "Account Deletion",
       `
-  );
+        <!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Account Deletion</title>
+            <style>
+              body {
+                font-family: Calibri, sans-serif;
+                font-style: normal;
+              }
+              .reset_button {
+                background-color: #008080 !important;
+                width: fit-content;
+                padding: 10px 15px;
+                color: white !important;
+                border-radius: 5px;
+                font-size: 14px;
+                text-decoration: none;
+                margin: 20px 0;
+                display: block;
+              }
+            </style>
+          </head>
+          <body>
+            <section>
+              <p>Hi ${user.name},</p>
+              <div style="margin-bottom: 10px">
+                <span>
+                  We're pleased to inform you that the government-issued ID you
+                  submitted to your airTalX account has been successfully verified. Here
+                  are the details:
+                </span>
+                <br />
+                <span>
+                  <li>Your Name: ${user.name}</li>
+                  <li>Deletion Time: ${new Date()}</li>
+                </span>
+                <br />
+                <span>
+                  This Deletion increases the trust between you and potential
+                  employers on our platform. You can now apply for jobs with a verified
+                  badge on your profile, which signifies that your identity has been
+                  confirmed.
+                </span>
+              </div>
+              <br />
+              <p>
+                If you have any questions or concerns, please feel free to contact our
+                support team. Thank you for using airTalX and happy job hunting!
+              </p>
+              <p>
+                <span>Thanks,</span>
+                <br />
+                <span style="font-weight: bold">AirTalX Team</span>
+              </p>
+            </section>
+          </body>
+        </html>
+        `
+    );
 
-  if (!mailResponse) {
-    return res
-      .status(500)
-      .json({ message: "Failed to send verification email" });
+    if (!mailResponse) {
+      return res
+        .status(500)
+        .json({ message: "Failed to send verification email" });
+    } else {
+      return await User.findByIdAndDelete(id);
+    }
   }
-
-  return await User.findByIdAndDelete(id);
 };
 
 // Add experience to a user
