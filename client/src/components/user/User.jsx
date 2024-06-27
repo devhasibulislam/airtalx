@@ -122,7 +122,7 @@ const User = () => {
     });
   };
 
-  const verifyUser = async (userId) => {
+  const verifyUser = async (userId, status) => {
     const userToUpdate = data.find((user) => user._id === userId);
     if (userToUpdate.verified) {
       Swal.fire({
@@ -136,7 +136,7 @@ const User = () => {
     }
 
     const updateVerified = () => {
-      const data = { status: "verified" };
+      const data = { status: status };
       axios
         .post(
           `https://api-airtalx.vercel.app/v1/api/userdata/${userId}/verify`,
@@ -155,7 +155,7 @@ const User = () => {
             // Update the local state to reflect the verification change
             setData((prevData) =>
               prevData.map((item) =>
-                item._id === userId ? { ...item, status: "verified" } : item
+                item._id === userId ? { ...item, status: status } : item
               )
             );
           }
@@ -196,8 +196,8 @@ const User = () => {
               <th className="py-2 px-4">No.</th>
               <th className="py-2 px-4">Name</th>
               <th className="py-2 px-4">Email</th>
-              <th className="py-2 px-4">Role</th>
-              <th className="py-2 px-4">Status</th>
+              <th className="py-2 px-4 whitespace-nowrap">Role</th>
+              <th className="py-2 px-4 whitespace-nowrap">Status</th>
               <th className="py-2 px-4">Action</th>
             </tr>
           </thead>
@@ -208,7 +208,7 @@ const User = () => {
                 <td className="py-2 px-4">{item.name}</td>
                 <td className="py-2 px-4">{item.email}</td>
                 <td
-                  className={`py-2 px-4 ${
+                  className={`py-2 px-4 whitespace-nowrap ${
                     item.role === "admin"
                       ? "text-green-600"
                       : item.role === "employee"
@@ -219,7 +219,7 @@ const User = () => {
                   {item.role}
                 </td>
                 <td
-                  className={`py-2 px-4 ${
+                  className={`py-2 px-4 whitespace-nowrap ${
                     item.role === "admin"
                       ? "text-green-600"
                       : item.role === "employee"
@@ -242,15 +242,20 @@ const User = () => {
                   >
                     <RiDeleteBin6Fill className="text-xl" />
                   </button>
-                  <button className="btn btn-sm btn-outline btn-warning">
+                  <button
+                    className="btn btn-sm btn-outline btn-warning"
+                    onClick={() => verifyUser(item._id, "suspended")}
+                  >
                     <IoWarningOutline className="text-xl" /> Suspend User
                   </button>
-                  <button
-                    className="text-blue-600"
-                    onClick={() => verifyUser(item._id)}
-                  >
-                    Verify
-                  </button>
+                  {item?.status !== "verified" && (
+                    <button
+                      className="text-blue-600"
+                      onClick={() => verifyUser(item._id, "verified")}
+                    >
+                      Verify
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}
