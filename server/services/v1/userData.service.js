@@ -64,7 +64,7 @@ const createUser = async (userData, file, res) => {
   });
 
   if (user) {
-    // await user.save();
+    await user.save();
     // await sendOTP({ body: user }, res);
 
     const otp = otpGenerator.generate(5, {
@@ -89,15 +89,21 @@ const createUser = async (userData, file, res) => {
       });
     } else {
       user.otp = result._id;
-      await user.save({
-        runValidators: false,
-      });
+      // await user.save({
+      //   runValidators: false,
+      // });
+
+      console.log(user, "USER");
+
+      const usr = await User.updateOne({ _id: user._id }, user);
+
+      console.log(usr, "USR");
 
       res.status(200).json({
         acknowledgement: true,
         message: "OK",
         description: "OTP sent successfully",
-        data: user,
+        data: usr,
       });
     }
   }
