@@ -64,7 +64,7 @@ const createUser = async (userData, file, res) => {
   });
 
   if (user) {
-    await user.save();
+    // await user.save();
     // await sendOTP({ body: user }, res);
 
     const otp = otpGenerator.generate(5, {
