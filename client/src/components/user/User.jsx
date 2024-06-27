@@ -139,7 +139,7 @@ const User = () => {
       const data = { status: "verified" };
       axios
         .post(
-          `https://airtalxfrontend.vercel.app/v1/api/userdata/${userId}/verify`,
+          `https://api-airtalx.vercel.app/v1/api/userdata/${userId}/verify`,
           data
         )
         .then((response) => {
