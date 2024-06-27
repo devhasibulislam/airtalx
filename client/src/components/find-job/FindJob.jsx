@@ -40,7 +40,10 @@ const FindJob = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await axios.get(`https://api-airtalx.vercel.app/v1/api/postjobs`);
+        const res = await axios.get(
+          `https://api-airtalx.vercel.app/v1/api/postjobs`
+        );
+        console.log({ data: res.data });
         setJobs(res.data);
         setLoading(false);
       } catch (error) {
@@ -78,8 +81,10 @@ const FindJob = () => {
 
   const filteredJobs = jobs.filter((job) => {
     const matchesSearch =
-      (job.job_title && job.job_title.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (job.by_employee_name && job.by_employee_name.toLowerCase().includes(searchQuery.toLowerCase()));
+      (job.job_title &&
+        job.job_title.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (job.by_employee_name &&
+        job.by_employee_name.toLowerCase().includes(searchQuery.toLowerCase()));
     const matchesType = selectedType ? job.job_type === selectedType : true;
     return matchesSearch && matchesType;
   });
@@ -106,7 +111,9 @@ const FindJob = () => {
 
     if (result.isConfirmed) {
       try {
-        await axios.delete(`https://api-airtalx.vercel.app/v1/api/postjobs/${id}`);
+        await axios.delete(
+          `https://api-airtalx.vercel.app/v1/api/postjobs/${id}`
+        );
         Swal.fire({
           title: "Deleted!",
           text: "Job deleted successfully",
@@ -150,30 +157,32 @@ const FindJob = () => {
         </select>
       </div>
 
-      <div className="grid lg:grid-cols-2 textw">
+      <div className="grid lg:grid-cols-2 textw ">
         {currentJobs.length > 0 ? (
           currentJobs.map((job, index) => (
             <div
-              key={job._id}
+              key={job?._id}
               className="border border-base-300 shadow-xl rounded-2xl p-4 m-2"
             >
               <div className="flex gap-3 items-center mb-2">
                 <h1 className="bg-blue-200 bgw p-2 rounded-2xl">
-                  {job.job_type}
+                  {job?.job_type}
                 </h1>
                 <h1 className="flex gap-1 items-center">
-                  <CiCreditCard1 /> {job.hour_per_week}$
+                  <CiCreditCard1 /> {job?.hour_per_week}$
                 </h1>
               </div>
 
-              <h1 className="text-2xl font-semibold">{job.job_title}</h1>
+              <h1 className="text-2xl font-semibold">{job?.job_title}</h1>
               <h2 className="mt-2">
-                By <span className="text-blue-600">{job.postby}</span>
+                By <span className="text-blue-600">{job?.postby}</span>
               </h2>
-              <p className="mt-2">{job.job_description.substring(0, 100)}...</p>
+              <p className="mt-2">
+                {job?.job_description?.substring(0, 100)}...
+              </p>
 
               <div className="mt-5">
-                <Link to={`/find-job/${job._id}`}>
+                <Link to={`/find-job/${job?._id}`}>
                   <ButtonAll2>See More</ButtonAll2>
                 </Link>
               </div>
@@ -181,7 +190,7 @@ const FindJob = () => {
               <div className="flex justify-between mt-6">
                 {user?.role === "admin" && (
                   <button
-                    onClick={() => handleEditClick(job._id)}
+                    onClick={() => handleEditClick(job?._id)}
                     className="btn btn-outline btn-warning"
                   >
                     <CiEdit className="text-xl" /> Edit Article
@@ -190,7 +199,7 @@ const FindJob = () => {
 
                 {user?.role === "admin" && (
                   <button
-                    onClick={() => handleDelete(job._id)}
+                    onClick={() => handleDelete(job?._id)}
                     className="btn btn-outline btn-error"
                   >
                     <RiDeleteBin6Line className="text-xl" /> Delete
@@ -206,7 +215,7 @@ const FindJob = () => {
         )}
       </div>
 
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-end mt-4 mb-4">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
