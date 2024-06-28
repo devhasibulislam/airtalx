@@ -16,7 +16,7 @@ const SingleBlog = () => {
     const fetchJobs = async () => {
       try {
         const res = await axios.get(
-          `https://api-airtalx.vercel.app/v1/api/blogs/${id}`
+          `${process.env.REACT_APP_BASE_API}/blogs/${id}`
         );
         setBlog(res.data);
         // setLoading(false);

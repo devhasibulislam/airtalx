@@ -23,7 +23,7 @@ const Application = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await axios.get(`https://api-airtalx.vercel.app/v1/api/application`);
+        const res = await axios.get(`${process.env.REACT_APP_BASE_API}/application`);
         setAppli(res.data);
       } catch (error) {
         console.error("There was an error fetching the user!", error);

@@ -10,7 +10,7 @@ const WorkHistory = () => {
   //   const fetchJobs = async () => {
   //     try {
   //       const res = await axios.get(
-  //         `https://api-airtalx.vercel.app/v1/api/history`
+  //         `${process.env.REACT_APP_BASE_API}/history`
   //       );
   //       setData(res.data);
   //     //   setLoading(false);

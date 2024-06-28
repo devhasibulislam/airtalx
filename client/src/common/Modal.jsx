@@ -6,7 +6,11 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const EditProfileModal = ({ isOpen, onClose, user, onProfileUpdate }) => {
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       location: user?.location || "",
       skill: user?.skill || "",
@@ -17,12 +21,16 @@ const EditProfileModal = ({ isOpen, onClose, user, onProfileUpdate }) => {
       portfolio: user?.portfolio || "",
       employment: user?.employment || "",
       salary: user?.salary || "",
+      age: user?.age || "",
     },
   });
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.put(`https://api-airtalx.vercel.app/v1/api/userdata/${user?._id}`, data);
+      const response = await axios.put(
+        `${process.env.REACT_APP_BASE_API}/userdata/${user?._id}`,
+        data
+      );
       if (response.data) {
         Swal.fire({
           position: "top",
@@ -48,76 +56,109 @@ const EditProfileModal = ({ isOpen, onClose, user, onProfileUpdate }) => {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="flex justify-around">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Location</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Location
+              </label>
               <input
                 type="text"
-                {...register("location", { required: true })}
+                {...register("location")}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 placeholder="Enter your Location"
               />
-              {errors.location && <p className="text-red-500 text-xs mt-1">Location is required</p>}
+              {errors.location && (
+                <p className="text-red-500 text-xs mt-1">
+                  Location is required
+                </p>
+              )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Skill</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Skill
+              </label>
               <input
                 type="text"
-                {...register("skill", { required: true })}
+                {...register("skill")}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 placeholder="Enter your Skill"
               />
-              {errors.skill && <p className="text-red-500 text-xs mt-1">Skill is required</p>}
+              {errors.skill && (
+                <p className="text-red-500 text-xs mt-1">Skill is required</p>
+              )}
             </div>
           </div>
-
           <div className="flex justify-around">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Skill Level</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Skill Level
+              </label>
               <input
                 type="text"
-                {...register("skill_level", { required: true })}
+                {...register("skill_level")}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 placeholder="Enter your Skill Level"
               />
-              {errors.skill_level && <p className="text-red-500 text-xs mt-1">Skill Level is required</p>}
+              {errors.skill_level && (
+                <p className="text-red-500 text-xs mt-1">
+                  Skill Level is required
+                </p>
+              )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Phone Number</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Phone Number
+              </label>
               <input
                 type="text"
-                {...register("phone_number", { required: true })}
+                {...register("phone_number")}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 placeholder="Enter your Phone Number"
               />
-              {errors.phone_number && <p className="text-red-500 text-xs mt-1">Phone Number is required</p>}
+              {errors.phone_number && (
+                <p className="text-red-500 text-xs mt-1">
+                  Phone Number is required
+                </p>
+              )}
             </div>
           </div>
-
           <div className="flex justify-around">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Current Job</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Current Job
+              </label>
               <input
                 type="text"
-                {...register("current_job", { required: true })}
+                {...register("current_job")}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 placeholder="Enter your Current Job"
               />
-              {errors.current_job && <p className="text-red-500 text-xs mt-1">Current Job is required</p>}
+              {errors.current_job && (
+                <p className="text-red-500 text-xs mt-1">
+                  Current Job is required
+                </p>
+              )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Current Company</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Current Company
+              </label>
               <input
                 type="text"
-                {...register("current_company", { required: true })}
+                {...register("current_company")}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 placeholder="Enter your Current Company"
               />
-              {errors.current_company && <p className="text-red-500 text-xs mt-1">Current Company is required</p>}
+              {errors.current_company && (
+                <p className="text-red-500 text-xs mt-1">
+                  Current Company is required
+                </p>
+              )}
             </div>
           </div>
-
           <div className="flex justify-around">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Portfolio</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Portfolio
+              </label>
               <input
                 type="text"
                 {...register("portfolio")}
@@ -126,7 +167,9 @@ const EditProfileModal = ({ isOpen, onClose, user, onProfileUpdate }) => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Employment</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Employment
+              </label>
               <input
                 type="text"
                 {...register("employment")}
@@ -135,47 +178,56 @@ const EditProfileModal = ({ isOpen, onClose, user, onProfileUpdate }) => {
               />
             </div>
           </div>
-
-          <div classNme="flex justify-around">
-          <div className="flex justify-center">
+          <div className="flex justify-around">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Salary</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Salary
+              </label>
               <input
                 type="text"
-                {...register("salary", { required: true })}
+                {...register("salary")}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 placeholder="Enter your Salary"
               />
-              {errors.salary && <p className="text-red-500 text-xs mt-1">Salary is required</p>}
+              {errors.salary && (
+                <p className="text-red-500 text-xs mt-1">Salary is required</p>
+              )}
             </div>
-          </div>
-          
-          <div className="flex justify-center">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Summary</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Summary
+              </label>
               <input
                 type="text"
-                {...register("summary", { required: true })}
+                {...register("summary")}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 placeholder="Enter your Summary"
               />
-              {errors.summary && <p className="text-red-500 text-xs mt-1">Summary is required</p>}
+              {errors.summary && (
+                <p className="text-red-500 text-xs mt-1">Summary is required</p>
+              )}
             </div>
           </div>
+          <div className="flex justify-around">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Age
+              </label>
+              <input
+                type="text"
+                {...register("age")}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                placeholder="Enter your age"
+              />
+            </div>
+            <div />
           </div>
 
           <div className="flex justify-end space-x-2">
-            <button
-              type="button"
-              className="btn btn-error"
-              onClick={onClose}
-            >
+            <button type="button" className="btn btn-error" onClick={onClose}>
               Cancel
             </button>
-            <button
-              type="submit"
-              className="btn btn-warning"
-            >
+            <button type="submit" className="btn btn-warning">
               Update Profile
             </button>
           </div>

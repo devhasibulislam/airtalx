@@ -41,7 +41,7 @@ app.use('/uploads', express.static('uploads'));
 /* router level connections */
 app.use('/v1/api/auth', authRouter);
 app.use('/v1/api/user', userRoute);
-app.use('/v1/api/jobs', jobsRoute);
+// app.use('/v1/api/jobs', jobsRoute);
 app.use('/v1/api/postjobs', postjobsRoute);
 app.use('/v1/api/userdata', userdataRoute);
 app.use('/v1/api/blogs', blogRoute);

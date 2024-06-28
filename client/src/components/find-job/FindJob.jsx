@@ -41,7 +41,7 @@ const FindJob = () => {
     const fetchJobs = async () => {
       try {
         const res = await axios.get(
-          `https://api-airtalx.vercel.app/v1/api/postjobs`
+          `${process.env.REACT_APP_BASE_API}/postjobs`
         );
         console.log({ data: res.data });
         setJobs(res.data);
@@ -111,9 +111,7 @@ const FindJob = () => {
 
     if (result.isConfirmed) {
       try {
-        await axios.delete(
-          `https://api-airtalx.vercel.app/v1/api/postjobs/${id}`
-        );
+        await axios.delete(`${process.env.REACT_APP_BASE_API}/postjobs/${id}`);
         Swal.fire({
           title: "Deleted!",
           text: "Job deleted successfully",
@@ -175,7 +173,10 @@ const FindJob = () => {
 
               <h1 className="text-2xl font-semibold">{job?.job_title}</h1>
               <h2 className="mt-2">
-                By <span className="text-blue-600">{job?.postby}</span>
+                By
+                <Link to={`/profile/${job?.postbyId}`}>
+                  <span className="text-blue-600">{job?.postby}</span>
+                </Link>
               </h2>
               <p className="mt-2">
                 {job?.job_description?.substring(0, 100)}...

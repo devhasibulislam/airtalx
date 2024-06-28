@@ -15,7 +15,7 @@ const FindEmploye = () => {
     const fetchUsers = async () => {
       try {
         const result = await axios.get(
-          `https://api-airtalx.vercel.app/v1/api/userdata`
+          `${process.env.REACT_APP_BASE_API}/userdata`
         );
         setUsers(result.data); // Assuming result.data is the array of user data
       } catch (error) {

@@ -33,7 +33,7 @@ const Billing = () => {
     };
     try {
       const result = await axios.post(
-        `https://api-airtalx.vercel.app/v1/api/auth/register`,
+        `${process.env.REACT_APP_BASE_API}/auth/register`,
         alldata
       );
       if (result.data.acknowledgement === true) {
