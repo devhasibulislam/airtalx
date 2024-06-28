@@ -6,7 +6,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { app } from "../../firebase.config";
+import { app } from "../../src/firebase";
 // import { app } from '../../firebase.confiq';
 
 export const AuthContext = createContext(null);
@@ -50,9 +50,7 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <div>
       <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
-    </div>
   );
 };
 

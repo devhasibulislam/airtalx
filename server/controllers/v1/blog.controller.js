@@ -4,8 +4,10 @@ const createBlog = async (req, res) => {
   try {
     const blog = await blogService.createBlog(req.body);
     res.status(201).json(blog);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+  }  catch (error) {
+    next(error);
+  } finally {
+    console.log(`Route: ${req.url} || Method: ${req.method}`);
   }
 };
 
@@ -13,8 +15,10 @@ const getBlogs = async (req, res) => {
   try {
     const blogs = await blogService.getBlogs();
     res.status(200).json(blogs);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+  }  catch (error) {
+    next(error);
+  } finally {
+    console.log(`Route: ${req.url} || Method: ${req.method}`);
   }
 };
 
@@ -25,8 +29,10 @@ const getBlogById = async (req, res) => {
       return res.status(404).json({ message: 'Blog not found' });
     }
     res.status(200).json(blog);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+  }  catch (error) {
+    next(error);
+  } finally {
+    console.log(`Route: ${req.url} || Method: ${req.method}`);
   }
 };
 
@@ -37,8 +43,10 @@ const updateBlog = async (req, res) => {
       return res.status(404).json({ message: 'Blog not found' });
     }
     res.status(200).json(blog);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+  }  catch (error) {
+    next(error);
+  } finally {
+    console.log(`Route: ${req.url} || Method: ${req.method}`);
   }
 };
 
@@ -49,8 +57,10 @@ const deleteBlog = async (req, res) => {
       return res.status(404).json({ message: 'Blog not found' });
     }
     res.status(200).json({ message: 'Blog deleted' });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+  }  catch (error) {
+    next(error);
+  } finally {
+    console.log(`Route: ${req.url} || Method: ${req.method}`);
   }
 };
 

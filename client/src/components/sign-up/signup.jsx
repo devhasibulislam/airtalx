@@ -13,6 +13,8 @@ import axios from "axios";
 const Signup = () => {
   const [activeTab, setActiveTab] = useState(0);
   const navigate = useNavigate();
+  //   const userL = useContext(AuthContext)
+  // console.log("This is from signup", userL)
   // console.log(`http://localhost:8080`);
   const handleTabClick = (index) => {
     setActiveTab(index);
@@ -34,7 +36,8 @@ const Signup = () => {
 
     try {
       const res = await axios.post(
-        `https://api-airtalx.vercel.app/v1/api/userdata`,
+        // `${process.env.REACT_APP_BASE_API}/userdata`,
+        `${process.env.REACT_APP_BASE_API}/userdata`,
         formData
       );
       console.log(res);
@@ -74,7 +77,8 @@ const Signup = () => {
 
     try {
       const res = await axios.post(
-        `https://api-airtalx.vercel.app/v1/api/userdata`,
+        // `${process.env.REACT_APP_BASE_API}/userdata`,
+        `${process.env.REACT_APP_BASE_API}/userdata`,
         formData
       );
       console.log(res);
@@ -231,62 +235,65 @@ const Signup = () => {
   );
 
   const handleGoogleLogin = async () => {
+    console.log("google login called step 1");
     try {
-      try {
-        const result = await signInWithPopup(auth, googleProvider);
-        const { user } = result;
-        
-        console.log(user.photoURL);
+      console.log("google login called step 2");
+      const result = await signInWithPopup(auth, googleProvider);
+      const { user } = result;
+      console.log("google login called step 3", user?.email);
 
-        const rrr = await axios.post(
-          `https://api-airtalx.vercel.app/v1/api/userdata`,
-          {
-            name: user.displayName,
-            email: user.email,
-            password: "12345678",
-            image: user.photoURL,
+      if (user) {
+        try {
+          const createUser = await axios.post(
+            `${process.env.REACT_APP_BASE_API}/userdata?social=true`,
+            {
+              name: user.displayName,
+              email: user.email,
+              image: user.photoURL,
+            }
+          );
+
+          console.log("createUser from signup", createUser.data.data);
+          if (createUser.data.data) {
+            window.location.reload();
+            navigate("/");
           }
-        );
-        console.log(rrr.data);
 
-        await axios.put(
-          `https://api-airtalx.vercel.app/v1/api/userdata/${rrr.data._id}`,
-          {
-            image: user.photoURL,
-          }
-        );
-
-        Swal.fire({
-          position: "top",
-          icon: "success",
-          title: "Google SignUp successful",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        navigate("/verifyotp");
-        setTimeout(() => {
-          window.location.reload();
-        }, 500);
-      } catch (error) {
-        console.error("Error checking/creating user in MongoDB:", error);
-        Swal.fire({
-          position: "top",
-          icon: "error",
-          title: "Error during Google Login",
-          text:
-            error.response?.data?.message ||
-            error.message ||
-            "Please try again later",
-          showConfirmButton: true,
-        });
+          Swal.fire({
+            position: "top",
+            icon: "success",
+            title: "Google SignUp successful",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } catch (error) {
+          Swal.fire({
+            position: "top",
+            icon: "error",
+            title: "Error during Google Login",
+            text:
+              error.response?.data?.message ||
+              error.message ||
+              "Please try again later",
+            showConfirmButton: true,
+          });
+        }
       }
+
+      // navigate("/verifyotp");
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 500);
     } catch (error) {
-      console.error("Error during Google login:", error);
+      console.error("Error checking/creating user in MongoDB:", error);
       Swal.fire({
         position: "top",
         icon: "error",
-        title: "Google Login failed",
-        text: error.message || "Please try again later",
+        title: "Error during Google Login",
+        text:
+          error.response?.data?.message ||
+          error.message ||
+          "Please try again later",
         showConfirmButton: true,
       });
     }

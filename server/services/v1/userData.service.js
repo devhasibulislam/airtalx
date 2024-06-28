@@ -47,7 +47,42 @@ const upload = multer({
 
 /* user service functions */
 
-const createUser = async (userData, file, res) => {
+const createUser = async (req, userData, file, res) => {
+  console.log("this is request",req.query)
+  if(req.query.social === "true"){
+    try {
+      const isExist = await User.findOne({email: req.body.email})
+      if(isExist){
+        return res.status(400).json({
+          acknowledgement: false,
+          message: "Already have this user",
+          description: "This user exists in DB",
+        });
+      }
+      const user = await User.create(req.body)
+      if (!user) {
+        return res.status(400).json({
+          acknowledgement: false,
+          message: "Bad Request",
+          description: "Failed to create user",
+        });
+      }
+      res.status(200).json({
+        acknowledgement: true,
+        message: "OK",
+        description: "User created successfully",
+        data: user,
+      });
+
+    } catch (error) {
+      res.status(500).json({
+        acknowledgement: false,
+        message: "Faild",
+        description: "Server faild to create user!",
+        data: error.message,
+      });
+    }
+  }
   const hashedPassword = await bcrypt.hash(userData.password, 10); // Hash the password
 
   // Check if an image file is uploaded
@@ -62,6 +97,7 @@ const createUser = async (userData, file, res) => {
     password: hashedPassword,
     image: imagePath,
   });
+
 
   if (user) {
     await user.save();

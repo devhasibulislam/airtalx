@@ -10,7 +10,7 @@ import { ButtonAll2 } from "../button/Button";
 import { Link } from "react-router-dom";
 
 const FindJob = () => {
-  const { user } = useAuthUser(auth);
+  const { user } = useAuthUser();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedType, setSelectedType] = useState("");
@@ -41,7 +41,7 @@ const FindJob = () => {
     const fetchJobs = async () => {
       try {
         const res = await axios.get(
-          `https://api-airtalx.vercel.app/v1/api/postjobs`
+          `${process.env.REACT_APP_BASE_API}/postjobs`
         );
         console.log({ data: res.data });
         setJobs(res.data);
@@ -112,7 +112,7 @@ const FindJob = () => {
     if (result.isConfirmed) {
       try {
         await axios.delete(
-          `https://api-airtalx.vercel.app/v1/api/postjobs/${id}`
+          `${process.env.REACT_APP_BASE_API}/postjobs/${id}`
         );
         Swal.fire({
           title: "Deleted!",

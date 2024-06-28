@@ -16,7 +16,7 @@ const Payment = () => {
     console.log(data);
     try {
       const response = await axios.post(
-        "https://api-airtalx.vercel.app/v1/api/payment",
+        "${process.env.REACT_APP_BASE_API}/payment",
         data
       );
       console.log(response);

@@ -9,7 +9,7 @@ import useAuthUser from "../../auth/getUser";
 import { auth } from "../../firebase";
 
 const JobDetails = () => {
-  const { user } = useAuthUser(auth);
+  const { user } = useAuthUser();
   const { id } = useParams();
   console.log(id);
   const [jobDetails, setJobDetails] = useState(null);
@@ -20,7 +20,7 @@ const JobDetails = () => {
     const fetchJobs = async () => {
       try {
         const res = await axios.get(
-          `https://api-airtalx.vercel.app/v1/api/postjobs/${id}`
+          `${process.env.REACT_APP_BASE_API}/postjobs/${id}`
         );
         setJobDetails(res.data);
         setLoading(false);

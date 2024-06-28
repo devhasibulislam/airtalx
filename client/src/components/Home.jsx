@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 import useAuthUser from "../auth/getUser";
 import { auth } from "../firebase";
 const Home = () => {
-  const { user } = useAuthUser(auth);
+  const { user } = useAuthUser();
   return (
     <div className="w-full mx-auto mt-4 overflow-hidden">
       <div className="justify-center max-w-5xl gap-1 p-4 py-20 mx-auto md:flex tems-center">

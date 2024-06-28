@@ -13,7 +13,7 @@ const User = () => {
     const fetchData = async () => {
       try {
         const result = await axios.get(
-          `https://api-airtalx.vercel.app/v1/api/userdata`
+          `${process.env.REACT_APP_BASE_API}/userdata`
         );
         setData(result.data); // Assuming result.data is the array of user data
       } catch (error) {
@@ -44,7 +44,7 @@ const User = () => {
     const updateRole = () => {
       const data = { role: "admin" };
       axios
-        .put(`https://api-airtalx.vercel.app/v1/api/userdata/${userId}`, data)
+        .put(`${process.env.REACT_APP_BASE_API}/userdata/${userId}`, data)
         .then((response) => {
           if (response.data) {
             Swal.fire({
@@ -96,7 +96,7 @@ const User = () => {
       if (result.isConfirmed) {
         try {
           await axios.delete(
-            `https://api-airtalx.vercel.app/v1/api/userdata/${userId}`
+            `${process.env.REACT_APP_BASE_API}/userdata/${userId}`
           );
           Swal.fire({
             position: "top",
@@ -139,7 +139,7 @@ const User = () => {
       const data = { status: status };
       axios
         .post(
-          `https://api-airtalx.vercel.app/v1/api/userdata/${userId}/verify`,
+          `${process.env.REACT_APP_BASE_API}/userdata/${userId}/verify`,
           data
         )
         .then((response) => {

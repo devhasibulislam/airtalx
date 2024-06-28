@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import useAuthUser from "../../../../auth/getUser";
 import { auth } from "../../../../firebase";
 const PostAJob = () => {
-  const { user } = useAuthUser(auth);
+  const { user } = useAuthUser();
   const {
     register,
     handleSubmit,
@@ -45,12 +45,12 @@ const PostAJob = () => {
     try {
       // console.log(data);
       await axios.post(
-        `https://api-airtalx.vercel.app/v1/api/postjobs`,
+        `${process.env.REACT_APP_BASE_API}/postjobs`,
         cleanedData
       );
 
       await axios.post(
-        `https://api-airtalx.vercel.app/v1/api/history`,
+        `${process.env.REACT_APP_BASE_API}/history`,
         historyData
       );
 
