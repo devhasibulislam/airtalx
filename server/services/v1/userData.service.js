@@ -102,6 +102,7 @@ const createUser = async (req, userData, file, res) => {
   if (user) {
     await user.save();
     // await sendOTP({ body: user }, res);
+    console.log("this is user from back end ", user)
 
     const otp = otpGenerator.generate(5, {
       digits: true,
