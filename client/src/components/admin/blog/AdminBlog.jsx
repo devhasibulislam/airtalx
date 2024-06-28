@@ -10,7 +10,7 @@ import  { ButtonAll2 } from "../../button/Button";
 import { Link } from "react-router-dom";
 
 const AdminBlog = () => {
-  const {user} = useAuthUser();
+  const {user} = useAuthUser(auth);
   console.log(user);
   const [editId, setEditId] = useState();
   const [datad, setData] = useState([]);
@@ -28,7 +28,7 @@ const AdminBlog = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axios.get(`${process.env.REACT_APP_BASE_API}/blogs`);
+        const result = await axios.get(`http://localhost:8080/v1/api/blogs`);
         setData(result.data); // Assuming result.data is the array of user data
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -50,7 +50,7 @@ const AdminBlog = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`${process.env.REACT_APP_BASE_API}/blogs/${userId}`);
+          await axios.delete(`http://localhost:8080/v1/api/blogs/${userId}`);
           Swal.fire({
             position: "top",
             icon: "success",

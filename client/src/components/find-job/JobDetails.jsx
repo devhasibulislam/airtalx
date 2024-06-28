@@ -62,13 +62,13 @@ const JobDetails = () => {
             </ButtonAll>
           )} */}
 
-          <Link to={`/apply-job/${jobDetails._id}`}>
-            <ButtonAll>Apply This Job</ButtonAll>
-          </Link>
-
-          {!user && (
+          {!user ? (
             <Link to="/login">
               <ButtonAll>Login to apply this job</ButtonAll>
+            </Link>
+          ) : (
+            <Link to={`/apply-job/${jobDetails._id}`}>
+              <ButtonAll>Apply This Job</ButtonAll>
             </Link>
           )}
 

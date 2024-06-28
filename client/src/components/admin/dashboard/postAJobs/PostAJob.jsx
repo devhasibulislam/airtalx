@@ -27,7 +27,9 @@ const PostAJob = () => {
     const cleanedData = {
       ...data,
       job_description: data.description || data.job_description,
+      job_requirements: data.requiments || data.job_requirements,
       postby: user.name,
+      postbyId: user._id,
     };
 
     const historyData = {
@@ -76,6 +78,7 @@ const PostAJob = () => {
   };
 
   const jobDescription = watch("job_description");
+  const jobRequirements = watch("job_requirements");
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="card-body">
@@ -266,7 +269,37 @@ const PostAJob = () => {
             className="rounded-2xl "
             style={{ height: "100px" }}
           />
+
           {errors.job_description && (
+            <span className="text-red-500">This field is required</span>
+          )}
+        </div>
+        <div className="form-control pt-10">
+          <label className="label">
+            <span className="font-semibold">Job Requirements</span>
+          </label>
+          <ReactQuill
+            value={jobRequirements}
+            onChange={(value) => setValue("job_requirements", value)}
+            modules={{
+              toolbar: [
+                [{ header: "1" }, { header: "2" }, { font: [] }],
+                [{ size: [] }],
+                ["bold", "italic", "underline", "strike", "blockquote"],
+                [
+                  { list: "ordered" },
+                  { list: "bullet" },
+                  { indent: "-1" },
+                  { indent: "+1" },
+                ],
+                ["clean"],
+              ],
+            }}
+            className="rounded-2xl "
+            style={{ height: "100px" }}
+          />
+
+          {errors.job_requirements && (
             <span className="text-red-500">This field is required</span>
           )}
         </div>

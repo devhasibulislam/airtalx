@@ -1,33 +1,38 @@
 // services/jobService.js
 const Job = require("../../models/v1/post.job");
-const History = require('../../models/v1/history.model');
+const History = require("../../models/v1/history.model");
 
 const createJob = async (jobData) => {
-    const job = new Job(jobData);
-    return await job.save();
+  const job = new Job(jobData);
+  return await job.save();
 };
 
-
-const getAllJobs = async () => {
-    return await Job.find({});
+const getAllJobs = async (req, res) => {
+  let jobs;
+  if (req.query.id) {
+    jobs = await Job.find({ postbyId: req.query.id });
+  } else {
+    jobs = await Job.find({});
+  }
+  return jobs;
 };
 
 const getJobById = async (id) => {
-    return await Job.findById(id);
+  return await Job.findById(id);
 };
 
 const updateJob = async (id, jobData) => {
-    return await Job.findByIdAndUpdate(id, jobData, { new: true });
+  return await Job.findByIdAndUpdate(id, jobData, { new: true });
 };
 
 const deleteJob = async (id) => {
-    return await Job.findByIdAndDelete(id);
+  return await Job.findByIdAndDelete(id);
 };
 
 module.exports = {
-    createJob,
-    getAllJobs,
-    getJobById,
-    updateJob,
-    deleteJob,
+  createJob,
+  getAllJobs,
+  getJobById,
+  updateJob,
+  deleteJob,
 };

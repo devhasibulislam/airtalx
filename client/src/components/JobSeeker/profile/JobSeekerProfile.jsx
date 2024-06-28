@@ -108,7 +108,7 @@ const JobSeekerProfile = () => {
         try {
           // Make API call to delete user from your database
           await axios.delete(
-            `https://api-airtalx.vercel.app/v1/api/userdata/${user?._id}`
+            `${process.env.REACT_APP_BASE_API}/userdata/${user?._id}`
           );
 
           // Delete user from Firebase Authentication

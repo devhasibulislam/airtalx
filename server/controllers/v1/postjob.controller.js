@@ -14,12 +14,10 @@ const createJob = async (req, res) => {
 
 const getAllJobs = async (req, res) => {
   try {
-    const jobs = await jobService.getAllJobs();
+    const jobs = await jobService.getAllJobs(req,res);
     res.status(200).json(jobs);
   } catch (error) {
-    next(error);
-  } finally {
-    console.log(`Route: ${req.url} || Method: ${req.method}`);
+    res.status(500).json({ message: error.message });
   }
 };
 

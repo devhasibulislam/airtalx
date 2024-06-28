@@ -25,7 +25,6 @@ const JobApply = () => {
     formState: { errors },
    
   } = useForm();
-
   const onSubmit = async (data) => {
     console.log(data);
     const {subject,message,contact_info} = data;

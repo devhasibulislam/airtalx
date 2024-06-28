@@ -3,7 +3,12 @@ const JobsModels = require("../../models/v1/jobs.models");
 // Get all jobs with pagination and field selection
 exports.getAllJobs = async (req, res) => {
   try {
-    const jobs = await JobsModels.find({});
+    let jobs;
+    // if (req.query.id) {
+    jobs = await JobsModels.find({ postbyId: "667e54961de33664e0746129" });
+    // } else {
+    //   jobs = await JobsModels.find({});
+    // }
 
     res.status(200).json({
       acknowledgement: true,

@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const jobsSchema = new mongoose.Schema(
   {
     postby: { type: String },
+    postbyId: { type: String },
     job_title: {
       type: String,
       required: [true, "Please, provide your job title"],
@@ -24,6 +25,10 @@ const jobsSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please, provide your job description"],
     },
+    job_requirements: {
+      type: String,
+      required: [true, "Please, provide your job requirements"],
+    },
     salary: {
       type: String,
       required: [true, "Please, provide your job salary"],
@@ -33,16 +38,16 @@ const jobsSchema = new mongoose.Schema(
       required: [true, "Please, provide your experience level"],
     },
     company: {
-      type: String
+      type: String,
     },
     location: {
-      type: String
+      type: String,
     },
     industry: {
-      type: String
+      type: String,
     },
     size_of_company: {
-      type: String
+      type: String,
     },
   },
   {
