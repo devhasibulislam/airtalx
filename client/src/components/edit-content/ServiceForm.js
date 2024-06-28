@@ -14,7 +14,7 @@ const ServiceForm = () => {
   const onSubmit = (data) => {
     setLoading(true)
     const result = fetch(
-      `${process.env.REACT_APP_ORIGIN_URL}/footer?services=true`,
+      `${process.env.REACT_APP_BASE_API}/footer?services=true`,
       {
         method: "PUT",
         headers: {

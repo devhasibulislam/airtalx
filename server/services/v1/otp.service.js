@@ -52,6 +52,7 @@ exports.sendOTP = async (req, res) => {
         acknowledgement: true,
         message: "OK",
         description: "OTP sent successfully",
+        data: user,
       });
     }
   }

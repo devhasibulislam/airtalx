@@ -27,10 +27,7 @@ const EditProfileModal = ({ isOpen, onClose, user, onProfileUpdate }) => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.put(
-        `${process.env.REACT_APP_BASE_API}/userdata/${user?._id}`,
-        data
-      );
+      const response = await axios.put(`${process.env.REACT_APP_BASE_API}/userdata/${user?._id}`, data);
       if (response.data) {
         Swal.fire({
           position: "top",

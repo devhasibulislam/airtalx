@@ -131,7 +131,7 @@ const NewMessagesList = ({ newMessages, markAsRead }) => (
 );
 
 function Message() {
-  const { user } = useAuthUser(auth);
+  const { user } = useAuthUser();
   const [users, setUsers] = useState([]);
   const [messages, setMessages] = useState([]);
   const [messageText, setMessageText] = useState("");

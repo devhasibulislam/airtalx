@@ -14,7 +14,7 @@ const userDataSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: [true, "Please, provide a strong password"],
+      // required: [true, "Please, provide a strong password"],
     },
     image: { type: String },
     role: {

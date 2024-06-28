@@ -12,7 +12,7 @@ const PriceForm = () => {
 
 
   useEffect(()=>{
-    fetch(`${process.env.REACT_APP_ORIGIN_URL}/footer`)
+    fetch(`${process.env.REACT_APP_BASE_API}/footer`)
     .then(res=> res.json())
     .then(data=>{
       setPrices(data?.pricing)
@@ -40,7 +40,7 @@ const PriceForm = () => {
       }
     ]
     
-    fetch(`${process.env.REACT_APP_ORIGIN_URL}/footer?price=true`,
+    fetch(`${process.env.REACT_APP_BASE_API}/footer?price=true`,
       {
         method: "PUT",
         headers: {

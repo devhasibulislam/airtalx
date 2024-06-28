@@ -3,7 +3,7 @@ const User = require('../../models/v1/userdata.model');
 const otpService = require('../../services/v1/upotp.service');
 
 
-const sendOtp = async (req, res) => {
+const sendOtp = async (req, res, next) => {
     const { email } = req.body;
     if (!email) {
       return res.status(400).json({
@@ -47,6 +47,8 @@ const sendOtp = async (req, res) => {
         message: 'Error',
         description: error.message,
       });
+    } finally{
+      next(next);
     }
   };
 

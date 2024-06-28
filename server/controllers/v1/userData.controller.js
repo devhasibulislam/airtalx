@@ -1,31 +1,43 @@
 // const userService = require("../../services/v1/userData.service");
 const userService = require("../../services/v1/userData.service");
 
-const createUser = (req, res) => {
+const createUser = async (req, res, next) => {
   userService.upload(req, res, async (err) => {
     if (err) {
       return res.status(400).json({ message: err });
     }
 
     try {
-      const newUser = await userService.createUser(req.body, req.file, res);
+      const newUser = await userService.createUser(req,req.body, req.file, res);
       res.status(201).json(newUser);
-    } catch (error) {
-      res.status(400).json({ message: error.message });
+    }  catch (error) {
+      next(error);
+    } finally {
+      console.log(`Route: ${req.url} || Method: ${req.method}`);
     }
   });
+  // try {
+  //   await userService.createUser(req, res, next);
+  // } catch (error) {
+  //   next(error);
+  // } finally {
+  //   console.log(`Route: ${req.url} || Method: ${req.method}`);
+  // }
+
 };
 
-const getAllUsers = async (req, res) => {
+const getAllUsers = async (req, res, next) => {
   try {
     const users = await userService.getAllUsers();
     res.status(200).json(users);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+  }  catch (error) {
+    next(error);
+  } finally {
+    console.log(`Route: ${req.url} || Method: ${req.method}`);
   }
 };
 
-const getUserByEmailC = async (req, res) => {
+const getUserByEmailC = async (req, res, next) => {
   try {
     const { email } = req.params;
     const user = await userService.getUserByEmail(email);
@@ -33,25 +45,29 @@ const getUserByEmailC = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(user);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+  }  catch (error) {
+    next(error);
+  } finally {
+    console.log(`Route: ${req.url} || Method: ${req.method}`);
   }
 };
 
-const getUserById = async (req, res) => {
+const getUserById = async (req, res,next) => {
   try {
     const user = await userService.getUserById(req.params.id);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(user);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+  }  catch (error) {
+    next(error);
+  } finally {
+    console.log(`Route: ${req.url} || Method: ${req.method}`);
   }
 };
 
 const updateUser = (req, res) => {
-  userService.upload(req, res, async (err) => {
+  userService.upload(req, res,next, async (err) => {
     if (err) {
       return res.status(400).json({ message: err });
     }
@@ -66,8 +82,10 @@ const updateUser = (req, res) => {
         return res.status(404).json({ message: "User not found" });
       }
       res.status(200).json(updatedUser);
-    } catch (error) {
-      res.status(400).json({ message: error.message });
+    }  catch (error) {
+      next(error);
+    } finally {
+      console.log(`Route: ${req.url} || Method: ${req.method}`);
     }
   });
 };
@@ -79,8 +97,10 @@ const deleteUser = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json({ message: "User deleted successfully" });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+  }  catch (error) {
+    next(error);
+  } finally {
+    console.log(`Route: ${req.url} || Method: ${req.method}`);
   }
 };
 
@@ -91,16 +111,20 @@ const addExperience = async (req, res) => {
     const experienceData = req.body;
     const updatedUser = await userService.addExperience(id, experienceData);
     res.status(200).json(updatedUser);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
+  }  catch (error) {
+    next(error);
+  } finally {
+    console.log(`Route: ${req.url} || Method: ${req.method}`);
   }
 };
 
 const addUserVerify = async (req, res) => {
   try {
     await userService.addUserVerify(req, res);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
+  }  catch (error) {
+    next(error);
+  } finally {
+    console.log(`Route: ${req.url} || Method: ${req.method}`);
   }
 };
 

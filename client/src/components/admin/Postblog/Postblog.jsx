@@ -8,7 +8,7 @@ import useAuthUser from "../../../auth/getUser";
 import { auth } from "../../../firebase";
 
 const Postblog = () => {
-  const {user} = useAuthUser(auth);
+  const {user} = useAuthUser();
   // console.log(user);
   const {
     register,

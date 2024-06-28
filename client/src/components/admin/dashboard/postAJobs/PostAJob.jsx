@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import useAuthUser from "../../../../auth/getUser";
 import { auth } from "../../../../firebase";
 const PostAJob = () => {
-  const { user } = useAuthUser(auth);
+  const { user } = useAuthUser();
   const {
     register,
     handleSubmit,

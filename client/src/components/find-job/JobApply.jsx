@@ -14,7 +14,7 @@ import { auth } from "../../firebase";
 
 const JobApply = () => {
   const navigate = useNavigate();
-  const {user} = useAuthUser(auth);
+  const {user} = useAuthUser();
   const [job, setJob] = useState([]);
   const [loading, setLoading] = useState([]);
   const { id } = useParams();

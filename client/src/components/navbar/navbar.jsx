@@ -9,7 +9,7 @@ import useAuthUser from "../../auth/getUser";
 import ButtonAll from "../button/Button";
 
 const Navbar = () => {
-  const { user } = useAuthUser(auth);
+  const { user } = useAuthUser();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 

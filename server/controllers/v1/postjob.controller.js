@@ -6,7 +6,9 @@ const createJob = async (req, res) => {
     const job = await jobService.createJob(req.body);
     res.status(201).json(job);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    next(error);
+  } finally {
+    console.log(`Route: ${req.url} || Method: ${req.method}`);
   }
 };
 
@@ -27,7 +29,9 @@ const getJobById = async (req, res) => {
     }
     res.status(200).json(job);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
+  } finally {
+    console.log(`Route: ${req.url} || Method: ${req.method}`);
   }
 };
 
@@ -39,7 +43,9 @@ const updateJob = async (req, res) => {
     }
     res.status(200).json(job);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    next(error);
+  } finally {
+    console.log(`Route: ${req.url} || Method: ${req.method}`);
   }
 };
 
@@ -51,7 +57,9 @@ const deleteJob = async (req, res) => {
     }
     res.status(200).json({ message: "Job deleted successfully" });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
+  } finally {
+    console.log(`Route: ${req.url} || Method: ${req.method}`);
   }
 };
 

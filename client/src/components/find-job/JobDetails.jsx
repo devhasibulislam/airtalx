@@ -9,7 +9,7 @@ import useAuthUser from "../../auth/getUser";
 import { auth } from "../../firebase";
 
 const JobDetails = () => {
-  const { user } = useAuthUser(auth);
+  const { user } = useAuthUser();
   const { id } = useParams();
   console.log(id);
   const [jobDetails, setJobDetails] = useState(null);

@@ -6,7 +6,7 @@ const CollapsibleSections = () => {
   const [footerData, setFooterData] = useState();
   useEffect(() => {
     const loader = () => {
-      fetch(`${process.env.REACT_APP_ORIGIN_URL}/footer`)
+      fetch(`${process.env.REACT_APP_BASE_API}/footer`)
         .then((res) => res.json())
         .then((data) => setFooterData(data));
     };

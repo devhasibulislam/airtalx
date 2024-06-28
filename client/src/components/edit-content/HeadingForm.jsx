@@ -37,7 +37,7 @@ const HeadingForm = () => {
       !(termsStatement?.faqStatement && termsStatement?.faqFill)
     ) {
       console.log("this is only statement");
-      url = `${process.env.REACT_APP_ORIGIN_URL}/footer?terms=true`;
+      url = `${process.env.REACT_APP_BASE_API}/footer?terms=true`;
       data = {
         heading: termsStatement.termsStatement,
         detail: termsStatement.teamsFill,
@@ -49,7 +49,7 @@ const HeadingForm = () => {
       !(termsStatement?.faqStatement && termsStatement?.faqFill)
     ) {
       console.log("this is only policy");
-      url = `${process.env.REACT_APP_ORIGIN_URL}/footer?policy=true`;
+      url = `${process.env.REACT_APP_BASE_API}/footer?policy=true`;
       data = {
         heading: termsStatement.policyStatement,
         detail: termsStatement.policyFill,
@@ -61,7 +61,7 @@ const HeadingForm = () => {
       termsStatement?.faqFill
     ) {
       console.log("this is only faq");
-      url = `${process.env.REACT_APP_ORIGIN_URL}/footer?faq=true`;
+      url = `${process.env.REACT_APP_BASE_API}/footer?faq=true`;
       data = {
         heading: termsStatement.faqStatement,
         detail: termsStatement.faqFill,

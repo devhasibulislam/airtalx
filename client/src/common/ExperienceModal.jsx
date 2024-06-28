@@ -18,7 +18,7 @@ const ExperienceModal = ({ isOpen, onClose, jobId, onUpdate }) => {
     // console.log(data);
 
     try {
-        const response = await axios.post(`${process.env.REACT_APP_BASE_API}/userdata/${user._id}/experience`,data);
+        const response = await axios.post(`http://localhost:8080/v1/api/userdata/${user._id}/experience`,data);
       
         // console.log("Post experience data:", response.data);
         onClose();

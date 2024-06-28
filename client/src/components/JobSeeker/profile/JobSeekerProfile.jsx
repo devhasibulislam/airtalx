@@ -10,9 +10,9 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 const JobSeekerProfile = () => {
-  const { user } = useAuthUser(auth);
-  // console.log(`${process.env.REACT_APP_BASE_API}/userdata/${user?._id}`);;
-  const [profileData, setProfileData] = useState(user);
+  const { user } = useAuthUser();
+  // console.log(`https://api-airtalx.vercel.app/v1/api/userdata/${user?._id}`);;
+  const [profileData, setProfileData] = useState();
   // console.log(user);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalExOpen, setIsModalExOpen] = useState(false);
@@ -367,7 +367,7 @@ export default JobSeekerProfile;
 // import Swal from 'sweetalert2';
 
 // const JobSeekerProfile = () => {
-//   const { user } = useAuthUser(auth);
+//   const { user } = useAuthUser();
 //   const [profileData, setProfileData] = useState(user);
 //   const [isModalOpen, setIsModalOpen] = useState(false);
 //   const [isModalExOpen, setIsModalExOpen] = useState(false);
