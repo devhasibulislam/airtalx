@@ -301,7 +301,7 @@ const JobSeekerProfile = () => {
         </div>
         {/* Experience List */}
         <div className="mt-6">
-          {profileData?.experience.map((m) => (
+          {profileData?.experience?.map((m) => (
             <div
               key={m._id}
               className=" m-3 p-3 border-b-2 border-base-200  grid-cols-2 items-center gap-3"
