@@ -72,7 +72,12 @@ const JobDetails = () => {
             </Link>
           )}
 
-          <h3>Copy Link</h3>
+          <button
+            className="cursor-pointer"
+            onClick={() => navigator.clipboard.writeText(window.location.href)}
+          >
+            Copy Link
+          </button>
         </div>
 
         <div>
@@ -112,12 +117,14 @@ const JobDetails = () => {
           </div>
         </div>
       </div>
-      <div className="my-6">
+      <div className="my-6 w-full flex flex-col gap-y-2">
         <h2 className="text-3xl font-semibold text-center">Job Description</h2>
-        <div
-          className="!p-4 bg-[#ecf7f4] w-full mt-2 prose"
-          dangerouslySetInnerHTML={{ __html: jobDetails.job_description }}
-        ></div>
+        <div className="!p-4 bg-[#ecf7f4] w-full">
+          <p
+            className="prose"
+            dangerouslySetInnerHTML={{ __html: jobDetails.job_description }}
+          />
+        </div>
       </div>
     </div>
   );
