@@ -15,7 +15,7 @@ const Signup = () => {
   const navigate = useNavigate();
   //   const userL = useContext(AuthContext)
   // console.log("This is from signup", userL)
-  // console.log(`http://localhost:8080`);
+  // console.log(`https://api-airtalx.vercel.app`);
   const handleTabClick = (index) => {
     setActiveTab(index);
   };
