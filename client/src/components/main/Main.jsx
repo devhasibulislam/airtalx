@@ -38,6 +38,7 @@ import Message from "../message/Message";
 import GoogleAnalytics from "../GoogleAnalytics,jsx/GoogleAnalytics";
 import EditContent from "../edit-content/EditContent";
 import AdminViewEmploye from "../find-employee/AdminView";
+import EmployerMyJobs from "../my-jobs/EmployerMyJobs";
 
 // Tab data
 const adminTabs = [
@@ -187,7 +188,8 @@ const EmployeeDashboard = () => {
       {activeTab === "Tab2" && <Message/>}
       {activeTab === "Tab3" && <PostAJob />}
       {activeTab === "Tab4" && <JobApplication/>}
-      {activeTab === "Tab5" && <FindJob />}
+      {/* {activeTab === "Tab5" && <FindJob />} */}
+      {activeTab === "Tab5" && <EmployerMyJobs />}
       {activeTab === "Tab6" && <FindEmploye />}
       {activeTab === "Tab7" && <WorkHistory />}
       {activeTab === "Tab8" && <Billing />}
