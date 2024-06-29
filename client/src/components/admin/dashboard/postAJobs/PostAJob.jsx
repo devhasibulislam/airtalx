@@ -220,15 +220,30 @@ const PostAJob = () => {
             How much (US Dollar) do you want to pay per Hour? the salary range
             is between $3.00 and $99.00
           </p>
-          <input
-            type="text"
-            placeholder="Answer"
-            className="input input-sm !bg-white input-bordered rounded-2xl"
-            {...register("salary", { required: true })}
-          />
-          {errors.job_headline && (
-            <span className="text-red-500">This field is required</span>
-          )}
+          <p className="flex md:flex-row flex-col gap-2 w-full mt-1">
+            <span className="flex flex-col gap-y-1 w-full">
+              <input
+                type="text"
+                placeholder="Answer"
+                className="input input-sm !bg-white input-bordered rounded-2xl"
+                {...register("salary", { required: true })}
+              />
+              {errors.job_headline && (
+                <span className="text-red-500">This field is required</span>
+              )}
+            </span>
+            <span className="flex flex-col gap-y-1 w-full">
+              <input
+                type="text"
+                placeholder="Answer"
+                className="input input-sm !bg-white input-bordered rounded-2xl"
+                {...register("salary1", { required: true })}
+              />
+              {errors.job_headline && (
+                <span className="text-red-500">This field is required</span>
+              )}
+            </span>
+          </p>
         </div>
         <div className="form-control mt-3 ">
           <label>Experience Level</label>
