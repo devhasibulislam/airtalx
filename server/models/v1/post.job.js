@@ -43,6 +43,10 @@ const jobsSchema = new mongoose.Schema(
     location: {
       type: String,
     },
+    status:{
+      type: String,
+      default: "Active",
+    },
     industry: {
       type: String,
     },
