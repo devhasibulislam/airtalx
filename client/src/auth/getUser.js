@@ -8,8 +8,6 @@ const useAuthUser = (auth) => {
   const { user: firebaseUser } = useContext(AuthContext);
   // const { user } = useContext(AuthContext);
 
-  console.log("user from hookkkkkkk", user)
-
   useEffect(() => {
     const loader = async () => {
       const response = await axios.get(
