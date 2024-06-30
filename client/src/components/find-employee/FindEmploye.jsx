@@ -27,7 +27,7 @@ const FindEmploye = () => {
   }, []);
 
   // Filter users with role 'employer'
-  const employers = users?.filter((user) => user.role === "employer");
+  const employers = users?.filter((user) => user.role === "job-seeker");
 
   // Filter based on search query and selected type
   const filteredEmployees =
