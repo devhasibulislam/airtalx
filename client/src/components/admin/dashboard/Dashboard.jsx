@@ -125,30 +125,22 @@ const Dashboard = () => {
       </div>
 
       <div className="mt-5 grid grid-cols-2 gap-3 ">
+      <div className="p-5 border border-base-300 rounded-md">
+        <h2 className="text-3xl">Job Postiung</h2>
+        <p>(This month)</p>
+        <h3 className="text-3xl font-bold">{posts.length}</h3>
+        <p className="text-sm mt-2">
+          Expend your reach, post a new job today.
+        </p>
+      </div>
         <div className="p-5 border border-base-300 rounded-md">
-          <h2 className="text-3xl">Total Jobseeker</h2>
-          <p>(This month)</p>
-          <h3 className="text-3xl font-bold">{jobSeekers.length}</h3>
-          <p className="text-sm mt-2">
-            Engage with our growing community of jobseekers.
-          </p>
-        </div>
-        <div className="p-5 border border-base-300 rounded-md">
-          <h2 className="text-3xl">Total Employee</h2>
+          <h2 className="text-3xl">Applications Received</h2>
           <p>(This month)</p>
           <h3 className="text-3xl font-bold">{employeer.length}</h3>
           <p className="text-sm mt-2">
             Reach out to employers, enhance their experience.
           </p>
         </div>
-      </div>
-      <div className="p-5 border border-base-300 mt-4 rounded-md">
-        <h2 className="text-3xl">Total Job Postiung</h2>
-        <p>(This month)</p>
-        <h3 className="text-3xl font-bold">{posts.length}</h3>
-        <p className="text-sm mt-2">
-          Monitor job market trends, optimize platform performance.
-        </p>
       </div>
     </div>
   );
